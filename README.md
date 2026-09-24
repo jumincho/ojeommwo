@@ -145,3 +145,7 @@ To run the bot in your own workspace, copy `.env.example` to `.env` and fill in 
 Version **2.6**, launched on 2026-09-23. The release is labelled *GPT-6 Sol Max (Daybreak Blue)*; the production model is GPT-6 Luna with xhigh reasoning.
 
 Design notes (in Korean): [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
+
+## License
+
+Released under the [MIT License](LICENSE).

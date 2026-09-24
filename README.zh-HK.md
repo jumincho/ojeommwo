@@ -145,3 +145,7 @@ npm test        # 單元測試，毋須 Slack 工作區或憑證
 版本 **2.6**，於 2026-09-23 正式推出。版本代號為 *GPT-6 Sol Max (Daybreak Blue)*；實際運作的模型是 xhigh 推理的 GPT-6 Luna。
 
 設計文件（韓文）：[ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
+
+## 許可證
+
+本項目以 [MIT 許可證](LICENSE) 發佈。

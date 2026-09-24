@@ -145,3 +145,7 @@ npm test        # 単体テスト（Slack ワークスペースや認証情報�
 バージョン **2.6**、2026-09-23 に正式リリース。リリース名は *GPT-6 Sol Max (Daybreak Blue)* で、実際の運用モデルは xhigh 推論の GPT-6 Luna です。
 
 設計ドキュメント（韓国語）：[ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
+
+## ライセンス
+
+[MIT ライセンス](LICENSE) のもとで公開しています。
