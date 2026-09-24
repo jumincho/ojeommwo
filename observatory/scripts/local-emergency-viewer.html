@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="color-scheme" content="dark" />
+    <title>오점뭐 로컬 비상 관측소</title>
+    <link rel="stylesheet" href="/local-emergency-viewer.css" />
+  </head>
+  <body class="local-emergency-viewer">
+    <main class="emergency-shell">
+      <header class="emergency-header">
+        <p class="emergency-kicker">비상 관측 화면</p>
+        <h1>오점뭐 로컬 비상 관측소</h1>
+        <p class="emergency-warning"><strong>로컬은 비상용입니다.</strong> 서버 장애 중 데이터 확인에만 사용하며 원본 DB는 수정하지 않습니다.</p>
+        <p id="snapshot-status" class="snapshot-status" role="status" aria-live="polite">검증된 스냅샷을 불러오는 중입니다.</p>
+      </header>
+
+      <section class="emergency-controls" aria-labelledby="menu-table-title">
+        <div>
+          <h2 id="menu-table-title">메뉴 현황</h2>
+          <p>식당, 지점, 메뉴, 카테고리 또는 재료 태그로 검색할 수 있습니다.</p>
+        </div>
+        <label for="menu-search">
+          <span>메뉴 검색</span>
+          <input id="menu-search" type="search" autocomplete="off" placeholder="예: 돈까스, 전북대점, pork" />
+        </label>
+      </section>
+
+      <div class="emergency-table-wrap" tabindex="0" aria-label="메뉴 데이터 표">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">메뉴</th>
+              <th scope="col">식당</th>
+              <th scope="col">지점</th>
+              <th scope="col">카테고리</th>
+              <th scope="col">재료 태그</th>
+              <th scope="col">가격</th>
+              <th scope="col">취향</th>
+              <th scope="col">추천 횟수</th>
+              <th scope="col">현재 검증</th>
+            </tr>
+          </thead>
+          <tbody id="menu-rows"></tbody>
+        </table>
+      </div>
+      <p id="empty-state" class="empty-state" hidden>검색 조건에 맞는 메뉴가 없습니다.</p>
+    </main>
+    <script src="/local-emergency-viewer.js" defer></script>
+  </body>
+</html>

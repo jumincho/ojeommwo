@@ -1,0 +1,21 @@
+.env
+.env.*.tmp
+data/*.json
+data/*.tmp
+data/codex-cli-runs/
+data/codex-cli-smoke*.txt
+data/*.lock
+data/*.bak
+data/verified-candidates.json
+data/meal-events.json
+!data/holiday-skip-dates.json
+!data/recommendations.sample.json
+!data/recommendations.json
+!data/meal-normalization-aliases.json
+node_modules/
+npm-debug.log*
+*.log
+logs/
+
+# Local audit records and recovery archives; never deploy or commit.
+/.local-state/

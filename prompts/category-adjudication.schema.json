@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviews"],
+  "properties": {
+    "reviews": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidateId", "category", "confidence", "reason"],
+        "properties": {
+          "candidateId": { "type": "string", "minLength": 1, "maxLength": 320 },
+          "category": { "type": "string", "enum": ["한식", "치킨", "분식", "돈까스", "족발/보쌈", "찜/탕", "구이", "피자", "중식", "일식", "회/해물", "양식", "아시안", "샌드위치", "샐러드", "버거", "멕시칸", "도시락", "죽"] },
+          "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+          "reason": { "type": "string", "minLength": 10, "maxLength": 200 }
+        }
+      }
+    }
+  }
+}

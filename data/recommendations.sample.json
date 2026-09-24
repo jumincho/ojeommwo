@@ -1,0 +1,26 @@
+[
+  {
+    "category": "도시락",
+    "restaurant": "검증된 식당명",
+    "menu": "검증된 메뉴명",
+    "priceText": "9,500원",
+    "platforms": ["배민"],
+    "comment": "든든하게 먹기 좋아서 점심 실패 확률이 낮은 편입니다."
+  },
+  {
+    "category": "돈까스",
+    "restaurant": "검증된 식당명",
+    "menu": "검증된 메뉴명",
+    "priceText": "10,000원",
+    "platforms": ["배민"],
+    "comment": "바삭한 식감이 살아 있어서 한입마다 만족감이 분명합니다."
+  },
+  {
+    "category": "피자",
+    "restaurant": "검증된 식당명",
+    "menu": "검증된 메뉴명",
+    "priceText": "12,000원",
+    "platforms": ["쿠팡이츠"],
+    "comment": "익숙하게 맛있는 계열이라 실패 확률이 낮은 편입니다."
+  }
+]

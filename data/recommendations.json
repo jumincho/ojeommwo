@@ -1,0 +1,300 @@
+[
+  {
+    "category": "한식",
+    "restaurant": "행복은간장밥 전북대점",
+    "menu": "아보카도 명란 덮밥",
+    "priceText": "7,900원",
+    "platforms": [],
+    "comment": "아보카도의 부드러운 지방감과 명란의 짭조름한 알갱이가 간장소스에 섞여 밥을 촉촉하게 끌고 갑니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "seafood"
+    ]
+  },
+  {
+    "category": "찜/탕",
+    "restaurant": "고기듬뿍 국물두루치기 본점",
+    "menu": "고기듬뿍 국물두루치기",
+    "priceText": "14,500원",
+    "platforms": [],
+    "comment": "돼지고기와 떡이 매콤한 국물 양념을 머금어 밥과 계란후라이에 비벼 먹기 좋습니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "pork"
+    ]
+  },
+  {
+    "category": "도시락",
+    "restaurant": "한솥도시락 전북대정문점",
+    "menu": "치킨마요",
+    "priceText": "3,900원",
+    "platforms": [],
+    "comment": "치킨 가라아게와 마요드레싱, 덮밥소스가 한 그릇 안에서 겹쳐져 고소함이 먼저 치고 올라옵니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "poultry"
+    ]
+  },
+  {
+    "category": "중식",
+    "restaurant": "도야짬뽕 전북대점",
+    "menu": "도야짬뽕",
+    "priceText": "10,000원",
+    "platforms": [],
+    "comment": "해산물 건더기와 불맛 국물이 같이 올라와서 한 숟갈마다 진한 짬뽕 향이 먼저 들어옵니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "seafood"
+    ]
+  },
+  {
+    "category": "중식",
+    "restaurant": "홍콩반점0410",
+    "menu": "짜장면",
+    "priceText": "6,500원",
+    "platforms": [],
+    "comment": "춘장 소스가 면에 진하게 배어들고 양파 단맛이 같이 올라와 첫입부터 짭짤한 감칠맛이 또렷합니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "branch": "전북대점",
+    "ingredientFamilies": [
+      "other"
+    ]
+  },
+  {
+    "category": "중식",
+    "restaurant": "춘리마라탕",
+    "menu": "셀프 마라샹궈(1인분 600g)",
+    "priceText": "18,000원",
+    "platforms": [],
+    "comment": "고기 풍미와 채소 식감이 살아 있고, 양념이 과하게 자극적이지 않아 매콤한 얼얼함 뒤에 깔끔함이 남습니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "branch": "전북대점",
+    "ingredientFamilies": [
+      "other"
+    ]
+  },
+  {
+    "category": "양식",
+    "restaurant": "롤링파스타 전북대점",
+    "menu": "우삼겹 도리아",
+    "priceText": "8,900원",
+    "platforms": [],
+    "comment": "노릇한 치즈 아래 밥알에 우삼겹 고소함이 배어 있어 한 숟가락마다 꾸덕한 소스와 감칠맛이 같이 올라옵니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "beef"
+    ]
+  },
+  {
+    "category": "피자",
+    "restaurant": "피자스쿨",
+    "menu": "아이리쉬 포테이토",
+    "priceText": "9,000원",
+    "platforms": [],
+    "comment": "감자 토핑의 포슬함과 치즈의 고소함이 같이 올라와서 한 조각 안에서도 담백함과 짭짤함이 번갈아 느껴집니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "branch": "전북대점",
+    "ingredientFamilies": [
+      "other"
+    ]
+  },
+  {
+    "category": "피자",
+    "restaurant": "파파존스 전주점",
+    "menu": "수퍼 파파스(L)",
+    "priceText": "28,500원",
+    "platforms": [],
+    "comment": "토마토소스와 모짜렐라 위에 소시지, 햄, 페퍼로니, 양파가 겹쳐져 씹을수록 짭짤한 풍미가 쌓입니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "pork"
+    ]
+  },
+  {
+    "category": "분식",
+    "restaurant": "모두랑 전북대점",
+    "menu": "로제 떡볶이",
+    "priceText": "18,000원",
+    "platforms": [],
+    "comment": "쫀득한 떡에 크리미한 로제 소스가 진하게 감기고, 매운맛이 치즈처럼 둥글게 눌립니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "other"
+    ]
+  },
+  {
+    "category": "한식",
+    "restaurant": "김피라 전북대점",
+    "menu": "갈릭우삼겹덮밥",
+    "priceText": "8,900원",
+    "platforms": [],
+    "comment": "갈릭후레이크와 우삼겹의 짭짤한 조합이 밥에 잘 붙어서 한 숟갈마다 고기 맛이 또렷합니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "beef"
+    ]
+  },
+  {
+    "category": "분식",
+    "restaurant": "짱그미김밥 전북대점",
+    "menu": "묵은지참치김밥",
+    "priceText": "5,800원",
+    "platforms": [],
+    "comment": "묵은지의 산미가 참치의 고소함을 잡아줘서 한 줄 안에서 조합이 깔끔하게 살아납니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "seafood"
+    ]
+  },
+  {
+    "category": "일식",
+    "restaurant": "고씨네",
+    "menu": "치즈롤까스카레",
+    "priceText": "9,500원",
+    "platforms": [],
+    "comment": "치즈롤까스의 고소한 튀김옷이 진한 카레 양념을 받아서 밥 위에 얹어 먹기 좋습니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "branch": "전북대점",
+    "ingredientFamilies": [
+      "pork"
+    ]
+  },
+  {
+    "category": "일식",
+    "restaurant": "무모한초밥 금암전북대점",
+    "menu": "특싱글초밥 18p",
+    "priceText": "19,900원",
+    "platforms": [],
+    "comment": "여러 초밥이 한 팩에 들어가고 와사비를 직접 조절하며 먹는 맛이 살아납니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "seafood"
+    ]
+  },
+  {
+    "category": "돈까스",
+    "restaurant": "만배식탁 전북대점",
+    "menu": "김치돈까스나베",
+    "priceText": "11,900원",
+    "platforms": [],
+    "comment": "김치 국물에 잠긴 돈까스가 바삭한 튀김옷과 새콤한 국물 맛을 같이 내서 국물과 튀김 조합이 분명하게 살아납니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "pork"
+    ]
+  },
+  {
+    "category": "치킨",
+    "restaurant": "푸라닭 전북대점",
+    "menu": "마요피뇨",
+    "priceText": "22,900원",
+    "platforms": [],
+    "comment": "특제 마요소스와 할라피뇨, 크루통이 겹쳐서 고소함과 바삭함이 같이 튑니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "poultry"
+    ]
+  },
+  {
+    "category": "치킨",
+    "restaurant": "후켄 전북대점",
+    "menu": "후라이드",
+    "priceText": "19,000원",
+    "platforms": [],
+    "comment": "얇은 튀김옷이 바삭하게 올라와 소금만 찍어도 닭살의 육즙이 또렷합니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "poultry"
+    ]
+  },
+  {
+    "category": "치킨",
+    "restaurant": "교촌치킨 전북대점",
+    "menu": "허니순살",
+    "priceText": "23,000원",
+    "platforms": [],
+    "comment": "허니소스가 안심과 정육 순살에 달라붙어 겉은 달고 안은 촉촉한 식감이 살아납니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "poultry"
+    ]
+  },
+  {
+    "category": "버거",
+    "restaurant": "맥도날드 전주덕진DT점",
+    "menu": "빅맥 세트",
+    "priceText": "7,600원",
+    "platforms": [],
+    "comment": "두 장의 소고기 패티에 특제 소스와 피클, 양상추가 겹쳐져 짭짤한 감칠맛이 또렷합니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "beef"
+    ]
+  },
+  {
+    "category": "버거",
+    "restaurant": "버거킹 전북대점",
+    "menu": "콰트로치즈와퍼세트",
+    "priceText": "10,400원",
+    "platforms": [],
+    "comment": "네 가지 치즈가 패티와 겹쳐져서 첫 입부터 진한 치즈 풍미와 불향이 같이 올라옵니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "beef"
+    ]
+  },
+  {
+    "category": "버거",
+    "restaurant": "맘스터치 전북대점",
+    "menu": "싸이버거 세트",
+    "priceText": "4,900원",
+    "platforms": [],
+    "comment": "닭다리살 패티의 촉촉함과 바삭한 번, 마요 소스 조합이 한입에서 같이 터집니다.",
+    "evidence": [
+      "previous verified recommendation history"
+    ],
+    "ingredientFamilies": [
+      "poultry"
+    ]
+  }
+]

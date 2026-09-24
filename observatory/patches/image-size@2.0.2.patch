@@ -1,0 +1,518 @@
+diff --git a/dist/detector.cjs b/dist/detector.cjs
+index 0898608dbeca36722dfd795341b1c3c1448f58aa..599cf52ae59d8509a6bfb9540de41e76c3996d79 100644
+--- a/dist/detector.cjs
++++ b/dist/detector.cjs
+@@ -28,9 +28,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -247,10 +249,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize = getImageSize2(imageHeader[0]);
+       images.push(imageSize);
+       imageOffset += imageHeader[1];
+diff --git a/dist/detector.mjs b/dist/detector.mjs
+index 67afcab02d627f95e98c938499e07a934b832a26..3b918a428be1f79d1d8649b802491d3fc576999d 100644
+--- a/dist/detector.mjs
++++ b/dist/detector.mjs
+@@ -26,9 +26,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -245,10 +247,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize = getImageSize2(imageHeader[0]);
+       images.push(imageSize);
+       imageOffset += imageHeader[1];
+diff --git a/dist/fromFile.cjs b/dist/fromFile.cjs
+index c226d3dac07f235db456c774b26cca88f655e1af..ae73c5806cd49ed0133e3cb845948ee1bb015e7e 100644
+--- a/dist/fromFile.cjs
++++ b/dist/fromFile.cjs
+@@ -54,9 +54,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -273,10 +275,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize2 = getImageSize2(imageHeader[0]);
+       images.push(imageSize2);
+       imageOffset += imageHeader[1];
+diff --git a/dist/fromFile.mjs b/dist/fromFile.mjs
+index 4a3c44432982397204f7a9d04fc66ef65a8e7ba4..e4843abfcb252d628cd53dd1e0ed1afcb063013f 100644
+--- a/dist/fromFile.mjs
++++ b/dist/fromFile.mjs
+@@ -31,9 +31,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -250,10 +252,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize2 = getImageSize2(imageHeader[0]);
+       images.push(imageSize2);
+       imageOffset += imageHeader[1];
+diff --git a/dist/index.cjs b/dist/index.cjs
+index bde0210eb131db06ccca30a5c466c7252a03af50..4036085d1f6b591765e09bedcfd91e8f4f10ecec 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -30,9 +30,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -249,10 +251,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize2 = getImageSize2(imageHeader[0]);
+       images.push(imageSize2);
+       imageOffset += imageHeader[1];
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 22c17afad4e406eba013fff7858366cb5f8e3ba4..0e3d59af8f30dc19e0b9e3944a32bb8d20937cd0 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -26,9 +26,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -245,10 +247,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize2 = getImageSize2(imageHeader[0]);
+       images.push(imageSize2);
+       imageOffset += imageHeader[1];
+diff --git a/dist/lookup.cjs b/dist/lookup.cjs
+index 9731ad8bb0949f8fdf9297851bdb312e91282f01..54b2c97102bccafcebd85fa895bf0e75d747e7eb 100644
+--- a/dist/lookup.cjs
++++ b/dist/lookup.cjs
+@@ -28,9 +28,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -247,10 +249,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize2 = getImageSize2(imageHeader[0]);
+       images.push(imageSize2);
+       imageOffset += imageHeader[1];
+diff --git a/dist/lookup.mjs b/dist/lookup.mjs
+index f787d1c8408d7b681fec8617595d058f66959869..33e7f3cf023b23e3210e0504cedeb72765d8181e 100644
+--- a/dist/lookup.mjs
++++ b/dist/lookup.mjs
+@@ -26,9 +26,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -245,10 +247,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize2 = getImageSize2(imageHeader[0]);
+       images.push(imageSize2);
+       imageOffset += imageHeader[1];
+diff --git a/dist/types/heif.cjs b/dist/types/heif.cjs
+index 1f490788ea654ea9896060a5c0253d81e348af92..a5a4f28ff74eb4de147a5a6159d9cf1ee068b887 100644
+--- a/dist/types/heif.cjs
++++ b/dist/types/heif.cjs
+@@ -6,9 +6,11 @@ var toUTF8String = (input, start = 0, end = input.length) => decoder.decode(inpu
+ var getView = (input, offset) => new DataView(input.buffer, input.byteOffset + offset);
+ var readUInt32BE = (input, offset = 0) => getView(input, offset).getUint32(0, false);
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+diff --git a/dist/types/heif.mjs b/dist/types/heif.mjs
+index 01330919e01b3c034a96a7b4b1dbf5a7f658bb2d..ab0289f0fe56076a2725fe5e270e2e7f9451460c 100644
+--- a/dist/types/heif.mjs
++++ b/dist/types/heif.mjs
+@@ -4,9 +4,11 @@ var toUTF8String = (input, start = 0, end = input.length) => decoder.decode(inpu
+ var getView = (input, offset) => new DataView(input.buffer, input.byteOffset + offset);
+ var readUInt32BE = (input, offset = 0) => getView(input, offset).getUint32(0, false);
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+diff --git a/dist/types/icns.cjs b/dist/types/icns.cjs
+index 32c8d370dcf80a10f14a6deebfdbe04d3c70585c..3a463741d007052c2d702a0844a92494a2ee0139 100644
+--- a/dist/types/icns.cjs
++++ b/dist/types/icns.cjs
+@@ -68,10 +68,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize = getImageSize(imageHeader[0]);
+       images.push(imageSize);
+       imageOffset += imageHeader[1];
+diff --git a/dist/types/icns.mjs b/dist/types/icns.mjs
+index 8710027bc5890a79d05a7fdb87de3018e556729e..bf73641828ed8c46217098387ab334237cdada27 100644
+--- a/dist/types/icns.mjs
++++ b/dist/types/icns.mjs
+@@ -66,10 +66,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize = getImageSize(imageHeader[0]);
+       images.push(imageSize);
+       imageOffset += imageHeader[1];
+diff --git a/dist/types/index.cjs b/dist/types/index.cjs
+index 6949cd134db7ab59dae7b804b36c7bacb4e387cf..18e512f4e987ee3252a587ff3f1d9876f8eafd9f 100644
+--- a/dist/types/index.cjs
++++ b/dist/types/index.cjs
+@@ -28,9 +28,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -247,10 +249,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize = getImageSize2(imageHeader[0]);
+       images.push(imageSize);
+       imageOffset += imageHeader[1];
+diff --git a/dist/types/index.mjs b/dist/types/index.mjs
+index b026dda4aa16c6077a76e4b3cfe3f54fe1d6d1d0..2d234d41338bd9cb3298c694a2c2ccf06e2912f0 100644
+--- a/dist/types/index.mjs
++++ b/dist/types/index.mjs
+@@ -26,9 +26,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+@@ -245,10 +247,13 @@ var ICNS = {
+   calculate(input) {
+     const inputLength = input.length;
+     const fileLength = readUInt32BE(input, FILE_LENGTH_OFFSET);
++    if (fileLength < 8 || fileLength > inputLength) throw new TypeError("Invalid ICNS file length");
+     let imageOffset = SIZE_HEADER2;
+     const images = [];
+     while (imageOffset < fileLength && imageOffset < inputLength) {
++      if (fileLength - imageOffset < 8) throw new TypeError("Truncated ICNS entry");
+       const imageHeader = readImageHeader(input, imageOffset);
++      if (imageHeader[1] < 8 || imageHeader[1] > fileLength - imageOffset) throw new TypeError("Invalid ICNS entry length");
+       const imageSize = getImageSize2(imageHeader[0]);
+       images.push(imageSize);
+       imageOffset += imageHeader[1];
+diff --git a/dist/types/jp2.cjs b/dist/types/jp2.cjs
+index cdd7c884efeb940b99f69a8f1d6ed361a1979211..72bd9706aea8d2d30fb6c7cdd5427efcbf026a05 100644
+--- a/dist/types/jp2.cjs
++++ b/dist/types/jp2.cjs
+@@ -6,9 +6,11 @@ var toUTF8String = (input, start = 0, end = input.length) => decoder.decode(inpu
+ var getView = (input, offset) => new DataView(input.buffer, input.byteOffset + offset);
+ var readUInt32BE = (input, offset = 0) => getView(input, offset).getUint32(0, false);
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+diff --git a/dist/types/jp2.mjs b/dist/types/jp2.mjs
+index 63a537635b4f91250431a53225d4521ed60cf67d..d04481cd6b4b5f81a50340b55b91243de05fbe42 100644
+--- a/dist/types/jp2.mjs
++++ b/dist/types/jp2.mjs
+@@ -4,9 +4,11 @@ var toUTF8String = (input, start = 0, end = input.length) => decoder.decode(inpu
+ var getView = (input, offset) => new DataView(input.buffer, input.byteOffset + offset);
+ var readUInt32BE = (input, offset = 0) => getView(input, offset).getUint32(0, false);
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+diff --git a/dist/types/jxl.cjs b/dist/types/jxl.cjs
+index a12095be85c7a8fd25763895a47c46b4292ebd9c..6329badedd56db18a88fa10eed2a6f1fdb2d0946 100644
+--- a/dist/types/jxl.cjs
++++ b/dist/types/jxl.cjs
+@@ -47,9 +47,11 @@ var toHexString = (input, start = 0, end = input.length) => input.slice(start, e
+ var getView = (input, offset) => new DataView(input.buffer, input.byteOffset + offset);
+ var readUInt32BE = (input, offset = 0) => getView(input, offset).getUint32(0, false);
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+diff --git a/dist/types/jxl.mjs b/dist/types/jxl.mjs
+index 49b0c4cac6abb366378e5feed745f16981b441c0..99f37e102f5c511ce5360de3be939f88b60b4eb8 100644
+--- a/dist/types/jxl.mjs
++++ b/dist/types/jxl.mjs
+@@ -45,9 +45,11 @@ var toHexString = (input, start = 0, end = input.length) => input.slice(start, e
+ var getView = (input, offset) => new DataView(input.buffer, input.byteOffset + offset);
+ var readUInt32BE = (input, offset = 0) => getView(input, offset).getUint32(0, false);
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+diff --git a/dist/types/utils.cjs b/dist/types/utils.cjs
+index 23d52e4cbf271e667feb2d7f040c07f69678d3aa..ce5c3e36697d0f43fd60718c0164c9497fe4e071 100644
+--- a/dist/types/utils.cjs
++++ b/dist/types/utils.cjs
+@@ -28,9 +28,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,
+diff --git a/dist/types/utils.mjs b/dist/types/utils.mjs
+index 3f09dceb036e40be8538dbb5588d88c951339158..494e33483d21731f1d83a71f89593e5282ac8b7f 100644
+--- a/dist/types/utils.mjs
++++ b/dist/types/utils.mjs
+@@ -26,9 +26,11 @@ function readUInt(input, bits, offset = 0, isBigEndian = false) {
+   return methods[methodName](input, offset);
+ }
+ function readBox(input, offset) {
+-  if (input.length - offset < 4) return;
+-  const boxSize = readUInt32BE(input, offset);
+-  if (input.length - offset < boxSize) return;
++  if (!Number.isSafeInteger(offset) || offset < 0 || input.length - offset < 8) return;
++  const declaredSize = readUInt32BE(input, offset);
++  // ISO BMFF size zero extends to EOF; every accepted box advances >= 8 bytes.
++  const boxSize = declaredSize === 0 ? input.length - offset : declaredSize;
++  if (boxSize < 8 || input.length - offset < boxSize) return;
+   return {
+     name: toUTF8String(input, 4 + offset, 8 + offset),
+     offset,

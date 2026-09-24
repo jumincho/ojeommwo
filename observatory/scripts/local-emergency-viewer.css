@@ -1,0 +1,211 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.local-emergency-banner {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  top: 0.75rem !important;
+  left: 50% !important;
+  width: min(46rem, calc(100% - 2rem)) !important;
+  transform: translateX(-50%) !important;
+  padding: 0.7rem 1rem !important;
+  border: 1px solid rgba(255, 199, 92, 0.72) !important;
+  border-radius: 999px !important;
+  background: rgba(39, 24, 5, 0.94) !important;
+  color: #fff4cf !important;
+  box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.45) !important;
+  font: 600 0.95rem/1.4 system-ui, sans-serif !important;
+  text-align: center !important;
+  pointer-events: none !important;
+}
+
+.local-emergency-viewer {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #090b13;
+  color: #f6f7fb;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.local-emergency-viewer .emergency-shell {
+  width: min(92rem, 100%);
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3vw, 3rem);
+}
+
+.local-emergency-viewer .emergency-header,
+.local-emergency-viewer .emergency-controls,
+.local-emergency-viewer .emergency-table-wrap {
+  border: 1px solid #2b3245;
+  border-radius: 1rem;
+  background: #111522;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.22);
+}
+
+.local-emergency-viewer .emergency-header {
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.local-emergency-viewer .emergency-kicker {
+  margin: 0;
+  color: #9fb8ff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.local-emergency-viewer h1,
+.local-emergency-viewer h2,
+.local-emergency-viewer p {
+  margin-top: 0;
+}
+
+.local-emergency-viewer h1 {
+  margin-bottom: 0.7rem;
+  font-size: clamp(1.9rem, 5vw, 3.5rem);
+  line-height: 1.15;
+}
+
+.local-emergency-viewer .emergency-warning {
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-left: 0.3rem solid #ffc75c;
+  background: #2b210d;
+  color: #fff1c1;
+}
+
+.local-emergency-viewer .snapshot-status {
+  margin-bottom: 0;
+  color: #bdc7dc;
+}
+
+.local-emergency-viewer .emergency-controls {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin: 1rem 0;
+  padding: 1.1rem 1.25rem;
+}
+
+.local-emergency-viewer .emergency-controls h2,
+.local-emergency-viewer .emergency-controls p {
+  margin-bottom: 0.2rem;
+}
+
+.local-emergency-viewer .emergency-controls label {
+  display: grid;
+  min-width: min(28rem, 100%);
+  gap: 0.35rem;
+  color: #d9e1f3;
+  font-weight: 700;
+}
+
+.local-emergency-viewer input[type="search"] {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #586784;
+  border-radius: 0.65rem;
+  background: #080b13;
+  color: #fff;
+  font: inherit;
+}
+
+.local-emergency-viewer input[type="search"]:focus-visible,
+.local-emergency-viewer .emergency-table-wrap:focus-visible {
+  outline: 0.2rem solid #88aaff;
+  outline-offset: 0.15rem;
+}
+
+.local-emergency-viewer .emergency-table-wrap {
+  overflow: auto;
+  max-height: 68vh;
+}
+
+.local-emergency-viewer table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.local-emergency-viewer th,
+.local-emergency-viewer td {
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid #2a3142;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.local-emergency-viewer th {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  background: #1a2030;
+  color: #dce5fa;
+  font-size: 0.9rem;
+}
+
+.local-emergency-viewer td:first-child {
+  color: #fff;
+  font-weight: 750;
+}
+
+.local-emergency-viewer tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.local-emergency-viewer tbody tr:hover {
+  background: rgba(133, 164, 255, 0.1);
+}
+
+.local-emergency-viewer .availability-current {
+  color: #8ff0b6;
+  font-weight: 750;
+}
+
+.local-emergency-viewer .availability-history {
+  color: #aab4c9;
+}
+
+.local-emergency-viewer .empty-state {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px dashed #586784;
+  border-radius: 0.75rem;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .local-emergency-banner {
+    top: 0.4rem !important;
+    border-radius: 0.75rem !important;
+    font-size: 0.82rem !important;
+  }
+
+  .local-emergency-viewer .emergency-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .local-emergency-viewer .emergency-controls label {
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

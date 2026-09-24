@@ -1,0 +1,45 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { requestSitesJson } from "../scripts/lib/sites-http.mjs";
+
+test("Sites transport retries transient gateway responses with the same request", async () => {
+  const requests = [];
+  const result = await requestSitesJson("https://example.test/chunk", { "X-Test": "idempotent" }, {
+    sleep: async () => {},
+    fetchImpl: async (url, options) => {
+      requests.push({ url, headers: options.headers, method: options.method });
+      return requests.length < 3 ? new Response("gateway", { status: 502 }) : Response.json({ status: "ok", accepted: true });
+    },
+  });
+  assert.equal(result.accepted, true);
+  assert.equal(requests.length, 3);
+  assert.deepEqual(requests[0], requests[2]);
+});
+
+test("Sites transport never retries rejected credentials and caps transient retries", async () => {
+  let calls = 0;
+  await assert.rejects(requestSitesJson("https://example.test/chunk", {}, {
+    sleep: async () => {}, fetchImpl: async () => { calls++; return Response.json({ status: "error" }, { status: 401 }); },
+  }), /401/u);
+  assert.equal(calls, 1);
+  calls = 0;
+  await assert.rejects(requestSitesJson("https://example.test/chunk", {}, {
+    sleep: async () => {}, fetchImpl: async () => { calls++; throw new Error("network down"); },
+  }), /network down/u);
+  assert.equal(calls, 3);
+});
+
+test("Sites transport respects whole-upload cancellation", async () => {
+  const controller = new AbortController();
+  let requestSignal;
+  const pending = requestSitesJson("https://example.test/commit", {}, {
+    signal: controller.signal,
+    fetchImpl: async (_url, options) => {
+      requestSignal = options.signal;
+      return new Promise((_resolve, reject) => options.signal.addEventListener("abort", () => reject(options.signal.reason), { once: true }));
+    },
+  });
+  controller.abort(new Error("upload deadline"));
+  await assert.rejects(pending, /upload deadline/u);
+  assert.equal(requestSignal.aborted, true);
+});

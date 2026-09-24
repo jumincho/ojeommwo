@@ -1,0 +1,53 @@
+{
+  "name": "ojeommwo-observatory",
+  "version": "2.6.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only visual observatory for the ojeommwo-v2 recommendation data and taste model.",
+  "packageManager": "pnpm@11.16.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "snapshot": "node scripts/export-snapshot.mjs --output public/data/snapshot.json",
+    "snapshot:runtime": "node scripts/export-snapshot.mjs --output runtime/snapshot.json",
+    "snapshot:validate": "node scripts/validate-snapshot.mjs public/data/snapshot.json",
+    "local:emergency": "node scripts/run-local-emergency-viewer.mjs",
+    "dev": "vinext dev",
+    "build": "node scripts/build-sites.mjs",
+    "build:sites": "node scripts/build-sites.mjs",
+    "start": "node scripts/run-local-emergency-viewer.mjs",
+    "test": "node --import ./scripts/setup-test-environment.mjs --test",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ignore-pattern .next --ignore-pattern out --ignore-pattern public/data/snapshot.json --ignore-pattern runtime",
+    "verify": "node scripts/export-snapshot.mjs --output public/data/snapshot.json && node scripts/validate-snapshot.mjs public/data/snapshot.json && node --import ./scripts/setup-test-environment.mjs --test && eslint . --ignore-pattern .next --ignore-pattern out --ignore-pattern dist --ignore-pattern public/data/snapshot.json --ignore-pattern runtime && tsc --noEmit && next build",
+    "verify:sites": "node scripts/export-snapshot.mjs --output public/data/snapshot.json && node scripts/validate-snapshot.mjs public/data/snapshot.json && node --import ./scripts/setup-test-environment.mjs --test && eslint . --ignore-pattern .next --ignore-pattern out --ignore-pattern dist --ignore-pattern public/data/snapshot.json --ignore-pattern runtime && tsc --noEmit && node scripts/build-sites.mjs"
+  },
+  "dependencies": {
+    "3d-force-graph": "1.79.0",
+    "next": "16.3.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "0.180.0",
+    "three-spritetext": "1.10.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.180.0",
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "eslint": "10.7.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "17.7.0",
+    "react-server-dom-webpack": "19.2.8",
+    "typescript-eslint": "8.65.0",
+    "typescript": "5.9.3",
+    "vinext": "0.0.50",
+    "vite": "8.0.16",
+    "wrangler": "4.92.0"
+  }
+}

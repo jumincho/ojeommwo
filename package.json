@@ -1,0 +1,40 @@
+{
+  "name": "ojeommwo-v2",
+  "version": "2.6.0",
+  "private": true,
+  "type": "module",
+  "description": "Slack lunch and dinner recommendation bot for JBNU Engineering Building 7.",
+  "scripts": {
+    "start": "node scripts/run-interaction-listener.js",
+    "dry-run": "node src/index.js --dry-run",
+    "preview:lunch": "node scripts/send-scheduled-meal.js --meal lunch --channel C0123456789 --mode cache --dry-run",
+    "preview:dinner": "node scripts/send-scheduled-meal.js --meal dinner --channel C0123456789 --mode cache --dry-run",
+    "preview:dm:dinner": "node scripts/send-dinner-dm-preview.js --mode cache --dry-run",
+    "validate": "node src/index.js --validate",
+    "health": "node scripts/health-check.js --require-pass",
+    "slack-auth-test": "node src/index.js --slack-auth-test",
+    "slack-capability-test": "node src/index.js --slack-capability-test",
+    "slack-security-audit": "node scripts/audit-slack-token.js",
+    "check": "node scripts/check-syntax.js",
+    "audit:recommendations": "node scripts/audit-recommendations.js",
+    "audit:categories": "node scripts/audit-category-arbitration.js --strict",
+    "maintenance": "node scripts/prune-runtime-artifacts.js",
+    "candidates:refresh": "node scripts/refresh-verified-candidates.js",
+    "candidates:catalog": "node scripts/rebuild-candidate-catalog.js",
+    "candidates:evidence-check": "node scripts/check-candidate-evidence.js",
+    "candidates:add-seeds": "node scripts/add-candidate-catalog-seeds.js",
+    "interactions": "node scripts/run-interaction-listener.js",
+    "meals:normalize": "node scripts/normalize-meal-events.js",
+    "taxonomy:migrate": "node scripts/migrate-food-taxonomy.js --dry-run",
+    "weather:check": "node scripts/check-weather.js --strict",
+    "observatory:snapshot": "node observatory/scripts/export-snapshot.mjs --output observatory/public/data/snapshot.json",
+    "observatory:validate": "node observatory/scripts/validate-snapshot.mjs observatory/public/data/snapshot.json",
+    "observatory:test": "node --import ./observatory/scripts/setup-test-environment.mjs --test observatory/tests/*.test.mjs",
+    "test": "node --import ./scripts/setup-node-environment.js --test test/*.test.js",
+    "test:coverage": "node --import ./scripts/setup-node-environment.js --test --experimental-test-coverage test/*.test.js",
+    "codex:auth-check": "node scripts/check-codex-auth.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "restaurant": "두찜",
+      "branch": "전주금암점",
+      "category": "찜/탕",
+      "restaurantAliases": [
+        "두찜 금암점",
+        "두찜 전주금암점"
+      ],
+      "menus": [
+        {
+          "menu": "두찜 로제찜닭",
+          "aliases": [
+            "로제찜닭",
+            "로제 찜닭",
+            "두찜 로제찜닭"
+          ]
+        },
+        {
+          "menu": "두찜 까만찜닭",
+          "aliases": [
+            "까만찜닭",
+            "까만 찜닭",
+            "두찜 까만찜닭"
+          ]
+        }
+      ],
+      "evidenceUrl": "https://www.diningcode.com/profile.php?rid=yatAECMn3LHw"
+    },
+    {
+      "restaurant": "신대화회관",
+      "branch": "",
+      "address": "전북특별자치도 전주시 덕진구 백동로 43",
+      "category": "찜/탕",
+      "restaurantAliases": [
+        "신대화",
+        "신대화 회관"
+      ],
+      "menus": [
+        {
+          "menu": "닭볶음탕(한마리)",
+          "aliases": [
+            "닭복음탕",
+            "닭 볶음탕",
+            "닭볶음탕",
+            "닭볶음탕 한마리"
+          ]
+        }
+      ],
+      "evidenceUrl": "https://www.diningcode.com/profile.php?rid=KhZEyXpXwxXc"
+    },
+    {
+      "restaurant": "와우케밥 치킨",
+      "branch": "",
+      "address": "전북특별자치도 전주시 덕진구 권삼득로 333 원플러스빌딩 1층 116호",
+      "category": "아시안",
+      "restaurantAliases": [
+        "와우케밥치킨",
+        "와우 케밥 치킨"
+      ],
+      "menus": [
+        {
+          "menu": "치+양도네르롤",
+          "aliases": [
+            "치킨양믹스롤",
+            "치킨 양 믹스 롤",
+            "치킨양도네르롤",
+            "치양도네르롤",
+            "치+양 도네르롤",
+            "롤 믹스 램",
+            "롤믹스램",
+            "치+양도네르롤(Regular레귤러)",
+            "치+양도네르롤(Large라지)"
+          ]
+        }
+      ],
+      "evidenceUrl": "https://www.diningcode.com/profile.php?rid=pNQxdZ8TprZb"
+    },
+    {
+      "restaurant": "모퉁이덮밥",
+      "branch": "",
+      "address": "전북특별자치도 전주시 덕진구 삼송3길 42, 107호",
+      "category": "일식",
+      "restaurantAliases": [
+        "모퉁이",
+        "모퉁이 전북대점"
+      ],
+      "menus": [
+        {
+          "menu": "모퉁이덮밥",
+          "aliases": [
+            "모퉁이 덮밥"
+          ]
+        }
+      ],
+      "evidenceUrl": "https://www.diningcode.com/profile.php?rid=ugffp3S7d2Yl"
+    }
+  ]
+}
