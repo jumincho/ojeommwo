@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ForceGraph3DInstance, LinkObject, NodeObject } from "3d-force-graph";
-import type { Object3D } from "three";
+import type { DepthTexture, Object3D } from "three";
 import type { CategoryRecord, MenuRecord, TasteGravityEasterEgg } from "../types";
 
 type MenuCosmosProps = {
@@ -44,9 +44,34 @@ type LensingPassLike = {
     lensRadius: { value: number };
     lensStrength: { value: number };
     aspect: { value: number };
+    shadowRadius: { value: number };
+    pixelsPerShadow: { value: number };
+    diskTime: { value: number };
+    selectionMix: { value: number };
+    fogMix: { value: number };
+    holeDepth: { value: number };
+    depthMargin: { value: number };
+    cameraNear: { value: number };
+    cameraFar: { value: number };
+    tDepth: { value: DepthTexture | null };
+    depthReady: { value: number };
   };
+  render: (
+    renderer: unknown,
+    writeBuffer: unknown,
+    readBuffer: { depthTexture: DepthTexture | null },
+    deltaTime?: number,
+    maskActive?: boolean,
+  ) => void;
   dispose?: () => void;
 };
+
+// Gargantua is seen from slightly above its disk, with a small roll, and is
+// always turned toward the camera. The lensing shader and the invisible click
+// proxies share these angles so what is drawn and what is clickable agree.
+const GARGANTUA_INCLINATION = 0.16;
+const GARGANTUA_ROLL = -0.1;
+const FOG_DENSITY = 0.00072;
 
 function seededValue(value: string, salt: number) {
   let hash = 2166136261 ^ salt;
@@ -55,6 +80,95 @@ function seededValue(value: string, salt: number) {
     hash = Math.imul(hash, 16777619);
   }
   return ((hash >>> 0) % 10_000) / 10_000;
+}
+
+function latticeHash(x: number, y: number, z: number) {
+  let hash = Math.imul(x, 374761393) ^ Math.imul(y, 668265263) ^ Math.imul(z, 1274126177);
+  hash = Math.imul(hash ^ (hash >>> 13), 1103515245);
+  return ((hash ^ (hash >>> 16)) >>> 0) / 4294967295;
+}
+
+function latticeNoise(x: number, y: number, z: number) {
+  const ix = Math.floor(x);
+  const iy = Math.floor(y);
+  const iz = Math.floor(z);
+  const fx = x - ix;
+  const fy = y - iy;
+  const fz = z - iz;
+  const ux = fx * fx * (3 - 2 * fx);
+  const uy = fy * fy * (3 - 2 * fy);
+  const uz = fz * fz * (3 - 2 * fz);
+  const lerp = (from: number, to: number, amount: number) => from + (to - from) * amount;
+  const plane = (offsetZ: number) => lerp(
+    lerp(latticeHash(ix, iy, iz + offsetZ), latticeHash(ix + 1, iy, iz + offsetZ), ux),
+    lerp(latticeHash(ix, iy + 1, iz + offsetZ), latticeHash(ix + 1, iy + 1, iz + offsetZ), ux),
+    uy,
+  );
+  return lerp(plane(0), plane(1), uz);
+}
+
+function skyNoise(x: number, y: number, z: number, octaves = 4) {
+  let sum = 0;
+  let total = 0;
+  let amplitude = 0.5;
+  for (let octave = 0; octave < octaves; octave += 1) {
+    sum += amplitude * latticeNoise(x, y, z);
+    total += amplitude;
+    x = x * 2.03 + 5.1;
+    y = y * 2.03 + 1.3;
+    z = z * 2.03 + 7.7;
+    amplitude *= 0.5;
+  }
+  return sum / total;
+}
+
+// Paints a faint equirectangular nebula with a dusty galactic band. Noise is
+// sampled on the unit sphere, so the texture wraps without a seam.
+function paintNebula(context: CanvasRenderingContext2D, width: number, height: number) {
+  const image = context.createImageData(width, height);
+  const violet = [62, 44, 138];
+  const teal = [20, 92, 118];
+  const magenta = [110, 32, 98];
+  for (let row = 0; row < height; row += 1) {
+    const latitude = (0.5 - row / (height - 1)) * Math.PI;
+    const y = Math.sin(latitude);
+    const ring = Math.cos(latitude);
+    const band = Math.exp(-((y / 0.3) ** 2));
+    for (let column = 0; column < width; column += 1) {
+      const longitude = (column / width) * Math.PI * 2;
+      const x = ring * Math.cos(longitude);
+      const z = ring * Math.sin(longitude);
+      const cloud = Math.max(0, skyNoise(x * 2.1 + 3, y * 2.1, z * 2.1 - 4) - 0.38) / 0.62;
+      const hue = skyNoise(x * 1.3 - 7, y * 1.3 + 2, z * 1.3 + 5, 3);
+      const rift = Math.max(0, skyNoise(x * 6 + 1, y * 6 - 3, z * 6 + 2, 3) - 0.45) / 0.55;
+      const glow = cloud ** 1.6 * (0.28 + 0.9 * band) * (1 - 0.6 * band * rift);
+      const toTeal = Math.min(1, Math.max(0, (hue - 0.38) / 0.24));
+      const toMagenta = Math.min(1, Math.max(0, (0.42 - hue) / 0.2));
+      const index = (row * width + column) * 4;
+      for (let channel = 0; channel < 3; channel += 1) {
+        const base = violet[channel] + (teal[channel] - violet[channel]) * toTeal;
+        image.data[index + channel] = (base + (magenta[channel] - base) * toMagenta) * glow;
+      }
+      image.data[index + 3] = 255;
+    }
+  }
+  context.putImageData(image, 0, 0);
+}
+
+// The cosmos is rebuilt whenever the filters change, so paint the nebula once
+// per page and let every rebuild reuse it.
+let nebulaCanvasCache: HTMLCanvasElement | null = null;
+function nebulaCanvas() {
+  if (!nebulaCanvasCache) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 128;
+    const context = canvas.getContext("2d");
+    if (!context) return null;
+    paintNebula(context, canvas.width, canvas.height);
+    nebulaCanvasCache = canvas;
+  }
+  return nebulaCanvasCache;
 }
 
 function categoryPosition(index: number, total: number) {
@@ -165,7 +279,8 @@ function categoryLabelHeight(width: number) {
 }
 
 function focusDistanceForViewport(kind: GraphNode["kind"], width: number) {
-  if (kind === "anomaly") return width <= 480 ? 310 : width <= 760 ? 255 : width <= 1100 ? 215 : 190;
+  // Frame the whole ray-traced disk, not only the shadow.
+  if (kind === "anomaly") return width <= 480 ? 320 : width <= 760 ? 275 : width <= 1100 ? 255 : 240;
   return width <= 480 ? 150 : width <= 760 ? 125 : 96;
 }
 
@@ -266,6 +381,7 @@ export function MenuCosmos({
     const cosmicDecorations: Object3D[] = [];
     let bloomPass: { setSize: (width: number, height: number) => void; dispose?: () => void } | null = null;
     let lensingPass: LensingPassLike | null = null;
+    const depthTextures: DepthTexture[] = [];
     let lensingAnimationFrame: number | null = null;
     let canvas: HTMLCanvasElement | null = null;
     let handleVisibilityChange: (() => void) | null = null;
@@ -302,6 +418,26 @@ export function MenuCosmos({
         graphRef.current = graph;
         objectById.clear();
 
+        // Soft stellar glow shared by category coronas and menu stars. Glows
+        // are additive, never raycast, and stay dimmer than the labels.
+        const glowCanvas = document.createElement("canvas");
+        glowCanvas.width = glowCanvas.height = 128;
+        const glowContext = glowCanvas.getContext("2d");
+        if (glowContext) {
+          const glow = glowContext.createRadialGradient(64, 64, 0, 64, 64, 64);
+          glow.addColorStop(0, "rgba(255,255,255,1)");
+          glow.addColorStop(0.1, "rgba(255,255,255,0.7)");
+          glow.addColorStop(0.28, "rgba(255,255,255,0.24)");
+          glow.addColorStop(0.56, "rgba(255,255,255,0.06)");
+          glow.addColorStop(1, "rgba(255,255,255,0)");
+          glowContext.fillStyle = glow;
+          glowContext.fillRect(0, 0, 128, 128);
+        }
+        const glowTexture = new three.CanvasTexture(glowCanvas);
+        // Drawn only if the lensing shader cannot compile on this GPU.
+        const blackHoleFallback: Object3D[] = [];
+        let lensingFailed = false;
+
         graph
           .width(Math.max(1, container.clientWidth))
           .height(Math.max(1, container.clientHeight))
@@ -327,12 +463,23 @@ export function MenuCosmos({
                 new three.MeshStandardMaterial({
                   color: node.color,
                   emissive: node.color,
-                  emissiveIntensity: 0.5,
+                  emissiveIntensity: 0.56,
                   roughness: 0.32,
                   metalness: 0.2,
                   flatShading: true,
                 }),
               );
+              const corona = new three.Sprite(new three.SpriteMaterial({
+                map: glowTexture,
+                color: node.color,
+                transparent: true,
+                opacity: 0.3,
+                depthWrite: false,
+                blending: three.AdditiveBlending,
+              }));
+              corona.name = "category-corona";
+              corona.scale.set(74, 74, 1);
+              corona.renderOrder = -1;
               const halo = new three.Mesh(
                 new three.SphereGeometry(12.5, 18, 18),
                 new three.MeshBasicMaterial({
@@ -345,11 +492,11 @@ export function MenuCosmos({
                 }),
               );
               const orbitA = new three.Mesh(
-                new three.TorusGeometry(14.5, 0.42, 8, 48),
+                new three.TorusGeometry(14.5, 0.34, 8, 64),
                 new three.MeshBasicMaterial({
                   color: node.color,
                   transparent: true,
-                  opacity: 0.48,
+                  opacity: 0.44,
                   depthWrite: false,
                   blending: three.AdditiveBlending,
                 }),
@@ -371,127 +518,76 @@ export function MenuCosmos({
               sprite.userData.labelAspect = sprite.scale.x / sprite.scale.y;
               sprite.raycast = () => {};
               // Category ornaments must never cover a nearby selectable menu.
-              for (const ornament of [halo, core, orbitA, orbitB]) ornament.raycast = () => {};
-              hub.add(halo, core, orbitA, orbitB, sprite);
+              for (const ornament of [corona, halo, core, orbitA, orbitB]) ornament.raycast = () => {};
+              hub.add(corona, halo, core, orbitA, orbitB, sprite);
               objectById.set(node.id, hub);
               return hub;
             }
 
             if (node.kind === "anomaly") {
+              // Gargantua itself is ray-traced by the lensing pass below: the
+              // shadow, the photon ring, the Doppler-beamed accretion disk and
+              // the far half of the disk bent over and under the shadow. These
+              // meshes are never drawn. The raycaster ignores visibility, so
+              // they keep the click target the same shape as the drawn hole.
               const anomaly = new three.Group();
               anomaly.userData.selectionId = node.easterEgg?.id;
+              const proxyMaterial = new three.MeshBasicMaterial({ visible: false });
               const horizon = new three.Mesh(
-                new three.SphereGeometry(node.size, 40, 40),
-                new three.MeshBasicMaterial({ color: "#000000" }),
+                new three.SphereGeometry(node.size, 32, 32),
+                new three.MeshBasicMaterial({ color: "#000000", visible: false }),
               );
               horizon.renderOrder = 4;
-
-              const gravitationalHalo = new three.Mesh(
-                new three.SphereGeometry(node.size * 1.48, 32, 32),
-                new three.MeshBasicMaterial({
-                  color: "#ffb84d",
-                  transparent: true,
-                  opacity: 0.07,
-                  depthWrite: false,
-                  side: three.BackSide,
-                  blending: three.AdditiveBlending,
-                }),
-              );
+              const gravitationalHalo = new three.Mesh(new three.SphereGeometry(node.size * 1.5, 24, 24), proxyMaterial);
 
               const facingGroup = new three.Group();
               facingGroup.name = "gargantua-facing";
-              const accretionDisk = new three.Group();
+              const accretionDisk = new three.Mesh(new three.CircleGeometry(node.size * 3.3, 64), proxyMaterial);
               accretionDisk.name = "accretion-disk";
-              const diskPalette = [
-                { color: "#fff8dc", opacity: 0.5, radius: 1.46, tube: 0.075 },
-                { color: "#ffe19a", opacity: 0.38, radius: 1.62, tube: 0.095 },
-                { color: "#ffb24a", opacity: 0.27, radius: 1.82, tube: 0.12 },
-                { color: "#ff7a2f", opacity: 0.17, radius: 2.08, tube: 0.15 },
-                { color: "#e94b24", opacity: 0.09, radius: 2.4, tube: 0.18 },
-              ];
-              for (const layer of diskPalette) {
-                const diskLayer = new three.Mesh(
-                  new three.TorusGeometry(node.size * layer.radius, node.size * layer.tube, 10, 112),
-                  new three.MeshBasicMaterial({
-                    color: layer.color,
-                    transparent: true,
-                    opacity: layer.opacity,
-                    depthWrite: false,
-                    blending: three.AdditiveBlending,
-                  }),
-                );
-                accretionDisk.add(diskLayer);
-              }
-              accretionDisk.rotation.x = 1.31;
-              accretionDisk.rotation.z = -0.1;
+              accretionDisk.rotation.set(-(Math.PI / 2 - GARGANTUA_INCLINATION), 0, GARGANTUA_ROLL, "ZYX");
 
-              const photonRing = new three.Mesh(
-                new three.TorusGeometry(node.size * 1.12, node.size * 0.055, 10, 112),
-                new three.MeshBasicMaterial({
-                  color: "#fff5c4",
-                  transparent: true,
-                  opacity: 0.52,
-                  depthWrite: false,
-                  blending: three.AdditiveBlending,
-                }),
-              );
-
-              const buildLensedArc = (
-                direction: 1 | -1,
-                radiusScale: number,
-                color: string,
-                opacity: number,
-                tubeScale: number,
-              ) => {
-                const points = Array.from({ length: 49 }, (_, index) => {
-                  const progress = index / 48;
-                  const angle = Math.PI * (0.07 + progress * 0.86);
+              const buildLensedArc = (direction: 1 | -1, radiusScale: number, tubeScale: number) => {
+                const points = Array.from({ length: 25 }, (_, index) => {
+                  const angle = Math.PI * (0.06 + (index / 24) * 0.88);
                   return new three.Vector3(
-                    Math.cos(angle) * node.size * radiusScale * 1.55,
+                    Math.cos(angle) * node.size * radiusScale * 1.3,
                     direction * Math.sin(angle) * node.size * radiusScale,
-                    -node.size * 0.08,
+                    0,
                   );
                 });
-                return new three.Mesh(
-                  new three.TubeGeometry(new three.CatmullRomCurve3(points), 72, node.size * tubeScale, 7, false),
-                  new three.MeshBasicMaterial({
-                    color,
-                    transparent: true,
-                    opacity,
-                    depthWrite: false,
-                    blending: three.AdditiveBlending,
-                  }),
+                const arc = new three.Mesh(
+                  new three.TubeGeometry(new three.CatmullRomCurve3(points), 40, node.size * tubeScale, 6, false),
+                  proxyMaterial,
                 );
+                arc.rotation.z = GARGANTUA_ROLL;
+                return arc;
               };
-
-              const upperLensingArc = buildLensedArc(1, 1.42, "#fff3c4", 0.44, 0.055);
-              const lowerLensingArc = buildLensedArc(-1, 1.34, "#ffc466", 0.32, 0.05);
-              const upperEcho = buildLensedArc(1, 1.62, "#ff8b36", 0.1, 0.04);
-              const lowerEcho = buildLensedArc(-1, 1.56, "#ff6b2d", 0.07, 0.035);
+              // The far half of the disk is lensed into arcs above and below the shadow.
+              const upperLensingArc = buildLensedArc(1, 1.42, 0.3);
+              const lowerLensingArc = buildLensedArc(-1, 1.28, 0.24);
 
               const selectionRing = new three.Mesh(
                 new three.TorusGeometry(node.size * 2.82, node.size * 0.045, 8, 96),
-                new three.MeshBasicMaterial({
-                  color: "#ffe7a1",
-                  transparent: true,
-                  opacity: 0.2,
-                  depthWrite: false,
-                  blending: three.AdditiveBlending,
-                }),
+                proxyMaterial,
               );
               selectionRing.name = "selection-ring";
               selectionRing.visible = node.easterEgg?.id === selectedIdRef.current;
 
-              facingGroup.add(
-                accretionDisk,
-                photonRing,
-                upperLensingArc,
-                lowerLensingArc,
-                upperEcho,
-                lowerEcho,
-                selectionRing,
-              );
-              anomaly.add(gravitationalHalo, facingGroup, horizon);
+              const fallbackGlow = new three.Sprite(new three.SpriteMaterial({
+                map: glowTexture,
+                color: "#ffb84d",
+                transparent: true,
+                opacity: 0.55,
+                depthWrite: false,
+                blending: three.AdditiveBlending,
+              }));
+              fallbackGlow.scale.set(node.size * 6, node.size * 6, 1);
+              fallbackGlow.visible = false;
+              fallbackGlow.raycast = () => {};
+              blackHoleFallback.push(horizon, fallbackGlow);
+
+              facingGroup.add(accretionDisk, upperLensingArc, lowerLensingArc, selectionRing);
+              anomaly.add(fallbackGlow, gravitationalHalo, facingGroup, horizon);
               objectById.set(node.id, anomaly);
               return anomaly;
             }
@@ -556,13 +652,35 @@ export function MenuCosmos({
         graph.cameraPosition({ x: 0, y: 24, z: appliedCameraDistance });
         graph.renderer().setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.45));
 
+        // Gargantua pass. Near the hole every pixel traces a light ray through
+        // the Schwarzschild metric (units of r_s): rays below the critical
+        // impact parameter fall in, rays crossing the thin disk pick up
+        // Doppler-beamed, gravitationally redshifted emission, and rays that
+        // circle the hole draw the far half of the disk over and under the
+        // shadow. Stars behind the hole are bent onto a source plane, and scene
+        // depth keeps anything in front of the hole sharp and unbent.
         const lensing = new shaderPassModule.ShaderPass({
           uniforms: {
             tDiffuse: { value: null },
+            tDepth: { value: null },
+            depthReady: { value: 0 },
             lensCenter: { value: new three.Vector2(-2, -2) },
             lensRadius: { value: 0.08 },
-            lensStrength: { value: 0.56 },
+            lensStrength: { value: 1 },
             aspect: { value: Math.max(1, container.clientWidth / Math.max(1, container.clientHeight)) },
+            shadowRadius: { value: 0.02 },
+            pixelsPerShadow: { value: 20 },
+            diskTime: { value: 18 },
+            selectionMix: { value: 0 },
+            fogMix: { value: 0 },
+            holeDepth: { value: 1000 },
+            depthMargin: { value: 12 },
+            cameraNear: { value: 0.1 },
+            cameraFar: { value: 2000 },
+          },
+          defines: {
+            GARGANTUA_INCLINATION: GARGANTUA_INCLINATION.toFixed(4),
+            GARGANTUA_ROLL: GARGANTUA_ROLL.toFixed(4),
           },
           vertexShader: `
             varying vec2 vUv;
@@ -572,40 +690,238 @@ export function MenuCosmos({
             }
           `,
           fragmentShader: `
+            #include <packing>
             uniform sampler2D tDiffuse;
+            uniform sampler2D tDepth;
+            uniform float depthReady;
             uniform vec2 lensCenter;
             uniform float lensRadius;
             uniform float lensStrength;
             uniform float aspect;
+            uniform float shadowRadius;
+            uniform float pixelsPerShadow;
+            uniform float diskTime;
+            uniform float selectionMix;
+            uniform float fogMix;
+            uniform float holeDepth;
+            uniform float depthMargin;
+            uniform float cameraNear;
+            uniform float cameraFar;
             varying vec2 vUv;
 
+            // Units are Schwarzschild radii; the shadow edge sits at 3√3/2.
+            const float CRITICAL_IMPACT = 2.598;
+            const float DISK_INNER = 3.0;
+            const float DISK_OUTER = 8.6;
+            const float START_DISTANCE = 15.0;
+            // Puts the Einstein ring near 1.4 shadow radii, behind the lensed disk.
+            const float SOURCE_DISTANCE = 4.0;
+            const float NEAR_FIELD = 3.75;
+            const float FLOW_PERIOD = 40.0;
+            const int MAX_STEPS = 120;
+
+            float hash13(vec3 point) {
+              point = fract(point * 0.1031);
+              point += dot(point, point.zyx + 31.32);
+              return fract((point.x + point.y) * point.z);
+            }
+
+            float valueNoise(vec3 point) {
+              vec3 cell = floor(point);
+              vec3 local = fract(point);
+              vec3 blend = local * local * (3.0 - 2.0 * local);
+              float n000 = hash13(cell);
+              float n100 = hash13(cell + vec3(1.0, 0.0, 0.0));
+              float n010 = hash13(cell + vec3(0.0, 1.0, 0.0));
+              float n110 = hash13(cell + vec3(1.0, 1.0, 0.0));
+              float n001 = hash13(cell + vec3(0.0, 0.0, 1.0));
+              float n101 = hash13(cell + vec3(1.0, 0.0, 1.0));
+              float n011 = hash13(cell + vec3(0.0, 1.0, 1.0));
+              float n111 = hash13(cell + vec3(1.0, 1.0, 1.0));
+              return mix(
+                mix(mix(n000, n100, blend.x), mix(n010, n110, blend.x), blend.y),
+                mix(mix(n001, n101, blend.x), mix(n011, n111, blend.x), blend.y),
+                blend.z
+              );
+            }
+
+            float fbm(vec3 point) {
+              float sum = 0.0;
+              float amplitude = 0.5;
+              for (int octave = 0; octave < 3; octave++) {
+                sum += amplitude * valueNoise(point);
+                point = point * 2.07 + vec3(3.1, 1.7, 5.3);
+                amplitude *= 0.5;
+              }
+              return sum / 0.875;
+            }
+
+            // Sampled on a circle so the streaks have no seam at ±π.
+            float diskStreaks(float azimuth, float radius, float seed) {
+              return fbm(vec3(cos(azimuth) * 2.3, sin(azimuth) * 2.3, log(radius) * 7.5) + seed * 17.0);
+            }
+
+            vec3 diskPalette(float heat) {
+              vec3 color = mix(vec3(0.254, 0.012, 0.004), vec3(0.815, 0.07, 0.018), smoothstep(0.0, 0.25, heat));
+              color = mix(color, vec3(1.0, 0.195, 0.028), smoothstep(0.2, 0.42, heat));
+              color = mix(color, vec3(1.0, 0.445, 0.068), smoothstep(0.38, 0.6, heat));
+              color = mix(color, vec3(1.0, 0.753, 0.323), smoothstep(0.55, 0.78, heat));
+              color = mix(color, vec3(1.0, 0.939, 0.716), smoothstep(0.74, 0.95, heat));
+              return mix(color, vec3(0.791, 0.855, 1.0), smoothstep(1.05, 1.4, heat));
+            }
+
+            vec4 diskSample(vec3 hit, float radius, vec3 rayDirection, float detail) {
+              float azimuth = atan(hit.z, hit.x);
+              float speed = sqrt(0.5 / radius);
+              vec3 orbit = vec3(-sin(azimuth), 0.0, cos(azimuth));
+              float doppler = sqrt(1.0 - speed * speed) / (1.0 + speed * dot(orbit, rayDirection));
+              float shift = doppler * sqrt(max(0.0, 1.0 - 1.0 / radius));
+              float profile = pow(DISK_INNER / radius, 0.75)
+                * pow(max(0.0, 1.0 - sqrt(DISK_INNER / radius)), 0.25) / 0.488;
+              // Two phases cross-fade so differential rotation never winds the streaks up.
+              float angularSpeed = speed / radius;
+              float cycle = diskTime / FLOW_PERIOD;
+              float phase = fract(cycle);
+              float halfPhase = fract(cycle + 0.5);
+              float streaks = mix(
+                diskStreaks(azimuth - angularSpeed * halfPhase * FLOW_PERIOD, radius, floor(cycle + 0.5)),
+                diskStreaks(azimuth - angularSpeed * phase * FLOW_PERIOD, radius, floor(cycle) + 0.5),
+                1.0 - abs(phase * 2.0 - 1.0)
+              );
+              streaks = mix(0.6, streaks, detail);
+              float edges = smoothstep(DISK_INNER * 0.94, DISK_INNER * 1.18, radius)
+                * (1.0 - smoothstep(DISK_OUTER * 0.62, DISK_OUTER, radius));
+              float alpha = clamp(edges * smoothstep(0.16, 0.8, streaks) * (0.5 + 0.55 * profile), 0.0, 0.94);
+              float intensity = pow(profile, 1.6) * pow(shift, 2.3) * (0.55 + 0.9 * streaks);
+              return vec4(diskPalette(profile * shift) * intensity * 1.4, alpha);
+            }
+
             void main() {
+              vec4 scene = texture2D(tDiffuse, vUv);
               vec2 metric = vec2((vUv.x - lensCenter.x) * aspect, vUv.y - lensCenter.y);
               float distanceToLens = length(metric);
-              float outerMask = 1.0 - smoothstep(lensRadius * 0.82, lensRadius, distanceToLens);
-              float horizonMask = smoothstep(lensRadius * 0.18, lensRadius * 0.34, distanceToLens);
-              float photonRing = exp(-pow((distanceToLens - lensRadius * 0.48) / max(lensRadius * 0.11, 0.0001), 2.0));
-              float deflection = lensRadius * (0.12 / max(distanceToLens / lensRadius, 0.22));
-              deflection *= outerMask * horizonMask * lensStrength;
-              vec2 direction = metric / max(distanceToLens, 0.0001);
-              vec2 warpedMetric = metric + direction * deflection;
-              vec2 warpedUv = lensCenter + vec2(warpedMetric.x / aspect, warpedMetric.y);
-              warpedUv = clamp(warpedUv, vec2(0.001), vec2(0.999));
-              vec2 chromaShift = vec2(direction.x / aspect, direction.y) * photonRing * 0.0018 * lensStrength;
-              vec4 base = texture2D(tDiffuse, warpedUv);
-              float red = texture2D(tDiffuse, clamp(warpedUv + chromaShift, 0.001, 0.999)).r;
-              float blue = texture2D(tDiffuse, clamp(warpedUv - chromaShift, 0.001, 0.999)).b;
-              vec3 lensed = vec3(red, base.g, blue) + vec3(1.0, 0.58, 0.18) * photonRing * 0.025;
-              float eventHorizonMask = 1.0 - smoothstep(lensRadius * 0.22, lensRadius * 0.31, distanceToLens);
-              vec3 finalLensed = mix(lensed, vec3(0.0), eventHorizonMask);
               float lensMask = step(distanceToLens, lensRadius);
-              gl_FragColor = mix(texture2D(tDiffuse, vUv), vec4(finalLensed, base.a), lensMask);
+              if (lensMask < 0.5) {
+                gl_FragColor = scene;
+                return;
+              }
+              if (depthReady > 0.5) {
+                // Anything between the camera and the hole is neither bent nor covered.
+                float depth = texture2D(tDepth, vUv).x;
+                float sceneDistance = -perspectiveDepthToViewZ(depth, cameraNear, cameraFar);
+                if (depth < 0.9999 && sceneDistance < holeDepth - depthMargin) {
+                  gl_FragColor = scene;
+                  return;
+                }
+              }
+
+              float rollCos = cos(GARGANTUA_ROLL);
+              float rollSin = sin(GARGANTUA_ROLL);
+              vec2 disk = vec2(rollCos * metric.x + rollSin * metric.y, rollCos * metric.y - rollSin * metric.x)
+                / max(shadowRadius, 0.00001);
+              float radius = length(disk);
+              vec2 direction = radius > 0.00001 ? disk / radius : vec2(0.0, 1.0);
+              float detail = smoothstep(6.0, 42.0, pixelsPerShadow);
+
+              // Stars and clusters behind the hole, bent onto a source plane behind it.
+              float impact = max(radius * CRITICAL_IMPACT, 0.001);
+              float bending = min(2.0 / impact + 2.945 / (impact * impact), 1.5);
+              float sourceImpact = impact - tan(bending) * SOURCE_DISTANCE;
+              float taper = 1.0 - smoothstep(0.5, 1.0, distanceToLens / lensRadius);
+              vec2 source = direction * mix(radius, sourceImpact / CRITICAL_IMPACT, taper * lensStrength);
+              vec2 sourceMetric = vec2(rollCos * source.x - rollSin * source.y, rollSin * source.x + rollCos * source.y)
+                * shadowRadius;
+              vec2 sourceUv = lensCenter + vec2(sourceMetric.x / aspect, sourceMetric.y);
+              // Light bent in from beyond the frame is not rendered: reflect it
+              // back from the edge, dimming as the reach grows, so a hole near
+              // the edge of the canvas does not cut a black notch into the sky.
+              vec2 beyond = max(-sourceUv, sourceUv - 1.0);
+              float frame = mix(0.45, 1.0, 1.0 - smoothstep(0.02, 0.4, max(beyond.x, beyond.y)));
+              vec2 reflectedUv = 1.0 - abs(1.0 - mod(abs(sourceUv), 2.0));
+              // Inside the Einstein ring only faint, mirrored secondary images remain.
+              float secondary = mix(0.1, 1.0, smoothstep(1.02, 1.6, radius));
+              vec3 background = texture2D(tDiffuse, clamp(reflectedUv, 0.001, 0.999)).rgb * frame * secondary;
+
+              // Shadow, photon ring and accretion disk, ray-traced near the hole.
+              vec3 emission = vec3(0.0);
+              float opacity = 0.0;
+              float eventHorizonMask = 0.0;
+              // Only trace where light can meet the disk: the lensed arcs stay
+              // within about 2 shadow radii, the direct image in a thin band.
+              if (radius < 2.4 || (abs(disk.y) < 1.0 && abs(disk.x) < NEAR_FIELD)) {
+                vec3 forward = vec3(0.0, -sin(GARGANTUA_INCLINATION), cos(GARGANTUA_INCLINATION));
+                vec3 up = vec3(0.0, cos(GARGANTUA_INCLINATION), sin(GARGANTUA_INCLINATION));
+                vec3 position = -forward * START_DISTANCE + (vec3(disk.x, 0.0, 0.0) + up * disk.y) * CRITICAL_IMPACT;
+                vec3 velocity = forward;
+                vec3 angular = cross(position, velocity);
+                float angularSquared = dot(angular, angular);
+                for (int iteration = 0; iteration < MAX_STEPS; iteration++) {
+                  float radiusSquared = dot(position, position);
+                  float orbitRadius = sqrt(radiusSquared);
+                  if (orbitRadius < 1.0) {
+                    eventHorizonMask = 1.0;
+                    break;
+                  }
+                  float stepSize = clamp(0.085 * orbitRadius, 0.03, 0.65);
+                  vec3 previous = position;
+                  velocity -= (1.5 * angularSquared / radiusSquared) * position / (radiusSquared * orbitRadius) * stepSize;
+                  position += velocity * stepSize;
+                  if (previous.y * position.y < 0.0) {
+                    vec3 hit = mix(previous, position, previous.y / (previous.y - position.y));
+                    float hitRadius = length(hit.xz);
+                    if (hitRadius > DISK_INNER * 0.94 && hitRadius < DISK_OUTER) {
+                      vec4 diskLight = diskSample(hit, hitRadius, normalize(velocity), detail);
+                      emission += (1.0 - opacity) * diskLight.rgb * diskLight.a;
+                      opacity += (1.0 - opacity) * diskLight.a;
+                      if (opacity > 0.985) break;
+                    }
+                  }
+                  if (orbitRadius > DISK_OUTER + 0.5 && dot(position, velocity) > 0.0) break;
+                }
+              }
+
+              float coverage = opacity + (1.0 - opacity) * eventHorizonMask;
+              emission /= 1.0 + 0.3 * emission;
+              float ringOffset = (radius - 1.015) / max(0.028, 1.4 / max(pixelsPerShadow, 1.0));
+              float photonRing = exp(-ringOffset * ringOffset) * (1.0 - 0.3 * direction.x);
+              vec3 hole = (emission + vec3(1.0, 0.896, 0.552) * photonRing * 0.8) * (1.0 - fogMix);
+              float selectionOffset = (radius - 2.82) / max(0.022, 1.2 / max(pixelsPerShadow, 1.0));
+              float selection = selectionMix * exp(-selectionOffset * selectionOffset);
+              vec3 color = background * (1.0 - coverage) + hole + vec3(1.0, 0.799, 0.356) * selection * 0.5;
+              gl_FragColor = vec4(color, scene.a);
             }
           `,
         }) as unknown as LensingPassLike;
         lensing.enabled = false;
         lensingPass = lensing;
-        graph.postProcessingComposer().addPass(lensing as never);
+        const composer = graph.postProcessingComposer();
+        // Scene depth lets the pass leave anything in front of the hole alone.
+        for (const target of [composer.renderTarget1, composer.renderTarget2]) {
+          if (target.depthTexture) continue;
+          const depthTexture = new three.DepthTexture(Math.max(1, target.width), Math.max(1, target.height));
+          target.depthTexture = depthTexture;
+          target.dispose();
+          depthTextures.push(depthTexture);
+        }
+        const renderLensing = lensing.render.bind(lensing);
+        lensing.render = (renderer, writeBuffer, readBuffer, deltaTime, maskActive) => {
+          lensing.uniforms.tDepth.value = readBuffer.depthTexture;
+          lensing.uniforms.depthReady.value = readBuffer.depthTexture ? 1 : 0;
+          renderLensing(renderer, writeBuffer, readBuffer, deltaTime, maskActive);
+        };
+        composer.addPass(lensing as never);
+        // If a GPU rejects the shader, fall back to a plain black hole rather
+        // than leaving the pass to paint nothing.
+        graph.renderer().debug.onShaderError = (gl, program) => {
+          console.error("Menu cosmos lensing shader failed", gl.getProgramInfoLog(program));
+          lensingFailed = true;
+          lensing.enabled = false;
+          for (const object of blackHoleFallback) {
+            object.visible = true;
+            const material = (object as Object3D & { material?: { visible: boolean } }).material;
+            if (material) material.visible = true;
+          }
+        };
 
         const bloom = new bloomModule.UnrealBloomPass(
           new three.Vector2(container.clientWidth, container.clientHeight),
@@ -634,8 +950,12 @@ export function MenuCosmos({
           pointContext.fillRect(0, 0, 64, 64);
         }
         const pointTexture = new three.CanvasTexture(pointCanvas);
+        // Stellar tints from blue-white to warm, weighted toward the old #c7ddff.
+        const starTints = ["#c7ddff", "#c7ddff", "#e9f1ff", "#ffffff", "#ffe7c2", "#9ec1ff"]
+          .map((color) => new three.Color(color));
         const stars = 1080;
         const starPositions = new Float32Array(stars * 3);
+        const starColors = new Float32Array(stars * 3);
         for (let index = 0; index < stars; index += 1) {
           const radius = 280 + seededValue(`star-${index}`, 5) * 620;
           const theta = seededValue(`star-${index}`, 7) * Math.PI * 2;
@@ -643,13 +963,18 @@ export function MenuCosmos({
           starPositions[index * 3] = radius * Math.sin(phi) * Math.cos(theta);
           starPositions[index * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
           starPositions[index * 3 + 2] = radius * Math.cos(phi);
+          const tint = starTints[Math.floor(seededValue(`star-${index}`, 19) * starTints.length)];
+          starColors[index * 3] = tint.r;
+          starColors[index * 3 + 1] = tint.g;
+          starColors[index * 3 + 2] = tint.b;
         }
         const starGeometry = new three.BufferGeometry();
         starGeometry.setAttribute("position", new three.BufferAttribute(starPositions, 3));
+        starGeometry.setAttribute("color", new three.BufferAttribute(starColors, 3));
         const starMaterial = new three.PointsMaterial({
-            map: pointTexture,
-            alphaTest: 0.01,
-          color: "#c7ddff",
+          map: pointTexture,
+          alphaTest: 0.01,
+          vertexColors: true,
           size: 1.85,
           transparent: true,
           opacity: 0.66,
@@ -825,19 +1150,171 @@ export function MenuCosmos({
         galacticDisk.rotation.x = 1.13;
         galacticDisk.rotation.z = -0.18;
         cosmicDecorations.push(galacticDisk);
+
+        // A warm nucleus and a dense, flattened bulge give the galactic core
+        // a body instead of a flat glow.
+        const nucleusCanvas = document.createElement("canvas");
+        nucleusCanvas.width = nucleusCanvas.height = 64;
+        const nucleusContext = nucleusCanvas.getContext("2d");
+        if (nucleusContext) {
+          const gradient = nucleusContext.createRadialGradient(32, 32, 0, 32, 32, 32);
+          gradient.addColorStop(0, "rgba(255,244,222,.6)");
+          gradient.addColorStop(.18, "rgba(255,214,160,.2)");
+          gradient.addColorStop(.5, "rgba(190,150,255,.05)");
+          gradient.addColorStop(1, "rgba(120,100,220,0)");
+          nucleusContext.fillStyle = gradient;
+          nucleusContext.fillRect(0, 0, 64, 64);
+          const nucleus = new three.Sprite(new three.SpriteMaterial({
+            map: new three.CanvasTexture(nucleusCanvas), transparent: true,
+            depthWrite: false, blending: three.AdditiveBlending,
+          }));
+          nucleus.scale.set(110, 110, 1);
+          nucleus.name = "galactic-nucleus";
+          cosmicDecorations.push(nucleus);
+        }
+        const bulgeCount = 420;
+        const bulgePositions = new Float32Array(bulgeCount * 3);
+        const bulgeColors = new Float32Array(bulgeCount * 3);
+        const bulgeTints = ["#fff1d6", "#ffe0b0", "#ffd9a8", "#f4f0ff"].map((color) => new three.Color(color));
+        for (let index = 0; index < bulgeCount; index += 1) {
+          const spread = Math.sqrt(-2 * Math.log(Math.max(1e-6, seededValue(`bulge-${index}`, 151)))) * 34;
+          const theta = seededValue(`bulge-${index}`, 157) * Math.PI * 2;
+          const phi = Math.acos(2 * seededValue(`bulge-${index}`, 163) - 1);
+          bulgePositions[index * 3] = spread * Math.sin(phi) * Math.cos(theta);
+          bulgePositions[index * 3 + 1] = spread * Math.cos(phi) * 0.62;
+          bulgePositions[index * 3 + 2] = spread * Math.sin(phi) * Math.sin(theta);
+          const tint = bulgeTints[index % bulgeTints.length];
+          bulgeColors[index * 3] = tint.r;
+          bulgeColors[index * 3 + 1] = tint.g;
+          bulgeColors[index * 3 + 2] = tint.b;
+        }
+        const bulgeGeometry = new three.BufferGeometry();
+        bulgeGeometry.setAttribute("position", new three.BufferAttribute(bulgePositions, 3));
+        bulgeGeometry.setAttribute("color", new three.BufferAttribute(bulgeColors, 3));
+        const galacticBulge = new three.Points(
+          bulgeGeometry,
+          new three.PointsMaterial({
+            map: pointTexture,
+            alphaTest: 0.01,
+            size: 2.4,
+            transparent: true,
+            opacity: 0.5,
+            vertexColors: true,
+            depthWrite: false,
+            blending: three.AdditiveBlending,
+          }),
+        );
+        galacticBulge.rotation.x = 0.42;
+        galacticBulge.rotation.z = -0.22;
+        galacticBulge.name = "galactic-bulge";
+        cosmicDecorations.push(galacticBulge);
+
+        // Distant sky: fine unattenuated stars and a faint nebula sphere, far
+        // outside the galaxy and exempt from fog so they read as background.
+        const skyStarCount = 1400;
+        const skyPositions = new Float32Array(skyStarCount * 3);
+        const skyColors = new Float32Array(skyStarCount * 3);
+        for (let index = 0; index < skyStarCount; index += 1) {
+          const theta = seededValue(`sky-${index}`, 101) * Math.PI * 2;
+          const phi = Math.acos(2 * seededValue(`sky-${index}`, 103) - 1);
+          const radius = 3200 + seededValue(`sky-${index}`, 107) * 600;
+          skyPositions[index * 3] = radius * Math.sin(phi) * Math.cos(theta);
+          skyPositions[index * 3 + 1] = radius * Math.cos(phi);
+          skyPositions[index * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
+          const tint = starTints[Math.floor(seededValue(`sky-${index}`, 109) * starTints.length)];
+          const brightness = 0.35 + seededValue(`sky-${index}`, 113) ** 2 * 0.65;
+          skyColors[index * 3] = tint.r * brightness;
+          skyColors[index * 3 + 1] = tint.g * brightness;
+          skyColors[index * 3 + 2] = tint.b * brightness;
+        }
+        const skyGeometry = new three.BufferGeometry();
+        skyGeometry.setAttribute("position", new three.BufferAttribute(skyPositions, 3));
+        skyGeometry.setAttribute("color", new three.BufferAttribute(skyColors, 3));
+        const skyStars = new three.Points(
+          skyGeometry,
+          new three.PointsMaterial({
+            map: pointTexture,
+            alphaTest: 0.01,
+            size: 1.8,
+            sizeAttenuation: false,
+            transparent: true,
+            opacity: 0.85,
+            vertexColors: true,
+            depthWrite: false,
+            fog: false,
+            blending: three.AdditiveBlending,
+          }),
+        );
+        skyStars.name = "sky-stars";
+        cosmicDecorations.push(skyStars);
+
+        const nebulaImage = nebulaCanvas();
+        if (nebulaImage) {
+          const nebulaTexture = new three.CanvasTexture(nebulaImage);
+          nebulaTexture.colorSpace = three.SRGBColorSpace;
+          const nebulaSky = new three.Mesh(
+            new three.SphereGeometry(3900, 48, 24),
+            new three.MeshBasicMaterial({
+              map: nebulaTexture,
+              side: three.BackSide,
+              transparent: true,
+              depthWrite: false,
+              fog: false,
+              blending: three.AdditiveBlending,
+            }),
+          );
+          nebulaSky.rotation.set(0.42, 0.3, -0.36);
+          nebulaSky.name = "nebula-sky";
+          cosmicDecorations.push(nebulaSky);
+        }
+
+        // One batched glow per menu star, following the simulated positions.
+        const menuNodes = graphData.nodes.filter((node) => node.kind === "menu");
+        const menuGlowPositions = new Float32Array(menuNodes.length * 3);
+        const menuGlowColors = new Float32Array(menuNodes.length * 3);
+        const menuGlowTints = menuNodes.map((node) => new three.Color(node.color).lerp(new three.Color("#ffffff"), 0.2));
+        const menuGlowRhythm = menuNodes.map((node) => ({
+          speed: 0.55 + seededValue(node.id, 137) * 1.05,
+          phase: seededValue(node.id, 139) * Math.PI * 2,
+        }));
+        const menuGlowGeometry = new three.BufferGeometry();
+        const menuGlowPositionAttribute = new three.BufferAttribute(menuGlowPositions, 3);
+        const menuGlowColorAttribute = new three.BufferAttribute(menuGlowColors, 3);
+        menuGlowGeometry.setAttribute("position", menuGlowPositionAttribute);
+        menuGlowGeometry.setAttribute("color", menuGlowColorAttribute);
+        const menuGlow = new three.Points(
+          menuGlowGeometry,
+          new three.PointsMaterial({
+            map: glowTexture,
+            size: 54,
+            transparent: true,
+            opacity: 0.6,
+            vertexColors: true,
+            depthWrite: false,
+            blending: three.AdditiveBlending,
+          }),
+        );
+        menuGlow.name = "menu-star-glow";
+        menuGlow.frustumCulled = false;
+        menuGlow.renderOrder = -1;
+        cosmicDecorations.push(menuGlow);
         // Decorative stars must never compete with actual menu hit targets.
         starField.raycast = () => {};
         for (const decoration of cosmicDecorations) {
           decoration.traverse((object) => { object.raycast = () => {}; });
         }
         graph.scene().add(...cosmicDecorations);
-        graph.scene().fog = new three.FogExp2("#020208", 0.00072);
+        graph.scene().fog = new three.FogExp2("#020208", FOG_DENSITY);
 
         const anomalyNode = graphData.nodes.find((node) => node.kind === "anomaly");
         const worldPosition = new three.Vector3();
         const projectedPosition = new three.Vector3();
         const categoryWorldPosition = new three.Vector3();
         const categoryProjectedPosition = new three.Vector3();
+        const glowPosition = new three.Vector3();
+        const cameraForward = new three.Vector3();
+        const holeOffset = new three.Vector3();
+        let twinkleClock = 0;
         let previousCosmicFrame = window.performance.now();
         const updateLensing = () => {
           if (disposed || document.hidden) { lensingAnimationFrame = null; return; }
@@ -845,12 +1322,33 @@ export function MenuCosmos({
           const currentCosmicFrame = window.performance.now();
           const cosmicDelta = Math.min(0.05, Math.max(0, (currentCosmicFrame - previousCosmicFrame) / 1000));
           previousCosmicFrame = currentCosmicFrame;
-          if (!motionReduced && !pausedRef.current) {
+          const cosmosMoving = !motionReduced && !pausedRef.current;
+          if (cosmosMoving) {
             dust.rotation.y -= cosmicDelta * 0.012;
             spiralArms.rotation.y += cosmicDelta * 0.009;
+            galacticBulge.rotation.y += cosmicDelta * 0.014;
             stellarFlares.rotation.z += cosmicDelta * 0.005;
             nebulaArcs.rotation.y -= cosmicDelta * 0.004;
+            twinkleClock += cosmicDelta;
           }
+          // Glows follow their stars; they twinkle only while the cosmos moves.
+          for (let index = 0; index < menuNodes.length; index += 1) {
+            const star = objectById.get(menuNodes[index].id);
+            if (!star) continue;
+            star.getWorldPosition(glowPosition);
+            menuGlowPositions[index * 3] = glowPosition.x;
+            menuGlowPositions[index * 3 + 1] = glowPosition.y;
+            menuGlowPositions[index * 3 + 2] = glowPosition.z;
+            const rhythm = menuGlowRhythm[index];
+            const pulse = 0.8 + 0.2 * Math.sin(twinkleClock * rhythm.speed + rhythm.phase);
+            const emphasis = menuNodes[index].id === selectedIdRef.current ? 1.45 : 1;
+            const tint = menuGlowTints[index];
+            menuGlowColors[index * 3] = tint.r * pulse * emphasis;
+            menuGlowColors[index * 3 + 1] = tint.g * pulse * emphasis;
+            menuGlowColors[index * 3 + 2] = tint.b * pulse * emphasis;
+          }
+          menuGlowPositionAttribute.needsUpdate = true;
+          menuGlowColorAttribute.needsUpdate = true;
           const camera = graph.camera();
           const width = Math.max(1, container.clientWidth);
           const height = Math.max(1, container.clientHeight);
@@ -912,24 +1410,40 @@ export function MenuCosmos({
           anomalyObject.updateWorldMatrix(true, false);
           anomalyObject.getWorldPosition(worldPosition);
           projectedPosition.copy(worldPosition).project(camera);
-          const onScreen = projectedPosition.z > -1
-            && projectedPosition.z < 1
-            && Math.abs(projectedPosition.x) < 1.18
-            && Math.abs(projectedPosition.y) < 1.18;
-          lensingPass.enabled = onScreen;
-          if (!onScreen) return;
           const aspect = width / height;
           const distance = Math.max(1, camera.position.distanceTo(worldPosition));
           const fieldOfView = "fov" in camera && typeof camera.fov === "number" ? camera.fov : 50;
+          // Apparent shadow radius, as a fraction of the viewport height.
           const projectedRadius = anomalyNode.size
             / (2 * distance * Math.tan(three.MathUtils.degToRad(fieldOfView) / 2));
-          lensingPass.uniforms.lensCenter.value.set(
+          // Keep the pass on while any part of the disk can still be on screen.
+          const diskReach = projectedRadius * 3.6 * 2;
+          const onScreen = projectedPosition.z > -1
+            && projectedPosition.z < 1
+            && Math.abs(projectedPosition.x) < 1.06 + diskReach / aspect
+            && Math.abs(projectedPosition.y) < 1.06 + diskReach;
+          lensingPass.enabled = onScreen && !lensingFailed;
+          if (!lensingPass.enabled) return;
+          const uniforms = lensingPass.uniforms;
+          uniforms.lensCenter.value.set(
             projectedPosition.x * 0.5 + 0.5,
             projectedPosition.y * 0.5 + 0.5,
           );
-          lensingPass.uniforms.aspect.value = aspect;
-          const maximumLensRadius = width <= 480 ? 0.11 : width <= 760 ? 0.14 : 0.18;
-          lensingPass.uniforms.lensRadius.value = three.MathUtils.clamp(projectedRadius * 3.1, 0.04, maximumLensRadius);
+          uniforms.aspect.value = aspect;
+          // The bent-starlight halo stays local so labels elsewhere stay straight.
+          const maximumLensRadius = width <= 480 ? 0.6 : width <= 760 ? 0.7 : 0.8;
+          uniforms.shadowRadius.value = projectedRadius;
+          uniforms.lensRadius.value = Math.max(projectedRadius * 3.9, Math.min(projectedRadius * 6, maximumLensRadius));
+          uniforms.pixelsPerShadow.value = projectedRadius * height * graph.renderer().getPixelRatio();
+          camera.getWorldDirection(cameraForward);
+          uniforms.holeDepth.value = holeOffset.subVectors(worldPosition, camera.position).dot(cameraForward);
+          uniforms.depthMargin.value = anomalyNode.size * 0.6;
+          if ("near" in camera && typeof camera.near === "number") uniforms.cameraNear.value = camera.near;
+          if ("far" in camera && typeof camera.far === "number") uniforms.cameraFar.value = camera.far;
+          // Match the scene fog, a little lighter because the disk is emissive.
+          uniforms.fogMix.value = (1 - Math.exp(-((FOG_DENSITY * distance) ** 2))) * 0.78;
+          uniforms.selectionMix.value = anomalyObject.getObjectByName("selection-ring")?.visible ? 1 : 0;
+          if (cosmosMoving) uniforms.diskTime.value += cosmicDelta * 2.3;
         };
         handleVisibilityChange = () => {
           if (document.hidden) {
@@ -997,7 +1511,9 @@ export function MenuCosmos({
         disposeObject(decoration);
       }
       if (graphRef.current) graphRef.current.scene().fog = null;
+      if (graphRef.current) graphRef.current.renderer().debug.onShaderError = null;
       lensingPass?.dispose?.();
+      for (const depthTexture of depthTextures) depthTexture.dispose();
       bloomPass?.dispose?.();
       graphRef.current?._destructor();
       for (const object of objectById.values()) disposeObject(object);
