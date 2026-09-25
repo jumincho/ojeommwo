@@ -1,16 +1,9 @@
-# 오점뭐 v2.6 · 2026-09-23 정식 출범
+# Ojeommwo v3 — 2026-09-25
 
-패키지 버전 `2.6.0`, 관측소 제품 버전 `2.6`. 사용자 지정 릴리즈 표기는 **GPT-6 Sol Max (Daybreak Blue)**이며, 실제 봇 수행 모델은 **GPT-6 Luna / xhigh**다. 최종 검증·배포 시각은 `HANDOFF.md`에 KST로 기록한다. Sites 내부 배포 번호는 제품 버전이 아니다.
+Package 3.0.0 / product 3.0. User-designated release attribution: GPT-6 Astra Max. Runtime bot: GPT-6 Luna with xhigh reasoning. Provider deployment sequence numbers are separate from the product version.
 
-## 2026-09-24 프런트 디자인 반영
+Later survey days now remain effective after an older meal record, with gradual damping of the old meal and repeated votes. Optional exploration targets two new restaurants with up to six searches and a 420-second bound; only verified results are admitted and an existing ready pool survives optional discovery failure. Missing model coordinates can be completed only from verified branch pages. Clear current menu-price changes are applied; conflicting evidence is withheld.
 
-**Claude Opus 5.5 Max**가 GitHub `claude/affectionate-archimedes-y59nl7`의 `f085c7485e419608d0059b2ae08c211bcef08239`에서 프런트 디자인을 개선했다. Codex는 변경된 CSS와 두 TSX 파일을 서버에 적용하고 테스트한 뒤 기존 Sites 프로젝트에 게시했으며 Windows 비상 사본에도 동일 소스를 반영했다. 검색 위치, 카테고리 타일, 글꼴·숫자·카드·상세 패널의 가독성과 반응형 배치를 개선했다. 사이트 문구·표시 정보·기능·3D 코스모스 코드는 유지했고 제품 버전은 `2.6`이다. 세부 검증과 배포 영수증은 `HANDOFF.md`와 `QUALITY_REPORT.md`에 기록한다.
+Category and ingredient review corrected shrimp-and-beef Whopper tagging, mushroom and rice synonyms, and unsupported species claims for unspecified kebab. Live authentication health now checks recent actual model-call acceptance. Cosmos labels and map/category/card contrast were improved without changing interface wording or features. Public source tests use sanitized and synthetic fixtures without requiring private operating data.
 
-- 서버 Codex CLI를 0.156.1로 갱신하고 기존 ChatGPT 계정의 서버 전용 인증으로 Luna xhigh 구조화 실호출을 검증했다. 모델은 웹 후보 조사·모호한 식사 입력 정규화·카테고리 충돌 재심사에 쓰인다. 순위·선호 계산·TTL·중복·DB 저장은 검증 가능한 코드가 담당한다.
-- 선호도는 Beta(3,3), 설문 0.9, 실제 식사 1.0, 180일 반감기다. 동일 사람·메뉴의 같은 날 투표는 최신 한 건만, 다른 날의 최근 3건은 1/0.5/0.25배로 반영한다. 개인 DM 테스트는 학습하지 않으며 실제 식사가 있으면 그 사람의 같은 메뉴 설문과 중복 합산하지 않는다.
-- 충분한 두 끼 후보가 있을 때에도 평일 11:35에 한 번 새 식당을 조사한다. 근거·분류·거리·배달·다양성 검증을 통과한 것만 저장한다. 선택 탐색 실패는 준비된 후보 풀과 발송을 실패 처리하지 않는다.
-- 19개 식사 카테고리, 명백한 음식 형식 우선, 상호·지점·메뉴 표기 통합, 단독 간식·음료·디저트 제외, 주재료 태그, 가격·배달 근거 재검증을 공통 경로에서 유지한다. 모호한 역사 메뉴의 단정적인 재료 태그 한 건은 제거했다.
-- 관측소 모바일의 하단 버튼/카드를 읽고 조작하기 쉽게 배치하고, 3D 카테고리 겹침에서 가까운 레이블을 우선했다. 취향 지도의 0/50/100% 의미, 퍼센트, 인접점 선택, 검색·다중 카테고리와 기존 문구·정보량은 유지한다.
-- 날씨는 전북대학교 공대 7호관 기준 기상청·에어코리아만 사용한다. 점심/저녁 발송, 부재 시 안전한 캐시, Slack 중복 전송 방지, pororo 원본·Sites 게시본·Windows 비상 사본의 역할을 유지한다.
-
-검증 범위와 남은 외부 의존성은 `QUALITY_REPORT.md`, 다음 작업자를 위한 실행 절차는 `HANDOFF.md`에 있다. lunch 채널에는 테스트 메시지를 보내지 않으며 최종 실발송 검증은 운영자 개인 DM 한 건만 사용한다.
+Future frontend design and public README review: Claude Opus 5 (max). Existing feature scope, KMA/AirKorea weather, private-DM testing and normally-off Windows standby remain unchanged.

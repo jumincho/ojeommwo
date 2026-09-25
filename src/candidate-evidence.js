@@ -396,6 +396,7 @@ async function verifyOneCandidate(candidate, { now, fetchImpl }) {
     ...(Array.isArray(candidate?.evidence) ? candidate.evidence : [])
   ].filter(Boolean))].map(evidenceKind).filter(Boolean).slice(0, 4);
   let coordinates = null;
+  let verifiedMenuPrice = null;
   let priceEvidenceUrl = "";
   let deliveryEvidenceUrl = "";
   const evidence = [];
@@ -445,14 +446,15 @@ async function verifyOneCandidate(candidate, { now, fetchImpl }) {
         };
       }
       const currentMenuPrice = unambiguousCurrentMenuPrice(html, candidate);
-      const storedMenuPrice = Number(String(candidate.priceText || "").replace(/[^\d]/gu, ""));
-      if (currentMenuPrice !== null && currentMenuPrice !== storedMenuPrice) {
-        sourceDiagnostics.push({ url: source.url.toString(), reason: "current-menu-price-changed" });
+      // An exact current menu/price pair can refresh a stale catalog price.
+      // Conflicting providers cannot be resolved by choosing a convenient one.
+      if (currentMenuPrice !== null && verifiedMenuPrice !== null && currentMenuPrice !== verifiedMenuPrice) {
+        sourceDiagnostics.push({ url: source.url.toString(), reason: "conflicting-current-menu-prices" });
         return {
           candidate: null,
           diagnostic: candidateDiagnostic(
             candidate,
-            "current-menu-price-changed",
+            "conflicting-current-menu-prices",
             sourceDiagnostics,
             "unavailable"
           )
@@ -460,7 +462,12 @@ async function verifyOneCandidate(candidate, { now, fetchImpl }) {
       }
       const parsedCoordinates = coordinatesFor(source, html);
       if (parsedCoordinates) coordinates = parsedCoordinates;
-      if (signals.menuPrice && !priceEvidenceUrl) priceEvidenceUrl = source.url.toString();
+      if (currentMenuPrice !== null) {
+        verifiedMenuPrice = currentMenuPrice;
+        priceEvidenceUrl = source.url.toString();
+      } else if (signals.menuPrice && !priceEvidenceUrl) {
+        priceEvidenceUrl = source.url.toString();
+      }
       if (signals.delivery && !deliveryEvidenceUrl) deliveryEvidenceUrl = source.url.toString();
       evidence.push(source.url.toString());
       sourceDiagnostics.push({
@@ -544,6 +551,12 @@ async function verifyOneCandidate(candidate, { now, fetchImpl }) {
     candidate: {
       ...candidate,
       ...coordinates,
+      ...(verifiedMenuPrice !== null ? {
+        priceText: `${verifiedMenuPrice.toLocaleString("en-US")}원`,
+        // These two evidence providers expose store menu prices, not a
+        // target-address delivery checkout quote.
+        priceChannel: "store",
+      } : {}),
       priceCheckedAt: now.toISOString(),
       deliveryCheckedAt: now.toISOString(),
       evidenceVerifiedAt: now.toISOString(),
@@ -553,7 +566,8 @@ async function verifyOneCandidate(candidate, { now, fetchImpl }) {
       evidence: [...new Set([
         priceEvidenceUrl,
         deliveryEvidenceUrl,
-        ...(Array.isArray(candidate.evidence) ? candidate.evidence : []),
+        // Persist only exact URLs whose branch body was actually verified.
+        // Model annotations appended to a URL are not an evidence address.
         ...evidence
       ])].slice(0, 6)
     },

@@ -506,7 +506,7 @@ test("Tabling coordinate parser accepts escaped application JSON", () => {
   assert.equal(parseTablingCoordinates("no coordinates"), null);
 });
 
-test("a current exact menu price change cannot be reused as a transient old-price candidate", async () => {
+test("a current exact menu price change updates the candidate without reusing the old price", async () => {
   const identity = { name: "근거식당", address: "전북 전주시 덕진구 테스트로 1",
     classifications: ["배달"], latitude: 35.8442, longitude: 127.1264 };
   const fetchFor = (html) => async () => new Response(html, { status: 200 });
@@ -517,9 +517,10 @@ test("a current exact menu price change cannot be reused as a transient old-pric
   ]) {
     const diagnostics = [];
     const result = await verifyCandidateResearchEvidence([candidate()], { fetchImpl: fetchFor(html), diagnostics });
-    assert.deepEqual(result, []);
-    assert.equal(diagnostics[0].reason, "current-menu-price-changed");
-    assert.equal(diagnostics[0].disposition, "unavailable");
+    assert.equal(result.length, 1);
+    assert.equal(result[0].priceText, "10,000원");
+    assert.equal(result[0].priceChannel, "store");
+    assert.deepEqual(diagnostics, []);
   }
 });
 
@@ -541,4 +542,42 @@ test("different sizes, ambiguous prices, and review claims cannot prove a menu p
     });
     assert.notEqual(diagnostics[0]?.reason, "current-menu-price-changed", JSON.stringify(extra));
   }
+});
+
+
+test("unknown model coordinates are filled only from matched provider evidence", async () => {
+  const input = { ...candidate(), latitude: null, longitude: null };
+  const base = { name: "근거식당", address: "전북 전주시 덕진구 테스트로 1", menu: "제육덮밥", price: "9,000원", classifications: ["배달"] };
+  const verify = async (payload) => verifyCandidateResearchEvidence([input], {
+    fetchImpl: async () => {
+      const bytes = new TextEncoder().encode(`<script>${JSON.stringify(payload)}</script>`);
+      return { ok: true, status: 200, headers: { get: () => String(bytes.byteLength) }, arrayBuffer: async () => bytes.buffer };
+    },
+  });
+  const result = await verify({ ...base, latitude: 35.8442, longitude: 127.1264 });
+  assert.equal(result.length, 1);
+  assert.equal(result[0].latitude, 35.8442);
+  assert.equal(result[0].longitude, 127.1264);
+  assert.deepEqual(await verify(base), []);
+});
+
+
+test("conflicting current prices fail closed instead of picking one provider", async () => {
+  const input = { ...candidate(), evidence: ["https://www.tabling.co.kr/place/abc123", "https://www.tabling.co.kr/place/def456"] };
+  const diagnostics = [];
+  const result = await verifyCandidateResearchEvidence([input], {
+    diagnostics,
+    fetchImpl: async (url) => new Response(`<script>${JSON.stringify({ name: "근거식당", address: "전북 전주시 덕진구 테스트로 1", menu: "제육덮밥", price: String(url).includes("abc123") ? "10,000원" : "12,000원", classifications: ["배달"], latitude: 35.8442, longitude: 127.1264 })}</script>`, { status: 200 }),
+  });
+  assert.deepEqual(result, []);
+  assert.equal(diagnostics[0].reason, "conflicting-current-menu-prices");
+  assert.equal(diagnostics[0].disposition, "unavailable");
+});
+
+
+test("verified evidence discards model URL annotations and unvisited URLs", async () => {
+  const input = { ...candidate(), evidence: ["https://www.tabling.co.kr/place/abc123 본문에 메뉴가 있음", "https://example.com/unverified"] };
+  const html = '<script>{"name":"근거식당","address":"전북 전주시 덕진구 테스트로 1","menu":"제육덮밥","price":"9,000원","classifications":["배달"],"latitude":35.8442,"longitude":127.1264}</script>';
+  const result = await verifyCandidateResearchEvidence([input], { fetchImpl: async () => new Response(html) });
+  assert.deepEqual(result[0].evidence, ["https://www.tabling.co.kr/place/abc123"]);
 });

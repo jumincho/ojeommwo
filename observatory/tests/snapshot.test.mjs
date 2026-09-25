@@ -37,6 +37,12 @@ import {
 } from "../scripts/lib/observatory-snapshot.mjs";
 import { validateSnapshot } from "../scripts/lib/snapshot-schema.mjs";
 
+import { hasOperatingData } from "./helpers/snapshot-fixture.mjs";
+
+if (!hasOperatingData) {
+  if (process.env.OJEOMMWO_DATA_DIR) throw new Error("Explicit integration fixture is incomplete");
+  test("live-store snapshot integration", { skip: "Source-only checkout: run on the primary server or provide a complete OJEOMMWO_DATA_DIR fixture" }, () => {});
+} else {
 // Freeze the complete operating input before fixing the test clock. Later
 // scheduled refreshes must not mix newly checked rows with an older suite
 // timestamp, or invalidate the same-input determinism assertion.
@@ -499,3 +505,5 @@ test("semantic category adjudication survives every snapshot projection boundary
     fs.rmSync(fixture.root, { recursive: true, force: true });
   }
 });
+
+}

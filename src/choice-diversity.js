@@ -23,6 +23,9 @@ export const INGREDIENT_FAMILY_LABELS = Object.freeze({
 const INGREDIENT_FAMILY_SET = new Set(INGREDIENT_FAMILIES);
 const NON_BLOCKING_FAMILY = "other";
 const EXACT_FAMILY_OVERRIDES = new Map([
+  // This restaurant offers chicken and lamb variants. Bare "케밥" does not
+  // identify the ordered protein; a named variant retains its own inference.
+  ["레반트\u001f케밥", Object.freeze(["other"])],
   // The verified menu description identifies 막창+곱창. "닭발" appears only
   // in the shop name, so treating this menu as poultry is an identity leak.
   ["동네불막창닭발\u001f반반세트", Object.freeze(["offal"])],
@@ -93,6 +96,16 @@ export function normalizeIngredientFamilies(values) {
   return orderedFamilies(values.filter((value) => INGREDIENT_FAMILY_SET.has(value)));
 }
 
+// Official current product: whole shrimp is a topping on a beef patty.
+// https://www.burgerking.co.kr/menu/detail/1080121 (checked 2026-09-25).
+// Do not extend this exception to unrelated shrimp/chicken/plant burgers.
+export function hasBeefWhopperPatty(menu) {
+  const name = normalizeKey(menu);
+  return /통새우와퍼/iu.test(name)
+    || (/와퍼/iu.test(name)
+      && !/(?:새우|쉬림프|슈림프|shrimp|해산물|seafood|치킨|닭|chicken|식물|비건|플랜트|plant|vegan)/iu.test(name));
+}
+
 export function ingredientFamiliesFor(candidate) {
   const identityKey = `${normalizeRestaurantKey(candidate?.restaurant)}\u001f${normalizeMenuKey(candidate?.menu)}`;
   const exactOverride = EXACT_FAMILY_OVERRIDES.get(identityKey);
@@ -124,9 +137,8 @@ export function ingredientFamiliesFor(candidate) {
       && !/(?:돼지|흑돼지|암퇘지|제육|(?<!우)삼겹|목살|항정|족발|보쌈|수육|돈까스|돈가스|돈카츠|돈코츠|차슈|포크|pork)/iu.test(text)) {
     inferredFamilies.delete("pork");
   }
-  // Standard Whopper products use a beef patty. Species-named seafood
-  // variants must not inherit beef from the shared product suffix.
-  if (/와퍼/iu.test(text) && !/(?:새우|쉬림프|슈림프|shrimp|해산물|seafood)/iu.test(text)) {
+  // Shared with public search tags; audited mixed patties keep both proteins.
+  if (hasBeefWhopperPatty(text)) {
     inferredFamilies.add("beef");
   }
   // In unqualified Korean menu names, 불고기 denotes beef. Explicit pork,

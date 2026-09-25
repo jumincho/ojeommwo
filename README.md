@@ -70,8 +70,8 @@ flowchart TB
   edge --> browser
 ```
 
-- **Candidates are prepared before posts.** Research and posting are separate jobs, so a failed search never becomes a failed post. Before each meal the bot re-verifies prices, delivery evidence, distance, cooldowns and diversity. It searches the web only when the verified pool runs short, plus one optional search for a new restaurant at 11:35.
-- **Taste model.** Each menu has a Beta posterior that starts from a Beta(3, 3) prior. Meal logs weigh 1.0 and survey ratings 0.9, evidence decays with a 180-day half-life, and an 18% exploration rate keeps new options in rotation. Repeat votes by one person are damped: only the latest vote counts within a day, and the latest three days count at 1, 0.5 and 0.25. The result is a ranking signal, not a promise of satisfaction.
+- **Candidates are prepared before posts.** Research and posting are separate jobs, so an optional failed search preserves any still-valid prepared pool. Before each meal the bot re-verifies prices, delivery evidence, distance, cooldowns and diversity. It searches the web only when the verified pool runs short, plus one optional search for a new restaurant at 11:35.
+- **Taste model.** Each menu has a Beta posterior that starts from a Beta(3, 3) prior. Meal logs weigh 1.0 and survey ratings 0.9, evidence decays with a 180-day half-life, and an 18% exploration rate keeps new options in rotation. Repeat votes by one person are damped: only the latest vote counts within a day, and the latest three days count at 1, 0.5 and 0.25. A meal log replaces surveys from the same day or earlier, while later survey days remain effective and gradually taper the older meal signal. The result is a ranking signal, not a promise of satisfaction.
 - **Safe storage.** JSON files with locks, atomic rename, fsync and integrity checks. Slack delivery goes through an outbox, so an uncertain send is never blindly repeated.
 - **Observatory pipeline.** Every ten minutes the server validates the database, exports a sanitized snapshot and publishes it to an edge worker backed by R2 object storage. Browsers read the latest snapshot when the page opens.
 
@@ -121,7 +121,7 @@ corepack pnpm lint
 corepack pnpm typecheck
 ```
 
-`corepack pnpm test` runs too, but a few suites rebuild the snapshot from the operating database, which is not part of this repository, so they fail here.
+`corepack pnpm test` uses the sanitized sample and synthetic stores when the private operating database is absent. The full operating-store integration check is explicitly skipped in this public checkout; it runs on the server.
 
 ### Bot
 
@@ -142,7 +142,7 @@ To run the bot in your own workspace, copy `.env.example` to `.env` and fill in 
 
 ## Status
 
-Version **2.6**, launched on 2026-09-23. The release is labelled *GPT-6 Sol Max (Daybreak Blue)*; the production model is GPT-6 Luna with xhigh reasoning.
+Version **3.0**, launched on 2026-09-25. The release is labelled *GPT-6 Astra Max*; the production model is GPT-6 Luna with xhigh reasoning.
 
 Design notes (in Korean): [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
 

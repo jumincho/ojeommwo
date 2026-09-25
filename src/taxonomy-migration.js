@@ -1,3 +1,4 @@
+import { recommendationCommentForDisplay } from "./recommendation-comment.js";
 import { classifyFoodCategory, isExcludedMealCandidate } from "./categories.js";
 import { ingredientFamiliesFor } from "./choice-diversity.js";
 import {
@@ -202,6 +203,12 @@ function canonicalRecord(record, report, {
     ...(identity.branch || record.branch !== undefined ? { branch: identity.branch } : {}),
     menu
   };
+  // Repair only the audited ambiguous protein claim, preserving all unrelated
+  // historical descriptions and immutable send timestamps.
+  if (normalizeKey(canonical.restaurant) === "레반트" && normalizeMenuKey(menu) === "케밥"
+      && typeof canonical.comment === "string") {
+    canonical.comment = recommendationCommentForDisplay(canonical);
+  }
   if (categoryResolution.authority === MODEL_CATEGORY_AUTHORITY) {
     recordCategoryAuthorityChange(report, record.categoryAuthority, MODEL_CATEGORY_AUTHORITY);
     canonical.categoryAuthority = MODEL_CATEGORY_AUTHORITY;

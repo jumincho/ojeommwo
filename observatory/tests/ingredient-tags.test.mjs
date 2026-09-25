@@ -1,20 +1,17 @@
+import { hasBeefWhopperPatty } from "../../src/choice-diversity.js";
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BOT_ROOT } from "../scripts/lib/bot-contract.mjs";
 import {
   INGREDIENT_SEARCH_TAGS,
   MAX_INGREDIENT_SEARCH_TAGS,
   ingredientSearchTagsFor,
 } from "../scripts/lib/ingredient-tags.mjs";
-import { buildSnapshot } from "../scripts/lib/observatory-snapshot.mjs";
+import { testSnapshot } from "./helpers/snapshot-fixture.mjs";
 import { validateSnapshot as validateBrowserSnapshot } from "../app/lib/snapshot-validator.mjs";
 import { validateSnapshot as validateServerSnapshot } from "../scripts/lib/snapshot-schema.mjs";
 
 const generatedAt = new Date().toISOString();
-const snapshot = buildSnapshot({
-  dataDir: process.env.OJEOMMWO_DATA_DIR || `${BOT_ROOT}/data`,
-  generatedAt
-});
+const snapshot = testSnapshot(generatedAt);
 const allowedTags = new Set(INGREDIENT_SEARCH_TAGS);
 
 function hasTag(menu, id) {
@@ -158,7 +155,7 @@ test("tag inference handles explicit families, guarded identity overlaps, restau
 
   const shrimpWhopper = ingredientSearchTagsFor({ category: "버거", menu: "통새우와퍼세트" });
   assert.equal(shrimpWhopper.includes("seafood · 해산물"), true);
-  assert.equal(shrimpWhopper.includes("beef · 소고기"), false);
+  assert.equal(shrimpWhopper.includes("beef · 소고기"), true);
   const beefWhopper = ingredientSearchTagsFor({ category: "버거", menu: "와퍼세트", comment: "불향 패티" });
   assert.equal(beefWhopper.includes("beef · 소고기"), true);
   assert.equal(beefWhopper.includes("meat patty · 고기 패티"), false);
@@ -334,4 +331,38 @@ test("pairing suggestions do not become ingredients while explicit ingredients a
   assert.ok(!ingredientSearchTagsFor({ menu: "크림파스타", description: "300그램의 든든한 한 끼" }).includes("lamb · 양고기"));
   assert.ok(ingredientSearchTagsFor({ menu: "램 스테이크" }).includes("lamb · 양고기"));
   assert.ok(ingredientSearchTagsFor({ menu: "램고기 구이" }).includes("lamb · 양고기"));
+});
+
+// New catalog rows must not depend on a rich marketing description to search.
+test("ingredient identity survives common Korean spellings without description", () => {
+  for (const menu of ["머쉬룸 파스타", "머시룸 크림 파스타", "트러플 리조또", "양송이 덮밥"]) {
+    assert.ok(ingredientSearchTagsFor({ menu }).includes("mushroom · 버섯"), menu);
+  }
+  for (const menu of ["규동", "가츠동", "돈부리"]) {
+    assert.ok(ingredientSearchTagsFor({ menu }).includes("rice · 밥"), menu);
+  }
+  assert.ok(ingredientSearchTagsFor({ menu: "규동" }).includes("beef · 소고기"));
+  assert.ok(!ingredientSearchTagsFor({ menu: "봉골레 파스타", restaurant: "머쉬룸 식당" }).includes("mushroom · 버섯"));
+});
+
+
+test("verified mixed patties and leafy vegetables remain searchable for new menus", () => {
+  for (const menu of ["통새우와퍼", "통새우 와퍼 주니어 세트"]) {
+    const tags = ingredientSearchTagsFor({ category: "버거", menu });
+    assert.ok(tags.includes("beef · 소고기"), menu);
+    assert.ok(tags.includes("seafood · 해산물"), menu);
+  }
+  for (const menu of ["통새우슈림프버거", "치킨와퍼", "플랜트와퍼"]) {
+    assert.ok(!ingredientSearchTagsFor({ category: "버거", menu }).includes("beef · 소고기"), menu);
+  }
+  for (const menu of ["우거지뼈해장국", "시래기국", "대파육개장"]) {
+    assert.ok(ingredientSearchTagsFor({ menu }).includes("vegetables · 채소"), menu);
+  }
+});
+
+
+test("browser and operational Whopper protein contracts agree", () => {
+  for (const menu of ["통새우와퍼", "통새우 와퍼 주니어 세트", "와퍼", "콰트로치즈와퍼", "통새우슈림프버거", "치킨와퍼", "플랜트와퍼", "비건 와퍼"]) {
+    assert.equal(ingredientSearchTagsFor({ category: "버거", menu }).includes("beef · 소고기"), hasBeefWhopperPatty(menu), menu);
+  }
 });

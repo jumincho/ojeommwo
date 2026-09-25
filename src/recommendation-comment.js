@@ -1,4 +1,4 @@
-import { cleanText } from "./text.js";
+import { cleanText, normalizeRestaurantKey, normalizeMenuKey } from "./text.js";
 
 const POLITE_ENDING_PATTERN = /(?:니다|요|죠|세요)[.!?]$/u;
 const PLAIN_DECLARATIVE_SENTENCE_PATTERN = /(?<!니)다[.!?](?:\s|$)/u;
@@ -45,7 +45,13 @@ export function fallbackRecommendationComment(item = {}) {
 }
 
 export function recommendationCommentForDisplay(item = {}) {
-  const comment = cleanText(item.comment);
+  // Historical generic kebab rows cannot establish the chicken/lamb option.
+  // Keep an appetizing description without asserting an unrecorded choice.
+  const comment = cleanText(item.comment).replace(
+    normalizeRestaurantKey(item.restaurant) === "레반트" && normalizeMenuKey(item.menu) === "케밥"
+      ? /양고기|닭고기/gu : /$^/u,
+    "고기"
+  );
   let displayComment = isPoliteRecommendationComment(comment) ? comment : fallbackRecommendationComment(item);
   for (const [pattern, replacement] of MEAL_REFERENCE_REPLACEMENTS) {
     displayComment = displayComment.replace(pattern, replacement);

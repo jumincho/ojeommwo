@@ -175,7 +175,7 @@ test("reviewed terse dishes still receive their operational protein family", () 
   );
   assert.deepEqual(
     ingredientFamiliesFor(item("버거", "버거킹", "통새우와퍼")),
-    ["seafood"]
+    ["beef", "seafood"]
   );
 });
 
@@ -217,4 +217,19 @@ test("reviewed Futoru soba futomaki shrimp stays product-scoped across spelling 
   assert.deepEqual(ingredientFamiliesFor({
     restaurant: "다른소바집", menu: "소바 후토마키", category: "일식", ingredientFamilies: ["other"],
   }), ["other"]);
+});
+
+
+test("mixed Whopper toppings do not erase beef or contaminate other protein patties", () => {
+  assert.deepEqual(ingredientFamiliesFor(item("버거", "버거킹", "통새우 와퍼 주니어 세트")), ["beef", "seafood"]);
+  assert.deepEqual(ingredientFamiliesFor(item("버거", "버거킹", "통새우슈림프버거")), ["seafood"]);
+  assert.deepEqual(ingredientFamiliesFor(item("버거", "새 매장", "치킨와퍼")), ["poultry"]);
+  assert.deepEqual(ingredientFamiliesFor(item("버거", "새 매장", "플랜트와퍼")), ["other"]);
+});
+
+
+test("unspecified kebab protein stays unknown without changing named variants", () => {
+  assert.deepEqual(ingredientFamiliesFor({ ...item("아시안", "레반트", "케밥"), ingredientFamilies: ["lamb"] }), ["other"]);
+  assert.deepEqual(ingredientFamiliesFor(item("아시안", "레반트", "양고기 케밥")), ["lamb"]);
+  assert.deepEqual(ingredientFamiliesFor(item("아시안", "레반트", "닭고기 케밥")), ["poultry"]);
 });

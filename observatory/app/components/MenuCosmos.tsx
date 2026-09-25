@@ -360,10 +360,11 @@ export function MenuCosmos({
               orbitB.scale.setScalar(0.78);
               const sprite = new SpriteText(node.name);
               sprite.name = "category-label";
-              sprite.color = node.color;
+              // Lift label luminance independently of category star color.
+              sprite.color = new three.Color(node.color).lerp(new three.Color("#ffffff"), 0.42).getStyle();
               sprite.textHeight = categoryLabelHeight(container.clientWidth);
               sprite.fontWeight = "700";
-              sprite.backgroundColor = "rgba(2, 4, 12, .74)";
+              sprite.backgroundColor = "rgba(2, 4, 12, .90)";
               sprite.padding = 3;
               sprite.borderRadius = 4;
               sprite.position.set(0, 24, 0);
@@ -612,9 +613,9 @@ export function MenuCosmos({
           0.3,
           0.28,
         );
-        bloom.threshold = 0.55;
-        bloom.strength = 0.54;
-        bloom.radius = 0.28;
+        bloom.threshold = 0.8;
+        bloom.strength = 0.48;
+        bloom.radius = 0.24;
         bloomPass = bloom;
         graph.postProcessingComposer().addPass(bloom);
 
@@ -866,7 +867,7 @@ export function MenuCosmos({
               label.getWorldPosition(categoryWorldPosition);
               const distance = Math.max(1, camera.position.distanceTo(categoryWorldPosition));
               const fov = "fov" in camera && typeof camera.fov === "number" ? camera.fov : 50;
-              const labelHeight = width < 480 ? 21 : 22;
+              const labelHeight = width < 480 ? 22 : 23;
               const worldHeight = labelHeight * 2 * distance * Math.tan(three.MathUtils.degToRad(fov) / 2) / height;
               const labelAspect = Number(label.userData.labelAspect) || 3;
               label.scale.set(worldHeight * labelAspect, worldHeight, 1);

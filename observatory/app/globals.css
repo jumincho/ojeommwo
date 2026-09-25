@@ -799,7 +799,7 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .reroll-card > * { flex-shrink: 0; }
 .reroll-card::before { content: ""; position: absolute; right: -32px; top: -38px; width: 95px; height: 95px; border: 1px solid color-mix(in srgb, var(--card-color) 15%, transparent); border-radius: 50%; box-shadow: 0 0 35px color-mix(in srgb, var(--card-color) 10%, transparent); }
 .reroll-card::after { content: ""; position: absolute; inset: auto 0 0; height: 2px; background: linear-gradient(90deg, transparent, var(--card-color), transparent); opacity: 0.65; }
-.reroll-card__category { display: block; max-width: 100%; overflow: hidden; color: color-mix(in srgb, var(--card-color) 72%, white); font-size: 12px; font-weight: 650; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+.reroll-card__category { display: block; max-width: 100%; overflow: hidden; color: color-mix(in srgb, var(--card-color) 72%, white); font-size: 13px; font-weight: 650; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
 .reroll-card > strong { display: -webkit-box; width: 100%; min-height: 40px; margin-top: 7px; overflow: hidden; font-size: 16px; font-weight: 750; line-height: 1.25; letter-spacing: -0.03em; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .reroll-card__restaurant { width: 100%; margin-top: 3px; overflow: hidden; color: #b9c4d4; font-size: 14px; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
 .reroll-card__price { width: 100%; margin-top: auto; padding-top: 4px; overflow: hidden; color: #f1f6ff; font-size: 15px; font-weight: 700; line-height: 1.35; font-variant-numeric: tabular-nums; text-overflow: ellipsis; white-space: nowrap; }

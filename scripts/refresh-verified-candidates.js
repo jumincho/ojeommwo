@@ -50,6 +50,7 @@ export async function runCandidateRefreshCli({
     );
     if (result.explorationStatus && result.explorationStatus !== "not-requested") {
       log(`[candidate-refresh] exploration=${result.explorationStatus} new=${result.exploredCandidateCount || 0}`);
+      if (result.explorationDiagnostics) log(`[candidate-refresh] discovery=${JSON.stringify(result.explorationDiagnostics)}`);
     }
   }
   return result;

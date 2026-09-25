@@ -197,7 +197,7 @@ export function TasteMap({ menus, easterEggs, taxonomy, selectedId, onSelect, on
                     key={category.id}
                     style={{ top: rowByCategory.get(category.id) ?? 132 }}
                   >
-                    <span style={{ color: category.color }}>{category.emoji} {category.id}</span>
+                    <span style={{ color: `color-mix(in srgb, ${category.color} 70%, white)` }}>{category.emoji} {category.id}</span>
                   </div>
                 ))}
               </div>

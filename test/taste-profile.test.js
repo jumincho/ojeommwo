@@ -512,3 +512,42 @@ test("Beta(3,3) prior keeps one or two fresh feedback effects gradual", () => {
     }
   });
 });
+
+
+test("newer surveys update an older actual meal without exceeding the respondent taper", () => {
+  const now = new Date("2026-09-25T02:00:00Z");
+  const actual = { ...candidate, respondentId: "same-person", rating: 5, mealType: "점심",
+    source: "scheduled-cache", normalizationStatus: "verified-source", date: "2026-09-20",
+    createdAt: "2026-09-20T02:00:00Z" };
+  const survey = (day) => ({ responseId: day, respondentId: actual.respondentId, date: day,
+    mealType: "점심", source: "scheduled-cache", submittedAt: `${day}T02:00:00Z`,
+    ratings: [{ ...candidate, rating: 1 }] });
+  const latest = survey("2026-09-25");
+  const changed = tastePosterior(candidate, { events: [actual], preferences: [latest], mealType: "점심", now });
+  assert.ok(changed.mean < 0.5, "the latest negative survey must be able to change an older positive opinion");
+  assert.ok(changed.sources.mealPositive > 0 && changed.sources.mealPositive <= 0.5);
+  assert.equal(changed.sources.surveyNegative, 0.9);
+  const threeDays = [survey("2026-09-23"), survey("2026-09-24"), latest];
+  const bounded = tastePosterior(candidate, { events: [actual], preferences: threeDays, mealType: "점심", now });
+  assert.equal(bounded.sources.mealPositive, 0, "older meal falls outside the most recent three observations");
+  assert.ok(bounded.evidenceWeight <= 1.75);
+});
+
+test("same Korean calendar day keeps actual-meal precedence across UTC midnight", () => {
+  const actual = { ...candidate, respondentId: "person", rating: 5, mealType: "점심",
+    source: "scheduled-cache", normalizationStatus: "verified-source", createdAt: "2026-09-24T16:00:00Z" };
+  const preferences = [{ responseId: "same-kst-day", respondentId: "person", mealType: "점심",
+    source: "scheduled-cache", submittedAt: "2026-09-25T02:00:00Z", ratings: [{ ...candidate, rating: 1 }] }];
+  const options = { events: [actual], mealType: "점심", now: new Date("2026-09-25T03:00:00Z") };
+  assert.deepEqual(tastePosterior(candidate, { ...options, preferences }), tastePosterior(candidate, options));
+});
+
+test("survey day deduplication follows Korea time when an explicit date is absent", () => {
+  const response = (id, submittedAt, rating) => ({ responseId: id, respondentId: "person", mealType: "점심",
+    source: "scheduled-cache", submittedAt, ratings: [{ ...candidate, rating }] });
+  const early = response("early", "2026-09-24T16:00:00Z", 5);
+  const latest = response("latest", "2026-09-25T02:00:00Z", 1);
+  const options = { mealType: "점심", now: new Date("2026-09-25T03:00:00Z") };
+  assert.deepEqual(tastePosterior(candidate, { ...options, preferences: [early, latest] }),
+    tastePosterior(candidate, { ...options, preferences: [latest] }));
+});

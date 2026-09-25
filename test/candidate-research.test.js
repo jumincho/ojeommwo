@@ -994,12 +994,15 @@ test("optional discovery adds only a verified new restaurant without weakening a
     }
   });
   assert.match(prompt, /신규 식당 탐색/u);
-  assert.match(prompt, /신규 후보를 최소 1개, 목표 1개, 최대 1개/u);
-  assert.match(prompt, /전체 웹 검색은 최대 4회/u);
+  assert.match(prompt, /신규 후보를 최소 1개, 목표 2개, 최대 2개/u);
+  assert.match(prompt, /전체 웹 검색은 최대 6회/u);
   assert.doesNotMatch(prompt, /반환 묶음 자체에서 서로 다른 카테고리/u);
-  assert.ok(timeoutMs > 0 && timeoutMs <= 300_000);
+  assert.ok(timeoutMs > 0 && timeoutMs <= 420_000);
   assert.equal(result.explorationStatus, "verified-new-restaurants");
   assert.equal(result.exploredCandidateCount, 1);
+  assert.deepEqual([result.explorationDiagnostics.raw, result.explorationDiagnostics.verified, result.explorationDiagnostics.newRestaurants], [2, 2, 1]);
+  assert.match(prompt, /latitude와 longitude는 null/u);
+  assert.match(prompt, /좌표만을 위한 지도·지오코딩 검색은 하지/u);
   assert.ok(result.candidates.some((item) => item.restaurant === "식당3"));
   assert.equal(result.candidates.filter((item) => item.restaurant === "식당0").length, 1);
   assert.equal(hasCandidateReadiness(result.candidates, 1), true);

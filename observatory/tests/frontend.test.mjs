@@ -113,7 +113,7 @@ test("responsive UI keeps labels legible and reroll cards concise on narrow scre
   assert.match(css, /\.taste-map__row span\s*\{[^}]*font:[^;}]*14px/su);
   assert.match(css, /\.search-field input\s*\{[^}]*height:\s*100%/su,
     "the input itself must fill its 40-42px visible target, not only its wrapper");
-  assert.match(css, /\.reroll-card__category\s*\{[^}]*font-size:\s*12px/su);
+  assert.match(css, /\.reroll-card__category\s*\{[^}]*font-size:\s*(1[3-9]|[2-9]\d)px/su);
   assert.match(css, /\.taste-rail__pole\s*\{[^}]*width:\s*12px[^}]*height:\s*12px/su);
   assert.doesNotMatch(read("app/layout.tsx"), /next\/font|Noto_Sans_KR/u);
   assert.match(css, /--font-sans:\s*"Pretendard Variable"[^;]*"Noto Sans KR"[^;]*system-ui/u);

@@ -1,6 +1,6 @@
 {
   "name": "ojeommwo-observatory",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "description": "Read-only visual observatory for the ojeommwo-v2 recommendation data and taste model.",

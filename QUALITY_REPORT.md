@@ -1,45 +1,7 @@
-# ojeommwo-v2 v2.6 품질 검증 · 2026-09-23
+# Ojeommwo v3 verification scope
 
-최종 판정: **PASS** (2026-09-23 21:44:42 KST). 검증 PASS는 아래에서 재현한 범위에 한정한다. 모든 미래 입력, 외부 API·식당·Slack·호스팅 장애나 알려지지 않은 취약점의 부재를 절대 보증하지 않는다.
+Release date: 2026-09-25. The server bot regression suite passed 624 tests with zero failures and ten Windows-specific skips. The integrated Observatory verification passed 76 tests with zero failures and two platform-specific skips; lint, TypeScript, Sites build and Next static build passed. Production dependency audit found no known advisories at the time of the check.
 
-## 2026-09-24 프런트 디자인 적용 검증
+Verification covered preference damping and later surveys, canonical identities, category arbitration, ingredient tags, trash input rejection, source-backed normalization, current price/delivery evidence, weather parsing, Slack delivery guards, atomic storage, snapshot privacy/CSP and emergency operation boundaries. A separate public-checkout run uses synthetic data and explicitly skips the unavailable real operating-store integration. Detailed private operational receipts are not published here.
 
-프런트 개선 수행자는 **Claude Opus 5.5 Max**이며 원본은 GitHub `claude/affectionate-archimedes-y59nl7` 커밋 `f085c7485e419608d0059b2ae08c211bcef08239`다. Codex가 세 변경 파일의 Git blob 일치를 확인한 후 운영 서버에서 두 검증 경로를 각각 실행했다. 각 경로에서 **73 PASS / 0 FAIL / 2 SKIP**, lint·typecheck·Sites 빌드·Next 정적 빌드 PASS였다. 141개 메뉴의 공개 스냅샷을 재생성·검증한 뒤 기존 Sites 프로젝트에 게시했다.
-
-현재 Sites 배포 `appgprj_6a5dac95abb88191ae8971c41ad2372c`의 `appgdep_6ab40d5ea30c8191b62abd6709bc4038`는 2026-09-24 02:33:42 KST에 성공했다. 공개 루트 HTTP 200, `/healthz`의 `status: ok`, 공개 API의 141개 메뉴, CSP 응답 헤더, 호스트 스냅샷 health를 확인했다. 공개 화면을 실제 브라우저로 열어 3D 코스모스, 취향 지도의 비선호/중립/선호 축, 목록 제목과 정렬 배지가 보이는지 점검했다. 서버·Windows 봇 health는 각각 **36 PASS / 0 WARN / 0 FAIL**이었다. 서버와 Windows 관측소 커밋·161파일 소스 seal 및 비상 사본의 7개 운영 저장소·정적 출력이 일치하며, 로컬 발송은 OFF다. 이 배포 작업에서 `lunch` 채널 실발송은 하지 않았다. 이전 출범 검증의 모바일 브라우저 결과와 Claude의 브랜치 검증 결과는 참고 근거이며, 이번 배포에 대한 모든 화면·외부 상황의 무오류 보증은 아니다. 자동 삭제 정책이 거부한 구 정적 출력 35파일은 별도 폴더에 모았고, 사용자가 2026-09-24 삭제했다. 폴더의 부재를 확인했다.
-
-## 이번에 발견하고 조치한 문제
-
-1. 서버 Codex CLI 0.154.0의 ChatGPT 계정 경로는 GPT-6 Luna xhigh를 거절했다. 안정판 0.156.1로 갱신하자 동일 계정의 서버 전용 인증으로 정상 구조화 호출이 가능했다. 운영 소스·환경의 강제 설정을 Luna xhigh로 맞췄다. 검색·모호한 식사 정규화·분류 충돌에 공통 적용되며, 점수·DB 관리는 코드가 담당한다.
-2. 같은 사람이 같은 메뉴를 여러 날 평가해도 이전 코드는 최신 한 건만 남겼다. 설문이 대부분인 실제 사용 패턴에서 반영이 약할 수 있었다. Beta(3,3), 설문 0.9, 같은 날 최신 한 건·다른 날 최근 3건의 1/0.5/0.25배, 180일 반감기로 조정했다. 개인 DM 테스트를 중복 제거 전에 제외해 나중의 테스트 반응이 운영 설문을 숨길 수 없게 했다. 한 사람의 반복을 서로 다른 사람의 독립 표처럼 세지 않는다.
-3. 두 끼 후보가 충분하면 모델 신규 탐색이 영원히 실행되지 않아 같은 식당이 순환하기 쉬웠다. 평일 11:35에 한 번 신규 식당 한 곳을 최대 4회 검색·5분으로 찾고, 기존 식당 재포장·근거 부족 후보를 배제한다. 선택 탐색이 실패해도 검증된 발송 후보는 보존한다. 실제 dry-run은 새 식당을 확보하지 못했으며, 신규 발견을 보장한다고 주장하지 않는다. 기존 검증 카탈로그 재검증을 실제 운영에 적용해 활성 후보를 10→11개로 늘리고 디디치킨 파닭치킨을 추가했다. 후보 부족 자체에는 최대 5회 보강, 결정론적 근거·다양성·발송 전 TTL 검사가 남는다.
-4. 관측소 모바일에서 하단 '다시 뽑기'가 세 줄로 꺾였다. 좁은 화면의 제목/버튼을 한 행에 두고 아래 카드를 가로 탐색하도록 했다. 3D에서는 전면 카테고리 이름을 우선하고 레이블 겹침 간격을 넓혔다. 용어·제공 정보·기능은 변경하지 않았다.
-5. 역사 데이터의 레반트 '케밥'은 치킨/양고기 종류가 나뉘는데 메뉴명은 종류가 없었다. 공개 검색 태그가 단정적으로 lamb였던 사례를 공통 태그 함수에서 '복합재료'로 교정했다. 명시적인 '양고기 케밥'은 계속 lamb로 검색된다.
-
-## 실행 검증
-
-| 영역 | 현재 확인된 근거 |
-|---|---|
-| Windows 코드 | 622건 중 620 PASS, 0 FAIL, 플랫폼 전용 2 SKIP. `check-syntax`와 정적 설정 검증 PASS. |
-| Linux 코드 | 통합 배포 중 622건 중 612 PASS, 0 FAIL, Windows 전용 10 SKIP. `check-syntax` PASS. |
-| 운영 데이터 | 추천 이력 366개/122묶음, 설문 145응답/435평점, 실제 식사 16건, 후보 11개/카탈로그 82개, outbox 0. 스키마·참조 검증 PASS. |
-| 카테고리·중복 | 후보·카탈로그·이력·설문 총 893행 분류 감사 미해결 0. taxonomy dry-run은 카테고리·메뉴·상호·지점·중복·제외 항목 변경 0. 신규 검색/입력 경로도 공통 판정과 실제 근거 검증을 통과해야 저장된다. |
-| 선호 | 단독 확실한 긍정 설문은 근사적으로 50→56.5%, 서로 다른 두 사람은 약 61.5%다. 한 사람의 3일 반복은 총 1.75표 이내로 제한된다. 부정도 대칭이다. 원본 평점은 바꾸지 않고 계산만 새로 적용한다. |
-| 모델 | 배포 후 Luna xhigh 인증 실호출 PASS, 최근 13,635토큰·약 7.5초. 10개 알려진 분류 경계의 구조화 연동 점검 10건 일치(지침에 정답 방향이 포함되어 독립 일반화 정확도는 아님). 신규 웹 탐색 실호출은 741,714토큰·234초·새 후보 0건이어서 빈 결과를 안전하게 보존함을 확인했다. |
-| 날씨 | 실서버 strict 검사에서 KMA 초단기 실황·예보·동네예보, 특보·UV, AirKorea 실측·경보 상태가 모두 ok. 현재·체감·최고·최저 온도 표시. PTY 0~7, LGT, 비/눈·눈날림·강설 분기는 단위 회귀로 확인한다. |
-| Slack | Bot 인증, lunch 가입, Socket Mode를 읽기 전용으로 확인. 개인 DM 대상 저녁 문안 dry-run은 기존 이모지·문구·순서를 유지했다. 최종 실발송은 보호된 운영자 DM 한 건; lunch에는 테스트 메시지 0건. |
-| 관측소 | 서버 `verify:sites`와 `verify` 각각 75건 중 73 PASS, 0 FAIL, 플랫폼 전용 2 SKIP. lint·typecheck·Sites/Next 빌드 PASS. Sites 게시 52번은 성공했고 API·정적 예비본 모두 141개 메뉴, 계약 지문 일치. 공개 HTTP/health 200, CSP 헤더, 모바일 3D/취향 지도·인접점 선택, 브라우저 오류 0. |
-| 서버·비상 | Bot health 36 PASS/0 WARN/0 FAIL, 호스트 관측소 해시 health PASS, `/root` 호스트 경로 0710, 관측소 0700. Windows 소스 seal 161파일과 일곱 저장소 서버 일치, 로컬 스케줄 OFF, 정상 서버에서 활성화 거부 PASS. |
-| 무게·의존성 | Socket Mode 리스너 RSS 약 79MiB, 운영 데이터 2.6MiB, 관측소 `dist` 8.8MiB·`out` 4.2MiB, 서버 여유 99GiB. `pnpm audit --prod` 알려진 취약점 0. Luna 웹 탐색의 시간·토큰 부담은 별도 표기한다. |
-
-## 정확성과 남는 경계
-
-명백한 장난·명령·URL·반복 문자열·단독 음료/간식은 입력 단계에서 거른다. 그럴듯한 실제 식사 입력은 상호·지점·메뉴 별칭과 현재 전북대 주변 페이지를 대조한다. 근거가 없는 모호한 입력을 정확한 상호·메뉴인 것처럼 확정하지 않는다. 분류는 19개 식사 범주만 허용하고 피자·카레·초밥 같은 형식을 부재료 단어보다 우선한다. 모델의 xhigh 판단도 메뉴판/주소/가격/배달의 실제 근거를 대신하지 않는다.
-
-가격은 7일, 배달 근거는 3일 유효기간을 적용하고 폐점/배달 중단의 명시적 신호를 제거한다. 오래된 이력 메뉴가 사이트에 남아 있더라도 현재 추천 후보라는 뜻이 아니다. 결제 시점의 특정 주소 배달 가능·배달비·임시 품절은 공개 웹 근거만으로 완전히 확인할 수 없으므로 화면의 불확실성 표시를 유지한다.
-
-날씨의 현재·체감·최고/최저·습도·오늘/내일 강수 시간/확률/양·특보·UV 수치·PM10/PM2.5 수치는 기존 문구와 순서를 유지한다. 공급원은 국내 공식 5개 신청 서비스로 충분하며 현행 기능에 중기예보나 오존 영향예보를 추가할 이유가 확인되지 않았다. 공식 공급원으로 바꿨다는 사실만으로 전북대 위치의 모든 순간에서 이전 서비스보다 정확하다고 보증할 수는 없다.
-
-Sites는 안정된 HTTPS 화면과 게시된 마지막 공개 스냅샷을 제공하지만 새 DB 내용은 pororo 게시 작업에 의존한다. 원본 봇/DB 이전이 아니다. 서버가 내려가면 공개 화면의 데이터가 오래될 수 있다. 자동 offsite 백업을 하지 않는 선택 때문에 마지막 Windows 동기화 후의 서버 데이터를 완전 유실하면 최신 반응까지 복원할 수 없다. 로컬 비상본은 OFF 유지와 소스 seal·7개 저장소·임대 시간·후보 유효성 검사를 전제로 한다. 2026-09-24~25는 사전에 등록된 휴일이라 현재 24시간 비상 임대에 발송 시간이 없다. 9월 28일 월요일에는 지금 후보 근거가 만료되어 새 동기화 없이 활성화하면 의도대로 거부된다.
-
-보안은 원본 식별자/비밀 비공개, 별도 UID·읽기 전용 모델 실행, URL/본문 검증, Slack 서명·영수증/멱등, JSON 잠금·원자 저장, CSP, 호스트 최소 권한을 확인했다. 이전 8788 포트는 리스너 0, cloudflared 실행 0, 형제 관측소 경로는 없다. 과거 로컬 인증 복구·릴리즈 로그는 사용자가 2026-09-23 삭제했고 대상 폴더의 부재를 확인했다. Sites 서비스의 과거 내부 버전 이력은 삭제 도구가 없어 남지만 현재 게시본과 프로젝트 문서에는 과거 버전 표기를 사용하지 않는다. lunch 채널 실발송 테스트는 허용하지 않는다.
+PASS applies to these checks. External restaurant pages, delivery availability, weather data, authentication, Slack and hosting may change or fail. A current menu page does not guarantee checkout-time delivery to every address; a source-backed model response is not an infallible classifier. Missing or contradictory evidence is withheld rather than invented.

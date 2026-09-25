@@ -1,7 +1,9 @@
 {
   "type": "object",
   "additionalProperties": false,
-  "required": ["candidates"],
+  "required": [
+    "candidates"
+  ],
   "properties": {
     "candidates": {
       "type": "array",
@@ -11,33 +13,156 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "category", "restaurant", "branch", "address", "latitude", "longitude",
-          "menu", "ingredientFamilies", "priceText", "priceChannel", "priceCheckedAt", "deliveryStatus",
-          "deliveryCheckedAt", "priceEvidenceUrl", "deliveryEvidenceUrl", "comment", "evidence"
+          "category",
+          "restaurant",
+          "branch",
+          "address",
+          "latitude",
+          "longitude",
+          "menu",
+          "ingredientFamilies",
+          "priceText",
+          "priceChannel",
+          "priceCheckedAt",
+          "deliveryStatus",
+          "deliveryCheckedAt",
+          "priceEvidenceUrl",
+          "deliveryEvidenceUrl",
+          "comment",
+          "evidence"
         ],
         "properties": {
-          "category": { "type": "string", "enum": ["한식", "치킨", "분식", "돈까스", "족발/보쌈", "찜/탕", "구이", "피자", "중식", "일식", "회/해물", "양식", "아시안", "샌드위치", "샐러드", "버거", "멕시칸", "도시락", "죽"] },
-          "restaurant": { "type": "string", "minLength": 2, "maxLength": 100 },
-          "branch": { "type": "string", "maxLength": 80 },
-          "address": { "type": "string", "minLength": 5, "maxLength": 200 },
-          "latitude": { "type": "number", "minimum": 33, "maximum": 39 },
-          "longitude": { "type": "number", "minimum": 124, "maximum": 132 },
-          "menu": { "type": "string", "minLength": 2, "maxLength": 120 },
+          "category": {
+            "type": "string",
+            "enum": [
+              "한식",
+              "치킨",
+              "분식",
+              "돈까스",
+              "족발/보쌈",
+              "찜/탕",
+              "구이",
+              "피자",
+              "중식",
+              "일식",
+              "회/해물",
+              "양식",
+              "아시안",
+              "샌드위치",
+              "샐러드",
+              "버거",
+              "멕시칸",
+              "도시락",
+              "죽"
+            ]
+          },
+          "restaurant": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "branch": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "address": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200
+          },
+          "latitude": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 33,
+            "maximum": 39
+          },
+          "longitude": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 124,
+            "maximum": 132
+          },
+          "menu": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
           "ingredientFamilies": {
             "type": "array",
             "minItems": 1,
             "maxItems": 3,
-            "items": { "type": "string", "enum": ["poultry", "beef", "pork", "seafood", "lamb", "offal", "other"] }
+            "items": {
+              "type": "string",
+              "enum": [
+                "poultry",
+                "beef",
+                "pork",
+                "seafood",
+                "lamb",
+                "offal",
+                "other"
+              ]
+            }
           },
-          "priceText": { "type": "string", "maxLength": 32, "pattern": "^[0-9]{1,3}(,[0-9]{3})+원$" },
-          "priceChannel": { "type": "string", "enum": ["store", "official-delivery", "unknown"] },
-          "priceCheckedAt": { "type": "string", "maxLength": 64, "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" },
-          "deliveryStatus": { "type": "string", "enum": ["verified", "likely"] },
-          "deliveryCheckedAt": { "type": "string", "maxLength": 64, "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T" },
-          "priceEvidenceUrl": { "type": "string", "maxLength": 2048, "pattern": "^https://" },
-          "deliveryEvidenceUrl": { "type": "string", "maxLength": 2048, "pattern": "^https://" },
-          "comment": { "type": "string", "minLength": 35, "maxLength": 120 },
-          "evidence": { "type": "array", "minItems": 1, "maxItems": 6, "items": { "type": "string", "maxLength": 2048, "pattern": "^https://" } }
+          "priceText": {
+            "type": "string",
+            "maxLength": 32,
+            "pattern": "^[0-9]{1,3}(,[0-9]{3})+원$"
+          },
+          "priceChannel": {
+            "type": "string",
+            "enum": [
+              "store",
+              "official-delivery",
+              "unknown"
+            ]
+          },
+          "priceCheckedAt": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+          },
+          "deliveryStatus": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "likely"
+            ]
+          },
+          "deliveryCheckedAt": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+          },
+          "priceEvidenceUrl": {
+            "type": "string",
+            "maxLength": 2048,
+            "pattern": "^https://"
+          },
+          "deliveryEvidenceUrl": {
+            "type": "string",
+            "maxLength": 2048,
+            "pattern": "^https://"
+          },
+          "comment": {
+            "type": "string",
+            "minLength": 35,
+            "maxLength": 120
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 6,
+            "items": {
+              "type": "string",
+              "maxLength": 2048,
+              "pattern": "^https://"
+            }
+          }
         }
       }
     }

@@ -71,6 +71,19 @@ function tasteIdentity(record = {}) {
   };
 }
 
+function observationDay(record) {
+  if (/^\d{4}-\d{2}-\d{2}$/u.test(String(record.date || ""))) return record.date;
+  const time = Date.parse(record.createdAt || record.eatenAt || "");
+  // The production timezone is fixed to Asia/Seoul. UTC midnight must not
+  // split two responses submitted on the same Korean calendar day.
+  return Number.isFinite(time) ? new Date(time + 9 * 60 * 60_000).toISOString().slice(0, 10) : null;
+}
+
+function observationIdentity(record) {
+  const identity = tasteIdentity(record);
+  return `${record.respondentId}:${identity.restaurant}:${identity.menu}`;
+}
+
 function preferenceRatings(preferences) {
   const responses = Array.isArray(preferences)
     ? preferences
@@ -113,10 +126,8 @@ function preferenceRatings(preferences) {
       - (Date.parse(left.createdAt || "") || 0));
     const seenDays = new Set();
     for (const rating of group) {
-      const day = /^\d{4}-\d{2}-\d{2}$/u.test(String(rating.date || ""))
-        ? rating.date
-        : /^\d{4}-\d{2}-\d{2}/u.exec(String(rating.createdAt || ""))?.[0]
-          || String(rating.responseId || rating.responseRatingIndex || "undated");
+      const day = observationDay(rating)
+        || String(rating.responseId || rating.responseRatingIndex || "undated");
       if (seenDays.has(day)) continue;
       const observationScale = [1, 0.5, 0.25][seenDays.size];
       if (observationScale === undefined) break;
@@ -192,14 +203,27 @@ export function tastePosterior(candidate, {
     surveyNegative: 0
   };
   const actualEvents = uniqueMealEvents(events);
-  const ratedActualIdentities = new Set(actualEvents
+  const ratedActualByIdentity = new Map(actualEvents
     .filter((event) => outcomeFor(event) !== null)
-    .map((event) => {
-      const identity = tasteIdentity(event);
-      return `${event.respondentId}:${identity.restaurant}:${identity.menu}`;
-    }));
+    .map((event) => [observationIdentity(event), event]));
+  const newerSurveyCounts = new Map();
+  const surveyObservations = preferenceRatings(preferences).filter((preference) => {
+    const key = observationIdentity(preference);
+    const actual = ratedActualByIdentity.get(key);
+    if (!actual) return true;
+    const actualDay = observationDay(actual);
+    const surveyDay = observationDay(preference);
+    // An actual meal supersedes earlier/same-day hypothetical opinions, but
+    // must not suppress future surveys forever. Undated legacy evidence cannot
+    // safely establish a changed opinion and retains actual-meal precedence.
+    if (!actualDay || !surveyDay || surveyDay <= actualDay) return false;
+    newerSurveyCounts.set(key, (newerSurveyCounts.get(key) || 0) + 1);
+    return true;
+  });
   for (const event of actualEvents) {
-    const weight = matchWeight(candidate, event, mealType, now, halfLifeDays);
+    const newerDays = newerSurveyCounts.get(observationIdentity(event)) || 0;
+    const observationScale = [1, 0.5, 0.25][newerDays] ?? 0;
+    const weight = matchWeight(candidate, event, mealType, now, halfLifeDays) * observationScale;
     if (!weight) continue;
     const outcome = outcomeFor(event);
     if (outcome === null) continue;
@@ -210,11 +234,7 @@ export function tastePosterior(candidate, {
     sources.mealPositive += positiveWeight;
     sources.mealNegative += negativeWeight;
   }
-  for (const preference of preferenceRatings(preferences)) {
-    const identity = tasteIdentity(preference);
-    if (preference.respondentId && ratedActualIdentities.has(
-      `${preference.respondentId}:${identity.restaurant}:${identity.menu}`
-    )) continue;
+  for (const preference of surveyObservations) {
     const signal = surveySignalFor(preference.rating);
     if (!signal) continue;
     const weight = matchWeight(candidate, preference, mealType, now, halfLifeDays)

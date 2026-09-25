@@ -62,7 +62,7 @@ const EXACT_MENU_TAG_OVERRIDES = new Map([
 const TEXT_RULES = Object.freeze([
   Object.freeze({ id: "chicken", pattern: /(?:닭고기|닭갈비|닭가슴살|닭다리살|닭발|닭볶음탕|닭불고기|치킨|통닭|찜닭|싸이버거|치킨버거|chicken)/iu }),
   Object.freeze({ id: "duck", pattern: /(?:훈제오리|오리고기|오리구이|오리불고기|오리주물럭|오리백숙|duck)/iu }),
-  Object.freeze({ id: "beef", pattern: /(?:소고기|쇠고기|한우|육회|우삼겹|차돌(?:박이)?|양지|우사골|소\s*불고기|한우\s*불고기|비프|beef)/iu }),
+  Object.freeze({ id: "beef", pattern: /(?:소고기|쇠고기|한우|육회|규동|우삼겹|차돌(?:박이)?|양지|우사골|소\s*불고기|한우\s*불고기|비프|beef)/iu }),
   Object.freeze({ id: "pork", pattern: /(?:돼지|흑돼지|암퇘지|제육|(?<!우)삼겹|목살|항정|족발|족보세트|보쌈|(?<!탕)수육|순대|돈까스|돈가스|돈카츠|돈코츠|차슈|프로슈토|뼈해장국|돼지국물|껍데기|두루치기|pork)/iu }),
   Object.freeze({ id: "seafood", pattern: /(?:해물|해산물|수산|새우|쉬림프|슈림프|shrimp|연어|참치|명란|광어|우럭|오징어|문어|낙지|주꾸미|쭈꾸미|대게|꽃게|킹크랩|게장|크랩|랍스터|조개|전복|장어|고등어|갈치|생선|(?<!육)회덮밥|모둠회|모듬회|초밥|스시|굴|석화|seafood|fish|salmon|tuna)/iu }),
   Object.freeze({ id: "lamb", pattern: /(?:양고기|양갈비|(?:^|[\s·,])램(?:고기|스테이크|숄더랙|[\s·,]|$)|lamb)/iu }),
@@ -70,16 +70,16 @@ const TEXT_RULES = Object.freeze([
   Object.freeze({ id: "tofu", pattern: /(?:순두부|연두부|두부|tofu)/iu }),
   Object.freeze({ id: "egg", pattern: /(?:계란|달걀|에그|egg)/iu }),
   Object.freeze({ id: "red-bean", pattern: /(?:팥|적두|red\s*bean)/iu }),
-  Object.freeze({ id: "rice", pattern: /(?:덮밥|비빔밥|볶음밥|국밥|공기밥|밥버거|김밥|초밥|후토마(?:끼|키)|도리아|카레|죽|밥알|라이스|rice)/iu }),
+  Object.freeze({ id: "rice", pattern: /(?:덮밥|비빔밥|볶음밥|국밥|공기밥|밥버거|김밥|초밥|후토마(?:끼|키)|도리아|카레|죽|밥알|라이스|규동|가츠동|카츠동|돈부리|rice)/iu }),
   Object.freeze({ id: "noodles", pattern: /(?:라멘|라면|우동|짬뽕|짜장면|쌀국수|국수|파스타|소바|모밀|막국수|전분면|면발|면\s*재료|(?:^|[\s·,])면(?:[을이가와과의]|[\s·,]|$)|쏸라펀|noodles?|pasta|ramen|udon)/iu }),
   Object.freeze({ id: "bread", pattern: /(?:(?<!밥)버거|샌드위치|피자|통밀\s*랩|도네르\s*롤|또띠아|토르티야|퀘사디아|도우|빵|bread|bun|wrap|tortilla)/iu }),
   Object.freeze({ id: "cheese", pattern: /(?:치즈|모짜렐라|cheese)/iu }),
   Object.freeze({ id: "dairy", pattern: /(?:크림|로제|우유|유제품|cream|dairy)/iu }),
-  Object.freeze({ id: "vegetables", pattern: /(?:채소|야채|샐러드|양상추|로메인|토마토|시금치|당근|아보카도|양파|호박|콩나물|깻잎|파채|상추|양배추|김치|묵은지|할라피뇨|vegetables?)/iu }),
+  Object.freeze({ id: "vegetables", pattern: /(?:채소|야채|샐러드|양상추|로메인|토마토|시금치|당근|아보카도|양파|호박|콩나물|깻잎|파채|상추|양배추|우거지|시래기|대파|쪽파|부추|김치|묵은지|할라피뇨|vegetables?)/iu }),
   Object.freeze({ id: "soybean", pattern: /(?:된장|콩나물|대두|soybean|soy)/iu }),
   Object.freeze({ id: "potato", pattern: /(?:감자|고구마|포테이토|웨지|potato)/iu }),
   Object.freeze({ id: "rice-cake", pattern: /(?:떡볶이|밀떡|쌀떡|떡사리|(?:^|[\s·,])떡(?:[이을과은도]|[\s·,]|$)|rice\s*cake)/iu }),
-  Object.freeze({ id: "mushroom", pattern: /(?:버섯|mushroom)/iu }),
+  Object.freeze({ id: "mushroom", pattern: /(?:버섯|머쉬룸|머시룸|양송이|새송이|표고|느타리|트러플|mushroom|truffle)/iu }),
   Object.freeze({ id: "processed-meat", pattern: /(?:햄(?!버거|버그)|베이컨|소시지|페퍼로니|프로슈토|sausage|\bham\b|bacon|pepperoni|prosciutto)/iu }),
   Object.freeze({ id: "peanut", pattern: /(?:피넛|땅콩|peanut)/iu }),
 ]);
@@ -125,6 +125,17 @@ function addScore(scores, id, score) {
  * staple (for example pizza dough). Restaurant names are not treated as
  * ingredients; narrowly audited brand/menu rules are explicit below.
  */
+// Browser-safe counterpart of the operational patty rule. Cross-package
+// regression tests enforce parity; importing the server tree here would cross
+// Next's browser build boundary. Official product evidence:
+// https://www.burgerking.co.kr/menu/detail/1080121
+function hasBeefWhopperPatty(menu) {
+  const name = normalizedText(menu).replace(/[^\p{L}\p{N}]/gu, "");
+  return /통새우와퍼/iu.test(name)
+    || (/와퍼/iu.test(name)
+      && !/(?:새우|쉬림프|슈림프|shrimp|해산물|seafood|치킨|닭|chicken|식물|비건|플랜트|plant|vegan)/iu.test(name));
+}
+
 export function ingredientSearchTagsFor(candidate = {}) {
   const scores = new Map();
   const menu = normalizedText(candidate.menu);
@@ -220,9 +231,9 @@ export function ingredientSearchTagsFor(candidate = {}) {
   // this after category defaults so the generic 버거 default cannot re-add it.
   if (riceBurgerWithoutBread) scores.delete("bread");
 
-  // A Whopper is a beef burger unless the product explicitly identifies a
-  // seafood patty. This guarded rule avoids tagging 통새우와퍼 as beef.
-  if (/와퍼/iu.test(menu) && !/(?:새우|쉬림프|슈림프)/iu.test(menu)) addScore(scores, "beef", 120);
+  // Use the same audited patty rule as operational diversity (including the
+  // beef-and-shrimp 통새우와퍼), so search and recommendations agree.
+  if (hasBeefWhopperPatty(menu)) addScore(scores, "beef", 120);
   if (["chicken", "duck", "beef", "pork", "seafood", "lamb", "offal"].some((id) => scores.has(id))) {
     scores.delete("meat-patty");
   }

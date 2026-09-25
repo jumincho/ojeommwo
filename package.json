@@ -1,6 +1,6 @@
 {
   "name": "ojeommwo-v2",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "description": "Slack lunch and dinner recommendation bot for JBNU Engineering Building 7.",

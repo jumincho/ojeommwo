@@ -22,7 +22,21 @@ function createFixture({ withOut = false } = {}) {
   const runtimeDir = path.join(root, "runtime");
   const outDir = path.join(root, "out");
   fs.mkdirSync(dataDir, { recursive: true });
-  for (const name of SOURCE_FILES) fs.copyFileSync(path.join(BOT_ROOT, "data", name), path.join(dataDir, name));
+  const emptyStores = {
+    "recommendation-history.json": { version: 1, items: [] },
+    "sent-messages.json": { version: 1, messages: [] },
+    "meal-events.json": { version: 1, events: [] },
+    "candidate-preferences.json": { version: 1, responses: [] },
+    "verified-candidates.json": { version: 1, candidates: [], catalog: [] },
+    "coffee-participation.json": { version: 1, messages: [] },
+    "delivery-outbox.json": { version: 1, deliveries: [] },
+  };
+  for (const name of SOURCE_FILES) {
+    const source = path.join(BOT_ROOT, "data", name);
+    if (fs.existsSync(source)) fs.copyFileSync(source, path.join(dataDir, name));
+    else if (Object.hasOwn(emptyStores, name)) fs.writeFileSync(path.join(dataDir, name), JSON.stringify(emptyStores[name]));
+    else throw new Error(`Required seed file missing: ${name}`);
+  }
   fs.copyFileSync(path.join(BOT_ROOT, "package.json"), path.join(botRoot, "package.json"));
 
   const generatedAt = new Date();

@@ -10,17 +10,13 @@ import {
 } from "../app/lib/taste-beeswarm.mjs";
 import { nextCategorySelection } from "../app/lib/category-selection.mjs";
 import { validateSnapshot as validateBrowserSnapshot } from "../app/lib/snapshot-validator.mjs";
-import { BOT_ROOT } from "../scripts/lib/bot-contract.mjs";
-import { buildSnapshot } from "../scripts/lib/observatory-snapshot.mjs";
+import { testSnapshot } from "./helpers/snapshot-fixture.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (name) => fs.readFileSync(path.join(root, name), "utf8");
 
 test("browser validator accepts the production projection and rejects nested corruption", () => {
-  const snapshot = buildSnapshot({
-    dataDir: path.resolve(process.env.OJEOMMWO_DATA_DIR || path.join(BOT_ROOT, "data")),
-    generatedAt: new Date().toISOString(),
-  });
+  const snapshot = testSnapshot();
   assert.equal(validateBrowserSnapshot(snapshot), snapshot);
 
   const previousSnapshot = structuredClone(snapshot);

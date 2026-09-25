@@ -35,6 +35,7 @@ import {
   nextScheduledSendAt
 } from "./candidate-research.js";
 import { codexExecutionIsolationStatus, codexResearchCapabilityStatus } from "./codex-cli.js";
+import { liveCodexAuthHealth } from "./codex-auth-health.js";
 import { RELEASE } from "./version.js";
 import { normalizeMealType } from "./meal-types.js";
 import { loadMealNormalizationCatalog } from "./meal-normalization.js";
@@ -861,6 +862,14 @@ export function runHealthCheck({ now = new Date() } = {}) {
     codexCapability.ok ? "pass" : "fail",
     codexCapability.detail
   ));
+  checks.push(attempt("codex-live-authentication", () => {
+    if (process.platform === "win32") {
+      return check("codex-live-authentication", "pass", "Windows emergency mode uses verified cached candidates without a model session");
+    }
+    const result = liveCodexAuthHealth({ directory: path.join(DATA_DIR, "codex-cli-runs"), now,
+      model: config.codexCliModel, reasoningEffort: config.codexCliReasoningEffort });
+    return check("codex-live-authentication", result.status, result.detail);
+  }));
   checks.push(check(
     "loose-fallback",
     config.allowUnverifiedFallback ? "warn" : "pass",
