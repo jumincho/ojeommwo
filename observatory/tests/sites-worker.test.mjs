@@ -20,27 +20,7 @@ import {
 const ROOT = path.resolve(import.meta.dirname, "..");
 const TOKEN = "fixture-token-with-at-least-thirty-two-bytes";
 
-class MemoryBucket {
-  #entries = new Map();
-
-  async get(key) {
-    const entry = this.#entries.get(key);
-    if (!entry) return null;
-    return {
-      body: new Blob([entry.bytes]).stream(),
-      httpEtag: '"fixture-etag"',
-      customMetadata: entry.options.customMetadata,
-    };
-  }
-
-  async put(key, value, options = {}) {
-    this.#entries.set(key, { bytes: new Uint8Array(value), options });
-  }
-
-  async delete(key) {
-    this.#entries.delete(key);
-  }
-}
+import { MemoryBucket } from "./helpers/r2-snapshot-fixture.mjs";
 
 function loadCurrentSnapshot() {
   return JSON.parse(fs.readFileSync(path.join(ROOT, "public", "data", "snapshot.json"), "utf8"));
