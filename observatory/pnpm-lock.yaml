@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  image-size: 2.0.3
   minimatch@10.2.5>brace-expansion: 5.0.9
   esbuild: 0.28.1
   fast-uri: 3.1.7
@@ -14,9 +15,6 @@ overrides:
   sharp: 0.35.4
   undici: 7.29.0
   ws: 8.21.0
-
-patchedDependencies:
-  image-size@2.0.2: d1abb664731ce2ec6a2485324c7552e297fcdb7fe42fd9a55a3a52b636b58379
 
 importers:
 
@@ -1442,9 +1440,9 @@ packages:
     resolution: {integrity: sha512-BAg6QkE8W+TuQLrrw0Ugr7HegXduRuuj8/ti2kSOc+jz1dmx8/WNcjr6XGnq5YpDWxFwwaavqD0+jIUOKelTsw==}
     engines: {node: '>= 4'}
 
-  image-size@2.0.2:
-    resolution: {integrity: sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==}
-    engines: {node: '>=16.x'}
+  image-size@2.0.3:
+    resolution: {integrity: sha512-9BJAtVCBth+76NwqnEfWr3PiRnYhbquk6K/USuQ1GQajz5NgLzO7tNsnoNjHfO7LuftgkBf+CCH6j28hjMbIYQ==}
+    engines: {node: '>=18'}
     hasBin: true
 
   imurmurhash@0.1.4:
@@ -3420,7 +3418,7 @@ snapshots:
 
   ignore@7.0.6: {}
 
-  image-size@2.0.2(patch_hash=d1abb664731ce2ec6a2485324c7552e297fcdb7fe42fd9a55a3a52b636b58379): {}
+  image-size@2.0.3: {}
 
   imurmurhash@0.1.4: {}
 
@@ -3952,7 +3950,7 @@ snapshots:
       '@unpic/react': 1.0.2(next@16.3.3(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@vercel/og': 0.8.6
       '@vitejs/plugin-react': 6.0.2(vite@8.0.16(@types/node@22.19.19)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0))
-      image-size: 2.0.2(patch_hash=d1abb664731ce2ec6a2485324c7552e297fcdb7fe42fd9a55a3a52b636b58379)
+      image-size: 2.0.3
       ipaddr.js: 2.4.0
       magic-string: 0.30.21
       react: 19.2.8

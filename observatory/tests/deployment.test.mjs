@@ -57,9 +57,11 @@ test("release, static fallback, and Sites contracts stay aligned", () => {
   assert.match(workspace, /sharp:\s*true/u);
   assert.match(workspace, /unrs-resolver:\s*true/u);
   for (const ghsa of ["GHSA-5p2g-fcmc-qvqq", "GHSA-w3rx-r6r6-pgpr"]) {
-    assert.equal(workspace.match(new RegExp(ghsa, "gu"))?.length, 1);
+    assert.equal(workspace.match(new RegExp(ghsa, "gu"))?.length ?? 0, 0);
   }
-  assert.match(workspace, /audit:\s*\n\s*level:\s*low\s*\n\s*ignore:/u);
+  assert.match(workspace, /audit:\s*\n\s*level:\s*low/u);
+  assert.match(workspace, /image-size:\s*2\.0\.3/u);
+  assert.doesNotMatch(workspace, /ignore:|image-size@2\.0\.2/u);
 
   const unsafeBuildAssets = [];
   const walk = (directory) => {

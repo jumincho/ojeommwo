@@ -9,11 +9,9 @@ allowBuilds:
 
 audit:
   level: low
-  ignore:
-    - GHSA-5p2g-fcmc-qvqq
-    - GHSA-w3rx-r6r6-pgpr
 
 overrides:
+  image-size: 2.0.3
   "minimatch@10.2.5>brace-expansion": 5.0.9
   esbuild: 0.28.1
   fast-uri: 3.1.7
@@ -24,5 +22,3 @@ overrides:
   undici: 7.29.0
   ws: 8.21.0
 
-patchedDependencies:
-  image-size@2.0.2: patches/image-size@2.0.2.patch

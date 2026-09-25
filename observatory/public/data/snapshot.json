@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-25T07:41:09.564Z",
+  "generatedAt": "2026-09-25T08:33:21.645Z",
   "source": {
     "project": "ojeommwo-v2",
     "releaseVersion": "3.0.0",
@@ -221,19 +221,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.6964,
-        "beta": 3.55616,
+        "alpha": 4.69616,
+        "beta": 3.55608,
         "mean": 0.56908,
-        "bias": 0.13817,
-        "evidenceWeight": 2.25256,
-        "confidence": 0.52969,
-        "intervalLow": 0.30128,
+        "bias": 0.13815,
+        "evidenceWeight": 2.25224,
+        "confidence": 0.52966,
+        "intervalLow": 0.30127,
         "intervalHigh": 0.83689,
         "sources": {
-          "mealPositive": 0.25567,
+          "mealPositive": 0.25563,
           "mealNegative": 0,
-          "surveyPositive": 1.44073,
-          "surveyNegative": 0.55616
+          "surveyPositive": 1.44053,
+          "surveyNegative": 0.55608
         }
       }
     },
@@ -269,19 +269,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.29347,
-        "beta": 3.25092,
+        "alpha": 4.29329,
+        "beta": 3.25088,
         "mean": 0.56909,
-        "bias": 0.13819,
-        "evidenceWeight": 1.54439,
-        "confidence": 0.43573,
-        "intervalLow": 0.29041,
-        "intervalHigh": 0.84778,
+        "bias": 0.13817,
+        "evidenceWeight": 1.54417,
+        "confidence": 0.43569,
+        "intervalLow": 0.2904,
+        "intervalHigh": 0.84777,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.29347,
-          "surveyNegative": 0.25092
+          "surveyPositive": 1.29329,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -317,19 +317,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.24907,
-        "beta": 4.25441,
+        "alpha": 4.24889,
+        "beta": 4.25423,
         "mean": 0.49969,
         "bias": -0.00063,
-        "evidenceWeight": 2.50347,
-        "confidence": 0.5559,
+        "evidenceWeight": 2.50312,
+        "confidence": 0.55586,
         "intervalLow": 0.23288,
-        "intervalHigh": 0.76649,
+        "intervalHigh": 0.7665,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.24907,
-          "surveyNegative": 1.25441
+          "surveyPositive": 1.24889,
+          "surveyNegative": 1.25423
         }
       }
     },
@@ -366,19 +366,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.37436,
-        "beta": 4.15433,
-        "mean": 0.56402,
-        "bias": 0.12804,
-        "evidenceWeight": 3.52869,
-        "confidence": 0.63825,
-        "intervalLow": 0.31262,
+        "alpha": 5.37403,
+        "beta": 4.15417,
+        "mean": 0.56401,
+        "bias": 0.12803,
+        "evidenceWeight": 3.5282,
+        "confidence": 0.63822,
+        "intervalLow": 0.31261,
         "intervalHigh": 0.81542,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 2.2995,
-          "surveyNegative": 1.15433
+          "surveyPositive": 2.29918,
+          "surveyNegative": 1.15417
         }
       }
     },
@@ -416,19 +416,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.56922,
-        "beta": 3.06566,
-        "mean": 0.59847,
-        "bias": 0.19693,
-        "evidenceWeight": 1.63488,
-        "confidence": 0.44977,
-        "intervalLow": 0.32404,
-        "intervalHigh": 0.87289,
+        "alpha": 4.569,
+        "beta": 3.06565,
+        "mean": 0.59846,
+        "bias": 0.19691,
+        "evidenceWeight": 1.63465,
+        "confidence": 0.44974,
+        "intervalLow": 0.32403,
+        "intervalHigh": 0.87288,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.56922,
-          "surveyNegative": 0.06566
+          "surveyPositive": 1.569,
+          "surveyNegative": 0.06565
         }
       }
     },
@@ -465,19 +465,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.18302,
-        "beta": 4.00242,
-        "mean": 0.44298,
-        "bias": -0.11404,
-        "evidenceWeight": 1.18543,
-        "confidence": 0.37214,
-        "intervalLow": 0.15737,
-        "intervalHigh": 0.72859,
+        "alpha": 3.18299,
+        "beta": 4.00228,
+        "mean": 0.44299,
+        "bias": -0.11402,
+        "evidenceWeight": 1.18527,
+        "confidence": 0.37211,
+        "intervalLow": 0.15738,
+        "intervalHigh": 0.7286,
         "sources": {
-          "mealPositive": 0.08163,
+          "mealPositive": 0.08162,
           "mealNegative": 0,
-          "surveyPositive": 0.10139,
-          "surveyNegative": 1.00242
+          "surveyPositive": 0.10137,
+          "surveyNegative": 1.00228
         }
       }
     },
@@ -513,19 +513,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.9941,
-        "beta": 3.1849,
-        "mean": 0.55636,
-        "bias": 0.11272,
-        "evidenceWeight": 1.179,
-        "confidence": 0.37087,
-        "intervalLow": 0.27059,
+        "alpha": 3.99396,
+        "beta": 3.18487,
+        "mean": 0.55635,
+        "bias": 0.11271,
+        "evidenceWeight": 1.17883,
+        "confidence": 0.37084,
+        "intervalLow": 0.27058,
         "intervalHigh": 0.84212,
         "sources": {
-          "mealPositive": 0.08163,
+          "mealPositive": 0.08162,
           "mealNegative": 0,
-          "surveyPositive": 0.91247,
-          "surveyNegative": 0.1849
+          "surveyPositive": 0.91235,
+          "surveyNegative": 0.18487
         }
       }
     },
@@ -561,19 +561,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.6992,
-        "beta": 3.83919,
-        "mean": 0.49071,
+        "alpha": 3.6991,
+        "beta": 3.83907,
+        "mean": 0.49072,
         "bias": -0.01857,
-        "evidenceWeight": 1.53839,
-        "confidence": 0.43477,
+        "evidenceWeight": 1.53818,
+        "confidence": 0.43474,
         "intervalLow": 0.20928,
         "intervalHigh": 0.77215,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.6992,
-          "surveyNegative": 0.83919
+          "surveyPositive": 0.6991,
+          "surveyNegative": 0.83907
         }
       }
     },
@@ -610,19 +610,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.36616,
-        "beta": 3.16738,
-        "mean": 0.57956,
-        "bias": 0.15913,
-        "evidenceWeight": 1.53354,
-        "confidence": 0.434,
-        "intervalLow": 0.30159,
-        "intervalHigh": 0.85754,
+        "alpha": 4.36597,
+        "beta": 3.16736,
+        "mean": 0.57955,
+        "bias": 0.15911,
+        "evidenceWeight": 1.53333,
+        "confidence": 0.43396,
+        "intervalLow": 0.30158,
+        "intervalHigh": 0.85753,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.36616,
-          "surveyNegative": 0.16738
+          "surveyPositive": 1.36597,
+          "surveyNegative": 0.16736
         }
       }
     },
@@ -658,19 +658,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.41452,
-        "beta": 3.69626,
-        "mean": 0.54428,
-        "bias": 0.08856,
-        "evidenceWeight": 2.11078,
-        "confidence": 0.51347,
+        "alpha": 4.41433,
+        "beta": 3.69616,
+        "mean": 0.54427,
+        "bias": 0.08855,
+        "evidenceWeight": 2.11049,
+        "confidence": 0.51344,
         "intervalLow": 0.27285,
         "intervalHigh": 0.8157,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.32074,
-          "surveyNegative": 0.69626
+          "surveyPositive": 1.32056,
+          "surveyNegative": 0.69616
         }
       }
     },
@@ -707,19 +707,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.39471,
-        "beta": 3.55616,
+        "alpha": 4.39452,
+        "beta": 3.55608,
         "mean": 0.55273,
-        "bias": 0.10547,
-        "evidenceWeight": 1.95087,
-        "confidence": 0.49378,
-        "intervalLow": 0.27935,
+        "bias": 0.10546,
+        "evidenceWeight": 1.9506,
+        "confidence": 0.49375,
+        "intervalLow": 0.27934,
         "intervalHigh": 0.82612,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.30093,
-          "surveyNegative": 0.55616
+          "surveyPositive": 1.30075,
+          "surveyNegative": 0.55608
         }
       }
     },
@@ -755,19 +755,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.8534,
-        "beta": 3.90003,
-        "mean": 0.55446,
-        "bias": 0.10891,
-        "evidenceWeight": 2.75343,
-        "confidence": 0.57925,
-        "intervalLow": 0.29266,
+        "alpha": 4.85314,
+        "beta": 3.8999,
+        "mean": 0.55445,
+        "bias": 0.1089,
+        "evidenceWeight": 2.75304,
+        "confidence": 0.57922,
+        "intervalLow": 0.29265,
         "intervalHigh": 0.81625,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.75961,
-          "surveyNegative": 0.90003
+          "surveyPositive": 1.75937,
+          "surveyNegative": 0.8999
         }
       }
     },
@@ -803,19 +803,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.62206,
-        "beta": 3.95315,
+        "alpha": 3.62197,
+        "beta": 3.95302,
         "mean": 0.47815,
-        "bias": -0.04371,
-        "evidenceWeight": 1.57521,
-        "confidence": 0.44059,
+        "bias": -0.0437,
+        "evidenceWeight": 1.57499,
+        "confidence": 0.44056,
         "intervalLow": 0.19754,
-        "intervalHigh": 0.75875,
+        "intervalHigh": 0.75876,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.62206,
-          "surveyNegative": 0.95315
+          "surveyPositive": 0.62197,
+          "surveyNegative": 0.95302
         }
       }
     },
@@ -851,19 +851,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.63388,
-        "beta": 3.25092,
-        "mean": 0.5877,
-        "bias": 0.1754,
-        "evidenceWeight": 1.88479,
-        "confidence": 0.48517,
-        "intervalLow": 0.31604,
-        "intervalHigh": 0.85936,
+        "alpha": 4.63365,
+        "beta": 3.25088,
+        "mean": 0.58769,
+        "bias": 0.17538,
+        "evidenceWeight": 1.88453,
+        "confidence": 0.48514,
+        "intervalLow": 0.31602,
+        "intervalHigh": 0.85935,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.63388,
-          "surveyNegative": 0.25092
+          "surveyPositive": 1.63365,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -898,19 +898,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.34917,
-        "beta": 3.25092,
-        "mean": 0.57225,
-        "bias": 0.14451,
-        "evidenceWeight": 1.60009,
-        "confidence": 0.44446,
-        "intervalLow": 0.29473,
-        "intervalHigh": 0.84978,
+        "alpha": 4.34898,
+        "beta": 3.25088,
+        "mean": 0.57224,
+        "bias": 0.14449,
+        "evidenceWeight": 1.59986,
+        "confidence": 0.44442,
+        "intervalLow": 0.29472,
+        "intervalHigh": 0.84977,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.34917,
-          "surveyNegative": 0.25092
+          "surveyPositive": 1.34898,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -946,19 +946,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.17116,
-        "beta": 3.94355,
+        "alpha": 5.17086,
+        "beta": 3.94341,
         "mean": 0.56734,
-        "bias": 0.13469,
-        "evidenceWeight": 3.11471,
-        "confidence": 0.60897,
-        "intervalLow": 0.31108,
+        "bias": 0.13467,
+        "evidenceWeight": 3.11428,
+        "confidence": 0.60894,
+        "intervalLow": 0.31107,
         "intervalHigh": 0.8236,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 2.0963,
-          "surveyNegative": 0.94355
+          "surveyPositive": 2.09601,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -995,19 +995,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.21651,
-        "beta": 4.88727,
+        "alpha": 4.21634,
+        "beta": 4.887,
         "mean": 0.46316,
-        "bias": -0.07368,
-        "evidenceWeight": 3.10378,
-        "confidence": 0.60813,
-        "intervalLow": 0.20511,
+        "bias": -0.07367,
+        "evidenceWeight": 3.10335,
+        "confidence": 0.6081,
+        "intervalLow": 0.2051,
         "intervalHigh": 0.72122,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 1.88727
+          "surveyPositive": 1.14149,
+          "surveyNegative": 1.887
         }
       }
     },
@@ -1042,19 +1042,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.00711,
-        "beta": 3.94355,
+        "alpha": 5.00683,
+        "beta": 3.94341,
         "mean": 0.55941,
-        "bias": 0.11883,
-        "evidenceWeight": 2.95066,
-        "confidence": 0.59601,
-        "intervalLow": 0.30052,
+        "bias": 0.11881,
+        "evidenceWeight": 2.95024,
+        "confidence": 0.59598,
+        "intervalLow": 0.30051,
         "intervalHigh": 0.81831,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.93225,
-          "surveyNegative": 0.94355
+          "surveyPositive": 1.93198,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -1089,19 +1089,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.20054,
-        "beta": 4.22022,
+        "alpha": 5.20024,
+        "beta": 4.22005,
         "mean": 0.55203,
-        "bias": 0.10406,
-        "evidenceWeight": 3.42076,
-        "confidence": 0.63105,
-        "intervalLow": 0.29862,
+        "bias": 0.10405,
+        "evidenceWeight": 3.42028,
+        "confidence": 0.63102,
+        "intervalLow": 0.29861,
         "intervalHigh": 0.80544,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 2.12568,
-          "surveyNegative": 1.22022
+          "surveyPositive": 2.12538,
+          "surveyNegative": 1.22005
         }
       }
     },
@@ -1136,19 +1136,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.268,
-        "beta": 4.37251,
+        "alpha": 5.26769,
+        "beta": 4.37232,
         "mean": 0.54644,
-        "bias": 0.09289,
-        "evidenceWeight": 3.64051,
-        "confidence": 0.64542,
-        "intervalLow": 0.29539,
+        "bias": 0.09288,
+        "evidenceWeight": 3.64,
+        "confidence": 0.64539,
+        "intervalLow": 0.29538,
         "intervalHigh": 0.7975,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 2.19314,
-          "surveyNegative": 1.37251
+          "surveyPositive": 2.19283,
+          "surveyNegative": 1.37232
         }
       }
     },
@@ -1185,19 +1185,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.21651,
-        "beta": 4.46261,
+        "alpha": 4.21634,
+        "beta": 4.4624,
         "mean": 0.48582,
         "bias": -0.02835,
-        "evidenceWeight": 2.67912,
-        "confidence": 0.57257,
-        "intervalLow": 0.22156,
-        "intervalHigh": 0.75009,
+        "evidenceWeight": 2.67875,
+        "confidence": 0.57254,
+        "intervalLow": 0.22155,
+        "intervalHigh": 0.7501,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 1.46261
+          "surveyPositive": 1.14149,
+          "surveyNegative": 1.4624
         }
       }
     },
@@ -1234,19 +1234,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.20611,
-        "beta": 3.80871,
+        "alpha": 4.20594,
+        "beta": 3.80859,
         "mean": 0.52479,
         "bias": 0.04958,
-        "evidenceWeight": 2.01482,
-        "confidence": 0.50185,
-        "intervalLow": 0.25119,
+        "evidenceWeight": 2.01454,
+        "confidence": 0.50181,
+        "intervalLow": 0.25118,
         "intervalHigh": 0.7984,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.20611,
-          "surveyNegative": 0.80871
+          "surveyPositive": 1.20594,
+          "surveyNegative": 0.80859
         }
       }
     },
@@ -1281,19 +1281,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.2127,
-        "beta": 3.40512,
-        "mean": 0.55301,
-        "bias": 0.10601,
-        "evidenceWeight": 1.61782,
-        "confidence": 0.44718,
-        "intervalLow": 0.2744,
+        "alpha": 4.21253,
+        "beta": 3.40507,
+        "mean": 0.553,
+        "bias": 0.106,
+        "evidenceWeight": 1.61759,
+        "confidence": 0.44715,
+        "intervalLow": 0.27439,
         "intervalHigh": 0.83161,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.2127,
-          "surveyNegative": 0.40512
+          "surveyPositive": 1.21253,
+          "surveyNegative": 0.40507
         }
       }
     },
@@ -1329,19 +1329,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.22276,
-        "beta": 3.24221,
-        "mean": 0.61699,
-        "bias": 0.23397,
-        "evidenceWeight": 2.46497,
-        "confidence": 0.55207,
-        "intervalLow": 0.35706,
+        "alpha": 5.22245,
+        "beta": 3.24218,
+        "mean": 0.61697,
+        "bias": 0.23395,
+        "evidenceWeight": 2.46463,
+        "confidence": 0.55203,
+        "intervalLow": 0.35704,
         "intervalHigh": 0.87691,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 2.22276,
-          "surveyNegative": 0.24221
+          "surveyPositive": 2.22245,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -1377,19 +1377,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 5.12153,
-        "beta": 3.24221,
-        "mean": 0.61235,
-        "bias": 0.2247,
-        "evidenceWeight": 2.36374,
-        "confidence": 0.54168,
-        "intervalLow": 0.35043,
+        "alpha": 5.12123,
+        "beta": 3.24218,
+        "mean": 0.61234,
+        "bias": 0.22468,
+        "evidenceWeight": 2.36341,
+        "confidence": 0.54164,
+        "intervalLow": 0.35042,
         "intervalHigh": 0.87426,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 2.12153,
-          "surveyNegative": 0.24221
+          "surveyPositive": 2.12123,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -1426,19 +1426,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.91398,
-        "beta": 3.89608,
+        "alpha": 3.91386,
+        "beta": 3.89595,
         "mean": 0.50115,
         "bias": 0.00229,
-        "evidenceWeight": 1.81006,
-        "confidence": 0.47507,
+        "evidenceWeight": 1.80981,
+        "confidence": 0.47504,
         "intervalLow": 0.22404,
-        "intervalHigh": 0.77825,
+        "intervalHigh": 0.77826,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.91398,
-          "surveyNegative": 0.89608
+          "surveyPositive": 0.91386,
+          "surveyNegative": 0.89595
         }
       }
     },
@@ -1473,19 +1473,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.2823,
-        "beta": 4.02985,
-        "mean": 0.44888,
-        "bias": -0.10223,
-        "evidenceWeight": 1.31215,
-        "confidence": 0.39616,
-        "intervalLow": 0.16509,
-        "intervalHigh": 0.73267,
+        "alpha": 3.28227,
+        "beta": 4.0297,
+        "mean": 0.44889,
+        "bias": -0.10222,
+        "evidenceWeight": 1.31197,
+        "confidence": 0.39613,
+        "intervalLow": 0.1651,
+        "intervalHigh": 0.73268,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.2823,
-          "surveyNegative": 1.02985
+          "surveyPositive": 0.28227,
+          "surveyNegative": 1.0297
         }
       }
     },
@@ -1521,19 +1521,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.47935,
-        "beta": 3.17319,
-        "mean": 0.58534,
-        "bias": 0.17068,
-        "evidenceWeight": 1.65254,
-        "confidence": 0.45244,
-        "intervalLow": 0.30983,
-        "intervalHigh": 0.86086,
+        "alpha": 4.47914,
+        "beta": 3.17316,
+        "mean": 0.58533,
+        "bias": 0.17066,
+        "evidenceWeight": 1.65231,
+        "confidence": 0.4524,
+        "intervalLow": 0.30981,
+        "intervalHigh": 0.86085,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.47935,
-          "surveyNegative": 0.17319
+          "surveyPositive": 1.47914,
+          "surveyNegative": 0.17316
         }
       }
     },
@@ -1568,19 +1568,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.67469,
-        "beta": 3.25593,
+        "alpha": 3.6746,
+        "beta": 3.25589,
         "mean": 0.53021,
         "bias": 0.06042,
-        "evidenceWeight": 0.93062,
-        "confidence": 0.31755,
-        "intervalLow": 0.23868,
+        "evidenceWeight": 0.93049,
+        "confidence": 0.31752,
+        "intervalLow": 0.23867,
         "intervalHigh": 0.82174,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.67469,
-          "surveyNegative": 0.25593
+          "surveyPositive": 0.6746,
+          "surveyNegative": 0.25589
         }
       }
     },
@@ -1616,19 +1616,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 3.54235,
-        "beta": 3.09483,
+        "alpha": 3.54228,
+        "beta": 3.09482,
         "mean": 0.53371,
-        "bias": 0.06743,
-        "evidenceWeight": 0.63718,
-        "confidence": 0.24162,
-        "intervalLow": 0.23677,
+        "bias": 0.06742,
+        "evidenceWeight": 0.6371,
+        "confidence": 0.24159,
+        "intervalLow": 0.23676,
         "intervalHigh": 0.83066,
         "sources": {
-          "mealPositive": 0.15114,
+          "mealPositive": 0.15112,
           "mealNegative": 0,
-          "surveyPositive": 0.39121,
-          "surveyNegative": 0.09483
+          "surveyPositive": 0.39115,
+          "surveyNegative": 0.09482
         }
       }
     },
@@ -1665,19 +1665,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.55644,
-        "beta": 3.32828,
+        "alpha": 3.55636,
+        "beta": 3.32824,
         "mean": 0.51657,
         "bias": 0.03314,
-        "evidenceWeight": 0.88472,
-        "confidence": 0.30669,
+        "evidenceWeight": 0.8846,
+        "confidence": 0.30666,
         "intervalLow": 0.22381,
         "intervalHigh": 0.80932,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.55644,
-          "surveyNegative": 0.32828
+          "surveyPositive": 0.55636,
+          "surveyNegative": 0.32824
         }
       }
     },
@@ -1714,19 +1714,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.10157,
-        "beta": 3.30758,
+        "alpha": 4.10141,
+        "beta": 3.30753,
         "mean": 0.55358,
-        "bias": 0.10716,
-        "evidenceWeight": 1.40914,
-        "confidence": 0.41334,
-        "intervalLow": 0.27158,
+        "bias": 0.10715,
+        "evidenceWeight": 1.40895,
+        "confidence": 0.41331,
+        "intervalLow": 0.27157,
         "intervalHigh": 0.83558,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.10157,
-          "surveyNegative": 0.30758
+          "surveyPositive": 1.10141,
+          "surveyNegative": 0.30753
         }
       }
     },
@@ -1763,18 +1763,18 @@
       ],
       "taste": {
         "alpha": 3,
-        "beta": 4.31321,
-        "mean": 0.41022,
-        "bias": -0.17957,
-        "evidenceWeight": 1.31321,
-        "confidence": 0.39635,
+        "beta": 4.31302,
+        "mean": 0.41023,
+        "bias": -0.17955,
+        "evidenceWeight": 1.31302,
+        "confidence": 0.39632,
         "intervalLow": 0.12959,
-        "intervalHigh": 0.69085,
+        "intervalHigh": 0.69086,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 1.31321
+          "surveyNegative": 1.31302
         }
       }
     },
@@ -1811,19 +1811,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 3.75528,
-        "beta": 4.3401,
+        "alpha": 3.75517,
+        "beta": 4.33991,
         "mean": 0.46388,
-        "bias": -0.07224,
-        "evidenceWeight": 2.09538,
-        "confidence": 0.51164,
+        "bias": -0.07223,
+        "evidenceWeight": 2.09509,
+        "confidence": 0.51161,
         "intervalLow": 0.19187,
-        "intervalHigh": 0.73589,
+        "intervalHigh": 0.7359,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07552,
-          "surveyPositive": 0.75528,
-          "surveyNegative": 1.26458
+          "mealNegative": 0.07551,
+          "surveyPositive": 0.75517,
+          "surveyNegative": 1.2644
         }
       }
     },
@@ -1860,19 +1860,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.61701,
-        "beta": 3.91839,
+        "alpha": 4.61679,
+        "beta": 3.91826,
         "mean": 0.54092,
-        "bias": 0.08185,
-        "evidenceWeight": 2.5354,
-        "confidence": 0.55902,
-        "intervalLow": 0.27546,
+        "bias": 0.08184,
+        "evidenceWeight": 2.53505,
+        "confidence": 0.55899,
+        "intervalLow": 0.27545,
         "intervalHigh": 0.80639,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.61701,
-          "surveyNegative": 0.91839
+          "surveyPositive": 1.61679,
+          "surveyNegative": 0.91826
         }
       }
     },
@@ -1909,19 +1909,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.5801,
-        "beta": 3.92493,
-        "mean": 0.53852,
+        "alpha": 4.57988,
+        "beta": 3.9248,
+        "mean": 0.53851,
         "bias": 0.07703,
-        "evidenceWeight": 2.50504,
-        "confidence": 0.55605,
-        "intervalLow": 0.27253,
+        "evidenceWeight": 2.50469,
+        "confidence": 0.55602,
+        "intervalLow": 0.27252,
         "intervalHigh": 0.80451,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.5801,
-          "surveyNegative": 0.92493
+          "surveyPositive": 1.57988,
+          "surveyNegative": 0.9248
         }
       }
     },
@@ -1958,19 +1958,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.07862,
-        "beta": 3.7932,
+        "alpha": 4.07847,
+        "beta": 3.79309,
         "mean": 0.51813,
-        "bias": 0.03626,
-        "evidenceWeight": 1.87182,
-        "confidence": 0.48345,
-        "intervalLow": 0.24217,
+        "bias": 0.03625,
+        "evidenceWeight": 1.87156,
+        "confidence": 0.48341,
+        "intervalLow": 0.24216,
         "intervalHigh": 0.79409,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.07862,
-          "surveyNegative": 0.7932
+          "surveyPositive": 1.07847,
+          "surveyNegative": 0.79309
         }
       }
     },
@@ -2007,19 +2007,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.63541,
-        "beta": 3.92406,
+        "alpha": 4.63518,
+        "beta": 3.92393,
         "mean": 0.54155,
-        "bias": 0.08311,
-        "evidenceWeight": 2.55947,
-        "confidence": 0.56135,
-        "intervalLow": 0.27645,
+        "bias": 0.0831,
+        "evidenceWeight": 2.55911,
+        "confidence": 0.56132,
+        "intervalLow": 0.27644,
         "intervalHigh": 0.80666,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.63541,
-          "surveyNegative": 0.92406
+          "surveyPositive": 1.63518,
+          "surveyNegative": 0.92393
         }
       }
     },
@@ -2057,19 +2057,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.18828,
-        "beta": 3.69106,
+        "alpha": 4.18811,
+        "beta": 3.69096,
         "mean": 0.53155,
         "bias": 0.0631,
-        "evidenceWeight": 1.87933,
-        "confidence": 0.48445,
-        "intervalLow": 0.25608,
+        "evidenceWeight": 1.87907,
+        "confidence": 0.48441,
+        "intervalLow": 0.25607,
         "intervalHigh": 0.80703,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.0945,
-          "surveyNegative": 0.69106
+          "surveyPositive": 1.09434,
+          "surveyNegative": 0.69096
         }
       }
     },
@@ -2106,19 +2106,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.76671,
-        "beta": 5.30242,
-        "mean": 0.41533,
-        "bias": -0.16933,
-        "evidenceWeight": 3.06914,
-        "confidence": 0.60546,
-        "intervalLow": 0.15987,
-        "intervalHigh": 0.67079,
+        "alpha": 3.7666,
+        "beta": 5.3021,
+        "mean": 0.41534,
+        "bias": -0.16932,
+        "evidenceWeight": 3.06871,
+        "confidence": 0.60542,
+        "intervalLow": 0.15988,
+        "intervalHigh": 0.67081,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 0.67293,
-          "surveyNegative": 2.30242
+          "surveyPositive": 0.67284,
+          "surveyNegative": 2.3021
         }
       }
     },
@@ -2154,19 +2154,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.16819,
-        "beta": 3.69461,
-        "mean": 0.53012,
-        "bias": 0.06023,
-        "evidenceWeight": 1.86279,
-        "confidence": 0.48224,
-        "intervalLow": 0.25434,
-        "intervalHigh": 0.80589,
+        "alpha": 4.16802,
+        "beta": 3.69451,
+        "mean": 0.53011,
+        "bias": 0.06022,
+        "evidenceWeight": 1.86253,
+        "confidence": 0.48221,
+        "intervalLow": 0.25433,
+        "intervalHigh": 0.8059,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.0744,
-          "surveyNegative": 0.69461
+          "surveyPositive": 1.07425,
+          "surveyNegative": 0.69451
         }
       }
     },
@@ -2202,19 +2202,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.76671,
-        "beta": 5.22163,
+        "alpha": 3.7666,
+        "beta": 5.22132,
         "mean": 0.41907,
-        "bias": -0.16187,
-        "evidenceWeight": 2.98834,
-        "confidence": 0.59906,
+        "bias": -0.16185,
+        "evidenceWeight": 2.98792,
+        "confidence": 0.59903,
         "intervalLow": 0.16225,
-        "intervalHigh": 0.67588,
+        "intervalHigh": 0.6759,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 0.67293,
-          "surveyNegative": 2.22163
+          "surveyPositive": 0.67284,
+          "surveyNegative": 2.22132
         }
       }
     },
@@ -2249,19 +2249,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.71097,
-        "beta": 3.15591,
-        "mean": 0.54042,
-        "bias": 0.08083,
-        "evidenceWeight": 0.86687,
-        "confidence": 0.30238,
-        "intervalLow": 0.24813,
+        "alpha": 3.71087,
+        "beta": 3.15589,
+        "mean": 0.54041,
+        "bias": 0.08082,
+        "evidenceWeight": 0.86675,
+        "confidence": 0.30235,
+        "intervalLow": 0.24812,
         "intervalHigh": 0.8327,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71097,
-          "surveyNegative": 0.15591
+          "surveyPositive": 0.71087,
+          "surveyNegative": 0.15589
         }
       }
     },
@@ -2297,19 +2297,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.15791,
-        "beta": 3.3926,
-        "mean": 0.55068,
-        "bias": 0.10136,
-        "evidenceWeight": 1.55051,
-        "confidence": 0.4367,
-        "intervalLow": 0.27085,
+        "alpha": 4.15774,
+        "beta": 3.39255,
+        "mean": 0.55067,
+        "bias": 0.10135,
+        "evidenceWeight": 1.55029,
+        "confidence": 0.43667,
+        "intervalLow": 0.27084,
         "intervalHigh": 0.83051,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.15791,
-          "surveyNegative": 0.3926
+          "surveyPositive": 1.15774,
+          "surveyNegative": 0.39255
         }
       }
     },
@@ -2344,19 +2344,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.87259,
-        "beta": 3.25092,
-        "mean": 0.59981,
-        "bias": 0.19963,
-        "evidenceWeight": 2.12351,
-        "confidence": 0.51498,
-        "intervalLow": 0.33299,
-        "intervalHigh": 0.86664,
+        "alpha": 4.87233,
+        "beta": 3.25088,
+        "mean": 0.5998,
+        "bias": 0.19961,
+        "evidenceWeight": 2.12321,
+        "confidence": 0.51494,
+        "intervalLow": 0.33297,
+        "intervalHigh": 0.86663,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.87259,
-          "surveyNegative": 0.25092
+          "surveyPositive": 1.87233,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -2392,19 +2392,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.52046,
-        "beta": 3.5523,
+        "alpha": 4.52025,
+        "beta": 3.55222,
         "mean": 0.55996,
-        "bias": 0.11993,
-        "evidenceWeight": 2.07276,
-        "confidence": 0.50893,
-        "intervalLow": 0.28887,
+        "bias": 0.11992,
+        "evidenceWeight": 2.07247,
+        "confidence": 0.5089,
+        "intervalLow": 0.28886,
         "intervalHigh": 0.83106,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.52046,
-          "surveyNegative": 0.5523
+          "surveyPositive": 1.52025,
+          "surveyNegative": 0.55222
         }
       }
     },
@@ -2440,19 +2440,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.80149,
-        "beta": 4.22393,
-        "mean": 0.532,
+        "alpha": 4.80124,
+        "beta": 4.22376,
+        "mean": 0.53199,
         "bias": 0.06399,
-        "evidenceWeight": 3.02542,
-        "confidence": 0.60202,
-        "intervalLow": 0.27276,
+        "evidenceWeight": 3.025,
+        "confidence": 0.60199,
+        "intervalLow": 0.27275,
         "intervalHigh": 0.79123,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.72662,
-          "surveyNegative": 1.22393
+          "surveyPositive": 1.72638,
+          "surveyNegative": 1.22376
         }
       }
     },
@@ -2489,19 +2489,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.14321,
-        "beta": 3.94355,
+        "alpha": 5.14291,
+        "beta": 3.94341,
         "mean": 0.56601,
-        "bias": 0.13202,
-        "evidenceWeight": 3.08675,
-        "confidence": 0.60682,
-        "intervalLow": 0.3093,
+        "bias": 0.13201,
+        "evidenceWeight": 3.08632,
+        "confidence": 0.60679,
+        "intervalLow": 0.30929,
         "intervalHigh": 0.82272,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 2.06834,
-          "surveyNegative": 0.94355
+          "surveyPositive": 2.06806,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -2539,19 +2539,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.78243,
-        "beta": 4.8022,
+        "alpha": 4.78218,
+        "beta": 4.80194,
         "mean": 0.49897,
         "bias": -0.00206,
-        "evidenceWeight": 3.58462,
-        "confidence": 0.64187,
-        "intervalLow": 0.24616,
-        "intervalHigh": 0.75178,
+        "evidenceWeight": 3.58412,
+        "confidence": 0.64184,
+        "intervalLow": 0.24615,
+        "intervalHigh": 0.75179,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.70756,
-          "surveyNegative": 1.8022
+          "surveyPositive": 1.70733,
+          "surveyNegative": 1.80194
         }
       }
     },
@@ -2587,19 +2587,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.21651,
-        "beta": 5.56729,
+        "alpha": 4.21634,
+        "beta": 5.56694,
         "mean": 0.43097,
-        "bias": -0.13806,
-        "evidenceWeight": 3.78381,
-        "confidence": 0.65421,
+        "bias": -0.13805,
+        "evidenceWeight": 3.78328,
+        "confidence": 0.65418,
         "intervalLow": 0.1829,
-        "intervalHigh": 0.67904,
+        "intervalHigh": 0.67905,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 2.56729
+          "surveyPositive": 1.14149,
+          "surveyNegative": 2.56694
         }
       }
     },
@@ -2635,19 +2635,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.77501,
-        "beta": 4.5328,
+        "alpha": 4.77476,
+        "beta": 4.53258,
         "mean": 0.51301,
         "bias": 0.02602,
-        "evidenceWeight": 3.3078,
-        "confidence": 0.6232,
+        "evidenceWeight": 3.30734,
+        "confidence": 0.62316,
         "intervalLow": 0.25691,
         "intervalHigh": 0.76911,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.70014,
-          "surveyNegative": 1.5328
+          "surveyPositive": 1.69991,
+          "surveyNegative": 1.53258
         }
       }
     },
@@ -2683,19 +2683,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.82556,
-        "beta": 3.38026,
-        "mean": 0.58807,
-        "bias": 0.17613,
-        "evidenceWeight": 2.20583,
-        "confidence": 0.52447,
-        "intervalLow": 0.32122,
+        "alpha": 4.82531,
+        "beta": 3.38021,
+        "mean": 0.58806,
+        "bias": 0.17611,
+        "evidenceWeight": 2.20552,
+        "confidence": 0.52443,
+        "intervalLow": 0.3212,
         "intervalHigh": 0.85491,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.82556,
-          "surveyNegative": 0.38026
+          "surveyPositive": 1.82531,
+          "surveyNegative": 0.38021
         }
       }
     },
@@ -2733,19 +2733,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.00351,
-        "beta": 3.90601,
+        "alpha": 4.00337,
+        "beta": 3.90588,
         "mean": 0.50616,
         "bias": 0.01233,
-        "evidenceWeight": 1.90952,
-        "confidence": 0.48843,
-        "intervalLow": 0.23063,
+        "evidenceWeight": 1.90926,
+        "confidence": 0.48839,
+        "intervalLow": 0.23062,
         "intervalHigh": 0.7817,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.00351,
-          "surveyNegative": 0.90601
+          "surveyPositive": 1.00337,
+          "surveyNegative": 0.90588
         }
       }
     },
@@ -2781,19 +2781,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.81125,
-        "beta": 3.17319,
-        "mean": 0.54568,
-        "bias": 0.09135,
-        "evidenceWeight": 0.98443,
-        "confidence": 0.32986,
+        "alpha": 3.81113,
+        "beta": 3.17316,
+        "mean": 0.54567,
+        "bias": 0.09134,
+        "evidenceWeight": 0.9843,
+        "confidence": 0.32983,
         "intervalLow": 0.25581,
         "intervalHigh": 0.83554,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.81125,
-          "surveyNegative": 0.17319
+          "surveyPositive": 0.81113,
+          "surveyNegative": 0.17316
         }
       }
     },
@@ -2828,19 +2828,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.55944,
-        "beta": 3.8535,
+        "alpha": 3.55936,
+        "beta": 3.85338,
         "mean": 0.48017,
-        "bias": -0.03967,
-        "evidenceWeight": 1.41294,
-        "confidence": 0.41399,
+        "bias": -0.03966,
+        "evidenceWeight": 1.41274,
+        "confidence": 0.41396,
         "intervalLow": 0.19682,
-        "intervalHigh": 0.76351,
+        "intervalHigh": 0.76352,
         "sources": {
-          "mealPositive": 0.15114,
+          "mealPositive": 0.15112,
           "mealNegative": 0,
-          "surveyPositive": 0.40829,
-          "surveyNegative": 0.8535
+          "surveyPositive": 0.40824,
+          "surveyNegative": 0.85338
         }
       }
     },
@@ -2878,18 +2878,18 @@
       ],
       "taste": {
         "alpha": 3,
-        "beta": 4.60063,
-        "mean": 0.3947,
-        "bias": -0.21059,
-        "evidenceWeight": 1.60063,
-        "confidence": 0.44454,
-        "intervalLow": 0.12053,
-        "intervalHigh": 0.66887,
+        "beta": 4.60041,
+        "mean": 0.39472,
+        "bias": -0.21057,
+        "evidenceWeight": 1.60041,
+        "confidence": 0.44451,
+        "intervalLow": 0.12054,
+        "intervalHigh": 0.66889,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 1.60063
+          "surveyNegative": 1.60041
         }
       }
     },
@@ -2926,19 +2926,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.20916,
-        "beta": 4.57718,
-        "mean": 0.41215,
-        "bias": -0.17569,
-        "evidenceWeight": 1.78635,
-        "confidence": 0.47179,
+        "alpha": 3.20913,
+        "beta": 4.57696,
+        "mean": 0.41216,
+        "bias": -0.17568,
+        "evidenceWeight": 1.7861,
+        "confidence": 0.47175,
         "intervalLow": 0.13899,
-        "intervalHigh": 0.68532,
+        "intervalHigh": 0.68533,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07552,
-          "surveyPositive": 0.20916,
-          "surveyNegative": 1.50166
+          "mealNegative": 0.07551,
+          "surveyPositive": 0.20913,
+          "surveyNegative": 1.50145
         }
       }
     },
@@ -2973,19 +2973,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.20916,
-        "beta": 4.55019,
-        "mean": 0.41359,
-        "bias": -0.17283,
-        "evidenceWeight": 1.75936,
-        "confidence": 0.46799,
-        "intervalLow": 0.13986,
-        "intervalHigh": 0.68731,
+        "alpha": 3.20913,
+        "beta": 4.54998,
+        "mean": 0.4136,
+        "bias": -0.17281,
+        "evidenceWeight": 1.75911,
+        "confidence": 0.46796,
+        "intervalLow": 0.13987,
+        "intervalHigh": 0.68733,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07552,
-          "surveyPositive": 0.20916,
-          "surveyNegative": 1.47467
+          "mealNegative": 0.07551,
+          "surveyPositive": 0.20913,
+          "surveyNegative": 1.47447
         }
       }
     },
@@ -3022,19 +3022,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 4.20094,
-        "beta": 3.51606,
+        "alpha": 4.20077,
+        "beta": 3.51599,
         "mean": 0.54437,
-        "bias": 0.08875,
-        "evidenceWeight": 1.717,
-        "confidence": 0.46193,
-        "intervalLow": 0.26689,
+        "bias": 0.08874,
+        "evidenceWeight": 1.71676,
+        "confidence": 0.4619,
+        "intervalLow": 0.26688,
         "intervalHigh": 0.82186,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07552,
-          "surveyPositive": 1.20094,
-          "surveyNegative": 0.44054
+          "mealNegative": 0.07551,
+          "surveyPositive": 1.20077,
+          "surveyNegative": 0.44048
         }
       }
     },
@@ -3071,19 +3071,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.89515,
-        "beta": 4.10821,
+        "alpha": 3.89502,
+        "beta": 4.10806,
         "mean": 0.48669,
         "bias": -0.02662,
-        "evidenceWeight": 2.00336,
-        "confidence": 0.50042,
+        "evidenceWeight": 2.00308,
+        "confidence": 0.50038,
         "intervalLow": 0.21267,
         "intervalHigh": 0.76071,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.89515,
-          "surveyNegative": 1.10821
+          "surveyPositive": 0.89502,
+          "surveyNegative": 1.10806
         }
       }
     },
@@ -3120,19 +3120,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 4.39549,
-        "beta": 3.55616,
-        "mean": 0.55278,
-        "bias": 0.10555,
-        "evidenceWeight": 1.95165,
-        "confidence": 0.49388,
-        "intervalLow": 0.27941,
+        "alpha": 4.39529,
+        "beta": 3.55608,
+        "mean": 0.55277,
+        "bias": 0.10554,
+        "evidenceWeight": 1.95137,
+        "confidence": 0.49385,
+        "intervalLow": 0.2794,
         "intervalHigh": 0.82615,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.30171,
-          "surveyNegative": 0.55616
+          "surveyPositive": 1.30152,
+          "surveyNegative": 0.55608
         }
       }
     },
@@ -3168,19 +3168,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.42067,
-        "beta": 3.55616,
-        "mean": 0.55419,
-        "bias": 0.10838,
-        "evidenceWeight": 1.97683,
-        "confidence": 0.49709,
-        "intervalLow": 0.28129,
+        "alpha": 4.42047,
+        "beta": 3.55608,
+        "mean": 0.55418,
+        "bias": 0.10837,
+        "evidenceWeight": 1.97655,
+        "confidence": 0.49705,
+        "intervalLow": 0.28128,
         "intervalHigh": 0.82709,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.32689,
-          "surveyNegative": 0.55616
+          "surveyPositive": 1.32671,
+          "surveyNegative": 0.55608
         }
       }
     },
@@ -3217,19 +3217,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 3.91407,
-        "beta": 3.83636,
+        "alpha": 3.91394,
+        "beta": 3.83624,
         "mean": 0.50501,
         "bias": 0.01003,
-        "evidenceWeight": 1.75043,
-        "confidence": 0.46673,
-        "intervalLow": 0.22698,
+        "evidenceWeight": 1.75019,
+        "confidence": 0.46669,
+        "intervalLow": 0.22697,
         "intervalHigh": 0.78305,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 0.82029,
-          "surveyNegative": 0.83636
+          "surveyPositive": 0.82018,
+          "surveyNegative": 0.83624
         }
       }
     },
@@ -3265,19 +3265,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.35617,
-        "beta": 3.81169,
+        "alpha": 4.35599,
+        "beta": 3.81158,
         "mean": 0.53333,
-        "bias": 0.06666,
-        "evidenceWeight": 2.16787,
-        "confidence": 0.52014,
-        "intervalLow": 0.26229,
+        "bias": 0.06665,
+        "evidenceWeight": 2.16757,
+        "confidence": 0.5201,
+        "intervalLow": 0.26228,
         "intervalHigh": 0.80437,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.35617,
-          "surveyNegative": 0.81169
+          "surveyPositive": 1.35599,
+          "surveyNegative": 0.81158
         }
       }
     },
@@ -3312,19 +3312,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.21651,
-        "beta": 5.46476,
-        "mean": 0.43553,
-        "bias": -0.12893,
-        "evidenceWeight": 3.68127,
-        "confidence": 0.64797,
+        "alpha": 4.21634,
+        "beta": 5.46441,
+        "mean": 0.43554,
+        "bias": -0.12892,
+        "evidenceWeight": 3.68076,
+        "confidence": 0.64793,
         "intervalLow": 0.18597,
-        "intervalHigh": 0.6851,
+        "intervalHigh": 0.68511,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 2.46476
+          "surveyPositive": 1.14149,
+          "surveyNegative": 2.46441
         }
       }
     },
@@ -3361,19 +3361,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 4.84294,
-        "beta": 3.94355,
+        "alpha": 4.84268,
+        "beta": 3.94341,
         "mean": 0.55118,
-        "bias": 0.10236,
-        "evidenceWeight": 2.78648,
-        "confidence": 0.58216,
-        "intervalLow": 0.28964,
+        "bias": 0.10235,
+        "evidenceWeight": 2.78609,
+        "confidence": 0.58212,
+        "intervalLow": 0.28963,
         "intervalHigh": 0.81272,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.76807,
-          "surveyNegative": 0.94355
+          "surveyPositive": 1.76782,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -3409,19 +3409,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 5.76996,
-        "beta": 3.24221,
-        "mean": 0.64024,
-        "bias": 0.28048,
-        "evidenceWeight": 3.01217,
-        "confidence": 0.60097,
-        "intervalLow": 0.39074,
-        "intervalHigh": 0.88975,
+        "alpha": 5.76957,
+        "beta": 3.24218,
+        "mean": 0.64023,
+        "bias": 0.28046,
+        "evidenceWeight": 3.01175,
+        "confidence": 0.60094,
+        "intervalLow": 0.39072,
+        "intervalHigh": 0.88974,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 2.76996,
-          "surveyNegative": 0.24221
+          "surveyPositive": 2.76957,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -3459,19 +3459,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 3.87865,
-        "beta": 4.1689,
+        "alpha": 3.87853,
+        "beta": 4.16874,
         "mean": 0.48197,
-        "bias": -0.03607,
-        "evidenceWeight": 2.04755,
-        "confidence": 0.50587,
+        "bias": -0.03606,
+        "evidenceWeight": 2.04726,
+        "confidence": 0.50584,
         "intervalLow": 0.2087,
-        "intervalHigh": 0.75523,
+        "intervalHigh": 0.75524,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.87865,
-          "surveyNegative": 1.1689
+          "surveyPositive": 0.87853,
+          "surveyNegative": 1.16874
         }
       }
     },
@@ -3508,19 +3508,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 4.46271,
-        "beta": 3.47321,
+        "alpha": 4.46251,
+        "beta": 3.47314,
         "mean": 0.56234,
-        "bias": 0.12469,
-        "evidenceWeight": 1.93592,
-        "confidence": 0.49186,
-        "intervalLow": 0.28934,
+        "bias": 0.12467,
+        "evidenceWeight": 1.93565,
+        "confidence": 0.49182,
+        "intervalLow": 0.28933,
         "intervalHigh": 0.83534,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.46271,
-          "surveyNegative": 0.47321
+          "surveyPositive": 1.46251,
+          "surveyNegative": 0.47314
         }
       }
     },
@@ -3556,19 +3556,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.34458,
-        "beta": 4.12113,
-        "mean": 0.44799,
-        "bias": -0.10402,
-        "evidenceWeight": 1.46571,
-        "confidence": 0.42292,
+        "alpha": 3.34454,
+        "beta": 4.12097,
+        "mean": 0.448,
+        "bias": -0.104,
+        "evidenceWeight": 1.46551,
+        "confidence": 0.42288,
         "intervalLow": 0.16684,
-        "intervalHigh": 0.72914,
+        "intervalHigh": 0.72915,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07552,
-          "surveyPositive": 0.34458,
-          "surveyNegative": 1.04561
+          "mealNegative": 0.07551,
+          "surveyPositive": 0.34454,
+          "surveyNegative": 1.04547
         }
       }
     },
@@ -3605,19 +3605,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.85267,
-        "beta": 3.94355,
-        "mean": 0.55168,
-        "bias": 0.10335,
-        "evidenceWeight": 2.79622,
-        "confidence": 0.583,
-        "intervalLow": 0.2903,
+        "alpha": 4.85241,
+        "beta": 3.94341,
+        "mean": 0.55167,
+        "bias": 0.10334,
+        "evidenceWeight": 2.79583,
+        "confidence": 0.58297,
+        "intervalLow": 0.29029,
         "intervalHigh": 0.81306,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.77781,
-          "surveyNegative": 0.94355
+          "surveyPositive": 1.77756,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -3653,19 +3653,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.39502,
-        "beta": 3.50559,
-        "mean": 0.55629,
-        "bias": 0.11258,
-        "evidenceWeight": 1.90062,
-        "confidence": 0.48726,
-        "intervalLow": 0.28235,
+        "alpha": 4.39483,
+        "beta": 3.50552,
+        "mean": 0.55628,
+        "bias": 0.11257,
+        "evidenceWeight": 1.90035,
+        "confidence": 0.48723,
+        "intervalLow": 0.28234,
         "intervalHigh": 0.83023,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.39502,
-          "surveyNegative": 0.50559
+          "surveyPositive": 1.39483,
+          "surveyNegative": 0.50552
         }
       }
     },
@@ -3702,19 +3702,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.9331,
-        "beta": 3.33091,
+        "alpha": 3.93297,
+        "beta": 3.33087,
         "mean": 0.54145,
-        "bias": 0.0829,
-        "evidenceWeight": 1.26401,
-        "confidence": 0.38726,
-        "intervalLow": 0.25632,
+        "bias": 0.08289,
+        "evidenceWeight": 1.26384,
+        "confidence": 0.38722,
+        "intervalLow": 0.25631,
         "intervalHigh": 0.82658,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.9331,
-          "surveyNegative": 0.33091
+          "surveyPositive": 0.93297,
+          "surveyNegative": 0.33087
         }
       }
     },
@@ -3751,19 +3751,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.54492,
-        "beta": 3.17319,
-        "mean": 0.52767,
+        "alpha": 3.54485,
+        "beta": 3.17316,
+        "mean": 0.52766,
         "bias": 0.05533,
-        "evidenceWeight": 0.71811,
-        "confidence": 0.26419,
-        "intervalLow": 0.23206,
+        "evidenceWeight": 0.71801,
+        "confidence": 0.26417,
+        "intervalLow": 0.23205,
         "intervalHigh": 0.82327,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.54492,
-          "surveyNegative": 0.17319
+          "surveyPositive": 0.54485,
+          "surveyNegative": 0.17316
         }
       }
     },
@@ -3798,19 +3798,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.40125,
-        "beta": 3.98642,
+        "alpha": 3.4012,
+        "beta": 3.98628,
         "mean": 0.4604,
-        "bias": -0.07921,
-        "evidenceWeight": 1.38767,
-        "confidence": 0.40962,
+        "bias": -0.0792,
+        "evidenceWeight": 1.38748,
+        "confidence": 0.40959,
         "intervalLow": 0.17729,
-        "intervalHigh": 0.7435,
+        "intervalHigh": 0.74351,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.40125,
-          "surveyNegative": 0.98642
+          "surveyPositive": 0.4012,
+          "surveyNegative": 0.98628
         }
       }
     },
@@ -3846,19 +3846,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.23109,
-        "beta": 3.09483,
+        "alpha": 3.23106,
+        "beta": 3.09482,
         "mean": 0.51077,
         "bias": 0.02154,
-        "evidenceWeight": 0.32593,
-        "confidence": 0.14013,
+        "evidenceWeight": 0.32588,
+        "confidence": 0.14011,
         "intervalLow": 0.20696,
         "intervalHigh": 0.81458,
         "sources": {
-          "mealPositive": 0.15114,
+          "mealPositive": 0.15112,
           "mealNegative": 0,
-          "surveyPositive": 0.07995,
-          "surveyNegative": 0.09483
+          "surveyPositive": 0.07994,
+          "surveyNegative": 0.09482
         }
       }
     },
@@ -3894,19 +3894,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.69835,
-        "beta": 3.09483,
+        "alpha": 3.69825,
+        "beta": 3.09482,
         "mean": 0.54442,
-        "bias": 0.08884,
-        "evidenceWeight": 0.79318,
-        "confidence": 0.28397,
+        "bias": 0.08883,
+        "evidenceWeight": 0.79307,
+        "confidence": 0.28394,
         "intervalLow": 0.25095,
-        "intervalHigh": 0.83789,
+        "intervalHigh": 0.83788,
         "sources": {
-          "mealPositive": 0.6184,
+          "mealPositive": 0.61831,
           "mealNegative": 0,
-          "surveyPositive": 0.07995,
-          "surveyNegative": 0.09483
+          "surveyPositive": 0.07994,
+          "surveyNegative": 0.09482
         }
       }
     },
@@ -3942,19 +3942,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.23109,
-        "beta": 3.09483,
+        "alpha": 3.23106,
+        "beta": 3.09482,
         "mean": 0.51077,
         "bias": 0.02154,
-        "evidenceWeight": 0.32593,
-        "confidence": 0.14013,
+        "evidenceWeight": 0.32588,
+        "confidence": 0.14011,
         "intervalLow": 0.20696,
         "intervalHigh": 0.81458,
         "sources": {
-          "mealPositive": 0.15114,
+          "mealPositive": 0.15112,
           "mealNegative": 0,
-          "surveyPositive": 0.07995,
-          "surveyNegative": 0.09483
+          "surveyPositive": 0.07994,
+          "surveyNegative": 0.09482
         }
       }
     },
@@ -3991,19 +3991,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.3845,
-        "beta": 3.59091,
-        "mean": 0.4852,
+        "alpha": 3.38445,
+        "beta": 3.59082,
+        "mean": 0.48521,
         "bias": -0.02959,
-        "evidenceWeight": 0.97541,
-        "confidence": 0.32782,
+        "evidenceWeight": 0.97527,
+        "confidence": 0.32779,
         "intervalLow": 0.19409,
-        "intervalHigh": 0.77632,
+        "intervalHigh": 0.77633,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.3845,
-          "surveyNegative": 0.59091
+          "surveyPositive": 0.38445,
+          "surveyNegative": 0.59082
         }
       }
     },
@@ -4039,19 +4039,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.21257,
-        "beta": 3.06566,
+        "alpha": 3.21254,
+        "beta": 3.06565,
         "mean": 0.5117,
         "bias": 0.0234,
-        "evidenceWeight": 0.27822,
-        "confidence": 0.12212,
-        "intervalLow": 0.20691,
+        "evidenceWeight": 0.27818,
+        "confidence": 0.12211,
+        "intervalLow": 0.2069,
         "intervalHigh": 0.81649,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.21257,
-          "surveyNegative": 0.06566
+          "surveyPositive": 0.21254,
+          "surveyNegative": 0.06565
         }
       }
     },
@@ -4087,19 +4087,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.78154,
-        "beta": 3.11873,
-        "mean": 0.54803,
-        "bias": 0.09606,
-        "evidenceWeight": 0.90027,
-        "confidence": 0.31041,
-        "intervalLow": 0.25675,
+        "alpha": 3.78143,
+        "beta": 3.11871,
+        "mean": 0.54802,
+        "bias": 0.09604,
+        "evidenceWeight": 0.90014,
+        "confidence": 0.31038,
+        "intervalLow": 0.25674,
         "intervalHigh": 0.8393,
         "sources": {
-          "mealPositive": 0.08163,
+          "mealPositive": 0.08162,
           "mealNegative": 0,
-          "surveyPositive": 0.69991,
-          "surveyNegative": 0.11873
+          "surveyPositive": 0.69981,
+          "surveyNegative": 0.11871
         }
       }
     },
@@ -4137,19 +4137,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.30424,
-        "beta": 3.65368,
+        "alpha": 4.30405,
+        "beta": 3.65359,
         "mean": 0.54087,
-        "bias": 0.08175,
-        "evidenceWeight": 1.95792,
-        "confidence": 0.49468,
+        "bias": 0.08174,
+        "evidenceWeight": 1.95765,
+        "confidence": 0.49465,
         "intervalLow": 0.26698,
         "intervalHigh": 0.81476,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.30424,
-          "surveyNegative": 0.65368
+          "surveyPositive": 1.30405,
+          "surveyNegative": 0.65359
         }
       }
     },
@@ -4186,19 +4186,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.36084,
-        "beta": 3.16738,
-        "mean": 0.51482,
+        "alpha": 3.36079,
+        "beta": 3.16736,
+        "mean": 0.51481,
         "bias": 0.02963,
-        "evidenceWeight": 0.52822,
-        "confidence": 0.20893,
-        "intervalLow": 0.21518,
+        "evidenceWeight": 0.52815,
+        "confidence": 0.20891,
+        "intervalLow": 0.21517,
         "intervalHigh": 0.81446,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.36084,
-          "surveyNegative": 0.16738
+          "surveyPositive": 0.36079,
+          "surveyNegative": 0.16736
         }
       }
     },
@@ -4234,19 +4234,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.62346,
-        "beta": 3.43001,
+        "alpha": 3.62337,
+        "beta": 3.42995,
         "mean": 0.51371,
-        "bias": 0.02743,
-        "evidenceWeight": 1.05347,
-        "confidence": 0.34501,
+        "bias": 0.02742,
+        "evidenceWeight": 1.05332,
+        "confidence": 0.34498,
         "intervalLow": 0.22399,
         "intervalHigh": 0.80344,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.62346,
-          "surveyNegative": 0.43001
+          "surveyPositive": 0.62337,
+          "surveyNegative": 0.42995
         }
       }
     },
@@ -4281,19 +4281,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.36084,
-        "beta": 3.16738,
-        "mean": 0.51482,
+        "alpha": 3.36079,
+        "beta": 3.16736,
+        "mean": 0.51481,
         "bias": 0.02963,
-        "evidenceWeight": 0.52822,
-        "confidence": 0.20893,
-        "intervalLow": 0.21518,
+        "evidenceWeight": 0.52815,
+        "confidence": 0.20891,
+        "intervalLow": 0.21517,
         "intervalHigh": 0.81446,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.36084,
-          "surveyNegative": 0.16738
+          "surveyPositive": 0.36079,
+          "surveyNegative": 0.16736
         }
       }
     },
@@ -4329,19 +4329,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.53002,
-        "beta": 3.50329,
+        "alpha": 3.52994,
+        "beta": 3.50322,
         "mean": 0.5019,
         "bias": 0.0038,
-        "evidenceWeight": 1.03331,
-        "confidence": 0.34065,
+        "evidenceWeight": 1.03316,
+        "confidence": 0.34062,
         "intervalLow": 0.21171,
         "intervalHigh": 0.79209,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.53002,
-          "surveyNegative": 0.50329
+          "surveyPositive": 0.52994,
+          "surveyNegative": 0.50322
         }
       }
     },
@@ -4377,19 +4377,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.7312,
-        "beta": 3.23748,
+        "alpha": 3.7311,
+        "beta": 3.23745,
         "mean": 0.53542,
-        "bias": 0.07085,
-        "evidenceWeight": 0.96868,
-        "confidence": 0.3263,
-        "intervalLow": 0.24479,
+        "bias": 0.07084,
+        "evidenceWeight": 0.96855,
+        "confidence": 0.32627,
+        "intervalLow": 0.24478,
         "intervalHigh": 0.82606,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.7312,
-          "surveyNegative": 0.23748
+          "surveyPositive": 0.7311,
+          "surveyNegative": 0.23745
         }
       }
     },
@@ -4426,19 +4426,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.36084,
-        "beta": 3.16738,
-        "mean": 0.51482,
+        "alpha": 3.36079,
+        "beta": 3.16736,
+        "mean": 0.51481,
         "bias": 0.02963,
-        "evidenceWeight": 0.52822,
-        "confidence": 0.20893,
-        "intervalLow": 0.21518,
+        "evidenceWeight": 0.52815,
+        "confidence": 0.20891,
+        "intervalLow": 0.21517,
         "intervalHigh": 0.81446,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.36084,
-          "surveyNegative": 0.16738
+          "surveyPositive": 0.36079,
+          "surveyNegative": 0.16736
         }
       }
     },
@@ -4473,19 +4473,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.49215,
-        "beta": 3.29869,
+        "alpha": 3.49208,
+        "beta": 3.29865,
         "mean": 0.51424,
-        "bias": 0.02849,
-        "evidenceWeight": 0.79084,
-        "confidence": 0.28337,
-        "intervalLow": 0.21969,
+        "bias": 0.02848,
+        "evidenceWeight": 0.79073,
+        "confidence": 0.28334,
+        "intervalLow": 0.21968,
         "intervalHigh": 0.8088,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.49215,
-          "surveyNegative": 0.29869
+          "surveyPositive": 0.49208,
+          "surveyNegative": 0.29865
         }
       }
     },
@@ -4519,19 +4519,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.20237,
-        "beta": 3.33181,
+        "alpha": 3.20235,
+        "beta": 3.33176,
         "mean": 0.4901,
         "bias": -0.01981,
-        "evidenceWeight": 0.53418,
-        "confidence": 0.21079,
+        "evidenceWeight": 0.53411,
+        "confidence": 0.21077,
         "intervalLow": 0.1905,
         "intervalHigh": 0.78969,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.20237,
-          "surveyNegative": 0.33181
+          "surveyPositive": 0.20235,
+          "surveyNegative": 0.33176
         }
       }
     },
@@ -4568,19 +4568,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.06746,
-        "beta": 3.06739,
+        "alpha": 3.06745,
+        "beta": 3.06738,
         "mean": 0.50001,
         "bias": 0.00001,
-        "evidenceWeight": 0.13484,
-        "confidence": 0.06316,
+        "evidenceWeight": 0.13482,
+        "confidence": 0.06315,
         "intervalLow": 0.19208,
         "intervalHigh": 0.80793,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.06746,
-          "surveyNegative": 0.06739
+          "surveyPositive": 0.06745,
+          "surveyNegative": 0.06738
         }
       }
     },
@@ -4616,19 +4616,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.33729,
-        "beta": 3.33693,
+        "alpha": 3.33724,
+        "beta": 3.33688,
         "mean": 0.50003,
         "bias": 0.00005,
-        "evidenceWeight": 0.67421,
-        "confidence": 0.25212,
+        "evidenceWeight": 0.67412,
+        "confidence": 0.25209,
         "intervalLow": 0.20312,
-        "intervalHigh": 0.79693,
+        "intervalHigh": 0.79694,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.33729,
-          "surveyNegative": 0.33693
+          "surveyPositive": 0.33724,
+          "surveyNegative": 0.33688
         }
       }
     },
@@ -4664,19 +4664,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.60712,
-        "beta": 3.60647,
+        "alpha": 3.60704,
+        "beta": 3.60638,
         "mean": 0.50005,
         "bias": 0.00009,
-        "evidenceWeight": 1.21359,
-        "confidence": 0.37764,
+        "evidenceWeight": 1.21342,
+        "confidence": 0.37761,
         "intervalLow": 0.21305,
         "intervalHigh": 0.78704,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.60712,
-          "surveyNegative": 0.60647
+          "surveyPositive": 0.60704,
+          "surveyNegative": 0.60638
         }
       }
     },
@@ -4710,19 +4710,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.06746,
-        "beta": 3.06739,
+        "alpha": 3.06745,
+        "beta": 3.06738,
         "mean": 0.50001,
         "bias": 0.00001,
-        "evidenceWeight": 0.13484,
-        "confidence": 0.06316,
+        "evidenceWeight": 0.13482,
+        "confidence": 0.06315,
         "intervalLow": 0.19208,
         "intervalHigh": 0.80793,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.06746,
-          "surveyNegative": 0.06739
+          "surveyPositive": 0.06745,
+          "surveyNegative": 0.06738
         }
       }
     },
@@ -4759,18 +4759,18 @@
       ],
       "taste": {
         "alpha": 3,
-        "beta": 3.8573,
-        "mean": 0.43749,
-        "bias": -0.12502,
-        "evidenceWeight": 0.8573,
-        "confidence": 0.30004,
+        "beta": 3.85718,
+        "mean": 0.4375,
+        "bias": -0.12501,
+        "evidenceWeight": 0.85718,
+        "confidence": 0.30001,
         "intervalLow": 0.14637,
-        "intervalHigh": 0.72861,
+        "intervalHigh": 0.72862,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 0.8573
+          "surveyNegative": 0.85718
         }
       }
     },
@@ -4807,18 +4807,18 @@
       ],
       "taste": {
         "alpha": 3,
-        "beta": 3.14591,
+        "beta": 3.14589,
         "mean": 0.48813,
         "bias": -0.02374,
-        "evidenceWeight": 0.14591,
-        "confidence": 0.068,
+        "evidenceWeight": 0.14589,
+        "confidence": 0.06799,
         "intervalLow": 0.18053,
         "intervalHigh": 0.79573,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 0.14591
+          "surveyNegative": 0.14589
         }
       }
     },
@@ -4855,19 +4855,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.69898,
-        "beta": 3.72859,
+        "alpha": 3.69888,
+        "beta": 3.72849,
         "mean": 0.49801,
         "bias": -0.00399,
-        "evidenceWeight": 1.42757,
-        "confidence": 0.4165,
+        "evidenceWeight": 1.42737,
+        "confidence": 0.41646,
         "intervalLow": 0.21468,
         "intervalHigh": 0.78133,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.69898,
-          "surveyNegative": 0.72859
+          "surveyPositive": 0.69888,
+          "surveyNegative": 0.72849
         }
       }
     },
@@ -4903,19 +4903,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.76671,
-        "beta": 3.55616,
-        "mean": 0.51438,
+        "alpha": 3.7666,
+        "beta": 3.55608,
+        "mean": 0.51437,
         "bias": 0.02875,
-        "evidenceWeight": 1.32287,
-        "confidence": 0.39811,
+        "evidenceWeight": 1.32268,
+        "confidence": 0.39808,
         "intervalLow": 0.22939,
         "intervalHigh": 0.79936,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 0.67293,
-          "surveyNegative": 0.55616
+          "surveyPositive": 0.67284,
+          "surveyNegative": 0.55608
         }
       }
     },
@@ -4950,19 +4950,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 4.25257,
-        "beta": 4.53437,
+        "alpha": 4.25239,
+        "beta": 4.53415,
         "mean": 0.48397,
         "bias": -0.03207,
-        "evidenceWeight": 2.78694,
-        "confidence": 0.5822,
-        "intervalLow": 0.22119,
-        "intervalHigh": 0.74674,
+        "evidenceWeight": 2.78655,
+        "confidence": 0.58216,
+        "intervalLow": 0.22118,
+        "intervalHigh": 0.74675,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 1.15879,
-          "surveyNegative": 1.53437
+          "surveyPositive": 1.15863,
+          "surveyNegative": 1.53415
         }
       }
     },
@@ -4997,18 +4997,18 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.079,
+        "alpha": 3.07899,
         "beta": 3.01732,
         "mean": 0.50506,
         "bias": 0.01012,
-        "evidenceWeight": 0.09632,
-        "confidence": 0.04595,
-        "intervalLow": 0.19632,
+        "evidenceWeight": 0.09631,
+        "confidence": 0.04594,
+        "intervalLow": 0.19631,
         "intervalHigh": 0.8138,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.079,
+          "surveyPositive": 0.07899,
           "surveyNegative": 0.01732
         }
       }
@@ -5045,18 +5045,18 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.079,
+        "alpha": 3.07899,
         "beta": 3.01732,
         "mean": 0.50506,
         "bias": 0.01012,
-        "evidenceWeight": 0.09632,
-        "confidence": 0.04595,
-        "intervalLow": 0.19632,
+        "evidenceWeight": 0.09631,
+        "confidence": 0.04594,
+        "intervalLow": 0.19631,
         "intervalHigh": 0.8138,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.079,
+          "surveyPositive": 0.07899,
           "surveyNegative": 0.01732
         }
       }
@@ -5092,19 +5092,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 4.03536,
-        "beta": 3.53131,
-        "mean": 0.53331,
-        "bias": 0.06662,
-        "evidenceWeight": 1.56666,
-        "confidence": 0.43925,
-        "intervalLow": 0.25292,
+        "alpha": 4.03522,
+        "beta": 3.53123,
+        "mean": 0.5333,
+        "bias": 0.06661,
+        "evidenceWeight": 1.56645,
+        "confidence": 0.43922,
+        "intervalLow": 0.25291,
         "intervalHigh": 0.8137,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.03536,
-          "surveyNegative": 0.53131
+          "surveyPositive": 1.03522,
+          "surveyNegative": 0.53123
         }
       }
     },
@@ -5139,19 +5139,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.71454,
-        "beta": 3.25092,
+        "alpha": 3.71444,
+        "beta": 3.25088,
         "mean": 0.53328,
-        "bias": 0.06656,
-        "evidenceWeight": 0.96546,
-        "confidence": 0.32557,
-        "intervalLow": 0.2425,
+        "bias": 0.06655,
+        "evidenceWeight": 0.96533,
+        "confidence": 0.32554,
+        "intervalLow": 0.24249,
         "intervalHigh": 0.82406,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71454,
-          "surveyNegative": 0.25092
+          "surveyPositive": 0.71444,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -5185,19 +5185,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.71454,
-        "beta": 3.25092,
+        "alpha": 3.71444,
+        "beta": 3.25088,
         "mean": 0.53328,
-        "bias": 0.06656,
-        "evidenceWeight": 0.96546,
-        "confidence": 0.32557,
-        "intervalLow": 0.2425,
+        "bias": 0.06655,
+        "evidenceWeight": 0.96533,
+        "confidence": 0.32554,
+        "intervalLow": 0.24249,
         "intervalHigh": 0.82406,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71454,
-          "surveyNegative": 0.25092
+          "surveyPositive": 0.71444,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -5232,19 +5232,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.71454,
-        "beta": 3.25092,
+        "alpha": 3.71444,
+        "beta": 3.25088,
         "mean": 0.53328,
-        "bias": 0.06656,
-        "evidenceWeight": 0.96546,
-        "confidence": 0.32557,
-        "intervalLow": 0.2425,
+        "bias": 0.06655,
+        "evidenceWeight": 0.96533,
+        "confidence": 0.32554,
+        "intervalLow": 0.24249,
         "intervalHigh": 0.82406,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71454,
-          "surveyNegative": 0.25092
+          "surveyPositive": 0.71444,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -5280,19 +5280,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.71454,
-        "beta": 3.25092,
+        "alpha": 3.71444,
+        "beta": 3.25088,
         "mean": 0.53328,
-        "bias": 0.06656,
-        "evidenceWeight": 0.96546,
-        "confidence": 0.32557,
-        "intervalLow": 0.2425,
+        "bias": 0.06655,
+        "evidenceWeight": 0.96533,
+        "confidence": 0.32554,
+        "intervalLow": 0.24249,
         "intervalHigh": 0.82406,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71454,
-          "surveyNegative": 0.25092
+          "surveyPositive": 0.71444,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -5328,19 +5328,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.71454,
-        "beta": 3.25092,
+        "alpha": 3.71444,
+        "beta": 3.25088,
         "mean": 0.53328,
-        "bias": 0.06656,
-        "evidenceWeight": 0.96546,
-        "confidence": 0.32557,
-        "intervalLow": 0.2425,
+        "bias": 0.06655,
+        "evidenceWeight": 0.96533,
+        "confidence": 0.32554,
+        "intervalLow": 0.24249,
         "intervalHigh": 0.82406,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71454,
-          "surveyNegative": 0.25092
+          "surveyPositive": 0.71444,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -5376,19 +5376,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 4.21651,
-        "beta": 3.94355,
-        "mean": 0.51673,
+        "alpha": 4.21634,
+        "beta": 3.94341,
+        "mean": 0.51672,
         "bias": 0.03345,
-        "evidenceWeight": 2.16006,
-        "confidence": 0.51924,
-        "intervalLow": 0.24512,
-        "intervalHigh": 0.78833,
+        "evidenceWeight": 2.15976,
+        "confidence": 0.5192,
+        "intervalLow": 0.24511,
+        "intervalHigh": 0.78834,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 0.94355
+          "surveyPositive": 1.14149,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -5425,19 +5425,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 4.21651,
-        "beta": 3.94355,
-        "mean": 0.51673,
+        "alpha": 4.21634,
+        "beta": 3.94341,
+        "mean": 0.51672,
         "bias": 0.03345,
-        "evidenceWeight": 2.16006,
-        "confidence": 0.51924,
-        "intervalLow": 0.24512,
-        "intervalHigh": 0.78833,
+        "evidenceWeight": 2.15976,
+        "confidence": 0.5192,
+        "intervalLow": 0.24511,
+        "intervalHigh": 0.78834,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 0.94355
+          "surveyPositive": 1.14149,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -5472,19 +5472,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.21651,
-        "beta": 3.94355,
-        "mean": 0.51673,
+        "alpha": 4.21634,
+        "beta": 3.94341,
+        "mean": 0.51672,
         "bias": 0.03345,
-        "evidenceWeight": 2.16006,
-        "confidence": 0.51924,
-        "intervalLow": 0.24512,
-        "intervalHigh": 0.78833,
+        "evidenceWeight": 2.15976,
+        "confidence": 0.5192,
+        "intervalLow": 0.24511,
+        "intervalHigh": 0.78834,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 0.94355
+          "surveyPositive": 1.14149,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -5522,19 +5522,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 4.51245,
-        "beta": 4.23947,
-        "mean": 0.5156,
+        "alpha": 4.51224,
+        "beta": 4.23929,
+        "mean": 0.51559,
         "bias": 0.03119,
-        "evidenceWeight": 2.75191,
-        "confidence": 0.57912,
-        "intervalLow": 0.25234,
-        "intervalHigh": 0.77885,
+        "evidenceWeight": 2.75153,
+        "confidence": 0.57908,
+        "intervalLow": 0.25233,
+        "intervalHigh": 0.77886,
         "sources": {
-          "mealPositive": 0.07486,
+          "mealPositive": 0.07485,
           "mealNegative": 0,
-          "surveyPositive": 1.43758,
-          "surveyNegative": 1.23947
+          "surveyPositive": 1.43738,
+          "surveyNegative": 1.23929
         }
       }
     },
@@ -5570,19 +5570,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.86775,
-        "beta": 3.24221,
+        "alpha": 3.86763,
+        "beta": 3.24218,
         "mean": 0.54399,
-        "bias": 0.08798,
-        "evidenceWeight": 1.10996,
-        "confidence": 0.35691,
-        "intervalLow": 0.25629,
+        "bias": 0.08797,
+        "evidenceWeight": 1.10981,
+        "confidence": 0.35687,
+        "intervalLow": 0.25628,
         "intervalHigh": 0.83169,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86775,
-          "surveyNegative": 0.24221
+          "surveyPositive": 0.86763,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5617,19 +5617,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.86775,
-        "beta": 4.04905,
+        "alpha": 3.86763,
+        "beta": 4.0489,
         "mean": 0.48855,
         "bias": -0.0229,
-        "evidenceWeight": 1.9168,
-        "confidence": 0.48938,
+        "evidenceWeight": 1.91653,
+        "confidence": 0.48934,
         "intervalLow": 0.21318,
-        "intervalHigh": 0.76392,
+        "intervalHigh": 0.76393,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86775,
-          "surveyNegative": 1.04905
+          "surveyPositive": 0.86763,
+          "surveyNegative": 1.0489
         }
       }
     },
@@ -5663,19 +5663,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.86775,
-        "beta": 3.24221,
+        "alpha": 3.86763,
+        "beta": 3.24218,
         "mean": 0.54399,
-        "bias": 0.08798,
-        "evidenceWeight": 1.10996,
-        "confidence": 0.35691,
-        "intervalLow": 0.25629,
+        "bias": 0.08797,
+        "evidenceWeight": 1.10981,
+        "confidence": 0.35687,
+        "intervalLow": 0.25628,
         "intervalHigh": 0.83169,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86775,
-          "surveyNegative": 0.24221
+          "surveyPositive": 0.86763,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5710,19 +5710,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.13037,
-        "beta": 3.24221,
+        "alpha": 4.13022,
+        "beta": 3.24218,
         "mean": 0.56023,
-        "bias": 0.12047,
-        "evidenceWeight": 1.37258,
-        "confidence": 0.40698,
-        "intervalLow": 0.27805,
-        "intervalHigh": 0.84242,
+        "bias": 0.12045,
+        "evidenceWeight": 1.37239,
+        "confidence": 0.40695,
+        "intervalLow": 0.27804,
+        "intervalHigh": 0.84241,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.13037,
-          "surveyNegative": 0.24221
+          "surveyPositive": 1.13022,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5756,19 +5756,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.86775,
-        "beta": 3.24221,
+        "alpha": 3.86763,
+        "beta": 3.24218,
         "mean": 0.54399,
-        "bias": 0.08798,
-        "evidenceWeight": 1.10996,
-        "confidence": 0.35691,
-        "intervalLow": 0.25629,
+        "bias": 0.08797,
+        "evidenceWeight": 1.10981,
+        "confidence": 0.35687,
+        "intervalLow": 0.25628,
         "intervalHigh": 0.83169,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86775,
-          "surveyNegative": 0.24221
+          "surveyPositive": 0.86763,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5804,19 +5804,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.86775,
-        "beta": 3.24221,
+        "alpha": 3.86763,
+        "beta": 3.24218,
         "mean": 0.54399,
-        "bias": 0.08798,
-        "evidenceWeight": 1.10996,
-        "confidence": 0.35691,
-        "intervalLow": 0.25629,
+        "bias": 0.08797,
+        "evidenceWeight": 1.10981,
+        "confidence": 0.35687,
+        "intervalLow": 0.25628,
         "intervalHigh": 0.83169,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86775,
-          "surveyNegative": 0.24221
+          "surveyPositive": 0.86763,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5850,19 +5850,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.86775,
-        "beta": 3.24221,
+        "alpha": 3.86763,
+        "beta": 3.24218,
         "mean": 0.54399,
-        "bias": 0.08798,
-        "evidenceWeight": 1.10996,
-        "confidence": 0.35691,
-        "intervalLow": 0.25629,
+        "bias": 0.08797,
+        "evidenceWeight": 1.10981,
+        "confidence": 0.35687,
+        "intervalLow": 0.25628,
         "intervalHigh": 0.83169,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86775,
-          "surveyNegative": 0.24221
+          "surveyPositive": 0.86763,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5897,19 +5897,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.99906,
-        "beta": 3.24221,
-        "mean": 0.55226,
-        "bias": 0.10452,
-        "evidenceWeight": 1.24127,
-        "confidence": 0.38296,
-        "intervalLow": 0.26732,
+        "alpha": 3.99892,
+        "beta": 3.24218,
+        "mean": 0.55225,
+        "bias": 0.10451,
+        "evidenceWeight": 1.2411,
+        "confidence": 0.38293,
+        "intervalLow": 0.26731,
         "intervalHigh": 0.8372,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.99906,
-          "surveyNegative": 0.24221
+          "surveyPositive": 0.99892,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5943,19 +5943,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.86775,
-        "beta": 3.24221,
+        "alpha": 3.86763,
+        "beta": 3.24218,
         "mean": 0.54399,
-        "bias": 0.08798,
-        "evidenceWeight": 1.10996,
-        "confidence": 0.35691,
-        "intervalLow": 0.25629,
+        "bias": 0.08797,
+        "evidenceWeight": 1.10981,
+        "confidence": 0.35687,
+        "intervalLow": 0.25628,
         "intervalHigh": 0.83169,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86775,
-          "surveyNegative": 0.24221
+          "surveyPositive": 0.86763,
+          "surveyNegative": 0.24218
         }
       }
     },
@@ -5991,19 +5991,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.43994,
-        "beta": 3.33091,
+        "alpha": 3.43988,
+        "beta": 3.33087,
         "mean": 0.50805,
         "bias": 0.0161,
-        "evidenceWeight": 0.77085,
-        "confidence": 0.2782,
-        "intervalLow": 0.21304,
+        "evidenceWeight": 0.77075,
+        "confidence": 0.27817,
+        "intervalLow": 0.21303,
         "intervalHigh": 0.80307,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43994,
-          "surveyNegative": 0.33091
+          "surveyPositive": 0.43988,
+          "surveyNegative": 0.33087
         }
       }
     },
@@ -6040,19 +6040,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.43994,
-        "beta": 3.33091,
+        "alpha": 3.43988,
+        "beta": 3.33087,
         "mean": 0.50805,
         "bias": 0.0161,
-        "evidenceWeight": 0.77085,
-        "confidence": 0.2782,
-        "intervalLow": 0.21304,
+        "evidenceWeight": 0.77075,
+        "confidence": 0.27817,
+        "intervalLow": 0.21303,
         "intervalHigh": 0.80307,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43994,
-          "surveyNegative": 0.33091
+          "surveyPositive": 0.43988,
+          "surveyNegative": 0.33087
         }
       }
     },
@@ -6088,19 +6088,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.43994,
-        "beta": 3.33091,
+        "alpha": 3.43988,
+        "beta": 3.33087,
         "mean": 0.50805,
         "bias": 0.0161,
-        "evidenceWeight": 0.77085,
-        "confidence": 0.2782,
-        "intervalLow": 0.21304,
+        "evidenceWeight": 0.77075,
+        "confidence": 0.27817,
+        "intervalLow": 0.21303,
         "intervalHigh": 0.80307,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43994,
-          "surveyNegative": 0.33091
+          "surveyPositive": 0.43988,
+          "surveyNegative": 0.33087
         }
       }
     },
@@ -6136,19 +6136,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.43994,
-        "beta": 3.33091,
+        "alpha": 3.43988,
+        "beta": 3.33087,
         "mean": 0.50805,
         "bias": 0.0161,
-        "evidenceWeight": 0.77085,
-        "confidence": 0.2782,
-        "intervalLow": 0.21304,
+        "evidenceWeight": 0.77075,
+        "confidence": 0.27817,
+        "intervalLow": 0.21303,
         "intervalHigh": 0.80307,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43994,
-          "surveyNegative": 0.33091
+          "surveyPositive": 0.43988,
+          "surveyNegative": 0.33087
         }
       }
     },
@@ -6186,19 +6186,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.43994,
-        "beta": 3.33091,
+        "alpha": 3.43988,
+        "beta": 3.33087,
         "mean": 0.50805,
         "bias": 0.0161,
-        "evidenceWeight": 0.77085,
-        "confidence": 0.2782,
-        "intervalLow": 0.21304,
+        "evidenceWeight": 0.77075,
+        "confidence": 0.27817,
+        "intervalLow": 0.21303,
         "intervalHigh": 0.80307,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43994,
-          "surveyNegative": 0.33091
+          "surveyPositive": 0.43988,
+          "surveyNegative": 0.33087
         }
       }
     },
@@ -6234,19 +6234,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.96721,
-        "beta": 3.85768,
+        "alpha": 3.96708,
+        "beta": 3.85756,
         "mean": 0.507,
         "bias": 0.014,
-        "evidenceWeight": 1.82489,
-        "confidence": 0.47711,
+        "evidenceWeight": 1.82463,
+        "confidence": 0.47707,
         "intervalLow": 0.23015,
         "intervalHigh": 0.78385,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.96721,
-          "surveyNegative": 0.85768
+          "surveyPositive": 0.96708,
+          "surveyNegative": 0.85756
         }
       }
     },
@@ -6282,19 +6282,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.67901,
-        "beta": 3.17319,
-        "mean": 0.53691,
-        "bias": 0.07382,
-        "evidenceWeight": 0.8522,
-        "confidence": 0.29879,
-        "intervalLow": 0.24419,
+        "alpha": 3.67892,
+        "beta": 3.17316,
+        "mean": 0.5369,
+        "bias": 0.07381,
+        "evidenceWeight": 0.85208,
+        "confidence": 0.29876,
+        "intervalLow": 0.24418,
         "intervalHigh": 0.82963,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.67901,
-          "surveyNegative": 0.17319
+          "surveyPositive": 0.67892,
+          "surveyNegative": 0.17316
         }
       }
     },
@@ -6331,19 +6331,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.55214,
-        "beta": 3.70204,
+        "alpha": 3.55206,
+        "beta": 3.70194,
         "mean": 0.48967,
         "bias": -0.02066,
-        "evidenceWeight": 1.25418,
-        "confidence": 0.38541,
+        "evidenceWeight": 1.254,
+        "confidence": 0.38537,
         "intervalLow": 0.20344,
-        "intervalHigh": 0.77589,
+        "intervalHigh": 0.7759,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.55214,
-          "surveyNegative": 0.70204
+          "surveyPositive": 0.55206,
+          "surveyNegative": 0.70194
         }
       }
     },
@@ -6378,19 +6378,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.10759,
-        "beta": 3.12423,
-        "mean": 0.49866,
+        "alpha": 3.10758,
+        "beta": 3.12422,
+        "mean": 0.49867,
         "bias": -0.00267,
-        "evidenceWeight": 0.23183,
-        "confidence": 0.10387,
+        "evidenceWeight": 0.2318,
+        "confidence": 0.10386,
         "intervalLow": 0.19281,
         "intervalHigh": 0.80452,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.10759,
-          "surveyNegative": 0.12423
+          "surveyPositive": 0.10758,
+          "surveyNegative": 0.12422
         }
       }
     },
@@ -6424,19 +6424,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.67069,
-        "beta": 3.09483,
-        "mean": 0.54256,
-        "bias": 0.08512,
-        "evidenceWeight": 0.76552,
-        "confidence": 0.27681,
+        "alpha": 3.67059,
+        "beta": 3.09482,
+        "mean": 0.54255,
+        "bias": 0.08511,
+        "evidenceWeight": 0.76541,
+        "confidence": 0.27678,
         "intervalLow": 0.24847,
         "intervalHigh": 0.83664,
         "sources": {
-          "mealPositive": 0.59074,
+          "mealPositive": 0.59066,
           "mealNegative": 0,
-          "surveyPositive": 0.07995,
-          "surveyNegative": 0.09483
+          "surveyPositive": 0.07994,
+          "surveyNegative": 0.09482
         }
       }
     },
@@ -6470,19 +6470,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.83605,
-        "beta": 3.11873,
-        "mean": 0.55157,
-        "bias": 0.10314,
-        "evidenceWeight": 0.95478,
-        "confidence": 0.32313,
-        "intervalLow": 0.2615,
-        "intervalHigh": 0.84164,
+        "alpha": 3.83594,
+        "beta": 3.11871,
+        "mean": 0.55156,
+        "bias": 0.10313,
+        "evidenceWeight": 0.95465,
+        "confidence": 0.3231,
+        "intervalLow": 0.26149,
+        "intervalHigh": 0.84163,
         "sources": {
-          "mealPositive": 0.73467,
+          "mealPositive": 0.73457,
           "mealNegative": 0,
-          "surveyPositive": 0.10139,
-          "surveyNegative": 0.11873
+          "surveyPositive": 0.10137,
+          "surveyNegative": 0.11871
         }
       }
     },
@@ -6518,19 +6518,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.20237,
-        "beta": 3.33181,
+        "alpha": 3.20235,
+        "beta": 3.33176,
         "mean": 0.4901,
         "bias": -0.01981,
-        "evidenceWeight": 0.53418,
-        "confidence": 0.21079,
+        "evidenceWeight": 0.53411,
+        "confidence": 0.21077,
         "intervalLow": 0.1905,
         "intervalHigh": 0.78969,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.20237,
-          "surveyNegative": 0.33181
+          "surveyPositive": 0.20235,
+          "surveyNegative": 0.33176
         }
       }
     },
@@ -6566,19 +6566,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.20916,
-        "beta": 4.12021,
-        "mean": 0.43785,
-        "bias": -0.1243,
-        "evidenceWeight": 1.32938,
-        "confidence": 0.39929,
+        "alpha": 3.20913,
+        "beta": 4.12006,
+        "mean": 0.43786,
+        "bias": -0.12429,
+        "evidenceWeight": 1.32919,
+        "confidence": 0.39925,
         "intervalLow": 0.15507,
-        "intervalHigh": 0.72063,
+        "intervalHigh": 0.72064,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.67967,
-          "surveyPositive": 0.20916,
-          "surveyNegative": 0.44054
+          "mealNegative": 0.67958,
+          "surveyPositive": 0.20913,
+          "surveyNegative": 0.44048
         }
       }
     },
@@ -6614,19 +6614,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.69898,
-        "beta": 3.72859,
+        "alpha": 3.69888,
+        "beta": 3.72849,
         "mean": 0.49801,
         "bias": -0.00399,
-        "evidenceWeight": 1.42757,
-        "confidence": 0.4165,
+        "evidenceWeight": 1.42737,
+        "confidence": 0.41646,
         "intervalLow": 0.21468,
         "intervalHigh": 0.78133,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.69898,
-          "surveyNegative": 0.72859
+          "surveyPositive": 0.69888,
+          "surveyNegative": 0.72849
         }
       }
     },
@@ -6661,19 +6661,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 4.35508,
-        "beta": 3.55616,
+        "alpha": 4.35489,
+        "beta": 3.55608,
         "mean": 0.55049,
-        "bias": 0.10099,
-        "evidenceWeight": 1.91124,
-        "confidence": 0.48865,
-        "intervalLow": 0.27637,
+        "bias": 0.10098,
+        "evidenceWeight": 1.91097,
+        "confidence": 0.48862,
+        "intervalLow": 0.27636,
         "intervalHigh": 0.82461,
         "sources": {
-          "mealPositive": 0.68215,
+          "mealPositive": 0.68206,
           "mealNegative": 0,
-          "surveyPositive": 0.67293,
-          "surveyNegative": 0.55616
+          "surveyPositive": 0.67284,
+          "surveyNegative": 0.55608
         }
       }
     },
@@ -6708,19 +6708,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.76671,
-        "beta": 3.55616,
-        "mean": 0.51438,
+        "alpha": 3.7666,
+        "beta": 3.55608,
+        "mean": 0.51437,
         "bias": 0.02875,
-        "evidenceWeight": 1.32287,
-        "confidence": 0.39811,
+        "evidenceWeight": 1.32268,
+        "confidence": 0.39808,
         "intervalLow": 0.22939,
         "intervalHigh": 0.79936,
         "sources": {
-          "mealPositive": 0.09378,
+          "mealPositive": 0.09377,
           "mealNegative": 0,
-          "surveyPositive": 0.67293,
-          "surveyNegative": 0.55616
+          "surveyPositive": 0.67284,
+          "surveyNegative": 0.55608
         }
       }
     },
@@ -6755,19 +6755,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 4.17421,
-        "beta": 3.25092,
+        "alpha": 4.17405,
+        "beta": 3.25088,
         "mean": 0.56217,
-        "bias": 0.12435,
-        "evidenceWeight": 1.42513,
-        "confidence": 0.41608,
-        "intervalLow": 0.28101,
+        "bias": 0.12433,
+        "evidenceWeight": 1.42493,
+        "confidence": 0.41605,
+        "intervalLow": 0.281,
         "intervalHigh": 0.84334,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.17421,
-          "surveyNegative": 0.25092
+          "surveyPositive": 1.17405,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -6801,19 +6801,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 4.03536,
-        "beta": 3.53131,
-        "mean": 0.53331,
-        "bias": 0.06662,
-        "evidenceWeight": 1.56666,
-        "confidence": 0.43925,
-        "intervalLow": 0.25292,
+        "alpha": 4.03522,
+        "beta": 3.53123,
+        "mean": 0.5333,
+        "bias": 0.06661,
+        "evidenceWeight": 1.56645,
+        "confidence": 0.43922,
+        "intervalLow": 0.25291,
         "intervalHigh": 0.8137,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.03536,
-          "surveyNegative": 0.53131
+          "surveyPositive": 1.03522,
+          "surveyNegative": 0.53123
         }
       }
     },
@@ -6847,19 +6847,19 @@
         "verified"
       ],
       "taste": {
-        "alpha": 3.71454,
-        "beta": 3.25092,
+        "alpha": 3.71444,
+        "beta": 3.25088,
         "mean": 0.53328,
-        "bias": 0.06656,
-        "evidenceWeight": 0.96546,
-        "confidence": 0.32557,
-        "intervalLow": 0.2425,
+        "bias": 0.06655,
+        "evidenceWeight": 0.96533,
+        "confidence": 0.32554,
+        "intervalLow": 0.24249,
         "intervalHigh": 0.82406,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71454,
-          "surveyNegative": 0.25092
+          "surveyPositive": 0.71444,
+          "surveyNegative": 0.25088
         }
       }
     },
@@ -6893,19 +6893,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 4.81543,
-        "beta": 3.94355,
+        "alpha": 4.81518,
+        "beta": 3.94341,
         "mean": 0.54977,
-        "bias": 0.09954,
-        "evidenceWeight": 2.75898,
-        "confidence": 0.57974,
-        "intervalLow": 0.28779,
+        "bias": 0.09953,
+        "evidenceWeight": 2.75859,
+        "confidence": 0.57971,
+        "intervalLow": 0.28778,
         "intervalHigh": 0.81175,
         "sources": {
-          "mealPositive": 0.67378,
+          "mealPositive": 0.67369,
           "mealNegative": 0,
-          "surveyPositive": 1.14165,
-          "surveyNegative": 0.94355
+          "surveyPositive": 1.14149,
+          "surveyNegative": 0.94341
         }
       }
     },
@@ -6941,19 +6941,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.43994,
-        "beta": 3.33091,
+        "alpha": 3.43988,
+        "beta": 3.33087,
         "mean": 0.50805,
         "bias": 0.0161,
-        "evidenceWeight": 0.77085,
-        "confidence": 0.2782,
-        "intervalLow": 0.21304,
+        "evidenceWeight": 0.77075,
+        "confidence": 0.27817,
+        "intervalLow": 0.21303,
         "intervalHigh": 0.80307,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43994,
-          "surveyNegative": 0.33091
+          "surveyPositive": 0.43988,
+          "surveyNegative": 0.33087
         }
       }
     },
@@ -6989,19 +6989,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.2823,
-        "beta": 3.17319,
+        "alpha": 3.28227,
+        "beta": 3.17316,
         "mean": 0.50845,
         "bias": 0.0169,
-        "evidenceWeight": 0.45549,
-        "confidence": 0.1855,
+        "evidenceWeight": 0.45543,
+        "confidence": 0.18548,
         "intervalLow": 0.20726,
         "intervalHigh": 0.80964,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.2823,
-          "surveyNegative": 0.17319
+          "surveyPositive": 0.28227,
+          "surveyNegative": 0.17316
         }
       }
     }
