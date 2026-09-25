@@ -13,3 +13,5 @@
 참고: [WCAG 대비](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [목표 크기](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html). 데이터 점은 밀집될 수 있으므로 보이는 점의 크기만 키우지 말고 인접 선택·목록 접근을 함께 유지한다.
 
 후속 디자인 및 공개 README 개선 담당 예정은 사용자 최신 지시의 **Claude Opus 5 (max)**다. 디자인 제안은 서버에서 검증하여 적용하며 현재 기능·정보 정책을 존중한다.
+
+고해상도 화면에서도 렌즈와 Bloom 후처리 버퍼는 캔버스와 같은 최대 1.45 픽셀 비율을 사용한다. EffectComposer 생성 시 읽은 기기 기본 비율을 그대로 두지 않아, 휴대폰에서 보이지 않는 초과 해상도로 광선을 계산하지 않도록 한다.

@@ -895,6 +895,9 @@ export function MenuCosmos({
         lensing.enabled = false;
         lensingPass = lensing;
         const composer = graph.postProcessingComposer();
+        // EffectComposer captures DPR at construction; keep the expensive lens
+        // and bloom buffers under the same 1.45 cap as the visible canvas.
+        composer.setPixelRatio(graph.renderer().getPixelRatio());
         // Scene depth lets the pass leave anything in front of the hole alone.
         for (const target of [composer.renderTarget1, composer.renderTarget2]) {
           if (target.depthTexture) continue;
