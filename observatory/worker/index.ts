@@ -23,8 +23,9 @@ interface Env {
   ASSETS: AssetFetcher;
   SNAPSHOTS: {
     get(key: string): Promise<unknown>;
-    put(key: string, value: ArrayBuffer | ArrayBufferView, options: unknown): Promise<void>;
-    delete(key: string): Promise<void>;
+    head(key: string): Promise<unknown>;
+    put(key: string, value: ArrayBuffer | ArrayBufferView, options: unknown): Promise<unknown>;
+    delete(key: string | string[]): Promise<void>;
   };
   SNAPSHOT_PUSH_TOKEN?: string;
 }
@@ -48,7 +49,7 @@ const worker = {
     }
     if (url.pathname === SNAPSHOT_COMMIT_PATH) {
       if (request.method !== "GET") return jsonResponse({ status: "error", reason: "method not allowed" }, 405);
-      return commitSnapshotChunks(request, env);
+      return commitSnapshotChunks(request, env, { waitUntil: (promise: Promise<unknown>) => ctx.waitUntil(promise) });
     }
     if (url.pathname === SNAPSHOT_ABORT_PATH) {
       if (request.method !== "GET") return jsonResponse({ status: "error", reason: "method not allowed" }, 405);

@@ -43,3 +43,35 @@ test("Sites transport respects whole-upload cancellation", async () => {
   await assert.rejects(pending, /upload deadline/u);
   assert.equal(requestSignal.aborted, true);
 });
+
+test("per-attempt timeout retries while the whole-upload deadline remains authoritative", async () => {
+  const events = [];
+  let calls = 0;
+  const keeper = setTimeout(() => {}, 2_000);
+  try {
+    const result = await requestSitesJson("https://example.test/commit", {}, {
+      timeoutMs: 10, sleep: async () => {}, onAttempt: (event) => events.push(event),
+      fetchImpl: async (_url, { signal }) => {
+        if (++calls === 2) return Response.json({ status: "ok" });
+        return new Promise((_resolve, reject) => signal.addEventListener("abort", () => reject(signal.reason), { once: true }));
+      },
+    });
+    assert.equal(result.status, "ok");
+    assert.equal(calls, 2);
+    assert.equal(events[0].error, "TimeoutError");
+    assert.equal(events[1].ok, true);
+  } finally { clearTimeout(keeper); }
+});
+
+test("diagnostic observer cannot break a successful request and permanent conflicts are not retried", async () => {
+  const result = await requestSitesJson("https://example.test/commit", {}, {
+    onAttempt: () => { throw new Error("observer failed"); },
+    fetchImpl: async () => Response.json({ status: "ok" }),
+  });
+  assert.equal(result.status, "ok");
+  let calls = 0;
+  await assert.rejects(requestSitesJson("https://example.test/commit", {}, {
+    fetchImpl: async () => { calls++; return Response.json({ status: "error", reason: "superseded" }, { status: 409 }); },
+  }), /409.*superseded/u);
+  assert.equal(calls, 1);
+});

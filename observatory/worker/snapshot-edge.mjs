@@ -10,6 +10,7 @@ export const SNAPSHOT_COMMIT_PATH = "/api/snapshot/commit";
 export const SNAPSHOT_ABORT_PATH = "/api/snapshot/abort";
 export const MAX_SNAPSHOT_BYTES = 512 * 1024;
 export const MAX_SNAPSHOT_CHUNKS = 256;
+export const CHUNK_READ_CONCURRENCY = 4;
 export const MAX_CHUNK_BYTES = 2 * 1024;
 export const MAX_ENCODED_BYTES = MAX_SNAPSHOT_BYTES + 64 * 1024;
 export const MAX_UPLOAD_AGE_MS = 30 * 60 * 1000;
@@ -169,22 +170,63 @@ export async function readBoundedSnapshot(request) {
   return bytes;
 }
 
+// Validation failures are permanent; R2/network failures must remain retryable.
+class SnapshotRequestError extends Error {
+  constructor(message, status = 400) {
+    super(message);
+    this.status = status;
+  }
+}
+
+function snapshotErrorResponse(error) {
+  return jsonResponse({
+    status: "error",
+    reason: error instanceof SnapshotRequestError
+      ? error.message : "snapshot storage is temporarily unavailable",
+  }, error instanceof SnapshotRequestError ? error.status : 503);
+}
+
+function publishedReceipt(stored, sha256) {
+  const metadata = stored?.customMetadata;
+  if (metadata?.sha256 !== sha256 || metadata?.releaseVersion !== EXPECTED_RELEASE
+      || !Number.isFinite(Date.parse(metadata?.generatedAt))) return null;
+  // A retry acknowledges the original publication; it never refreshes its age.
+  return { status: "ok", sha256, generatedAt: metadata.generatedAt };
+}
+
 async function publishSnapshotBytes(bytes, env, now, expectedSha256) {
+  let snapshot;
+  try {
     if (!(bytes instanceof Uint8Array) || bytes.byteLength === 0 || bytes.byteLength > MAX_SNAPSHOT_BYTES) {
       throw new Error("snapshot size is outside the upload limit");
     }
-    const snapshot = validateSnapshot(JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)));
+    snapshot = validateSnapshot(JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)));
     if (snapshot.source.releaseVersion !== EXPECTED_RELEASE) {
       throw new Error("snapshot release does not match the deployed site");
     }
-    const generatedAtMs = Date.parse(snapshot.generatedAt);
-    const ageMs = now() - generatedAtMs;
+    const ageMs = now() - Date.parse(snapshot.generatedAt);
     if (!Number.isFinite(ageMs) || ageMs < -5 * 60 * 1000 || ageMs > MAX_UPLOAD_AGE_MS) {
       throw new Error("snapshot is not fresh enough to publish");
     }
-    const sha256 = await sha256Hex(bytes);
-    if (expectedSha256 && sha256 !== expectedSha256) throw new Error("snapshot SHA-256 does not match");
-    await env.SNAPSHOTS.put(SNAPSHOT_KEY, bytes, {
+  } catch (error) {
+    throw new SnapshotRequestError(error instanceof Error ? error.message : "snapshot validation failed");
+  }
+  const sha256 = await sha256Hex(bytes);
+  if (expectedSha256 && sha256 !== expectedSha256) {
+    throw new SnapshotRequestError("snapshot SHA-256 does not match");
+  }
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const current = await env.SNAPSHOTS.head(SNAPSHOT_KEY);
+    const receipt = publishedReceipt(current, sha256);
+    if (receipt) return receipt;
+    if (Date.parse(current?.customMetadata?.generatedAt) >= Date.parse(snapshot.generatedAt)) {
+      throw new SnapshotRequestError("snapshot was superseded by an equally recent or newer publication", 409);
+    }
+    if (current && !current.etag) throw new Error("snapshot ETag is unavailable");
+    // R2 evaluates this condition atomically: a late retry cannot replace a
+    // snapshot that another request published after our metadata read.
+    const stored = await env.SNAPSHOTS.put(SNAPSHOT_KEY, bytes, {
+      onlyIf: current ? { etagMatches: current.etag } : new Headers({ "If-None-Match": "*" }),
       httpMetadata: {
         contentType: "application/json; charset=utf-8",
         cacheControl: "no-store, max-age=0, must-revalidate",
@@ -195,7 +237,9 @@ async function publishSnapshotBytes(bytes, env, now, expectedSha256) {
         releaseVersion: snapshot.source.releaseVersion,
       },
     });
-    return { status: "ok", sha256, generatedAt: snapshot.generatedAt };
+    if (stored) return { status: "ok", sha256, generatedAt: snapshot.generatedAt };
+  }
+  throw new Error("snapshot changed during publication; retry required");
 }
 
 export async function uploadSnapshot(request, env, { now = Date.now } = {}) {
@@ -203,34 +247,35 @@ export async function uploadSnapshot(request, env, { now = Date.now } = {}) {
     return jsonResponse({ status: "error", reason: "unauthorized" }, 401);
   }
   try {
-    return jsonResponse(await publishSnapshotBytes(await readBoundedSnapshot(request), env, now));
+    let bytes;
+    try { bytes = await readBoundedSnapshot(request); } catch (error) {
+      throw new SnapshotRequestError(error instanceof Error ? error.message : "snapshot validation failed");
+    }
+    return jsonResponse(await publishSnapshotBytes(bytes, env, now));
   } catch (error) {
-    return jsonResponse({
-      status: "error",
-      reason: error instanceof Error ? error.message : "snapshot validation failed",
-    }, 400);
+    return snapshotErrorResponse(error);
   }
 }
 
 function integerHeader(request, name, { minimum, maximum }) {
   const raw = request.headers.get(name) ?? "";
-  if (!/^(0|[1-9][0-9]*)$/u.test(raw)) throw new Error(`${name} must be an integer`);
+  if (!/^(0|[1-9][0-9]*)$/u.test(raw)) throw new SnapshotRequestError(`${name} must be an integer`);
   const value = Number(raw);
   if (!Number.isSafeInteger(value) || value < minimum || value > maximum) {
-    throw new Error(`${name} is outside the allowed range`);
+    throw new SnapshotRequestError(`${name} is outside the allowed range`);
   }
   return value;
 }
 
 function uploadIdHeader(request) {
   const uploadId = request.headers.get("X-Snapshot-Upload") ?? "";
-  if (!/^[a-f0-9]{64}$/u.test(uploadId)) throw new Error("snapshot upload id is invalid");
+  if (!/^[a-f0-9]{64}$/u.test(uploadId)) throw new SnapshotRequestError("snapshot upload id is invalid");
   return uploadId;
 }
 
 function encodingHeader(request) {
   const encoding = request.headers.get("X-Snapshot-Encoding") ?? "";
-  if (encoding !== "gzip") throw new Error("snapshot encoding must be gzip");
+  if (encoding !== "gzip") throw new SnapshotRequestError("snapshot encoding must be gzip");
   return encoding;
 }
 
@@ -240,13 +285,16 @@ function chunkKey(uploadId, index) {
 
 function decodeChunk(value) {
   if (!/^[A-Za-z0-9_-]+$/u.test(value) || value.length > Math.ceil(MAX_CHUNK_BYTES * 4 / 3) + 2) {
-    throw new Error("snapshot chunk encoding is invalid");
+    throw new SnapshotRequestError("snapshot chunk encoding is invalid");
   }
   const padded = value.replaceAll("-", "+").replaceAll("_", "/").padEnd(Math.ceil(value.length / 4) * 4, "=");
-  const binary = atob(padded);
+  let binary;
+  try { binary = atob(padded); } catch {
+    throw new SnapshotRequestError("snapshot chunk encoding is invalid");
+  }
   const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
   if (bytes.byteLength === 0 || bytes.byteLength > MAX_CHUNK_BYTES) {
-    throw new Error("snapshot chunk size is outside the allowed range");
+    throw new SnapshotRequestError("snapshot chunk size is outside the allowed range");
   }
   return bytes;
 }
@@ -259,10 +307,61 @@ async function storedObjectBytes(stored) {
 }
 
 async function cleanupChunks(env, uploadId, total) {
-  if (typeof env.SNAPSHOTS.delete !== "function") return;
-  await Promise.allSettled(Array.from({ length: total }, (_, index) => (
-    env.SNAPSHOTS.delete(chunkKey(uploadId, index))
-  )));
+  // R2 supports up to 1,000 keys per delete; our protocol caps this at 256.
+  await env.SNAPSHOTS.delete(Array.from({ length: total }, (_, index) => chunkKey(uploadId, index)));
+}
+
+async function committedResponse(receipt, env, uploadId, total, waitUntil) {
+  const cleanup = cleanupChunks(env, uploadId, total).catch(() => {
+    // Do not report a completed publication as failed because cleanup failed.
+    console.warn("snapshot chunk cleanup deferred", { uploadId, total });
+  });
+  if (waitUntil) waitUntil(cleanup);
+  else await cleanup;
+  return jsonResponse(receipt);
+}
+
+async function readSnapshotChunks(env, uploadId, total, encoding) {
+  const chunks = new Array(total);
+  let next = 0;
+  let byteLength = 0;
+  let failure;
+  async function readNext() {
+    while (!failure && next < total) {
+      const index = next++;
+      try {
+        const stored = await env.SNAPSHOTS.get(chunkKey(uploadId, index));
+        if (!stored
+            || stored.customMetadata?.uploadId !== uploadId
+            || stored.customMetadata?.index !== String(index)
+            || stored.customMetadata?.total !== String(total)
+            || stored.customMetadata?.encoding !== encoding) {
+          throw new SnapshotRequestError(`snapshot chunk ${index} is missing or mismatched`);
+        }
+        const bytes = await storedObjectBytes(stored);
+        if (bytes.byteLength === 0 || bytes.byteLength > MAX_CHUNK_BYTES) {
+          throw new SnapshotRequestError("stored snapshot chunk exceeds the upload limit");
+        }
+        byteLength += bytes.byteLength;
+        if (byteLength > MAX_ENCODED_BYTES) {
+          throw new SnapshotRequestError("encoded snapshot exceeds the upload limit");
+        }
+        chunks[index] = bytes;
+      } catch (error) {
+        failure ??= error;
+      }
+    }
+  }
+  // Drain all active reads on failure; no unobserved work survives this stage.
+  await Promise.all(Array.from({ length: Math.min(CHUNK_READ_CONCURRENCY, total) }, readNext));
+  if (failure) throw failure;
+  const result = new Uint8Array(byteLength);
+  let offset = 0;
+  for (const chunk of chunks) {
+    result.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return result;
 }
 
 async function decompressGzipBounded(bytes) {
@@ -279,7 +378,7 @@ async function decompressGzipBounded(bytes) {
     }
   } catch (error) {
     await reader.cancel().catch(() => {});
-    throw error;
+    throw new SnapshotRequestError(error instanceof Error ? error.message : "snapshot gzip is invalid");
   }
   const result = new Uint8Array(byteLength);
   let offset = 0;
@@ -305,58 +404,40 @@ export async function uploadSnapshotChunk(request, env) {
     });
     return jsonResponse({ status: "ok", uploadId, index, total });
   } catch (error) {
-    return jsonResponse({
-      status: "error",
-      reason: error instanceof Error ? error.message : "snapshot chunk validation failed",
-    }, 400);
+    return snapshotErrorResponse(error);
   }
 }
 
-export async function commitSnapshotChunks(request, env, { now = Date.now } = {}) {
+/** @param {{ now?: () => number, waitUntil?: (promise: Promise<unknown>) => void }} [options] */
+export async function commitSnapshotChunks(request, env, options = {}) {
+  const { now = Date.now, waitUntil } = options;
   if (!(await tokenMatches(request, env.SNAPSHOT_PUSH_TOKEN))) {
     return jsonResponse({ status: "error", reason: "unauthorized" }, 401);
   }
-  let uploadId;
-  let total;
   try {
-    uploadId = uploadIdHeader(request);
-    total = integerHeader(request, "X-Snapshot-Total", { minimum: 1, maximum: MAX_SNAPSHOT_CHUNKS });
+    const uploadId = uploadIdHeader(request);
+    const total = integerHeader(request, "X-Snapshot-Total", { minimum: 1, maximum: MAX_SNAPSHOT_CHUNKS });
     const expectedSha256 = request.headers.get("X-Snapshot-SHA256") ?? "";
     const encoding = encodingHeader(request);
-    if (expectedSha256 !== uploadId) throw new Error("snapshot commit SHA-256 is invalid");
-    const chunks = [];
-    let byteLength = 0;
-    for (let index = 0; index < total; index += 1) {
-      const stored = await env.SNAPSHOTS.get(chunkKey(uploadId, index));
-      if (!stored
-          || stored.customMetadata?.uploadId !== uploadId
-          || stored.customMetadata?.index !== String(index)
-          || stored.customMetadata?.total !== String(total)
-          || stored.customMetadata?.encoding !== encoding) {
-        throw new Error(`snapshot chunk ${index} is missing or mismatched`);
-      }
-      const bytes = await storedObjectBytes(stored);
-      byteLength += bytes.byteLength;
-      if (byteLength > MAX_ENCODED_BYTES) throw new Error("encoded snapshot exceeds the upload limit");
-      chunks.push(bytes);
+    if (expectedSha256 !== uploadId) throw new SnapshotRequestError("snapshot commit SHA-256 is invalid");
+    let receipt = publishedReceipt(await env.SNAPSHOTS.head(SNAPSHOT_KEY), uploadId);
+    if (receipt) return committedResponse(receipt, env, uploadId, total, waitUntil);
+    let encoded;
+    try {
+      encoded = await readSnapshotChunks(env, uploadId, total, encoding);
+    } catch (error) {
+      // Another attempt may have published and removed the chunks while we
+      // were reading them. Its matching receipt is still authoritative.
+      receipt = publishedReceipt(await env.SNAPSHOTS.head(SNAPSHOT_KEY), uploadId);
+      if (receipt) return committedResponse(receipt, env, uploadId, total, waitUntil);
+      throw error;
     }
-    const snapshotBytes = new Uint8Array(byteLength);
-    let offset = 0;
-    for (const chunk of chunks) {
-      snapshotBytes.set(chunk, offset);
-      offset += chunk.byteLength;
-    }
-    const receipt = await publishSnapshotBytes(
-      await decompressGzipBounded(snapshotBytes), env, now, expectedSha256,
-    );
-    await cleanupChunks(env, uploadId, total);
-    return jsonResponse(receipt);
+    receipt = await publishSnapshotBytes(await decompressGzipBounded(encoded), env, now, expectedSha256);
+    return committedResponse(receipt, env, uploadId, total, waitUntil);
   } catch (error) {
-    if (uploadId && total) await cleanupChunks(env, uploadId, total);
-    return jsonResponse({
-      status: "error",
-      reason: error instanceof Error ? error.message : "snapshot commit validation failed",
-    }, 400);
+    // Leave staged chunks intact for retries after transient storage failures.
+    // A client that abandons an upload explicitly calls the abort endpoint.
+    return snapshotErrorResponse(error);
   }
 }
 
@@ -370,10 +451,7 @@ export async function abortSnapshotChunks(request, env) {
     await cleanupChunks(env, uploadId, total);
     return jsonResponse({ status: "ok", uploadId, removed: total });
   } catch (error) {
-    return jsonResponse({
-      status: "error",
-      reason: error instanceof Error ? error.message : "snapshot abort validation failed",
-    }, 400);
+    return snapshotErrorResponse(error);
   }
 }
 
@@ -404,7 +482,7 @@ export async function serveSnapshot(request, env) {
 }
 
 export async function healthResponse(env, { now = Date.now } = {}) {
-  const stored = await env.SNAPSHOTS.get(SNAPSHOT_KEY);
+  const stored = await env.SNAPSHOTS.head(SNAPSHOT_KEY);
   if (!stored) return jsonResponse({ status: "starting", service: "ojeommwo-observatory" }, 503);
   const generatedAt = stored.customMetadata?.generatedAt ?? "";
   const signedAgeSeconds = Math.floor((now() - Date.parse(generatedAt)) / 1000);

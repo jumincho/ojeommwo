@@ -143,7 +143,7 @@ validate_local_snapshot
 # The public Sites dispatch layer permits GET/HEAD from the pororo egress ASN.
 # Stream bounded authenticated chunks through GET headers; the Worker assembles,
 # validates, and atomically commits only the exact SHA-256 snapshot.
-docker exec "$DATA_CONTAINER" node "$CONTAINER_ROOT/scripts/push-snapshot-sites.mjs" >/dev/null
+docker exec "$DATA_CONTAINER" node "$CONTAINER_ROOT/scripts/push-snapshot-sites.mjs"
 verify_remote_snapshot
 
 if [ "${OBSERVATORY_VERBOSE:-0}" = 1 ]; then
