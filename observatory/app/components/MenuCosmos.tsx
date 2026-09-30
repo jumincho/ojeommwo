@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ForceGraph3DInstance, LinkObject, NodeObject } from "3d-force-graph";
-import type { DepthTexture, Object3D } from "three";
+import type { DepthTexture, Object3D, Vector3 } from "three";
+import { nearestTasteTarget } from "../lib/taste-beeswarm.mjs";
 import type { CategoryRecord, MenuRecord, TasteGravityEasterEgg } from "../types";
 
 type MenuCosmosProps = {
@@ -72,6 +73,27 @@ type LensingPassLike = {
 const GARGANTUA_INCLINATION = 0.16;
 const GARGANTUA_ROLL = -0.1;
 const FOG_DENSITY = 0.00072;
+
+// Sides a category label may take around its hub, in the order tried, as
+// [toward screen right, toward screen up]. Diagonals keep one end by the hub.
+const LABEL_PLACEMENTS = {
+  above: [0, 1],
+  below: [0, -1],
+  right: [1, 0],
+  left: [-1, 0],
+  "above-right": [0.6, 1],
+  "above-left": [-0.6, 1],
+  "below-right": [0.6, -1],
+  "below-left": [-0.6, -1],
+} as const;
+type LabelPlacement = keyof typeof LABEL_PLACEMENTS;
+const LABEL_PLACEMENT_ORDER = Object.keys(LABEL_PLACEMENTS) as LabelPlacement[];
+// World-space radius of a hub's outer orbit; labels keep clear of it.
+const HUB_LABEL_CLEARANCE = 14.5;
+// Menu stars are only 4-7 px wide on screen, so a click that misses every star
+// still reaches the nearest one within these radii: a 24 px target for a mouse
+// or pen (WCAG 2.5.8) and a 44 px one for a finger.
+const STAR_PICK_REACH = { pointer: 12, touch: 22 } as const;
 
 function seededValue(value: string, salt: number) {
   let hash = 2166136261 ^ salt;
@@ -386,6 +408,7 @@ export function MenuCosmos({
     let canvas: HTMLCanvasElement | null = null;
     let contextLost = false;
     let handleVisibilityChange: (() => void) | null = null;
+    let handlePointerMove: ((event: PointerEvent) => void) | null = null;
     let appliedCameraDistance = 0;
     const objectById = new Map<string, Object3D>();
     objectByIdRef.current = objectById;
@@ -442,6 +465,51 @@ export function MenuCosmos({
         // Drawn only if the lensing shader cannot compile on this GPU.
         const blackHoleFallback: Object3D[] = [];
         let lensingFailed = false;
+
+        const selectNode = (node: GraphNode) => {
+          if (node.kind === "category") return;
+          if (node.kind === "menu" && node.menu) onSelectRef.current(node.menu);
+          if (node.kind === "anomaly" && node.easterEgg) onSelectEasterEggRef.current(node.easterEgg);
+          const distance = focusDistanceForViewport(node.kind, container.clientWidth);
+          focusGraphNode(graph, node, distance, motionReduced ? 0 : 900);
+        };
+        // A click that hits a star is picked as before. One that misses goes to
+        // the nearest star (or the black hole) on screen, the taste map's
+        // nearest-target rule. Hubs and labels are not targets and, like every
+        // other ornament, never stand in the way of one.
+        const pickableNodes = graphData.nodes.filter((node) => node.kind !== "category");
+        const pickTargets: Array<{ id: string; x: number; y: number }> = [];
+        const pickPosition = new three.Vector3();
+        let hoveringTarget = false;
+        const nearestNodeAt = (x: number, y: number, reach: number) => {
+          const camera = graph.camera();
+          camera.updateMatrixWorld();
+          const width = Math.max(1, container.clientWidth);
+          const height = Math.max(1, container.clientHeight);
+          pickTargets.length = 0;
+          for (const node of pickableNodes) {
+            const object = objectById.get(node.id);
+            if (!object) continue;
+            object.getWorldPosition(pickPosition).project(camera);
+            if (pickPosition.z < -1 || pickPosition.z > 1) continue;
+            pickTargets.push({ id: node.id, x: (pickPosition.x * 0.5 + 0.5) * width, y: (-pickPosition.y * 0.5 + 0.5) * height });
+          }
+          const id = nearestTasteTarget(pickTargets, x, y, reach);
+          return pickableNodes.find((node) => node.id === id) ?? null;
+        };
+        let lastPointer: { x: number; y: number } | null = null;
+        const updatePointerCursor = () => {
+          const nearTarget = hoveringTarget || (lastPointer !== null
+            && nearestNodeAt(lastPointer.x, lastPointer.y, STAR_PICK_REACH.pointer) !== null);
+          container.style.cursor = nearTarget ? "pointer" : "grab";
+        };
+        handlePointerMove = (event) => {
+          if (event.pointerType === "touch" || event.buttons !== 0) return;
+          const bounds = container.getBoundingClientRect();
+          lastPointer = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+          if (!hoveringTarget) updatePointerCursor();
+        };
+        container.addEventListener("pointermove", handlePointerMove, { passive: true });
 
         graph
           .width(Math.max(1, container.clientWidth))
@@ -521,6 +589,11 @@ export function MenuCosmos({
               sprite.borderRadius = 4;
               sprite.position.set(0, 24, 0);
               sprite.userData.labelAspect = sprite.scale.x / sprite.scale.y;
+              // Labels are read, not hit: draw them after every glow and over
+              // the scene so neither the galactic core nor a nearer star can
+              // wash out or cover the name. Clicks still reach the stars.
+              sprite.renderOrder = 1;
+              sprite.material.depthTest = false;
               sprite.raycast = () => {};
               // Category ornaments must never cover a nearby selectable menu.
               for (const ornament of [corona, halo, core, orbitA, orbitB]) ornament.raycast = () => {};
@@ -624,15 +697,18 @@ export function MenuCosmos({
           .linkWidth(0)
           .linkDirectionalParticles(0)
           .onNodeHover((node) => {
-            container.style.cursor = node?.kind === "menu" || node?.kind === "anomaly" ? "pointer" : "grab";
+            hoveringTarget = node?.kind === "menu" || node?.kind === "anomaly";
+            updatePointerCursor();
           })
-          .onNodeClick((node) => {
-            if (node.kind === "category") return;
-            if (node.kind === "menu" && node.menu) onSelectRef.current(node.menu);
-            if (node.kind === "anomaly" && node.easterEgg) onSelectEasterEggRef.current(node.easterEgg);
-            const distance = focusDistanceForViewport(node.kind, container.clientWidth);
-            focusGraphNode(graph, node, distance, motionReduced ? 0 : 900);
+          .onNodeClick(selectNode)
+          .onBackgroundClick((event) => {
+            const bounds = container.getBoundingClientRect();
+            const reach = (event as PointerEvent).pointerType === "touch" ? STAR_PICK_REACH.touch : STAR_PICK_REACH.pointer;
+            const node = nearestNodeAt(event.clientX - bounds.left, event.clientY - bounds.top, reach);
+            if (node) selectNode(node);
           })
+          // Only a star or the black hole shows the pointer, never the background.
+          .showPointerCursor((object) => Boolean(object))
           .warmupTicks(72)
           .cooldownTicks(motionReduced ? 60 : 180)
           .d3AlphaDecay(0.029)
@@ -1317,8 +1393,11 @@ export function MenuCosmos({
         const anomalyNode = graphData.nodes.find((node) => node.kind === "anomaly");
         const worldPosition = new three.Vector3();
         const projectedPosition = new three.Vector3();
-        const categoryWorldPosition = new three.Vector3();
         const categoryProjectedPosition = new three.Vector3();
+        const labelAnchors = new Map<string, Vector3>();
+        const labelOffset = new three.Vector3();
+        const cameraRight = new three.Vector3();
+        const cameraUp = new three.Vector3();
         const glowPosition = new three.Vector3();
         const cameraForward = new three.Vector3();
         const holeOffset = new three.Vector3();
@@ -1363,6 +1442,12 @@ export function MenuCosmos({
           const selectedCategory = graphData.nodes.find((node) => (
             node.id === selectedIdRef.current || node.easterEgg?.id === selectedIdRef.current
           ))?.category;
+          const fov = "fov" in camera && typeof camera.fov === "number" ? camera.fov : 50;
+          const halfFovTangent = Math.tan(three.MathUtils.degToRad(fov) / 2);
+          const labelHeight = width < 480 ? 24 : 25;
+          // Screen axes in world space, so a label can sit beside its hub.
+          cameraRight.setFromMatrixColumn(camera.matrixWorld, 0).normalize();
+          cameraUp.setFromMatrixColumn(camera.matrixWorld, 1).normalize();
           const projectedLabels = graphData.nodes
             .filter((node) => node.kind === "category")
             .map((node) => {
@@ -1370,23 +1455,24 @@ export function MenuCosmos({
               const label = hub?.getObjectByName("category-label");
               if (!hub || !label) return null;
               hub.updateWorldMatrix(true, false);
-              label.getWorldPosition(categoryWorldPosition);
-              const distance = Math.max(1, camera.position.distanceTo(categoryWorldPosition));
-              const fov = "fov" in camera && typeof camera.fov === "number" ? camera.fov : 50;
-              const labelHeight = width < 480 ? 24 : 25;
-              const worldHeight = labelHeight * 2 * distance * Math.tan(three.MathUtils.degToRad(fov) / 2) / height;
+              let anchor = labelAnchors.get(node.id);
+              if (!anchor) {
+                anchor = new three.Vector3();
+                labelAnchors.set(node.id, anchor);
+              }
+              hub.getWorldPosition(anchor);
+              const distance = Math.max(1, camera.position.distanceTo(anchor));
+              const worldPerPixel = (2 * distance * halfFovTangent) / height;
               const labelAspect = Number(label.userData.labelAspect) || 3;
-              label.scale.set(worldHeight * labelAspect, worldHeight, 1);
-              categoryProjectedPosition.copy(categoryWorldPosition).project(camera);
+              label.scale.set(labelHeight * worldPerPixel * labelAspect, labelHeight * worldPerPixel, 1);
               return {
                 id: node.id,
                 category: node.category,
+                anchor,
                 label,
                 halfWidth: (labelHeight / 2) * labelAspect,
                 distance,
-                x: (categoryProjectedPosition.x * 0.5 + 0.5) * width,
-                y: (-categoryProjectedPosition.y * 0.5 + 0.5) * height,
-                visible: categoryProjectedPosition.z >= -1 && categoryProjectedPosition.z <= 1,
+                worldPerPixel,
               };
             })
             .filter((item): item is NonNullable<typeof item> => item !== null)
@@ -1398,13 +1484,38 @@ export function MenuCosmos({
           const visibleLabelPositions: Array<{ x: number; y: number; halfWidth: number }> = [];
           const verticalGap = width <= 480 ? 38 : 31;
           for (const item of projectedLabels) {
-            const overlaps = visibleLabelPositions.some((position) => (
-              Math.abs(position.x - item.x) < position.halfWidth + item.halfWidth + 8
-              && Math.abs(position.y - item.y) < verticalGap
-            ));
-            item.label.visible = item.visible && item.x > item.halfWidth && item.x < width - item.halfWidth
-              && item.y > 66 && item.y < height - 36 && !overlaps;
-            if (item.label.visible) visibleLabelPositions.push({ x: item.x, y: item.y, halfWidth: item.halfWidth });
+            // A crowded label tries the other sides of its hub before it is
+            // hidden. The side it used last frame goes first, so labels do not
+            // hop from side to side while the orbit turns.
+            const previous = item.label.userData.placement as LabelPlacement | undefined;
+            const sides = previous
+              ? [previous, ...LABEL_PLACEMENT_ORDER.filter((side) => side !== previous)]
+              : LABEL_PLACEMENT_ORDER;
+            const clearance = Math.max(6, HUB_LABEL_CLEARANCE / item.worldPerPixel);
+            let placed = false;
+            for (const side of sides) {
+              const [towardRight, towardUp] = LABEL_PLACEMENTS[side];
+              const sideways = towardUp === 0 ? clearance + item.halfWidth + 4 : item.halfWidth;
+              labelOffset.copy(cameraRight).multiplyScalar(towardRight * sideways * item.worldPerPixel)
+                .addScaledVector(cameraUp, towardUp * (clearance + labelHeight / 2) * item.worldPerPixel);
+              categoryProjectedPosition.copy(item.anchor).add(labelOffset).project(camera);
+              const x = (categoryProjectedPosition.x * 0.5 + 0.5) * width;
+              const y = (-categoryProjectedPosition.y * 0.5 + 0.5) * height;
+              const fits = categoryProjectedPosition.z >= -1 && categoryProjectedPosition.z <= 1
+                && x > item.halfWidth && x < width - item.halfWidth && y > 66 && y < height - 36;
+              const overlaps = fits && visibleLabelPositions.some((position) => (
+                Math.abs(position.x - x) < position.halfWidth + item.halfWidth + 8
+                && Math.abs(position.y - y) < verticalGap
+              ));
+              if (!fits || overlaps) continue;
+              // Hubs are never rotated or scaled, so a world offset is a local one.
+              item.label.position.copy(labelOffset);
+              item.label.userData.placement = side;
+              visibleLabelPositions.push({ x, y, halfWidth: item.halfWidth });
+              placed = true;
+              break;
+            }
+            item.label.visible = placed;
           }
 
           if (!anomalyNode || !lensingPass) return;
@@ -1509,6 +1620,7 @@ export function MenuCosmos({
       if (lensingAnimationFrame !== null) window.cancelAnimationFrame(lensingAnimationFrame);
       resizeObserver?.disconnect();
       if (handleVisibilityChange) document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (handlePointerMove) container.removeEventListener("pointermove", handlePointerMove);
       canvas?.removeEventListener("webglcontextlost", handleContextLost, false);
       if (starField) {
         graphRef.current?.scene().remove(starField);

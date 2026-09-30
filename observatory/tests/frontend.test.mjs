@@ -98,6 +98,23 @@ test("cosmos is layered, motion-aware, lightweight, and disposes every custom GP
   assert.doesNotMatch(cosmos, /menus\.filter\(\(item\) => item\.category === menu\.category\)/u);
 });
 
+test("cosmos labels find room around their hub and a missed click still reaches the nearest star", () => {
+  const cosmos = read("app/components/MenuCosmos.tsx");
+  // A crowded label tries the other sides of its hub, keeping last frame's side first.
+  assert.match(cosmos, /const LABEL_PLACEMENTS = \{/u);
+  assert.match(cosmos, /userData\.placement as LabelPlacement/u);
+  assert.match(cosmos, /visibleLabelPositions\.push/u);
+  // Labels draw over glows and nearer stars, but clicks pass through them.
+  assert.match(cosmos, /sprite\.renderOrder = 1;\s*sprite\.material\.depthTest = false;\s*sprite\.raycast = \(\) => \{\};/u);
+  // A miss uses the taste map's nearest-target rule; the background never shows a pointer.
+  assert.match(cosmos, /import \{ nearestTasteTarget \} from "\.\.\/lib\/taste-beeswarm\.mjs"/u);
+  assert.match(cosmos, /STAR_PICK_REACH = \{ pointer: 12, touch: 22 \}/u);
+  assert.match(cosmos, /\.onBackgroundClick\(/u);
+  assert.match(cosmos, /nearestTasteTarget\(pickTargets, x, y, reach\)/u);
+  assert.match(cosmos, /\.showPointerCursor\(\(object\) => Boolean\(object\)\)/u);
+  assert.match(cosmos, /removeEventListener\("pointermove", handlePointerMove\)/u);
+});
+
 test("responsive UI keeps labels legible and reroll cards concise on narrow screens", () => {
   const reroll = read("app/components/RerollShop.tsx");
   const observatory = read("app/components/Observatory.tsx");
