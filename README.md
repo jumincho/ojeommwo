@@ -25,20 +25,20 @@ On weekdays at 11:25 and 17:25 KST, skipping public holidays, the bot posts thre
 
 - **Three distinct picks per meal.** Category, restaurant, dish and main protein all differ. Cooldowns keep a restaurant away for 14 days and a dish for 7.
 - **Only verified candidates.** Each pick is checked for meal suitability, the actual branch, a price seen within 7 days and delivery evidence within 3 days, within 6 km of the lab's building. Closures and paused delivery remove a candidate. Delivery evidence means the branch delivers; whether it reaches your address at checkout is for the ordering app to confirm.
-- **19 meal categories.** 한식, 치킨, 분식, 돈까스, 족발/보쌈, 찜/탕, 구이, 피자, 중식, 일식, 회/해물, 양식, 아시안, 샌드위치, 샐러드, 버거, 멕시칸, 도시락 and 죽. Standalone drinks, desserts and snacks are excluded.
+- **19 meal categories.** 한식, 치킨, 분식, 돈까스, 족발/보쌈, 찜/탕, 구이, 피자, 중식, 일식, 회/해물, 양식, 아시안, 샌드위치, 샐러드, 버거, 멕시칸, 도시락 and 죽. Standalone drinks, desserts and snacks are excluded, and a clear dish form wins over an ingredient: a bulgogi pizza is still 피자.
 - **Feedback in Slack.** Rate recommended menus from 1 to 5 with up to three tags, log meals (including ones that were not recommended), and answer the "coffee later?" poll.
-- **Official weather.** Current, feels-like, high and low temperature, humidity, precipitation, weather warnings, UV and fine dust from the Korea Meteorological Administration and AirKorea.
-- **An LLM where judgement helps, code everywhere else.** GPT-6 Luna (xhigh reasoning, through the Codex CLI) looks for new restaurants on the web, maps loosely typed meal logs to real branches and menus, and re-adjudicates ambiguous categories against the branch's own menu. It runs in a read-only sandbox and returns schema-validated JSON. Ranking, preference math, cooldowns, expiry, deduplication and storage are deterministic, tested code.
+- **Official weather.** Current, feels-like, high and low temperature, humidity, precipitation, weather warnings, UV and fine dust for the lab's building, from five Korea Meteorological Administration and AirKorea services.
+- **An LLM where judgement helps, code everywhere else.** GPT-6 Luna (xhigh reasoning, through the Codex CLI) looks for new restaurants on the web, maps loosely typed meal logs to real branches and menus, and re-adjudicates ambiguous categories against the branch's own menu. It runs in a read-only sandbox, returns schema-validated JSON and never writes the database. Ranking, preference math, cooldowns, expiry, deduplication and storage are deterministic, tested code.
 
 ### Menu Observatory
 
-- **3D Menu Cosmos** (3D 코스모스): categories are glowing hubs and menus orbit them as stars, each with a soft glow of its category colour. Drag to rotate, scroll to zoom, click a star for details.
+- **3D Menu Cosmos** (3D 코스모스): categories are glowing hubs and menus orbit them as stars, each with a soft glow of its category colour. Drag to rotate, scroll to zoom, click a star for details. When names crowd, a category label moves to a free side of its hub instead of disappearing, and a click or tap that just misses a star still selects the nearest one.
 - **A black hole at the edge of the galaxy.** The lab's officially banned menu sits at taste −∞, inside a black hole that is ray-traced live on the GPU. Light is bent through the Schwarzschild metric: the accretion disk burns brighter on the side turning toward you, its far half is lensed over and under the shadow, a thin photon ring traces the edge, and the stars behind are bent around it. Click it like any other star.
 - **Taste Map** (취향 지도): every menu sits on a *dislike 0% · neutral 50% · like 100%* axis, one lane per category. Direction is shown with text, colour, symbol and pattern together, and a ranked list view is one click away.
 - **Filters and search.** Select several categories at once, or search by menu, restaurant or main ingredient (try `pork`).
 - **Menu details.** Preference, times recommended, times eaten, rating count and average, price and delivery freshness.
 - **Menu browsing** (메뉴 둘러보기): five random menus along the bottom; press 다시 뽑기 to draw again.
-- **Accessible by default.** Keyboard navigation with a ranked list, a reduced-motion mode that stills the rotation, the twinkling and the disk, and a fallback when WebGL is unavailable. The page loads once and never refreshes itself.
+- **Accessible by default.** Keyboard navigation with a ranked list, a reduced-motion mode that stills the rotation, the twinkling and the disk, and a fallback when WebGL is unavailable. The animation stops if the GPU context is lost, and the page loads once and never refreshes itself.
 
 The observatory interface is in Korean.
 
@@ -72,17 +72,19 @@ flowchart TB
 ```
 
 - **Candidates are prepared before posts.** Research and posting are separate jobs. Before each meal the bot re-verifies prices, delivery evidence, distance, cooldowns and diversity, and keeps enough for two meals: whichever three valid picks go out first, three more remain. It searches the web only when that pool runs short, plus an optional look for new restaurants at 11:35 (at most six searches for two restaurants, within 420 seconds). A failed optional search leaves the prepared pool intact.
-- **Evidence stays honest.** A clear new price on the branch's current menu replaces the old one, while prices that disagree between sources are held back. Distances use coordinates read from the exact branch page, never the model's guess, and pages that were not actually visited are never stored as evidence.
-- **Taste model.** Each menu has a Beta posterior that starts from a Beta(3, 3) prior. Meal logs weigh 1.0 and survey ratings 0.9, evidence decays with a 180-day half-life, and an 18% exploration rate keeps new options in rotation. Repeat votes by one person are damped: only the latest vote counts within a day, and the latest three days count at 1, 0.5 and 0.25. A meal log overrides surveys from the same day or earlier; later surveys still count and gradually retire the older meal signal. The result is a ranking signal, not a promise of satisfaction.
+- **Nothing verified is thrown away.** The active shortlist holds up to twelve candidates. Verified finds that do not fit it stay in a larger catalog and are re-verified in rotation, so a good new restaurant is not lost just because the shortlist was full.
+- **Evidence stays honest.** A clear new price on the branch's current menu replaces the old one, while prices that disagree between sources are held back. Distances use coordinates read from the exact branch page, never the model's guess, and pages that were not actually visited are never stored as evidence. Closures and branch mismatches are removed for good, even from backups, while a temporary network error keeps evidence that is still valid.
+- **Taste model.** Each menu has a Beta posterior that starts from a Beta(3, 3) prior. Meal logs weigh 1.0 and survey ratings 0.9, and evidence decays with a 180-day half-life. Repeat votes by one person are damped: only the latest vote counts within a day, and the latest three days count at 1, 0.5 and 0.25. A meal log overrides surveys from the same day or earlier; later surveys still count and gradually retire the older meal signal. From a neutral 50%, one strong rating moves a menu to about 57%, ten from the same person on the same day still count once, and ten different people move it to 80%.
+- **Ranking.** Each score mixes 82% of the posterior mean with an 18% random Beta sample, so the favourite is not picked every time. A well-evidenced restaurant the lab has not ordered from yet gets a small 0.5-point bonus, but strong preferences, delivery-distance risk, cooldowns and diversity still come first. The result is a ranking signal, not a promise of satisfaction.
 - **Safe storage.** Seven JSON stores (recommendations, delivery receipts, meals, candidates, surveys, coffee and the Slack outbox) with locks, atomic rename, fsync and integrity checks. Slack delivery goes through the outbox, so an uncertain send is never blindly repeated.
-- **Health from real calls.** A real model call every morning at 07:40 checks that the LLM answers, and health reports the latest real call rather than only the token's expiry date.
-- **Observatory pipeline.** Every ten minutes the server validates the database, exports a sanitized snapshot and publishes it to an edge worker backed by R2 object storage; a follow-up check compares the hash the public API serves. Browsers read the latest snapshot when the page opens.
+- **Health from real calls.** A real model call every morning at 07:40 checks that the LLM answers, and health reports the latest real call rather than only the token's expiry date. Each Socket Mode connection has a deadline and a failed one is cleaned up before reconnecting, so a stalled handshake cannot leave a dead or duplicate listener.
+- **Observatory pipeline.** Every ten minutes the server validates the database, exports a sanitized snapshot and publishes it to an edge worker backed by R2 object storage. The upload is chunked and hashed with SHA-256, and R2 writes are conditional, so a late retry never overwrites a newer snapshot; a follow-up check compares the hash the public API serves. Browsers read the latest snapshot when the page opens.
 
 ## Tech stack
 
 | Part | Built with |
 | --- | --- |
-| Bot | Node.js 22+ with no npm dependencies, Slack Web API and Socket Mode, Codex CLI |
+| Bot | Node.js 22+ with one pinned dependency (Undici 7.29.1), Slack Web API and Socket Mode, Codex CLI |
 | Data | KMA and AirKorea open APIs, JSON stores |
 | Observatory | Next.js 16, React 19, vinext (Vite 8), TypeScript, three.js, 3d-force-graph, a GLSL ray-tracing pass for the black hole |
 | Hosting | Workers-style edge function with R2 storage; a static export doubles as an offline viewer |
@@ -125,7 +127,7 @@ corepack pnpm typecheck
 corepack pnpm test
 ```
 
-The tests use the sanitized sample and synthetic stores, so they run without the private operating database. The one integration check that needs the real stores is skipped here; it runs on the server.
+The tests use the sanitized sample and synthetic stores, so they run without the private operating database. They import the bot's HTTP transport, so run `npm ci --omit=dev --ignore-scripts` at the repository root first. Windows-only checks, and the one integration check that needs the real stores, are skipped elsewhere.
 
 ### Bot
 
@@ -144,19 +146,19 @@ To run the bot in your own workspace, copy `.env.example` to `.env` and fill in 
 - No tokens, API keys, OAuth state, logs or operating database are committed. Secrets live in `.env` and in protected files outside the project.
 - The public snapshot holds aggregates only: menus, restaurants, categories, preference posteriors and counts. It contains no Slack user IDs, messages or channel data, and a validator rejects forbidden fields before anything is published.
 - Publishing a snapshot requires a bearer token. For everyone else the site is read-only, served with a strict Content Security Policy, HSTS and anti-framing headers.
+- Dependencies are locked and audited without an advisory ignore list.
 
 ## Status
 
-Version **2.0**, launched on 2026-09-30. The release is labelled *GPT-6.1 Sol (max)*; the production model is GPT-6 Luna with xhigh reasoning.
+Version **2.0** (2.0.0), released on 2026-09-30. The release is labelled *GPT-6.1 Sol (max)*; the production model is GPT-6 Luna with xhigh reasoning.
 
 New in 2.0:
 
-- Surveys given after a meal log count again; an old meal log no longer masks them indefinitely.
-- Fresher prices, coordinates from the branch's own page, and a retuned search for new restaurants.
-- Main-ingredient tags corrected after Luna re-reviewed all 141 unique menus.
-- Health checks based on real model calls, not only token expiry.
-- Clearer 3D labels and more legible taste-map and card text.
-- Tests that run from the public source, and image-size 2.0.3 with no known vulnerabilities.
+- Verified finds that miss the active shortlist are kept in the catalog and can be recommended after re-verification.
+- A small 0.5-point bonus for a well-evidenced restaurant the lab has not tried yet.
+- Socket Mode connections with a deadline and clean-up after errors, so a stalled handshake cannot leave a dead or duplicate listener.
+- Undici 7.29.1 pinned for the bot instead of the older copy bundled with Node, and a clean observatory audit with Undici 7.29.1, fast-uri 3.1.8 and brace-expansion 5.0.12.
+- Larger 3D category labels (24/25 px) that move to a free side of their hub instead of disappearing, stars that are easier to click or tap, 15 px taste-map rows, and animation that stops if the GPU context is lost.
 
 Design notes (in Korean): [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
 
