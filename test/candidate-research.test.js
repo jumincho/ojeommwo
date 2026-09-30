@@ -1451,3 +1451,14 @@ test("evidence covers every send in the next 24 hours without demanding holiday 
   assert.equal(candidateEvidenceHorizonAt({now: new Date("2026-09-18T17:35:00+09:00"), holidayCheck: noHoliday}).toISOString(), "2026-09-18T11:35:00.000Z");
   assert.throws(() => candidateEvidenceHorizonAt({now: new Date("invalid")}), /valid current time/u);
 });
+
+
+test("verified discoveries survive the active-pool cap in the revalidation catalog", () => {
+  const now = new Date("2026-07-13T00:00:00.000Z");
+  const raw = Array.from({ length: CANDIDATE_ACTIVE_LIMIT + 6 }, (_, i) => freshCandidate(i, now));
+  const store = buildVerifiedCandidateStore({ candidates: raw }, { now, requiredReadySets: 1 });
+  assert.equal(store.candidates.length, CANDIDATE_ACTIVE_LIMIT);
+  assert.equal(store.catalog.length, raw.length);
+  const activeIds = new Set(store.candidates.map((item) => item.candidateId));
+  assert.equal(store.catalog.filter((item) => !activeIds.has(item.candidateId)).length, 6);
+});

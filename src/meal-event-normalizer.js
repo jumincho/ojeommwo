@@ -1,3 +1,4 @@
+import { fetchHttp } from "./http-transport.js";
 import path from "node:path";
 import {
   config,
@@ -208,7 +209,7 @@ function markDeterministicEvidence(claim, restaurantPage, restaurantSource, menu
   return verified;
 }
 
-async function verifyMealEventEvidence(claim, { fetchImpl = globalThis.fetch } = {}) {
+async function verifyMealEventEvidence(claim, { fetchImpl = fetchHttp } = {}) {
   if (typeof fetchImpl !== "function") return null;
   const restaurantSource = deterministicEvidenceSource(claim.restaurantEvidenceUrl);
   const menuSources = claim.menus.map((menu) => deterministicEvidenceSource(menu.evidenceUrl));
@@ -349,7 +350,7 @@ export function validateMealEventNormalizationResult(parsed, event) {
 }
 
 export async function normalizeMealEventFromReviewedCatalog(event, {
-  fetchImpl = globalThis.fetch
+  fetchImpl = fetchHttp
 } = {}) {
   const local = event?.normalization?.local;
   const reviewed = local?.reviewedEvidence;
@@ -398,7 +399,7 @@ export async function normalizeMealEventFromReviewedCatalog(event, {
 export async function normalizeMealEventWithCodex(event, {
   runStructured = runStructuredCodex,
   now = new Date(),
-  fetchImpl = globalThis.fetch
+  fetchImpl = fetchHttp
 } = {}) {
   if (config.codexCliModel !== REQUIRED_CODEX_MODEL
     || config.codexCliReasoningEffort !== REQUIRED_CODEX_REASONING_EFFORT

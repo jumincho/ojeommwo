@@ -1,17 +1,13 @@
-# 관측소 v3 디자인 기준
+# 현재 디자인 계약
 
-기존 우주 시각화·색조·용어·문구·정보량을 유지한다. 선호율을 숨기거나 내부 계산 메타데이터를 다시 노출하지 않는다. 코스모스/취향 지도 전환, 검색과 다중 필터, 메뉴 둘러보기가 첫 화면에서 식별되어야 한다.
+문구·정보량·기능 범위는 사용자와 정한 현재 형태를 유지한다. 내부 계산 메타데이터, 최초 추천일/현재 근거 필터, 자동 데이터 갱신을 늘리지 않는다. 선호도 %는 유지한다. 한눈에 보기/검색/카테고리/상세/둘러보기 구성과 현행 용어를 보존한다.
 
-취향 지도는 비선호·중립·선호를 텍스트·색·기호·표면 패턴으로 구별한다. 인접한 점과 이미 선택된 점은 각각 선택 가능해야 하며, 선택 확대가 옆 점을 막으면 회귀다. 실제 브라우저에서 근접한 두 점을 번갈아 눌러 확인한다.
+3D 코스모스는 어두운 공간·은하 팔·성운·성단 코로나·별의 glow·국소 렌즈 효과를 사용한다. label을 효과보다 밝게 유지하고 24/25px의 화면 크기와 충돌 제거를 적용한다. 선택 성단 label을 우선하고 offscreen/toolbar 범위에는 그리지 않는다. 장식은 raycast하지 않아 메뉴 선택을 막지 않는다. 궤도 정지와 render 정지를 구분하여 정지 중에도 메뉴를 선택할 수 있다.
 
-코스모스는 별과 성단이 주인공이다. Bloom은 글씨·선택 표식을 흐리지 않도록 제한한다. 카테고리 이름은 밝은 혼합색, 어두운 받침, 화면 공간 충돌 회피를 사용한다. 궤도를 멈춘 직후에도 별을 선택할 수 있어야 한다. WebGL 부재·reduced-motion·키보드 경로를 유지한다.
+취향 지도는 왼쪽 분홍 비선호 0%, 가운데 중립 50%, 오른쪽 초록 선호 100%다. 기호/문구/패턴을 함께 사용하여 색만으로 방향을 구분시키지 않는다. 행 label 15px, 겹침 없는 deterministic beeswarm, nearest pointer target, selected ring의 pointer 비간섭과 roving keyboard focus를 유지한다. 원의 크기는 선호/비선호 양 끝에서 같다.
 
-블랙홀(취향 −∞ 이스터에그)은 은하 가장자리의 배경 사건으로 둔다. 렌즈 패스가 슈바르츠실트 광선 추적으로 그림자·광자 고리·도플러 강착원반과 그림자 위아래로 휜 원반 뒷면을 그린다. 장면 깊이를 읽어 블랙홀 앞의 별과 라벨은 휘지 않고, 뒤편 별빛만 굴절한다. 렌즈 범위는 블랙홀 주변으로 한정해 다른 라벨을 비틀지 않는다. 보이지 않는 프록시 메시가 그려진 모양대로 클릭을 받는다. reduced-motion과 궤도 정지에서는 원반의 흐름과 별의 반짝임도 멈춘다. 셰이더를 컴파일할 수 없는 GPU에서는 검은 구와 빛무리로 대체한다.
+모바일은 filter/detail drawer, 배경 inert·focus return·Escape, 수평 카드 scroll과 말줄임을 사용한다. 검색 input 자체가 넓은 click target이어야 한다. 실제 362px 및 desktop 화면에서 글씨·button·overflow·인접 선택을 확인한다. reduced-motion과 hidden tab에서는 불필요한 회전/장식을 줄이고 WebGL context loss 때 animation을 멈춘다.
 
-기본 조작 글꼴은 가능한 한 14px 이상, 보조 정보는 최소 12px, 주요 카드 카테고리는 13px 이상으로 한다. 모바일 하단의 제목과 다시 뽑기는 같은 행에 놓고 카드가 문구를 가리지 않아야 한다. 데스크톱/좁은 화면과 실제 캔버스를 확인한다.
+참고 자료는 [WCAG 비텍스트 대비](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html), [Material motion](https://m3.material.io/styles/motion/overview/how-it-works), [Vercel design system 사례](https://vercel.com/blog/how-our-agents-build-on-brand-pages-with-design-md)다. 사용자가 제공한 scroll-world 같은 영상 중심 사례는 실제 메뉴 좌표·선택·가벼운 운용과 목적이 달라 유료 영상/생성 파이프라인을 추가하지 않았다.
 
-참고: [WCAG 대비](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [목표 크기](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html). 데이터 점은 밀집될 수 있으므로 보이는 점의 크기만 키우지 말고 인접 선택·목록 접근을 함께 유지한다.
-
-후속 디자인 및 공개 README 개선 담당 예정은 사용자 최신 지시의 **Claude Opus 5 (max)**다. 디자인 제안은 서버에서 검증하여 적용하며 현재 기능·정보 정책을 존중한다.
-
-고해상도 화면에서도 렌즈와 Bloom 후처리 버퍼는 캔버스와 같은 최대 1.45 픽셀 비율을 사용한다. EffectComposer 생성 시 읽은 기기 기본 비율을 그대로 두지 않아, 휴대폰에서 보이지 않는 초과 해상도로 광선을 계산하지 않도록 한다.
+다음 Claude Opus 5 (max) 작업도 이 계약을 보존한다. 기존 효과에 장식을 더하는 것보다 실제 label/선택/가독성의 개선 근거를 우선한다.

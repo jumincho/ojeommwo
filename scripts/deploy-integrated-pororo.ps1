@@ -187,7 +187,7 @@ if (-not $env:TEMP -or -not (Test-Path -LiteralPath $env:TEMP -PathType Containe
 }
 
 $BotSourceEntries = @(
-  ".env.example", ".gitignore", "ARCHITECTURE.md", "HANDOFF.md", "package.json",
+  ".env.example", ".gitignore", "ARCHITECTURE.md", "HANDOFF.md", "package.json", "package-lock.json",
   "AGENTS.md", "MODEL_EVALUATION.md", "QUALITY_REPORT.md", "README.md", "RELEASES.md", "config", "prompts", "scripts", "src", "test"
 )
 $Ssh = (Get-Command "ssh.exe" -ErrorAction Stop).Source
@@ -664,6 +664,8 @@ for fixture in \
   cp -- "$root/data/$fixture" "$stage/data/$fixture"
 done
 chmod 0600 "$stage/data/"*.json
+# Install only the exact locked production transport before validation.
+(cd "$stage" && npm ci --omit=dev --ignore-scripts --no-fund --no-audit)
 (cd "$stage" && node scripts/check-syntax.js)
 run_bot_tests "$stage"
 rm -- "$stage/observatory"

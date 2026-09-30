@@ -46,13 +46,13 @@ test("release, static fallback, and Sites contracts stay aligned", () => {
   assert.equal(pkg.devDependencies.vite, "8.0.16");
   assert.equal(pkg.devDependencies.vinext, "0.0.50");
   assert.equal(pkg.dependencies.vinext, undefined);
-  assert.match(workspace, /minimatch@10\.2\.5>brace-expansion["']?:\s*5\.0\.9/u);
+  assert.match(workspace, /minimatch@10\.2\.5>brace-expansion["']?:\s*5\.0\.12/u);
   assert.match(workspace, /esbuild:\s*0\.28\.1/u);
-  assert.match(workspace, /fast-uri:\s*3\.1\.7/u);
+  assert.match(workspace, /fast-uri:\s*3\.1\.8/u);
   assert.match(workspace, /nanoid:\s*3\.3\.18/u);
   assert.match(workspace, /postcss:\s*8\.5\.23/u);
   assert.match(workspace, /sharp:\s*0\.35\.4/u);
-  assert.match(workspace, /undici:\s*7\.29\.0/u);
+  assert.match(workspace, /undici:\s*7\.29\.1/u);
   assert.match(workspace, /ws:\s*8\.21\.0/u);
   assert.match(workspace, /sharp:\s*true/u);
   assert.match(workspace, /unrs-resolver:\s*true/u);

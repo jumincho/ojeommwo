@@ -1,11 +1,13 @@
-# Ojeommwo v3 contributor rules
+# Ojeommwo v2 contributor rules
 
-This is the public source distribution. It contains sanitized examples, not production credentials or operating stores. Read README.md, ARCHITECTURE.md and observatory/DESIGN.md before editing. Keep the MIT license and multilingual README structure; the next planned frontend/README review is by Claude Opus 5 (max).
+The bot owns recommendation data and writes. `observatory/` is the integrated read-only website. Preserve the 19 meal categories, canonical identities, ingredient tags, cooldowns, Korean interface wording and existing features. Keep /bap and participant counts removed. Do not add browser polling.
 
-Preserve the 19 meal categories, existing Korean UI terminology and information, preference percentages, multi-category filters, paused-cosmos selection, keyboard access and manual refresh. Do not reintroduce /bap or meal party counts. Use KMA/AirKorea only.
+Runtime research uses gpt-6-luna with xhigh and web search. Deterministic code validates evidence and handles ranking, preference weights, deduplication and atomic writes. Explicit food shapes override misleading ingredient or restaurant names; ambiguous identities require grounded model adjudication.
 
-GPT-6 Luna xhigh handles research, loose meal-name normalization and ambiguous category adjudication. Deterministic code validates evidence, computes preferences and owns storage. Keep canonical identity and ingredient changes shared across input, recommendations and the Observatory.
+Never send tests to a shared meal channel. Use mocks, dry runs and capability reads. A private operator DM requires the installation owner's explicit instruction. Exclude private test contexts from learning. Production identifiers in this public checkout are placeholders.
 
-Never test-send to an operating meal channel. Use synthetic fixtures, dry-runs and read-only capability checks; a real send requires the operator's designated private DM. Placeholder Slack IDs and deployment hosts must be replaced consistently for a separate installation. Do not publish secrets, operating JSON, logs or internal handoffs. Do not deploy a fork to the existing Sites project merely because its public manifest is present.
+Install root dependencies with npm ci --omit=dev --ignore-scripts. Run npm run check and npm test. Inside observatory install frozen pnpm dependencies and run tests, lint and typecheck. Original operating stores, credentials, private receipts and recovery paths do not belong in this repository. The sanitized public snapshot and synthetic fixtures support independent tests.
 
-Version 3.0.0 / product 3.0. Any PASS statement must identify the verified scope and remaining external dependencies. Prompt cache is optional; all bootstrap instructions must remain in files.
+Deploying a fork requires its own Sites project and credentials; never deploy to the bundled reference project. Standby is normally off and requires independently confirmed server failure, matching source seal, consistent fresh stores and a bounded lease. No automatic offsite backup is provided.
+
+Read HANDOFF, ARCHITECTURE, MODEL_EVALUATION and QUALITY_REPORT after a model change or a prompt cache miss. Planned next frontend and README reviewer: Claude Opus 5 (max).

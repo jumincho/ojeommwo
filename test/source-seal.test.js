@@ -20,6 +20,7 @@ function write(root, relativePath, content) {
 function createFixture() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "ojeommwo-source-seal-test-"));
   write(root, "package.json", '{"name":"seal-fixture","version":"9.8.7","type":"module"}\n');
+  write(root, "package-lock.json", '{"lockfileVersion":3,"packages":{}}\n');
   write(root, "src/version.js", [
     'export const RELEASE = Object.freeze({',
     '  version: "9.8.7",',
@@ -53,7 +54,7 @@ test("source seal is deterministic and carries the release declared by src/versi
   });
   assert.equal(first.sourceSeal.algorithm, "sha256");
   assert.match(first.sourceSeal.sha256, /^[0-9a-f]{64}$/u);
-  assert.equal(first.sourceSeal.fileCount, 9);
+  assert.equal(first.sourceSeal.fileCount, 10);
 });
 
 test("dynamic data and secrets are excluded from the runtime source seal", async (t) => {
@@ -82,6 +83,9 @@ test("runtime source and immutable fixture mutations change the SHA-256 seal", a
   write(root, "data/holiday-skip-dates.json", '{"fixture":"changed"}\n');
   const fixtureChanged = await buildSourceSeal({ root });
   assert.notEqual(fixtureChanged.sourceSeal.sha256, sourceChanged.sourceSeal.sha256);
+  write(root, "package-lock.json", '{"lockfileVersion":3,"packages":{"transport":"patched"}}\n');
+  const dependenciesChanged = await buildSourceSeal({ root });
+  assert.notEqual(dependenciesChanged.sourceSeal.sha256, fixtureChanged.sourceSeal.sha256);
 });
 
 test("source seal is byte-exact and distinguishes LF from CRLF", async (t) => {

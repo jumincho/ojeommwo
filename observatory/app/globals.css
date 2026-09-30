@@ -595,7 +595,7 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .taste-map__axis--positive { left: 92%; width: 2px; background: linear-gradient(rgba(110, 255, 181, 0.42), transparent); }
 .taste-map__rows { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
 .taste-map__row { position: absolute; right: 5%; left: 20%; height: 1px; border-top: 1px dashed rgba(128, 159, 199, 0.16); }
-.taste-map__row span { position: absolute; left: 8px; top: -10px; min-width: 88px; padding: 3px 10px 3px 4px; border-radius: 4px; background: linear-gradient(90deg, rgba(2, 2, 8, 0.96) 76%, transparent); font: 680 14px/1.4 var(--font-sans); white-space: nowrap; opacity: 1; }
+.taste-map__row span { position: absolute; left: 8px; top: -10px; min-width: 88px; padding: 3px 10px 3px 4px; border-radius: 4px; background: linear-gradient(90deg, rgba(2, 2, 8, 0.96) 76%, transparent); font: 680 15px/1.4 var(--font-sans); white-space: nowrap; opacity: 1; }
 .taste-map__star { position: absolute; z-index: 4; min-width: 24px; min-height: 24px; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: 50%; background: transparent; cursor: pointer; transition: opacity 150ms ease; }
 .taste-map__star span { position: absolute; top: 50%; left: 50%; width: var(--taste-dot-size, 10px); height: var(--taste-dot-size, 10px); transform: translate(-50%, -50%); border-radius: 50%; background: currentColor; box-shadow: var(--taste-dot-glow, 0 0 12px currentColor); pointer-events: none; transition: transform 150ms ease; }
 .taste-map__star span::after { content: ""; position: absolute; inset: 34%; border-radius: 50%; background: #fff; box-shadow: 0 0 4px #fff; }

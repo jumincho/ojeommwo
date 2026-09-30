@@ -1,17 +1,15 @@
-# 관측소 v3 구조
+# 관측소 구조
 
-`app/`은 3D 코스모스, 취향 지도/목록, 검색·카테고리 다중 필터, 상세 보기와 메뉴 둘러보기의 React UI다. WebGL을 지연 로드하고 비가시 탭에서 멈추며 종료 시 자원을 해제한다. 궤도 정지와 클릭 선택은 독립 동작이다. 가까운 점 선택을 위해 포인터 위치 기준의 인접 항목 탐색을 사용한다.
+운영 봇의 JSON store → `scripts/lib/observatory-snapshot.mjs` → 허용된 공개 projection → 인증된 snapshot push → Sites Worker/R2 → 브라우저의 1회 조회 구조다. 운영 DB를 브라우저나 Sites에 직접 노출하지 않는다.
 
-`scripts/export-snapshot.mjs`가 상위 봇의 운영 저장소와 선호 알고리즘을 읽어 정제된 공개 스냅샷을 만든다. 동일한 카테고리·식별자·선호 계산과 세부 재료 태그가 기존/신규 메뉴에 적용된다. `scripts/lib/bot-contract.mjs`는 실제 봇 소스 지문을 공개 데이터 계약에 포함한다.
+`app/components/Observatory.tsx`는 데이터 조회/검증/필터/상세, MenuCosmos는 3D, TasteMap은 지도/목록과 밀집 선택, TasteRail은 동등한 양 끝 원과 % 축, RerollShop은 메뉴 둘러보기를 맡는다. `app/lib`는 canonical schema, category selection과 deterministic beeswarm을 제공한다.
 
-`worker/`는 Sites Worker이며 `SNAPSHOTS` R2에 저장된 스냅샷을 제공한다. 인증된 게시 경로는 크기·시각·스키마·해시 검증과 순서 검사를 거쳐 승격한다. 프런트 브라우저는 접속 시 데이터를 읽고 자동 갱신하지 않는다.
+`worker/snapshot-edge.mjs`는 보안 headers, authenticated upload, bounded gzip 조립, SHA, upload receipt, R2 조건부 write와 cache 정책을 담당한다. `worker/index.ts`는 허용된 path/method를 연결한다. `build/sites-vite-plugin.ts`와 `scripts/build-sites.mjs`가 기존 Sites manifest 및 서버 엔트리를 검증한다.
 
-게시 전송은 gzip 조각당 2 KiB, 원본 512 KiB, 최대 256조각으로 제한한다. Worker는 조각을 최대 4개씩 병렬로 읽고 순서대로 조립한다. 현재 게시본의 SHA-256과 같은 commit은 조각이 삭제된 후에도 기존 영수증으로 성공 응답하며 생성 시각을 갱신하지 않는다. R2의 조건부 put과 ETag를 사용해 메타데이터 조회 뒤 경합이 발생해도 늦은 이전 데이터가 최신 게시본을 덮어쓰지 못하게 한다. 동일 시각의 다른 해시와 더 오래된 게시본은 409로 거부한다.
+`scripts/lib/bot-contract.mjs`는 상위 카테고리/별칭/선호/학습 계약을 재사용한다. 모든 메뉴의 ingredient-tags는 메뉴·검증된 주재료 근거를 사용하고 restaurant 이름을 재료로 삼지 않는다. 공개 source fingerprint는 store bytes와 import하는 알고리즘 계약까지 포함하므로 DB/알고리즘 변화가 다음 export에 반영된다. 상세 가격과 배달은 정확한 branch/menu 최신 근거를 우선하고 오래된 가격이나 임의의 배달 가능성을 만들지 않는다.
 
-게시 후 조각 삭제는 일괄 요청 한 번을 `ctx.waitUntil`로 처리한다. 삭제 실패가 게시 성공을 취소하지 않으며 같은 해시 재시도가 삭제를 다시 시도한다. 저장소 일시 장애는 503과 조각 보존으로 재시도를 허용하고, 잘못된 입력은 400, 인증 실패는 401이다. 게시를 포기한 클라이언트가 abort로 조각을 정리한다. 정리 자체가 계속 실패하면 조각이 남을 수 있으나 공개 데이터나 다음 해시의 게시에 사용되지는 않는다.
+업로드는 512KiB snapshot, 2KiB chunk, 최대 256 chunk, 4개 병렬 R2 read 및 bounded decompression을 사용한다. 같은 SHA 재시도는 기존 publication의 시간/receipt를 보존한다. ETag 조건부 R2 저장으로 과거 snapshot의 늦은 commit이 새 자료를 덮어쓰지 못한다. 전송/정리 지연과 transient R2 실패는 재시도하고 schema/hash 실패는 거절한다.
 
-클라이언트는 조각당 15초, commit당 45초, 전체 업로드 120초와 최대 3회 시도를 적용한다. 전체 기한은 재시도로 연장하지 않는다. 호스트 저널의 성공 영수증에는 해시·생성 시각·조각 수·전체/commit 소요 시간·시도/재시도/시간 초과 횟수만 남긴다. 비밀·본문·요청 헤더는 기록하지 않는다. `tests/sites-commit.test.mjs`는 응답 유실, 동시 게시, 늦은 요청, 일시 저장소 장애와 후처리 지연을 재현한다.
+pororo host의 `refresh-snapshot-host.sh`가 10분 export/push/해시 확인, 5분 주기의 health가 나이/해시를 확인한다. runtime은 프로젝트 밖 보호 상태를 가리키는 기존 symlink다. root traversal/프로젝트/state 권한을 함께 보존한다. production preview 서버나 임시 tunnel은 필요 없다.
 
-호스트의 `scripts/refresh-snapshot-host.sh`는 컨테이너 DB 검증, 임시 스냅샷 생성·검증, 원자 승격, Sites 업로드, 공개 API 해시 대조를 수행한다. 10분 게시와 5분 오프셋 health가 설정된다. pororo 장애 때 Sites의 마지막 게시본은 남지만 DB의 새 변경은 전달되지 않는다.
-
-`out/`은 서버에서 빌드하여 Windows에 동기화하는 비상용 정적 출력이다. `runtime`은 프로젝트 밖 보호 상태를 가리키므로 소스 배포·정리에서 덮어쓰지 않는다. 실제 운영 경로는 상위 인계 문서에 기록한다.
+브라우저는 자동 polling 없이 current→static→last-known-good 순으로 fallback한다. WebGL 불가 시 목록 접근, hidden/reduced-motion 처리, GPU 객체 정리, 키보드 선택, 모바일 drawer focus/닫기와 배경 inert 경계를 둔다. localhost emergency viewer는 out과 보호된 공개 snapshot만 서빙하고 host/origin/path/기밀 파일 접근을 제한한다.

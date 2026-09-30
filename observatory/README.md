@@ -1,9 +1,13 @@
-# Ojeommwo 관측소 v3
+# 오점뭐 메뉴 관측소
 
-전북대 메뉴의 카테고리·선호·배달 근거를 3D 코스모스와 취향 지도/목록으로 보는 읽기 전용 사이트다. 공개 주소는 https://ojeommwo-observatory.jumincho.chatgpt.site/ 이다. 봇과 같은 프로젝트의 `observatory/` 하위 디렉터리이며 별도 형제 서비스가 아니다.
+통합 ojeommwo-v2의 `observatory/` 하위 프로젝트. 정식 v2 / 2.0.0, 2026-09-30. [운영 사이트](https://ojeommwo-observatory.jumincho.chatgpt.site/).
 
-운영 소스 수정·설치·빌드는 pororo의 `/root/ojeommwo-v2/observatory`에서 수행한다. `corepack pnpm run verify:sites`는 Sites 출력, `corepack pnpm run verify`는 Windows 비상용 Next 정적 출력을 검사·빌드한다. `corepack pnpm audit --prod`로 운영 의존성을 검사한다.
+Slack 추천·실제 식사·선호 설문의 공개 집계를 3D 코스모스와 취향 지도로 보여준다. 검색, 여러 카테고리 선택, 상세 보기와 메뉴 둘러보기를 제공한다. 문구/정보량/기능 범위는 기존 운영 계약을 유지한다. 선호도 %와 명확한 비선호·중립·선호 방향은 유지한다. 브라우저는 처음 들어올 때 한 번 데이터를 읽고 자동 갱신하지 않는다.
 
-운영 DB가 있는 서버에서는 전체 통합 테스트를 실행한다. 공개 소스만 있는 환경에서는 정제된 샘플 스냅샷과 임시 저장소를 사용하며 운영 DB 통합 검증은 명시적으로 건너뛴다. `pnpm test` 성공을 실제 운영 DB 검사와 혼동하지 않는다.
+운영 DB/봇은 pororo에 있다. host cron이 10분마다 비밀/Slack 대상/사용자/주소/근거 URL 없는 snapshot을 export하고 기존 Sites Worker의 R2에 전송한다. 사이트를 Sites로 옮긴 것은 안정된 HTTPS origin과 프론트 배포를 위한 결정이며 운영 DB를 이전한 것이 아니다.
 
-사이트는 브라우저 자동 갱신을 하지 않는다. 새로운 접속에는 호스트의 주기적 스냅샷 게시가 반영된다. 정제된 공개 데이터만 외부로 전달하며 원본 Slack 식별자·자유 입력·비밀은 게시하지 않는다. 배포와 비상 절차는 상위 `HANDOFF.md`, 최종 검증 결과는 상위 `QUALITY_REPORT.md`를 따른다.
+서버 소스에서 `corepack pnpm install --frozen-lockfile`, `corepack pnpm audit`, `corepack pnpm run verify:sites`로 검사/빌드한다. npm lock은 이 하위 프로젝트에서 사용하지 않는다. emergency out은 `corepack pnpm exec next build`로 별도 생성한다. 원본 운영 DB가 없는 checkout의 테스트는 이미 공개된 sanitized sample을 사용한다.
+
+기존 `.openai/hosting.json`의 project_id/R2 binding/public audience를 보존한다. 서버 Git 소스를 Sites 원격에 push한 exact commit에서 artifact를 만들고 저장·배포한다. 사용하지 않는 8788 서버/임시 터널/형제 프로젝트를 복원하지 않는다. secret이나 auth token을 파일·Git·client bundle에 넣지 않는다.
+
+Windows는 정상 시 OFF인 비상 모드만 사용한다. 서버에서 만든 out과 root source seal을 동기화하며, 비상 viewer는 localhost만 bind한다. 세부 운영은 상위 HANDOFF.md, 디자인은 DESIGN.md, 전송/보안은 ARCHITECTURE.md와 SECURITY.md를 따른다.

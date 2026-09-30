@@ -1,34 +1,9 @@
-# v3 운영 모델 평가 · 2026-09-25
+# v2 runtime model assessment
 
-## 확인한 계약과 역할
+The required research model is gpt-6-luna with xhigh reasoning and web search. It investigates local restaurants, resolves loosely written meal entries and adjudicates ambiguous food categories. Web output is checked against current address/menu HTML. Explicit food shapes such as pizza, curry and sushi have structural guards; an ambiguous model decision is bound to the grounded identity.
 
-서버 설정과 실호출은 **GPT-6 Luna (`gpt-6-luna`) / `xhigh`**다. Codex CLI 0.156.1, ChatGPT 계정 OAuth를 사용한다. 2026-09-25 사용자 device-auth 완료 후 격리 후보를 동일 계정·최신성·실호출·CAS로 확인하여 운영 인증에 승격했다. 15:48:45 KST 실제 인증 호출이 성공했다. 토큰 만료일만 검사하던 health에 최근 실제 인증 성공 검사도 추가했다.
+The model does not write the DB or replace deterministic ranking, locks, deduplication, price/delivery TTL or cooldown checks. Existing-cache sends, survey storage, taste scoring and the read-only website use no model tokens. This division is appropriate for Luna: scoped semantic judgments with verifiable output, and reproducible code for integrity.
 
-모델은 웹 후보 탐색, 실제 식사 자유 입력의 전북대 근처 상호·메뉴 정규화, 의미 분류 재심사를 맡는다. 검색은 활성화되어 있다. 선호 수식·순위·쿨다운·중복·스키마·DB 쓰기는 결정론적 코드가 수행한다. DB 원자성이나 통계 계산을 LLM에게 직접 맡기지 않는 현재 구성이 적절하다.
+Measured job ranges in a small installation sample: live authentication about 13,600 tokens; category adjudication about 15,000; a searched loose-entry normalization about 112,600; full candidate research about 269,000 to 1,254,000, with substantial cached input in large runs. Reasoning tokens are already included in output totals and must not be counted twice. Retries and failed runs may consume additional usage. Pro OAuth allowance and API billing are different systems; these observations are not guaranteed future quotas.
 
-## 실제 수행과 보완
-
-141개 공개 메뉴 전체를 24개 이하 묶음 6회로 의미 재검토했다. 31개의 분류 대안·재료·근거 확인 제안을 공통 카테고리 계약과 실제 메뉴판으로 재검토했다. 이 검토는 모델의 독립 정확도를 산정한 통계 실험이 아니다. 예컨대 초밥/후토마키의 일식 분류는 운영 계약이며, 무지침 모델의 회/해물 제안을 그대로 적용하지 않는다.
-
-명확한 조리 형식은 보호하고 모호한 항목은 지점 URL과 제한된 설명을 재심사 입력에 제공한다. 설명은 앞선 모델의 주장이므로 사실 근거로 간주하지 않는다. 실제 메뉴판을 확인해도 확신이 부족한 후보는 보류한다. 통새우와퍼의 쇠고기+새우는 버거킹 공식 제품 설명으로 교정했다. 일반 케밥처럼 선택한 고기가 기록되지 않은 경우 특정 고기를 단정하지 않는다.
-
-신규 탐색 부진의 한 원인은 모델에게 화면에 없는 좌표까지 직접 구하도록 요구한 것이었다. 이제 모델은 모르는 좌표를 null로 제출하고 서버가 같은 지점 HTML의 구조화 좌표를 검증한다. 수정 후 실제 조사에서 원시 2개·본문 검증 2개·최종 신규 식당 1개가 추가됐다. 다른 1개는 분류 중간 확신으로 보류됐다. 증거·거리 조건을 완화하지 않았다.
-
-## 측정한 토큰
-
-| 작업 | 실제 토큰 | 시간/해석 |
-|---|---:|---|
-| 인증 점검 1회 | 입력 13,589 + 출력 32 = 13,621 | 15.1초, 캐시 입력 0 |
-| 메뉴 141개 의미 점검 6회 | 합계 129,535 | 묶음당 20,317~22,197, 약 87~114초 |
-| 수정 전 신규 탐색 1회 | 989,692 | 240.3초, 신규 0, 캐시 입력 882,944 |
-| 좌표 역할 수정 후 신규 탐색 | 367,869 | 317.1초, 캐시 입력 277,760 |
-| 위 탐색의 분류 재심사 | 15,004 | 32.4초, 중간 확신 후보 보류 |
-| 일반 캐시 발송·설문 계산·사이트 조회·DB 원자 저장 | 모델 호출 없음 | 날씨 HTTP와 결정론적 코드는 별도 |
-
-검색 토큰은 검색/페이지 도구를 거치며 누적된 호출량이다. 단일 프롬프트 길이와 같지 않다. 추론 출력은 출력 토큰에 이미 포함되므로 중복 합산하지 않는다. 시간 초과·인증 실패의 일부 호출에는 토큰 영수증이 없어 0토큰으로 계산하면 안 된다. 실제 기록 위치는 `data/codex-cli-runs/*-telemetry.log`다.
-
-평일 선택 탐색 한 번은 이번 관측에서 약 0.38~0.99M 토큰이었으나 보장된 평균·상한은 아니다. 후보 부족 시 추가 조사와 재시도가 발생할 수 있다. 모델 호출 외 서버 상시 부하는 작고, 탐색의 시간/토큰은 원격 모델과 공개 웹 정보에 좌우된다. Pro 20x의 계정 전체 한도나 다른 작업의 사용량을 이 봇이 독점한다고 가정하지 않는다.
-
-[공식 Luna 문서](https://developers.openai.com/api/docs/models/gpt-6-luna)의 xhigh 지원과 텍스트 API 참고 요율은 입력 $0.10/M, 캐시 입력 $0.01/M, 출력 $0.50/M이다. 긴 단일 요청의 할증과 도구 비용이 별도일 수 있다. 현재는 Codex OAuth이므로 이 참고 요율을 별도 API 청구액으로 환산하거나 Pro 잔여 한도를 보증하지 않는다.
-
-모델/프롬프트가 바뀐 첫 요청의 prompt-cache miss는 정상이다. 새 작업자는 캐시 hit 없이도 같은 설정·스키마·실호출·근거 검증을 재현해야 한다. 외부 인증 철회는 재로그인이 필요하며 health가 이를 정상으로 숨기지 않는다.
+Taste retains Beta(3,3), survey weight 0.9 and a 180-day half-life. One strong positive independent survey moves 50% to 56.5%, two to 61.5%; negative reactions are symmetric. A mild positive moves to 53.5%, and same-person same-day repetition is deduplicated. Ten independent strong positives move toward 80%. Actual meal entries and surveys are deduplicated together, while survey-only signals remain meaningful.

@@ -384,6 +384,7 @@ export function MenuCosmos({
     const depthTextures: DepthTexture[] = [];
     let lensingAnimationFrame: number | null = null;
     let canvas: HTMLCanvasElement | null = null;
+    let contextLost = false;
     let handleVisibilityChange: (() => void) | null = null;
     let appliedCameraDistance = 0;
     const objectById = new Map<string, Object3D>();
@@ -399,6 +400,10 @@ export function MenuCosmos({
 
     const handleContextLost = (event: Event) => {
       event.preventDefault();
+      contextLost = true;
+      graphRef.current?.pauseAnimation();
+      if (lensingAnimationFrame !== null) window.cancelAnimationFrame(lensingAnimationFrame);
+      lensingAnimationFrame = null;
       if (!disposed) setStatus("fallback");
     };
 
@@ -1320,7 +1325,7 @@ export function MenuCosmos({
         let twinkleClock = 0;
         let previousCosmicFrame = window.performance.now();
         const updateLensing = () => {
-          if (disposed || document.hidden) { lensingAnimationFrame = null; return; }
+          if (disposed || document.hidden || contextLost) { lensingAnimationFrame = null; return; }
           lensingAnimationFrame = window.requestAnimationFrame(updateLensing);
           const currentCosmicFrame = window.performance.now();
           const cosmicDelta = Math.min(0.05, Math.max(0, (currentCosmicFrame - previousCosmicFrame) / 1000));
@@ -1368,7 +1373,7 @@ export function MenuCosmos({
               label.getWorldPosition(categoryWorldPosition);
               const distance = Math.max(1, camera.position.distanceTo(categoryWorldPosition));
               const fov = "fov" in camera && typeof camera.fov === "number" ? camera.fov : 50;
-              const labelHeight = width < 480 ? 22 : 23;
+              const labelHeight = width < 480 ? 24 : 25;
               const worldHeight = labelHeight * 2 * distance * Math.tan(three.MathUtils.degToRad(fov) / 2) / height;
               const labelAspect = Number(label.userData.labelAspect) || 3;
               label.scale.set(worldHeight * labelAspect, worldHeight, 1);
@@ -1391,7 +1396,7 @@ export function MenuCosmos({
               || left.id.localeCompare(right.id, "ko-KR")
             ));
           const visibleLabelPositions: Array<{ x: number; y: number; halfWidth: number }> = [];
-          const verticalGap = width <= 480 ? 36 : 29;
+          const verticalGap = width <= 480 ? 38 : 31;
           for (const item of projectedLabels) {
             const overlaps = visibleLabelPositions.some((position) => (
               Math.abs(position.x - item.x) < position.halfWidth + item.halfWidth + 8
@@ -1449,7 +1454,7 @@ export function MenuCosmos({
           if (cosmosMoving) uniforms.diskTime.value += cosmicDelta * 2.3;
         };
         handleVisibilityChange = () => {
-          if (document.hidden) {
+          if (document.hidden || contextLost) {
             graph.pauseAnimation();
             if (lensingAnimationFrame !== null) window.cancelAnimationFrame(lensingAnimationFrame);
             lensingAnimationFrame = null;

@@ -65,6 +65,7 @@ const PROTECTED_SOURCE_FILES = Object.freeze([
   "ARCHITECTURE.md",
   "HANDOFF.md",
   "package.json",
+  "package-lock.json",
   "AGENTS.md",
   "MODEL_EVALUATION.md",
   "QUALITY_REPORT.md",
@@ -850,6 +851,19 @@ export function runHealthCheck({ now = new Date() } = {}) {
           ? `next-send candidates are intentionally gated by the ${candidateSchedule.refreshAt.toISOString()} refresh before ${nextSendAt.toISOString()}`
         : `${eligible.length}/${currentlyEligible.length} trusted candidates remain valid through the actual next send and cannot form a diverse set; ${selectable.length} are cooldown-eligible now`
     );
+  }));
+
+  checks.push(attempt("http-transport", () => {
+    const declared = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, "package.json"), "utf8"));
+    const locked = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, "package-lock.json"), "utf8"));
+    const installed = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, "node_modules", "undici", "package.json"), "utf8"));
+    const required = "7.29.1";
+    const valid = declared.dependencies?.undici === required
+      && locked.packages?.["node_modules/undici"]?.version === required
+      && installed.version === required;
+    return check("http-transport", valid ? "pass" : "fail", valid
+      ? `security-patched Undici ${required} is pinned, locked, and installed independently of Node`
+      : "HTTP transport dependency drift; run npm ci from the reviewed lockfile");
   }));
 
   checks.push(attempt("secret-permissions", secretPermissionCheck));

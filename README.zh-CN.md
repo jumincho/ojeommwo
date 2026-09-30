@@ -132,6 +132,7 @@ corepack pnpm test
 需要 Node.js 22 或更高版本。
 
 ```sh
+npm ci --omit=dev --ignore-scripts
 npm run check   # 语法与 JSON 检查
 npm test        # 单元测试，无需 Slack 工作区或凭据
 ```
@@ -146,9 +147,9 @@ npm test        # 单元测试，无需 Slack 工作区或凭据
 
 ## 现状
 
-版本 **3.0**，于 2026-09-25 正式上线。版本代号为 *GPT-6 Astra Max*；实际运行的模型是 xhigh 推理的 GPT-6 Luna。
+版本 **2.0**，于 2026-09-30 正式上线。版本代号为 *GPT-6.1 Sol (max)*；实际运行的模型是 xhigh 推理的 GPT-6 Luna。
 
-3.0 的新变化：
+2.0 的新变化：
 
 - 用餐记录之后提交的问卷重新生效，较早的用餐记录不会再一直盖过之后的问卷。
 - 更新的价格、从门店页面读取的坐标，以及重新调整的新餐厅探索。

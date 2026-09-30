@@ -1,9 +1,9 @@
-# Ojeommwo v3 public handoff
+# Ojeommwo v2 public handoff
 
-Release date: 2026-09-25. User-designated release attribution: GPT-6 Astra Max. Bot runtime: GPT-6 Luna / xhigh. Claude Opus 5 (max) is the planned next reviewer for frontend design and the public README.
+Release: 2.0.0, 2026-09-30. Source declaration: 2026-09-30T17:33:38+09:00. Implementation attribution: GPT-6.1 Sol (max). Runtime: GPT-6 Luna / xhigh. Planned next frontend and README reviewer: Claude Opus 5 (max).
 
-A new contributor needs no earlier conversation or prompt cache: read AGENTS.md, README.md, ARCHITECTURE.md, MODEL_EVALUATION.md and observatory/HANDOFF.md. Run npm run check and npm test in the root, then pnpm test, pnpm lint and pnpm typecheck inside observatory after installing its locked dependencies. The public checkout supplies sanitized snapshots and synthetic stores; actual operating-store integration is a separate server check.
+No previous conversation or prompt cache is required. Read AGENTS.md, README.md, ARCHITECTURE.md, MODEL_EVALUATION.md, QUALITY_REPORT.md and observatory/HANDOFF.md. Run locked dependency installation, root syntax/unit checks and Observatory tests/lint/typecheck. Public tests use sanitized snapshots and synthetic fixtures; original-store integration and deployment receipts are private installation checks.
 
-The bot/server is authoritative. Sites hosts the website and a sanitized read-only snapshot; it does not host the Slack bot or original operating database. Windows standby is normally off and requires a current matching source seal, seven consistent stores, valid candidates and an independently confirmed server outage. Separate-installation identifiers in this distribution are placeholders. Do not use the bundled production Site identifier to deploy a fork.
+The server is authoritative. Sites hosts the frontend and sanitized aggregate snapshot, while the Slack bot and original DB stay on the server. The observatory is a child project. Windows standby is normally off and requires matching source/locks, seven consistent stores, valid evidence, a recent snapshot and independently confirmed outage. Server recovery or lease expiry stops the standby.
 
-Preserve Korean interface wording and functionality. Never test-send to a shared meal channel. No credentials, original reactions, operator identity, deployment receipts or private recovery paths belong in this public document. Internal operational procedures and receipts are maintained separately.
+Never test-send to shared meal channels. Preserve Korean UI text, existing percentage displays and functions. Keep /bap, participant counts and browser auto-refresh removed. Public identifiers are placeholders and the bundled reference Site project must not be used to deploy forks. No credentials, original reactions, operator identity or private deployment receipts belong here.

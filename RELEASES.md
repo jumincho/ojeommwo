@@ -1,9 +1,9 @@
-# Ojeommwo v3 — 2026-09-25
+# Releases
 
-Package 3.0.0 / product 3.0. User-designated release attribution: GPT-6 Astra Max. Runtime bot: GPT-6 Luna with xhigh reasoning. Provider deployment sequence numbers are separate from the product version.
+## v2.0.0 — 2026-09-30
 
-Later survey days now remain effective after an older meal record, with gradual damping of the old meal and repeated votes. Optional exploration targets two new restaurants with up to six searches and a 420-second bound; only verified results are admitted and an existing ready pool survives optional discovery failure. Missing model coordinates can be completed only from verified branch pages. Clear current menu-price changes are applied; conflicting evidence is withheld.
+Formal v2 launch; implementation attribution GPT-6.1 Sol (max), source declaration 2026-09-30T17:33:38+09:00. Runtime research remains GPT-6 Luna / xhigh.
 
-Category and ingredient review corrected shrimp-and-beef Whopper tagging, mushroom and rice synonyms, and unsupported species claims for unspecified kebab. Live authentication health now checks recent actual model-call acceptance. Cosmos labels and map/category/card contrast were improved without changing interface wording or features. Public source tests use sanitized and synthetic fixtures without requiring private operating data.
+Preserve all deterministically verified discoveries in the candidate catalog and add a small quality-gated first-restaurant exploration bonus. Harden Socket Mode connect deadlines and cleanup. Pin patched Undici 7.29.1 independently of Node, include the dependency lock in the source seal and deploy process, and update Observatory dependency security overrides. Improve category label spacing, taste-map readability and WebGL context-loss handling without changing functions or Korean copy.
 
-Future frontend design and public README review: Claude Opus 5 (max). Existing feature scope, KMA/AirKorea weather, private-DM testing and normally-off Windows standby remain unchanged.
+Validation: no failures in server/Windows bot and Observatory tests, both-platform health, lint/typecheck/builds, dependency audits, taxonomy and integration checks. Original operation data and credentials are excluded. Planned subsequent frontend and README reviewer: Claude Opus 5 (max).

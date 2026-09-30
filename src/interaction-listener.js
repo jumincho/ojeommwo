@@ -1,3 +1,4 @@
+import { TransportWebSocket } from "./http-transport.js";
 import { config } from "./config.js";
 import {
   OPEN_OBSERVATORY_ACTION_ID,
@@ -165,7 +166,57 @@ async function connectionUrl() {
   return result.url;
 }
 
-export async function runInteractionListener({ WebSocketImpl = globalThis.WebSocket } = {}) {
+export function waitForSocketConnection(url, {
+  WebSocketImpl = TransportWebSocket,
+  connectTimeoutMs = 20_000,
+  onOpen = () => {},
+  handleEnvelope = handleSocketEnvelope
+} = {}) {
+  return new Promise((resolve, reject) => {
+    const socket = new WebSocketImpl(url);
+    let opened = false;
+    let settled = false;
+    const finish = (error) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(connectTimer);
+      socket.removeEventListener("open", open);
+      socket.removeEventListener("message", message);
+      socket.removeEventListener("error", failed);
+      socket.removeEventListener("close", closed);
+      // A failed transport must not remain alive alongside its replacement.
+      if (error) {
+        try { socket.close(); } catch { /* already closed or failed handshake */ }
+        reject(error);
+      } else resolve();
+    };
+    const open = () => {
+      if (settled) return;
+      opened = true;
+      clearTimeout(connectTimer);
+      try { onOpen(); } catch (error) { finish(error); }
+    };
+    const message = async (event) => {
+      if (settled) return;
+      try {
+        const envelope = JSON.parse(String(event.data));
+        if (envelope.type === "disconnect") socket.close();
+        else await handleEnvelope(envelope, { socket });
+      } catch (error) {
+        logWarn("[interactions] payload failed:", error.message);
+      }
+    };
+    const failed = () => finish(new Error("Socket Mode connection error"));
+    const closed = () => finish(opened ? null : new Error("Socket Mode closed before opening"));
+    const connectTimer = setTimeout(() => finish(new Error("Socket Mode connection timed out")), connectTimeoutMs);
+    socket.addEventListener("open", open);
+    socket.addEventListener("message", message);
+    socket.addEventListener("error", failed);
+    socket.addEventListener("close", closed);
+  });
+}
+
+export async function runInteractionListener({ WebSocketImpl = TransportWebSocket } = {}) {
   if (!config.enableMealFeedback) throw new Error("ENABLE_MEAL_FEEDBACK is disabled");
   if (!config.slackAppToken) throw new Error("SLACK_APP_TOKEN is missing");
   let retryMs = 1000;
@@ -179,29 +230,16 @@ export async function runInteractionListener({ WebSocketImpl = globalThis.WebSoc
   for (;;) {
     try {
       const url = await connectionUrl();
-      await new Promise((resolve, reject) => {
-        const socket = new WebSocketImpl(url);
-        let opened = false;
-        socket.addEventListener("open", () => {
-          opened = true;
+      await waitForSocketConnection(url, {
+        WebSocketImpl,
+        onOpen: () => {
           retryMs = 1000;
           logInfo("[interactions] Socket Mode connected.");
           if (!pendingResumeStarted) {
             pendingResumeStarted = true;
             retryPending();
           }
-        });
-        socket.addEventListener("message", async (event) => {
-          try {
-            const envelope = JSON.parse(String(event.data));
-            if (envelope.type === "disconnect") socket.close();
-            else await handleSocketEnvelope(envelope, { socket });
-          } catch (error) {
-            logWarn("[interactions] payload failed:", error.message);
-          }
-        });
-        socket.addEventListener("error", () => reject(new Error("Socket Mode connection error")));
-        socket.addEventListener("close", () => opened ? resolve() : reject(new Error("Socket Mode closed before opening")));
+        }
       });
     } catch (error) {
       logWarn("[interactions] reconnecting after error:", error.message);

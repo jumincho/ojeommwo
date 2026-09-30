@@ -312,7 +312,14 @@ export function deliveryDistanceRiskPenalty(candidate) {
   return Math.min(18, (distanceKm - 3) * 6);
 }
 
-function scoreCandidate(candidate, rng, { mealEvents, candidatePreferences, mealType, now }) {
+function firstRestaurantBonus(candidate, observedRestaurants) {
+  const key = normalizeRestaurantKey(candidate.restaurant);
+  // Half a point is smaller than the taste gain from one strong direct vote.
+  // Evidence/source quality, distance, cooldown and diversity still dominate.
+  return candidate.sourceRank >= 4 && key && !observedRestaurants.has(key) ? 0.5 : 0;
+}
+
+function scoreCandidate(candidate, rng, { mealEvents, candidatePreferences, mealType, now, observedRestaurants }) {
   const sourceScore = Math.min(Math.max(candidate.sourceRank || 0, 0), 4) * 100;
   const verificationScore = candidate.sourceRank >= 4
     ? (candidate.deliveryStatus === "verified" ? 12 : 4)
@@ -327,6 +334,7 @@ function scoreCandidate(candidate, rng, { mealEvents, candidatePreferences, meal
   }) * 10;
   const categoryOrderScore = (FOOD_CATEGORIES.length - FOOD_CATEGORIES.indexOf(candidate.category)) / 100;
   return sourceScore + verificationScore + preferenceScore + categoryOrderScore + rng() / 100
+    + firstRestaurantBonus(candidate, observedRestaurants)
     - deliveryDistanceRiskPenalty(candidate);
 }
 
@@ -336,12 +344,15 @@ function tryPick(candidates, history, options) {
   const mealEvents = options.mealEvents || { events: [] };
   const candidatePreferences = options.candidatePreferences || { responses: [] };
   const { restaurants, menus } = recentKeys(history, mealEvents, now, options);
+  const observedRestaurants = new Set(combinedHistoryItems(history, mealEvents)
+    .map((item) => normalizeRestaurantKey(item.restaurant)));
   const ranked = candidates
     .map((candidate) => ({ candidate, score: scoreCandidate(candidate, rng, {
       mealEvents,
       candidatePreferences,
       mealType: options.mealType,
-      now
+      now,
+      observedRestaurants
     }) }))
     .map((entry) => ({
       ...entry,

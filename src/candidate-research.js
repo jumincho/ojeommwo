@@ -1052,7 +1052,9 @@ export function buildVerifiedCandidateStore(parsed, {
     catalog: withoutInvalidatedCandidates(
       mergeCandidateCatalog(
         existingCatalog,
-        [...catalogCandidates, ...existingCandidates, ...candidates]
+        // Keep every verified discovery even when the active diversity reserve
+        // cannot include it yet. The rotating catalog will recheck it later.
+        [...catalogCandidates, ...existingCandidates, ...currentEvidenceCandidates]
       ),
       retainedInvalidatedCandidateIds,
       activeCandidateIds

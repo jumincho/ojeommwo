@@ -19,6 +19,7 @@ export const SOURCE_SEAL_LIMITS = Object.freeze({
 const SOURCE_DIRECTORIES = Object.freeze(["src", "scripts", "prompts", "config"]);
 const SOURCE_FILES = Object.freeze([
   "package.json",
+  "package-lock.json",
   "data/holiday-skip-dates.json",
   "data/recommendations.json",
   "data/recommendations.sample.json"

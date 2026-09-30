@@ -1,7 +1,9 @@
-# Observatory v3 public handoff
+# Observatory v2 handoff
 
-The Observatory is the observatory/ child project of Ojeommwo. Start with README.md, ARCHITECTURE.md, DESIGN.md and SECURITY.md. Its Korean wording, information, preference percentages, multi-category filters and manual refresh behavior are intentional.
+This is the `observatory/` child project of Ojeommwo v2, released 2026-09-30 with GPT-6.1 Sol (max) attribution. Planned next frontend and README reviewer: Claude Opus 5 (max).
 
-After installing locked dependencies, pnpm test, pnpm lint and pnpm typecheck validate the public source. pnpm build requires the integrated parent bot source and produces the Sites artifact. The existing .openai/hosting.json identifies the author's Site: create or configure your own destination before deploying a fork. No original operating database or publisher secret belongs in the website artifact.
+Sites serves the UI and sanitized read-only aggregate snapshot. The bot owns the original data. The integration includes bounded chunk upload, SHA-256, retry receipts, R2 conditional writes and CSP hashes. Validate byte equality and actual browser behavior after deploying; HTTP 200 alone is insufficient. Deploy a fork to its own Site project, never the bundled reference installation.
 
-The next planned frontend and public README reviewer is Claude Opus 5 (max). Production edits and builds follow the owner's server-first workflow; deployment receipts, credentials and emergency synchronization details are kept in the private operations repository.
+Preserve text, information scope, preference percentages and features. First category selection isolates it; additional categories can be combined. The map has explicit dislike/neutral/like ends and nearest-point selection. The 3D view includes layered nebula/arms/glow/lensing and bounded density/pixel ratio; context loss stops animation. Keep browser auto-refresh and removed filters disabled.
+
+Install frozen pnpm dependencies, run tests/lint/typecheck, then build on the deployment server. Copy prebuilt static output to emergency standby; do not rebuild a different frontend there. Standby is normally off. Read DESIGN.md, ARCHITECTURE.md, SECURITY.md and the parent handoff after any model or prompt-cache change.

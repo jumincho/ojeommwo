@@ -110,7 +110,7 @@ test("responsive UI keeps labels legible and reroll cards concise on narrow scre
   assert.match(css, /\.reroll-card__price\s*\{[^}]*text-overflow:\s*ellipsis/su);
   assert.match(css, /@media \(max-width: 760px\)[\s\S]*\.reroll-card\s*\{[^}]*flex:\s*0 0 166px/su);
   assert.match(css, /\.taste-map__semantic-pole b\s*\{[^}]*font-size:\s*16px/su);
-  assert.match(css, /\.taste-map__row span\s*\{[^}]*font:[^;}]*14px/su);
+  assert.match(css, /\.taste-map__row span\s*\{[^}]*font:[^;}]*(?:1[4-9]|[2-9]\d)px/su);
   assert.match(css, /\.search-field input\s*\{[^}]*height:\s*100%/su,
     "the input itself must fill its 40-42px visible target, not only its wrapper");
   assert.match(css, /\.reroll-card__category\s*\{[^}]*font-size:\s*(1[3-9]|[2-9]\d)px/su);

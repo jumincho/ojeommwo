@@ -132,6 +132,7 @@ The tests use the sanitized sample and synthetic stores, so they run without the
 Requires Node.js 22 or later.
 
 ```sh
+npm ci --omit=dev --ignore-scripts
 npm run check   # syntax and JSON checks
 npm test        # unit tests; no Slack workspace or credentials needed
 ```
@@ -146,9 +147,9 @@ To run the bot in your own workspace, copy `.env.example` to `.env` and fill in 
 
 ## Status
 
-Version **3.0**, launched on 2026-09-25. The release is labelled *GPT-6 Astra Max*; the production model is GPT-6 Luna with xhigh reasoning.
+Version **2.0**, launched on 2026-09-30. The release is labelled *GPT-6.1 Sol (max)*; the production model is GPT-6 Luna with xhigh reasoning.
 
-New in 3.0:
+New in 2.0:
 
 - Surveys given after a meal log count again; an old meal log no longer masks them indefinitely.
 - Fresher prices, coordinates from the branch's own page, and a retuned search for new restaurants.

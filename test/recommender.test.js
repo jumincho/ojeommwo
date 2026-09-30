@@ -478,3 +478,19 @@ test("selection uses the supplied clock for both taste decay and cooldown", () =
   assert.equal(first.find(item => item.category === "한식").restaurant, oldFavorite.restaurant);
   assert.equal(later.find(item => item.category === "한식").restaurant, newFavorite.restaurant);
 });
+
+
+test("first-time restaurant exploration breaks a neutral tie without overriding strong survey preference", () => {
+  const now = new Date("2026-09-30T00:00:00.000Z");
+  const seen = { ...baseCandidates[0], sourceRank: 4, ingredientFamilies: ["pork"] };
+  const fresh = { ...seen, restaurant: "새로운식당", menu: "매운제육덮밥" };
+  const history = { items: [{ ...seen, source: "scheduled-cache", recommendedAt: "2026-09-01T00:00:00.000Z" }] };
+  const options = { now, history, limit: 1, rng: () => 0.5 };
+  assert.equal(selectRecommendations([seen, fresh], options)[0].restaurant, fresh.restaurant);
+  const preferences = { responses: [{
+    source: "scheduled-cache", respondentId: "survey-person", submittedAt: now.toISOString(),
+    ratings: [{ restaurant: seen.restaurant, menu: seen.menu, category: seen.category, rating: 5 }]
+  }] };
+  assert.equal(selectRecommendations([seen, fresh], { ...options, candidatePreferences: preferences })[0].restaurant, seen.restaurant);
+  assert.equal(selectRecommendations([seen, { ...fresh, deliveryStatus: "likely", distanceKm: 4 }], options)[0].restaurant, seen.restaurant);
+});

@@ -1,3 +1,4 @@
+import { fetchHttp } from "./http-transport.js";
 import { config } from "./config.js";
 import { normalizeMealType } from "./meal-types.js";
 import { readBoundedResponseBytes } from "./bounded-response.js";
@@ -1337,7 +1338,7 @@ export function formatWeatherAlert(metrics) {
 export async function getWeatherAlert({
   mealType = "점심",
   now = new Date(),
-  fetchImpl = globalThis.fetch
+  fetchImpl = fetchHttp
 } = {}) {
   if (!config.weatherEnabled) return null;
   requireWeatherConfiguration();

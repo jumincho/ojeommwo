@@ -1,3 +1,4 @@
+import { fetchHttp } from "./http-transport.js";
 import { SERVICE_VERSION } from "./version.js";
 import { readBoundedResponseBytes } from "./bounded-response.js";
 import { parseDiningCodeCoordinates, parseTablingCoordinates } from "./evidence-coordinates.js";
@@ -577,7 +578,7 @@ async function verifyOneCandidate(candidate, { now, fetchImpl }) {
 
 export async function verifyCandidateResearchEvidence(candidates, {
   now = new Date(),
-  fetchImpl = globalThis.fetch,
+  fetchImpl = fetchHttp,
   diagnostics
 } = {}) {
   if (typeof fetchImpl !== "function") return [];

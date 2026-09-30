@@ -1,3 +1,4 @@
+import { fetchHttp } from "./http-transport.js";
 import { randomUUID } from "node:crypto";
 import { config } from "./config.js";
 import { RECOMMENDATION_LIMITS } from "./recommendation-limits.js";
@@ -51,7 +52,7 @@ export function validateMessageBlocks(blocks) {
 }
 
 export async function slackApi(method, body, token = config.slackBotToken, {
-  fetchImpl = globalThis.fetch,
+  fetchImpl = fetchHttp,
   timeoutMs = config.slackApiTimeoutMs,
   maxAttempts = 3,
   retryBaseMs = 250,
@@ -61,7 +62,7 @@ export async function slackApi(method, body, token = config.slackBotToken, {
   if (!/^[a-z][a-z0-9_.]+$/i.test(String(method || ""))) {
     throw new Error("Slack API method is invalid");
   }
-  if (process.env.NODE_ENV === "test" && fetchImpl === globalThis.fetch) {
+  if (process.env.NODE_ENV === "test" && (fetchImpl === fetchHttp || fetchImpl === globalThis.fetch)) {
     throw new Error("Slack API network access is disabled in NODE_ENV=test; inject fetchImpl for a mock request");
   }
   if (!token) throw new Error(`${method} failed: missing Slack bot token`);
