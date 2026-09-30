@@ -10,4 +10,4 @@ Install root dependencies with npm ci --omit=dev --ignore-scripts. Run npm run c
 
 Deploying a fork requires its own Sites project and credentials; never deploy to the bundled reference project. Standby is normally off and requires independently confirmed server failure, matching source seal, consistent fresh stores and a bounded lease. No automatic offsite backup is provided.
 
-Read HANDOFF, ARCHITECTURE, MODEL_EVALUATION and QUALITY_REPORT after a model change or a prompt cache miss. Planned next frontend and README reviewer: Claude Opus 5 (max).
+Read HANDOFF, ARCHITECTURE, MODEL_EVALUATION and QUALITY_REPORT after a model change or a prompt cache miss. Frontend and five-language README improvements by Claude Opus 5.5 (max) were integrated on 2026-09-30. Validate each later change against current source and deployment receipts.
