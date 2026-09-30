@@ -10,4 +10,4 @@
 
 참고 자료는 [WCAG 비텍스트 대비](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html), [Material motion](https://m3.material.io/styles/motion/overview/how-it-works), [Vercel design system 사례](https://vercel.com/blog/how-our-agents-build-on-brand-pages-with-design-md)다. 사용자가 제공한 scroll-world 같은 영상 중심 사례는 실제 메뉴 좌표·선택·가벼운 운용과 목적이 달라 유료 영상/생성 파이프라인을 추가하지 않았다.
 
-다음 Claude Opus 5 (max) 작업도 이 계약을 보존한다. 기존 효과에 장식을 더하는 것보다 실제 label/선택/가독성의 개선 근거를 우선한다.
+Claude Opus 5.5 (max)의 후속 label·별 선택 개선도 이 계약을 보존했다. 이후 프론트 작업에서도 이 계약을 유지한다. 기존 효과에 장식을 더하는 것보다 실제 label/선택/가독성의 개선 근거를 우선한다.
