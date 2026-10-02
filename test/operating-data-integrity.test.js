@@ -486,3 +486,16 @@ test("meal event integrity rejects raw identities and duplicate respondent meal 
     /respondent\/date\/meal slots must be unique/u
   );
 });
+
+test("meal schema permits a private rehearsal alongside a real slot but rejects repeats inside each scope", () => {
+  const event = {
+    eventId: "E-REAL", respondentId: "12345678-1234-5abc-adef-123456789abc", date: "2026-07-14",
+    menu: "제육", mealType: "점심", source: "scheduled-cache", tags: [],
+    channel: "C123ABC", messageTs: "123.456", createdAt: "2026-07-14T00:00:00.000Z"
+  };
+  const privateEvent = { ...event, eventId: "E-PRIVATE", source: "manual-private-test", channel: "D123ABC", messageTs: "234.567" };
+  assert.deepEqual(validateMealEventStore({ version: 1, events: [event, privateEvent] }), { eventCount: 2 });
+  for (const item of [event, privateEvent]) {
+    assert.throws(() => validateMealEventStore({ version: 1, events: [event, privateEvent, { ...item, eventId: "E-DUPLICATE" }] }), /respondent\/date\/meal slots must be unique/u);
+  }
+});

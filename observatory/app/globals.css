@@ -995,3 +995,12 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   .observatory-grid { min-height: 280px; }
   .reroll-shop { position: relative; }
 }
+
+/* Keep endpoint meaning legible without adding explanatory copy. */
+.taste-map__semantic-pole--negative small { color: #ffd1df; }
+.taste-map__semantic-pole--neutral small { color: #e2ebf8; }
+.taste-map__semantic-pole--positive small { color: #c7ffe0; }
+.taste-map__semantic-pole--negative { box-shadow: 0 0 20px rgba(255, 94, 145, 0.10); }
+.taste-map__semantic-pole--positive { box-shadow: 0 0 20px rgba(110, 255, 181, 0.10); }
+.menu-cosmos.is-paused .menu-cosmos__atmosphere::before,
+.menu-cosmos.is-paused .menu-cosmos__atmosphere::after { animation-play-state: paused; }

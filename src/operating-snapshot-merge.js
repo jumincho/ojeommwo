@@ -1,3 +1,4 @@
+import { mealSubmissionSlotKey } from "./history-policy.js";
 import fs from "node:fs";
 import path from "node:path";
 import { config } from "./config.js";
@@ -384,8 +385,8 @@ function mergeMealEvents(serverStore, localStore) {
 
   const slots = new Map();
   for (const [eventId, event] of eventsById) {
-    if (!event.respondentId || !event.date) continue;
-    const slot = `${event.respondentId}:${event.date}:${event.mealType}`;
+    const slot = mealSubmissionSlotKey(event);
+    if (!slot) continue;
     if (!slots.has(slot)) slots.set(slot, []);
     slots.get(slot).push({ eventId, event });
   }

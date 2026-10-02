@@ -5,6 +5,8 @@ import type { ErrorInfo, ReactNode } from "react";
 import type { MenuRecord, ObservatorySnapshot, TasteGravityEasterEgg } from "../types";
 import { nextCategorySelection } from "../lib/category-selection.mjs";
 import { validateSnapshot } from "../lib/snapshot-validator.mjs";
+import { loadSnapshotFromEndpoints } from "../lib/snapshot-loader.mjs";
+import { nextFactExpiry, projectSnapshotFreshness } from "../lib/snapshot-freshness.mjs";
 import { MenuCosmos } from "./MenuCosmos";
 import { RerollShop } from "./RerollShop";
 import { TasteMap } from "./TasteMap";
@@ -19,7 +21,6 @@ type SelectionState = {
 
 const formatter = new Intl.NumberFormat("ko-KR");
 const SNAPSHOT_CACHE_KEY = "ojeommwo-observatory:last-good:v2";
-const MAX_SNAPSHOT_TEXT_LENGTH = 5_000_000;
 const CONTROLS_OVERLAY_QUERY = "(max-width: 760px)";
 const DETAILS_OVERLAY_QUERY = "(max-width: 980px)";
 const FOCUSABLE_SELECTOR = [
@@ -542,42 +543,17 @@ export function Observatory() {
   const [error, setError] = useState<string | null>(null);
   const [snapshotNotice, setSnapshotNotice] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const [factClock, setFactClock] = useState(Date.now);
 
   useEffect(() => {
     const controller = new AbortController();
     let active = true;
 
     async function loadSnapshot() {
-      const requestController = new AbortController();
-      const abortRequest = () => requestController.abort();
-      let timedOut = false;
-      controller.signal.addEventListener("abort", abortRequest, { once: true });
-      const timeout = window.setTimeout(() => {
-        timedOut = true;
-        requestController.abort();
-      }, 15_000);
       try {
-        let data: ObservatorySnapshot | null = null;
-        let endpointError: unknown = null;
-        for (const endpoint of ["/api/snapshot/current", "/data/snapshot.json"] as const) {
-          try {
-            const response = await fetch(endpoint, { cache: "no-store", signal: requestController.signal });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const declaredLength = Number(response.headers.get("content-length"));
-            if (Number.isFinite(declaredLength) && declaredLength > MAX_SNAPSHOT_TEXT_LENGTH) {
-              throw new Error("데이터 파일이 허용 크기를 초과했습니다.");
-            }
-            const snapshotText = await response.text();
-            if (snapshotText.length > MAX_SNAPSHOT_TEXT_LENGTH) throw new Error("데이터 파일이 허용 크기를 초과했습니다.");
-            data = validateSnapshot(JSON.parse(snapshotText)) as ObservatorySnapshot;
-            break;
-          } catch (cause: unknown) {
-            if (requestController.signal.aborted) throw cause;
-            endpointError = cause;
-          }
-        }
-        if (!data) throw endpointError ?? new Error("스냅샷을 불러오지 못했습니다.");
+        const data = await loadSnapshotFromEndpoints({ signal: controller.signal }) as ObservatorySnapshot;
         if (!active) return;
+        setFactClock(Date.now());
         setSnapshot(data);
         setError(null);
         setSnapshotNotice(null);
@@ -588,9 +564,7 @@ export function Observatory() {
         }
       } catch (cause: unknown) {
         if (controller.signal.aborted || !active) return;
-        const message = timedOut
-          ? "요청 시간 초과"
-          : cause instanceof Error ? cause.message : "알 수 없는 연결 오류";
+        const message = cause instanceof Error ? cause.message : "알 수 없는 연결 오류";
         let cachedSnapshot: ObservatorySnapshot | null = null;
         try {
           const cached = window.localStorage.getItem(SNAPSHOT_CACHE_KEY);
@@ -599,15 +573,13 @@ export function Observatory() {
           cachedSnapshot = null;
         }
         if (cachedSnapshot) {
+          setFactClock(Date.now());
           setSnapshot(cachedSnapshot);
           setError(null);
           setSnapshotNotice("연결할 수 없어 이 브라우저에 저장된 메뉴를 표시합니다.");
         } else {
           setError(message);
         }
-      } finally {
-        window.clearTimeout(timeout);
-        controller.signal.removeEventListener("abort", abortRequest);
       }
     }
 
@@ -618,14 +590,25 @@ export function Observatory() {
     };
   }, [attempt]);
 
+  useEffect(() => {
+    if (!snapshot) return;
+    const update = () => setFactClock(Date.now());
+    const onVisible = () => { if (document.visibilityState === "visible") update(); };
+    document.addEventListener("visibilitychange", onVisible);
+    const expiry = nextFactExpiry(snapshot, Date.now());
+    const timer = expiry === null ? undefined : window.setTimeout(update, Math.min(2_147_483_647, Math.max(1, expiry - Date.now() + 1)));
+    return () => { window.clearTimeout(timer); document.removeEventListener("visibilitychange", onVisible); };
+  }, [snapshot, factClock]);
+  const displaySnapshot = useMemo(() => snapshot ? projectSnapshotFreshness(snapshot, factClock) as ObservatorySnapshot : null, [snapshot, factClock]);
+
   if (error) return <ErrorState message={error} retry={() => { setError(null); setAttempt((value) => value + 1); }} />;
-  if (!snapshot) return <LoadingState />;
+  if (!snapshot || !displaySnapshot) return <LoadingState />;
   return (
     <SnapshotRenderBoundary
       resetKey={`${attempt}:${snapshot.generatedAt}:${snapshot.source.sourceFingerprint}`}
       onReset={() => setAttempt((value) => value + 1)}
     >
-      <ObservatoryApp snapshot={snapshot} snapshotNotice={snapshotNotice} />
+      <ObservatoryApp snapshot={displaySnapshot} snapshotNotice={snapshotNotice} />
     </SnapshotRenderBoundary>
   );
 }

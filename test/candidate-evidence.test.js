@@ -581,3 +581,29 @@ test("verified evidence discards model URL annotations and unvisited URLs", asyn
   const result = await verifyCandidateResearchEvidence([input], { fetchImpl: async () => new Response(html) });
   assert.deepEqual(result[0].evidence, ["https://www.tabling.co.kr/place/abc123"]);
 });
+
+
+test("branch-only evidence cannot inherit model claims of destination delivery or platform prices", async () => {
+  const now = new Date("2026-10-03T00:00:00Z");
+  for (const provider of ["tabling", "diningcode"]) {
+    for (const exactPrice of [true, false]) {
+      const url = provider === "tabling"
+        ? "https://www.tabling.co.kr/place/abc123"
+        : "https://www.diningcode.com/profile.php?rid=branch123";
+      const identity = '<script>{"name":"근거식당","address":"전북 전주시 덕진구 테스트로 1",'
+        + '"latitude":35.8442,"longitude":127.1264,"classifications":["배달"]'
+        + (exactPrice ? ',"menu":"제육덮밥","price":"9,000원"' : '') + '}</script>';
+      const html = identity + '<input id="hdn_lat" value="35.8442"><input id="hdn_lng" value="127.1264"><span>배달 <b>3</b></span>'
+        + (exactPrice ? '' : '<div class="menu">제육덮밥 <strong>9,000원</strong></div>');
+      const input = { ...candidate(), priceEvidenceUrl: url, deliveryEvidenceUrl: url,
+        evidence: [url], deliveryStatus: "verified", priceChannel: "official-delivery" };
+      const result = await verifyCandidateResearchEvidence([input], {
+        now, fetchImpl: async () => new Response(html),
+      });
+      assert.equal(result.length, 1, `${provider} price mode ${exactPrice}`);
+      assert.equal(result[0].deliveryStatus, "likely");
+      assert.equal(result[0].priceChannel, "store");
+      assert.equal(result[0].priceText, "9,000원");
+    }
+  }
+});

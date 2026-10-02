@@ -97,8 +97,12 @@ function validateAvailability(menu, generatedTime, trail) {
     invariant(Date.parse(menu.availabilityCheckedAt) <= Date.parse(menu.availabilityExpiresAt), `${trail} availability interval is reversed`);
     invariant(Date.parse(menu.availabilityExpiresAt) >= generatedTime, `${trail} availability is already expired`);
   }
+  invariant((menu.priceCheckedAt === null) === (menu.priceExpiresAt === null), `${trail} price evidence requires a complete timestamp pair`);
+  if (menu.priceCheckedAt !== null) {
+    invariant(Date.parse(menu.priceCheckedAt) <= Date.parse(menu.priceExpiresAt), `${trail} price interval is reversed`);
+    invariant(Date.parse(menu.priceExpiresAt) >= generatedTime, `${trail} price is already expired`);
+  }
   if (!menu.availableNow) {
-    invariant(menu.priceCheckedAt === null && menu.priceExpiresAt === null, `${trail} unavailable records must not carry current price timestamps`);
     invariant(!menu.sources.includes("verified"), `${trail} unavailable records must not claim a verified source`);
     return;
   }

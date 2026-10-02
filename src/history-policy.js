@@ -31,3 +31,11 @@ export function isLearningHistoryItem(item) {
   return isNotPrivateTest(item)
     && !NON_LEARNING_NORMALIZATION_STATUSES.has(String(item?.normalizationStatus || ""));
 }
+
+// A DM rehearsal and a real meal are distinct submissions. Keep this key shared
+// by UI duplicate checks, storage validation, and emergency snapshot recovery.
+export function mealSubmissionSlotKey(event) {
+  if (!event?.respondentId || !event?.date) return "";
+  const scope = isNotPrivateTest(event) ? "production" : "private-test";
+  return `${event.respondentId}:${event.date}:${event.mealType}:${scope}`;
+}

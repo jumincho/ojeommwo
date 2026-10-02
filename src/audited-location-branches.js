@@ -13,37 +13,37 @@ const AUDITED_LOCATIONS = Object.freeze([
     restaurantKey: normalizeKey("본도시락"),
     branch: "전북대점",
     diningCodeRid: "QPwXHDtb7lGP",
-    addressToken: normalizeKey("조경단로 83"),
+    addressToken: "조경단로 83",
   }),
   Object.freeze({
     restaurantKey: normalizeKey("광장수산"),
     branch: "덕진광장로점",
     diningCodeRid: "bzDOMtvnugZq",
-    addressToken: normalizeKey("덕진광장로 1-11"),
+    addressToken: "덕진광장로 1-11",
   }),
   Object.freeze({
     restaurantKey: normalizeKey("하나요리당고"),
     branch: "전북대점",
     diningCodeRid: "2xHNItG0xclL",
-    addressToken: normalizeKey("권삼득로 333"),
+    addressToken: "권삼득로 333",
   }),
   Object.freeze({
     restaurantKey: normalizeKey("더 담다"),
     branch: "전북대점",
     tablingPlaceId: "677ccbd066de5f06987decbb",
-    addressToken: normalizeKey("권삼득로 333"),
+    addressToken: "권삼득로 333",
   }),
   Object.freeze({
     restaurantKey: normalizeKey("주모"),
     branch: "전북대점",
     diningCodeRid: "kQsMWwrcahu3",
-    addressToken: normalizeKey("명륜5길 8"),
+    addressToken: "명륜5길 8",
   }),
   Object.freeze({
     restaurantKey: normalizeKey("코지버거"),
     branch: "전북대점",
     diningCodeRid: "t1SdeO793r5P",
-    addressToken: normalizeKey("명륜3길 9-4"),
+    addressToken: "명륜3길 9-4",
   }),
   Object.freeze({
     restaurantKey: normalizeKey("모퉁이"),
@@ -52,7 +52,7 @@ const AUDITED_LOCATIONS = Object.freeze([
     correctIdentity: true,
     diningCodeRid: "ugffp3S7d2Yl",
     tablingPlaceId: "677cd7fa66de5f069893b106",
-    addressToken: normalizeKey("삼송3길 42 107호"),
+    addressToken: "삼송3길 42 107호",
   }),
 ]);
 
@@ -100,11 +100,23 @@ function evidenceUrls(record) {
   ].filter(Boolean);
 }
 
+function matchesAuditedAddress(value, token) {
+  // Preserve road/building-number boundaries: removing punctuation first made
+  // 83 match 830, 9-4 match 9-40, and 1-11 match 111. Unit/floor suffixes remain
+  // valid after an exact building number, but cannot extend that number.
+  const normalized = String(value || "").normalize("NFKC").replace(/,/gu, " ");
+  const pattern = token.split(/\s+/u).map((part) =>
+    part.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")
+      .replace(/\d+(?:-\d+)*/gu, "$&(?![\\d-])")
+  ).join("\\s*");
+  return new RegExp(pattern, "iu").test(normalized);
+}
+
 function auditedLocationFor(record) {
   if (!record || typeof record !== "object" || Array.isArray(record)) return "";
   const identity = canonicalizeRestaurantIdentity(record);
   const restaurantKey = normalizeKey(identity.restaurant);
-  const addressKey = normalizeKey(record.address);
+
   const urls = evidenceUrls(record);
   const rids = new Set(urls.map(diningCodeRid).filter(Boolean));
   const tablingPlaceIds = new Set(urls.map(tablingPlaceId).filter(Boolean));
@@ -112,7 +124,7 @@ function auditedLocationFor(record) {
     item.restaurantKey === restaurantKey
     && ((item.diningCodeRid && rids.has(item.diningCodeRid))
       || (item.tablingPlaceId && tablingPlaceIds.has(item.tablingPlaceId))
-      || (addressKey && addressKey.includes(item.addressToken)))
+      || matchesAuditedAddress(record.address, item.addressToken))
   )) || null;
 }
 

@@ -1,3 +1,4 @@
+import { mealSubmissionSlotKey } from "./history-policy.js";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -529,10 +530,10 @@ export function mergeMealEvent(store, event, {
   now = new Date()
 } = {}) {
   validateMealEventStore(store, { now });
+  const slot = mealSubmissionSlotKey(event);
   const previous = store.events.find((item) =>
     item.eventId === event.eventId
-    || (event.respondentId && item.respondentId === event.respondentId
-      && item.date === event.date && item.mealType === event.mealType));
+    || (slot && mealSubmissionSlotKey(item) === slot));
   if (previous) return { store, event: previous, inserted: false };
 
   const nowMs = currentTimeMs(now, "Meal event merge");

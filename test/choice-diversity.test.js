@@ -233,3 +233,17 @@ test("unspecified kebab protein stays unknown without changing named variants", 
   assert.deepEqual(ingredientFamiliesFor(item("아시안", "레반트", "양고기 케밥")), ["lamb"]);
   assert.deepEqual(ingredientFamiliesFor(item("아시안", "레반트", "닭고기 케밥")), ["poultry"]);
 });
+
+
+test("ingredient inference does not turn hamburger, gram units, or scrambled eggs into meat species", () => {
+  for (const [category, menu, supplied, expected] of [
+    ["버거", "햄버거", ["beef"], ["beef"]],
+    ["양식", "함박 햄버그 스테이크", ["beef"], ["beef"]],
+    ["구이", "삼겹살 300그램", ["pork"], ["pork"]],
+    ["샌드위치", "스크램블 에그 샌드위치", ["other"], ["other"]],
+    ["구이", "램 스테이크", ["other"], ["lamb"]],
+    ["구이", "프리미엄 램숄더랙", ["other"], ["lamb"]],
+    ["도시락", "햄 치즈 도시락", ["other"], ["pork"]],
+  ]) assert.deepEqual(ingredientFamiliesFor(item(category, "식당", menu,
+    { ingredientFamilies: supplied })), expected, menu);
+});

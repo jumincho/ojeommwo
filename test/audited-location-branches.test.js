@@ -73,3 +73,18 @@ test("audited location branches refuse fuzzy, conflicting, or untrusted matches"
     branch: "다른점",
   });
 });
+
+
+test("audited addresses require exact building numbers and preserve distinct units", () => {
+  for (const [restaurant, address] of [
+    ["본도시락", "전주시 덕진구 조경단로 830"],
+    ["본도시락", "전주시 덕진구 조경단로 83-1"],
+    ["광장수산", "전주시 덕진구 덕진광장로 1-110"],
+    ["광장수산", "전주시 덕진구 덕진광장로 111"],
+    ["코지버거", "전주시 덕진구 명륜3길 9-40"],
+  ]) assert.equal(auditedBranchForLocation({ restaurant, address }), "", address);
+  assert.equal(auditedBranchForLocation({ restaurant: "본도시락",
+    address: "전주시 덕진구 조경단로83 2층" }), "전북대점");
+  assert.equal(auditedIdentityCorrectionForLocation({ restaurant: "모퉁이",
+    address: "전주시 덕진구 삼송3길 42, 1070호" }), null);
+});

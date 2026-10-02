@@ -150,17 +150,15 @@ npm test        # 單元測試，毋須 Slack 工作區或憑證
 
 ## 現況
 
-版本 **2.0**（2.0.0），於 2026-09-30 正式推出。版本代號為 *GPT-6.1 Sol (max)*；實際運作的模型是 xhigh 推理的 GPT-6 Luna。
+版本 **2.5**（2.5.0），2026-10-03 正式推出。版本標註為 *GPT-6 Astra Ultra*；實際運作模型仍是 xhigh 推理的 GPT-6 Luna。
 
-2.0 的新變化：
+- 加強排程發送條件與私人 DM 隔離，保護群組用餐紀錄和偏好學習。
+- 已驗證目錄菜單與歷史偏好一同顯示，並嚴格處理載入時限及價格、配送證據的到期。
+- 保留現行韓語文案與功能，改善 3D 和口味地圖的可讀性與選取操作。
+- 已審查鎖定依賴、模型認證、國內天氣、運作資料和應急條件；驗證範圍請見品質報告。
+- 後續前端及 README 改善計劃由 Claude Opus 5 Ultracode 負責。
 
-- 未能進入現用候選名單的已驗證候選會保留在目錄中，經重新核實後仍可獲推薦。
-- 證據充分、但還未叫過的餐廳會獲 0.5 分的小幅加分。
-- Socket Mode 連線設有時限並會在出錯後清理，卡住的握手不會留下失效或重複的監聽器。
-- 機械人固定使用 Undici 7.29.1，不再依賴 Node 附帶的舊版本；觀測站憑 Undici 7.29.1、fast-uri 3.1.8 和 brace-expansion 5.0.12 通過了依賴審核。
-- 更大的 3D 類別標籤（24/25 px）會移到中心周圍的空位而不是消失，星星更容易點中或輕觸選中，口味地圖的行文字為 15 px，GPU 環境遺失時動畫會停止。
-
-設計文件（韓文）：[ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
+設計及發佈文件: [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [QUALITY_REPORT.md](QUALITY_REPORT.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
 
 ## 許可證
 

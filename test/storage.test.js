@@ -505,3 +505,27 @@ test("oversized UTF-8 and non-JSON writes preserve the primary and recovery copy
     fs.rmSync(dataDir, { recursive: true, force: true });
   }
 });
+
+test("private DM meals and production meals do not consume each other's daily slot", () => {
+  const event = {
+    eventId: "meal-production", respondentId: RESPONDENT_ID, date: "2026-07-14", mealType: "점심",
+    source: "scheduled-cache", restaurant: "밥집", menu: "제육", rating: 5, tags: [],
+    channel: "C123ABC", messageTs: "123.456", createdAt: "2026-07-14T00:00:00.000Z"
+  };
+  const privateEvent = { ...event, eventId: "meal-private", source: "manual-private-test", channel: "D123ABC", messageTs: "234.567" };
+  const now = new Date("2026-07-14T00:00:01.000Z");
+  for (const [firstEvent, secondEvent] of [[privateEvent, event], [event, privateEvent]]) {
+    const first = mergeMealEvent({ version: 1, events: [] }, firstEvent, { now });
+    const second = mergeMealEvent(first.store, secondEvent, { now });
+    assert.equal(second.inserted, true);
+    assert.equal(second.store.events.length, 2);
+    for (const existing of [event, privateEvent]) {
+      const duplicate = mergeMealEvent(second.store, { ...existing, eventId: `${existing.eventId}-again`, messageTs: "345.678" }, { now });
+      assert.equal(duplicate.inserted, false);
+      assert.equal(duplicate.event.eventId, existing.eventId);
+    }
+    const exactRetry = mergeMealEvent(first.store, { ...secondEvent, eventId: firstEvent.eventId }, { now });
+    assert.equal(exactRetry.inserted, false);
+    assert.equal(exactRetry.event.eventId, firstEvent.eventId);
+  }
+});

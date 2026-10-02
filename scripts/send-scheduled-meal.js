@@ -1,5 +1,6 @@
 import { config, assertRecommendationMode, assertRuntimeConfig } from "../src/config.js";
-import { slackApi } from "../src/slack.js";
+import { slackApi, postMessage } from "../src/slack.js";
+import { assertScheduledDeliveryAuthority } from "../src/scheduled-delivery-guard.js";
 import { executeMeal } from "../src/meal-service.js";
 import { normalizeMealType } from "../src/meal-types.js";
 import { validateStaticFallback } from "../src/recommender.js";
@@ -85,6 +86,9 @@ async function main() {
     }
   }
 
+  // Reject accidental direct tests before Slack preflight or failure alerts.
+  if (!dryRun && !authTest) assertScheduledDeliveryAuthority({ mealType });
+
   Object.assign(failureContext, {
     meal: mealType,
     channel,
@@ -118,7 +122,15 @@ async function main() {
     mealType,
     mode,
     source: sourceForMode(mode),
-    dryRun
+    dryRun,
+    dependencies: {
+      postMessage: async (payload) => {
+        // Preflight/weather work may cross the window or a deployment may
+        // begin meanwhile. Validate again immediately before the actual send.
+        assertScheduledDeliveryAuthority({ mealType });
+        return postMessage(payload);
+      }
+    }
   });
 
   if (!dryRun && result.weather === null) {

@@ -366,3 +366,9 @@ test("browser and operational Whopper protein contracts agree", () => {
     assert.equal(ingredientSearchTagsFor({ category: "버거", menu }).includes("beef · 소고기"), hasBeefWhopperPatty(menu), menu);
   }
 });
+
+
+test("Chinese noodle or rice menu keeps both staple choices searchable", () => {
+  const tags = ingredientSearchTagsFor({ restaurant: "프프프ver.2", menu: "우육마라미엔or밥", category: "중식", ingredientFamilies: ["beef"] });
+  for (const id of ["beef", "noodles", "rice"]) assert.ok(tags.some((tag) => tag.startsWith(`${id} ·`)));
+});

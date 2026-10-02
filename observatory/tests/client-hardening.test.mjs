@@ -129,13 +129,13 @@ test("mobile panels, snapshot fallback, map keyboard controls, and readable CSS 
   assert.match(observatory, /inert=\{\(detailsAreOverlay && !detailOpen\)/u);
   assert.match(observatory, /event\.key !== "Tab"/u);
   assert.match(observatory, /lastSelectionTriggerRef[\s\S]*\.focus\(\)/u);
-  assert.match(observatory, /validateSnapshot\(JSON\.parse\(snapshotText\)\)/u);
-  assert.match(observatory, /MAX_SNAPSHOT_TEXT_LENGTH/u);
+  assert.match(read("app/lib/snapshot-loader.mjs"), /validateSnapshot\(JSON\.parse\(snapshotText\)\)/u);
+  assert.match(read("app/lib/snapshot-loader.mjs"), /MAX_SNAPSHOT_TEXT_LENGTH/u);
   assert.match(observatory, /window\.localStorage\.setItem\(SNAPSHOT_CACHE_KEY/u);
   assert.match(observatory, /class SnapshotRenderBoundary/u);
   assert.match(observatory, /const selectionStillExists/u);
   assert.match(observatory, /nextCategorySelection\(selectedCategories, category, categoryIds\)/u);
-  assert.doesNotMatch(observatory, /setInterval|visibilitychange|최초 추천일 필터|현재 근거/u);
+  assert.doesNotMatch(observatory, /setInterval|최초 추천일 필터|현재 근거/u);
   assert.doesNotMatch(observatory, />신규 후보/u);
 
   assert.match(taste, /buildTasteBeeswarm/u);

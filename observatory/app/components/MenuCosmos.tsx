@@ -1462,7 +1462,8 @@ export function MenuCosmos({
               }
               hub.getWorldPosition(anchor);
               const distance = Math.max(1, camera.position.distanceTo(anchor));
-              const worldPerPixel = (2 * distance * halfFovTangent) / height;
+              const depth = Math.max(1, -categoryProjectedPosition.copy(anchor).applyMatrix4(camera.matrixWorldInverse).z);
+              const worldPerPixel = (2 * depth * halfFovTangent) / height;
               const labelAspect = Number(label.userData.labelAspect) || 3;
               label.scale.set(labelHeight * worldPerPixel * labelAspect, labelHeight * worldPerPixel, 1);
               return {
@@ -1677,7 +1678,7 @@ export function MenuCosmos({
   }, [paused, reducedMotion]);
 
   return (
-    <section className="menu-cosmos" id="cosmos-stage" aria-label="3차원 메뉴 코스모스" aria-describedby="cosmos-accessibility-note">
+    <section className={`menu-cosmos${paused ? " is-paused" : ""}`} id="cosmos-stage" aria-label="3차원 메뉴 코스모스" aria-describedby="cosmos-accessibility-note">
       <div ref={containerRef} className="menu-cosmos__canvas" aria-hidden="true" />
       <div className="menu-cosmos__atmosphere" aria-hidden="true"><i /><i /><i /></div>
       <p className="sr-only" id="cosmos-accessibility-note">

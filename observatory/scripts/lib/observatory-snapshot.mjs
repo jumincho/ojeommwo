@@ -258,10 +258,11 @@ function compareRecordPriority(left, right) {
   return Date.parse(right.timestamp || "") - Date.parse(left.timestamp || "");
 }
 
-function makeRecords({ historyItems, staticRecommendations, activeCandidates, mealEvents, ratings, generatedAt }) {
+function makeRecords({ historyItems, staticRecommendations, activeCandidates, researchedCatalog, mealEvents, ratings, generatedAt }) {
   return [
     ...historyItems.map((item) => ({ ...item, sourceKind: "history", timestamp: item.recommendedAt || generatedAt })),
-    ...staticRecommendations.map((item) => ({ ...item, sourceKind: "catalog", timestamp: generatedAt })),
+    ...researchedCatalog.map((item) => ({ ...item, sourceKind: "catalog", timestamp: item.evidenceVerifiedAt || generatedAt })),
+    ...staticRecommendations.map((item) => ({ ...item, sourceKind: "catalog", timestamp: "1970-01-01T00:00:00.000Z" })),
     ...activeCandidates.map((item) => ({ ...item, sourceKind: "verified", timestamp: item.priceCheckedAt || generatedAt })),
     ...expandMealEvents(mealEvents).map((item) => ({ ...item, sourceKind: "meal", timestamp: item.createdAt || generatedAt })),
     ...ratings.map((item) => ({ ...item, sourceKind: "preference", timestamp: item.createdAt || generatedAt })),
@@ -362,7 +363,7 @@ function addDays(value, days) {
   return new Date(time + days * DAY_MS).toISOString();
 }
 
-function availabilityProjection(candidate, storeDelivery, now) {
+function availabilityProjection(candidate, storeDelivery, now, priceCandidate = candidate) {
   const delivery = storeDelivery ?? candidate;
   if (!delivery) {
     return {
@@ -389,8 +390,8 @@ function availabilityProjection(candidate, storeDelivery, now) {
     availabilityExpiresAt: deliveryExpiresAt,
     deliveryStatus: delivery.deliveryStatus === "verified" ? "verified" : "likely",
     deliveryFreshness,
-    priceCheckedAt: candidate ? safeDate(candidate.priceCheckedAt, null) : null,
-    priceExpiresAt: candidate ? addDays(candidate.priceCheckedAt, config.researchPriceTtlDays) : null,
+    priceCheckedAt: priceCandidate ? safeDate(priceCandidate.priceCheckedAt, null) : null,
+    priceExpiresAt: priceCandidate ? addDays(priceCandidate.priceCheckedAt, config.researchPriceTtlDays) : null,
   };
 }
 
@@ -432,20 +433,23 @@ export function buildSnapshot({ dataDir, generatedAt = new Date().toISOString() 
     .filter(isLearningCandidatePreferenceResponse)
     .map(canonicalProjectionPreferenceResponse);
   const ratings = learningPreferenceRatings({ ...preferenceStore, responses: preferenceResponses });
-  const activeByKey = dedupeActiveCandidates(verifiedStore.candidates, now);
+  const invalidated = new Set(verifiedStore.invalidatedCandidateIds || []);
+  const allowedCandidate = (item) => !invalidated.has(candidateKey(item.restaurant, item.menu, item.branch));
+  const catalogRows = (Array.isArray(verifiedStore.catalog) ? verifiedStore.catalog : []).filter(allowedCandidate);
+  const activeRows = (Array.isArray(verifiedStore.candidates) ? verifiedStore.candidates : []).filter(allowedCandidate);
+  const activeByKey = dedupeActiveCandidates(activeRows, now);
   const activeCandidates = [...activeByKey.values()];
-  const currentPrices = dedupeCurrentPrices([
-    ...(Array.isArray(verifiedStore.catalog) ? verifiedStore.catalog : []),
-    ...(Array.isArray(verifiedStore.candidates) ? verifiedStore.candidates : []),
-  ], now);
-  const recentDeliveryByRestaurant = dedupeRecentDeliveryByRestaurant([
-    ...(Array.isArray(verifiedStore.catalog) ? verifiedStore.catalog : []),
-    ...(Array.isArray(verifiedStore.candidates) ? verifiedStore.candidates : []),
-  ], now);
+  // Retain discovered dishes beyond the small selectable pool. Their identity
+  // remains useful after fact TTLs expire; current price/delivery are separate.
+  const researchedCatalog = catalogRows.filter((item) => item.evidenceVerifiedAt)
+    .map(canonicalProjectionRecord);
+  const currentPrices = dedupeCurrentPrices([...catalogRows, ...activeRows], now);
+  const recentDeliveryByRestaurant = dedupeRecentDeliveryByRestaurant([...catalogRows, ...activeRows], now);
   const records = makeRecords({
     historyItems,
     staticRecommendations,
     activeCandidates,
+    researchedCatalog,
     mealEvents,
     ratings,
     generatedAt,
@@ -518,7 +522,8 @@ export function buildSnapshot({ dataDir, generatedAt = new Date().toISOString() 
       now,
     }));
     const menuRatings = surveyExact.get(key) || [];
-    const availability = availabilityProjection(active, storeDelivery, now);
+    const priceCandidate = currentPrices.get(key);
+    const availability = availabilityProjection(active, storeDelivery, now, priceCandidate);
     const publicRestaurant = cleanText(parsed.base).slice(0, 120);
     const publicBranch = cleanText(parsed.branch).slice(0, 80);
     const publicMenu = cleanText(preferred.menu).slice(0, 120);
@@ -531,7 +536,7 @@ export function buildSnapshot({ dataDir, generatedAt = new Date().toISOString() 
       restaurantLabel: formatRestaurant(publicRestaurant, publicBranch),
       menu: publicMenu,
       category,
-      priceText: cleanText(currentPrices.get(key)?.priceText || active?.priceText || preferred.priceText || historyRepresentative?.priceText || "가격 정보 없음").slice(0, 60),
+      priceText: cleanText(priceCandidate?.priceText || "가격 정보 없음").slice(0, 60),
       comment: publicComment,
       ingredientFamilies: ingredientSearchTagsFor({
         category,

@@ -150,17 +150,15 @@ npm test        # 単体テスト（Slack ワークスペースや認証情報�
 
 ## ステータス
 
-バージョン **2.0**（2.0.0）、2026-09-30 に正式リリース。リリース名は *GPT-6.1 Sol (max)* で、実際の運用モデルは xhigh 推論の GPT-6 Luna です。
+バージョン **2.5**（2.5.0）、2026-10-03 正式リリース。リリース表記は *GPT-6 Astra Ultra*、実際の運用モデルは xhigh 推論の GPT-6 Luna です。
 
-2.0 の変更点：
+- 予約投稿の条件確認と個人 DM の分離で、グループの食事記録と好みの学習を保護します。
+- 検証済みカタログのメニューと過去の好みを併せて表示し、読込期限と価格・配達情報の有効期限を反映します。
+- 現在の韓国語表記と機能を保ち、3D と好みマップの読みやすさや選択操作を改善しました。
+- 固定依存関係、モデル認証、国内気象情報、運用データと緊急運用の条件を点検しました。検証範囲は品質報告書を参照してください。
+- 今後のフロントエンドと README の改善は Claude Opus 5 Ultracode が担当する予定です。
 
-- すぐに使う候補リストに入らなかった検証済みの候補をカタログに残し、再検証を経て推薦できるようにしました。
-- 根拠が十分で、まだ頼んだことのない店に 0.5 点の小さな加点。
-- Socket Mode の接続に制限時間を設け、エラー後に片付けることで、止まったハンドシェイクが死んだリスナーや重複したリスナーを残しません。
-- ボットは Node に付属する古い版ではなく Undici 7.29.1 を固定して使い、観測所は Undici 7.29.1・fast-uri 3.1.8・brace-expansion 5.0.12 で依存関係の監査をクリアしました。
-- 大きくなった 3D カテゴリラベル（24/25 px）は消える代わりに中心の空いている側へ移り、星はクリックやタップで選びやすくなり、好みマップの行の文字は 15 px になり、GPU コンテキストが失われるとアニメーションを止めます。
-
-設計ドキュメント（韓国語）：[ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
+設計とリリース文書: [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [QUALITY_REPORT.md](QUALITY_REPORT.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
 
 ## ライセンス
 

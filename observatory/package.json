@@ -1,6 +1,6 @@
 {
   "name": "ojeommwo-observatory",
-  "version": "2.0.0",
+  "version": "2.5.0",
   "private": true,
   "type": "module",
   "description": "Read-only visual observatory for the ojeommwo-v2 recommendation data and taste model.",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "3d-force-graph": "1.79.0",
-    "next": "16.3.3",
+    "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "three": "0.180.0",

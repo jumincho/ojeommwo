@@ -284,8 +284,9 @@ test("only active deterministic candidates provide availability and current pric
     assert.equal(menu.sources.includes("verified"), true);
   }
   for (const menu of snapshot.menus.filter((item) => !item.availableNow)) {
-    assert.equal(menu.priceCheckedAt, null);
-    assert.equal(menu.priceExpiresAt, null);
+    assert.equal(menu.priceCheckedAt === null, menu.priceExpiresAt === null);
+    if (menu.priceExpiresAt) assert.ok(Date.parse(menu.priceExpiresAt) >= now.getTime());
+    else assert.equal(menu.priceText, "가격 정보 없음");
     assert.equal(menu.sources.includes("verified"), false);
     if (menu.deliveryStatus === null) {
       assert.equal(menu.deliveryFreshness, null);
@@ -504,6 +505,44 @@ test("semantic category adjudication survives every snapshot projection boundary
   } finally {
     fs.rmSync(fixture.root, { recursive: true, force: true });
   }
+});
+
+test("independently researched catalog-only menus appear and old prices never become current", () => {
+  const fixture = copyOperatingFixture();
+  try {
+    const store = readJson("verified-candidates.json", fixture.dataDir);
+    const sample = structuredClone(store.catalog.find((item) => normalizeVerifiedCandidate(item, { now: new Date(generatedAt) }) && hasCurrentDeterministicEvidence(item, { now: new Date(generatedAt) })));
+    assert.ok(sample);
+    // Identity-only stale records are safe to show but may not invent facts.
+    sample.restaurant = "감사전용식당"; sample.branch = "전북대점";
+    sample.menu = "삼겹살카레"; sample.category = "일식";
+    sample.candidateId = "감사전용식당:전북대점:삼겹살카레";
+    sample.priceText = "1,000원"; sample.priceCheckedAt = new Date(Date.parse(generatedAt) - 30 * 86_400_000).toISOString();
+    store.catalog.push(sample);
+    fs.writeFileSync(path.join(fixture.dataDir, "verified-candidates.json"), JSON.stringify(store));
+    const snapshot = buildSnapshot({ dataDir: fixture.dataDir, generatedAt });
+    const menu = snapshot.menus.find((item) => item.restaurant === "감사전용식당");
+    assert.ok(menu, "catalog menu omitted from projection");
+    assert.equal(menu.category, "일식");
+    assert.equal(menu.availableNow, false);
+    assert.equal(menu.priceText, "가격 정보 없음");
+    const seeds = readJson("recommendations.json", fixture.dataDir);
+    fs.writeFileSync(path.join(fixture.dataDir, "recommendations.json"), JSON.stringify([...seeds, { ...sample, comment: "묵은 김치와 함께 먹기 좋은 메뉴입니다." }]));
+    sample.priceCheckedAt = sample.evidenceVerifiedAt;
+    sample.priceText = "8,300원";
+    sample.comment = "고소한 카레와 촉촉한 삼겹살이 따뜻한 밥과 어우러져 든든하게 즐기기 좋은 한 끼입니다.";
+    store.catalog[store.catalog.length - 1] = sample;
+    fs.writeFileSync(path.join(fixture.dataDir, "verified-candidates.json"), JSON.stringify(store));
+    const current = buildSnapshot({ dataDir: fixture.dataDir, generatedAt }).menus.find((item) => item.restaurant === "감사전용식당");
+    assert.equal(current.priceText, "8,300원");
+    assert.ok(current.priceCheckedAt && current.priceExpiresAt);
+    assert.equal(current.comment, "고소한 카레와 촉촉한 삼겹살이 따뜻한 밥과 어우러져 든든하게 즐기기 좋은 한 끼입니다.");
+    assert.equal(current.availableNow, false);
+    fs.writeFileSync(path.join(fixture.dataDir, "recommendations.json"), JSON.stringify(seeds));
+    store.invalidatedCandidateIds = [...(store.invalidatedCandidateIds || []), sample.candidateId];
+    fs.writeFileSync(path.join(fixture.dataDir, "verified-candidates.json"), JSON.stringify(store));
+    assert.equal(buildSnapshot({ dataDir: fixture.dataDir, generatedAt }).menus.some((item) => item.restaurant === "감사전용식당"), false);
+  } finally { fs.rmSync(fixture.root, { recursive: true, force: true }); }
 });
 
 }

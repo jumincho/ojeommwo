@@ -154,8 +154,12 @@ function validateEvidence(menu, generatedTime, path) {
     invariant(Date.parse(menu.availabilityCheckedAt) <= Date.parse(menu.availabilityExpiresAt), path, "배달 가능 확인 시간이 뒤집혔습니다.");
     invariant(Date.parse(menu.availabilityExpiresAt) >= generatedTime, path, "생성 시점에 이미 만료된 배달 근거입니다.");
   }
+  invariant((menu.priceCheckedAt === null) === (menu.priceExpiresAt === null), path, "가격 근거에 확인·유효 시간이 함께 필요합니다.");
+  if (menu.priceCheckedAt !== null) {
+    invariant(Date.parse(menu.priceCheckedAt) <= Date.parse(menu.priceExpiresAt), path, "가격 확인 시간이 뒤집혔습니다.");
+    invariant(Date.parse(menu.priceExpiresAt) >= generatedTime, path, "생성 시점에 이미 만료된 가격 근거입니다.");
+  }
   if (!menu.availableNow) {
-    invariant(menu.priceCheckedAt === null && menu.priceExpiresAt === null, path, "현재 미검증 메뉴가 가격 확인 시간을 포함하고 있습니다.");
     invariant(!menu.sources.includes("verified"), `${path}.sources`, "현재 미검증 메뉴가 검증됨으로 표시되어 있습니다.");
     return;
   }

@@ -150,17 +150,15 @@ To run the bot in your own workspace, copy `.env.example` to `.env` and fill in 
 
 ## Status
 
-Version **2.0** (2.0.0), released on 2026-09-30. The release is labelled *GPT-6.1 Sol (max)*; the production model is GPT-6 Luna with xhigh reasoning.
+Version **2.5** (2.5.0), released 2026-10-03. The release label is *GPT-6 Astra Ultra*; the runtime model remains GPT-6 Luna with xhigh reasoning.
 
-New in 2.0:
+- Scheduled-send guards and private-DM isolation protect shared meal history and taste.
+- Verified catalog menus appear alongside historical taste, with bounded loading and honest expiry for price/delivery evidence.
+- 3D and taste-map readability and selection are improved while keeping the current Korean wording and features.
+- Locked dependencies, model authentication, domestic weather, operating data and emergency guards were reviewed; see the scoped quality report.
+- A later frontend and README improvement pass is planned for Claude Opus 5 Ultracode.
 
-- Verified finds that miss the active shortlist are kept in the catalog and can be recommended after re-verification.
-- A small 0.5-point bonus for a well-evidenced restaurant the lab has not tried yet.
-- Socket Mode connections with a deadline and clean-up after errors, so a stalled handshake cannot leave a dead or duplicate listener.
-- Undici 7.29.1 pinned for the bot instead of the older copy bundled with Node, and a clean observatory audit with Undici 7.29.1, fast-uri 3.1.8 and brace-expansion 5.0.12.
-- Larger 3D category labels (24/25 px) that move to a free side of their hub instead of disappearing, stars that are easier to click or tap, 15 px taste-map rows, and animation that stops if the GPU context is lost.
-
-Design notes (in Korean): [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
+Design and release notes: [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [QUALITY_REPORT.md](QUALITY_REPORT.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
 
 ## License
 

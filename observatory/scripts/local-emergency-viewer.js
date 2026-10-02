@@ -1,6 +1,7 @@
 "use strict";
 
 const state = { menus: [] };
+let expiryTimer;
 const searchInput = document.querySelector("#menu-search");
 const rows = document.querySelector("#menu-rows");
 const status = document.querySelector("#snapshot-status");
@@ -27,24 +28,32 @@ function render() {
     ...(Array.isArray(menu.ingredientFamilies) ? menu.ingredientFamilies : []),
   ].join(" ")).includes(query));
   const fragment = document.createDocumentFragment();
+  const now = Date.now();
   for (const menu of visible) {
+    const priceCurrent = Date.parse(menu.priceExpiresAt) > now;
+    const deliveryCurrent = Date.parse(menu.availabilityExpiresAt) > now;
+    const availableNow = menu.availableNow && priceCurrent && deliveryCurrent;
     const row = document.createElement("tr");
     appendCell(row, menu.menu);
     appendCell(row, menu.restaurant);
     appendCell(row, menu.branch || "-");
     appendCell(row, menu.category);
     appendCell(row, Array.isArray(menu.ingredientFamilies) ? menu.ingredientFamilies.join(", ") : "-");
-    appendCell(row, menu.priceText);
-    appendCell(row, `${Math.round(Number(menu.taste?.mean || 0.5) * 100)}%`);
+    appendCell(row, priceCurrent ? menu.priceText : "가격 정보 없음");
+    appendCell(row, `${Math.round(Number(menu.taste?.mean ?? 0.5) * 100)}%`);
     appendCell(row, menu.occurrences);
     appendCell(
       row,
-      menu.availableNow ? "현재 검증됨" : "이력 정보",
-      menu.availableNow ? "availability-current" : "availability-history",
+      availableNow ? "현재 검증됨" : "이력 정보",
+      availableNow ? "availability-current" : "availability-history",
     );
     fragment.append(row);
   }
   rows?.replaceChildren(fragment);
+  clearTimeout(expiryTimer);
+  const futureTimes = state.menus.flatMap((menu) => [menu.priceExpiresAt, menu.availabilityExpiresAt])
+    .map((value) => Date.parse(value)).filter((time) => Number.isFinite(time) && time > now);
+  if (futureTimes.length) expiryTimer = setTimeout(render, Math.min(2_147_483_647, Math.max(1, Math.min(...futureTimes) - now + 1)));
   if (emptyState) emptyState.hidden = visible.length !== 0;
   if (status?.dataset.ready === "true") {
     status.textContent = `전체 ${state.menus.length.toLocaleString("ko-KR")}개 중 ${visible.length.toLocaleString("ko-KR")}개 메뉴를 표시합니다.`;
@@ -74,4 +83,5 @@ async function loadSnapshot() {
 }
 
 searchInput?.addEventListener("input", render);
+window.addEventListener("focus", render);
 void loadSnapshot();

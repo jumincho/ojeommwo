@@ -1,13 +1,15 @@
-# Ojeommwo v2 contributor rules
+# Ojeommwo v2.5 contributor rules
 
-The bot owns recommendation data and writes. `observatory/` is the integrated read-only website. Preserve the 19 meal categories, canonical identities, ingredient tags, cooldowns, Korean interface wording and existing features. Keep /bap and participant counts removed. Do not add browser polling.
+Release: 2.5.0 (v2.5), 2026-10-03T00:56:08+09:00. User-requested attribution: GPT-6 Astra Ultra. Runtime: GPT-6 Luna / xhigh.
 
-Runtime research uses gpt-6-luna with xhigh and web search. Deterministic code validates evidence and handles ranking, preference weights, deduplication and atomic writes. Explicit food shapes override misleading ingredient or restaurant names; ambiguous identities require grounded model adjudication.
+The integrated server project owns the bot, original stores and `observatory/` child project. Sites hosts only the read-only website and sanitized aggregate snapshot. Runtime research uses `gpt-6-luna` with `xhigh` and web search. Preserve 19 meal categories, canonical identities, ingredient tags, cooldowns, Korean UI wording, percentages and existing features. Keep `/bap`, participant counts and browser polling removed.
 
-Never send tests to a shared meal channel. Use mocks, dry runs and capability reads. A private operator DM requires the installation owner's explicit instruction. Exclude private test contexts from learning. Production identifiers in this public checkout are placeholders.
+Model output is an untrusted structured claim. Code verifies branch identity, pages, prices, delivery, distance, category structure and expiry before atomic writes. The model never writes original stores or replaces reproducible preference/ranking arithmetic. Strong dish forms protect against ingredient-driven errors; genuinely ambiguous categories use identity-bound model adjudication.
 
-Install root dependencies with npm ci --omit=dev --ignore-scripts. Run npm run check and npm test. Inside observatory install frozen pnpm dependencies and run tests, lint and typecheck. Original operating stores, credentials, private receipts and recovery paths do not belong in this repository. The sanitized public snapshot and synthetic fixtures support independent tests.
+Never test-send to a shared meal channel. Use mocks, dry runs and capability reads; an operator DM requires the installation owner's explicit instruction. Private DM input and preview contexts must not influence group taste or meal history. Public checkout identifiers are placeholders. Secrets, original stores, receipts, OAuth state and runtime logs must not enter Git.
 
-Deploying a fork requires its own Sites project and credentials; never deploy to the bundled reference project. Standby is normally off and requires independently confirmed server failure, matching source seal, consistent fresh stores and a bounded lease. No automatic offsite backup is provided.
+Install root dependencies with `npm ci --omit=dev --ignore-scripts`; run `npm run check`, `npm test`, `npm run observatory:validate` and `npm run observatory:test`. Observatory build checks additionally need frozen pnpm dependencies, lint and typecheck. Build production UI on the authoritative deployment server, then copy its static emergency build. A fork needs its own Sites project and credentials; never deploy to the bundled reference project.
 
-Read HANDOFF, ARCHITECTURE, MODEL_EVALUATION and QUALITY_REPORT after a model change or a prompt cache miss. Frontend and five-language README improvements by Claude Opus 5.5 (max) were integrated on 2026-09-30. Validate each later change against current source and deployment receipts.
+Standby is normally OFF. Activation needs a matching source seal, seven consistent stores no older than 24 hours, valid recommendation evidence, independently confirmed primary outage and a bounded lease. Recovery or expiry stops standby. No automatic offsite backup is provided, so an unsynchronized standby may correctly refuse activation.
+
+After a model replacement or prompt cache miss, read `HANDOFF.md`, `ARCHITECTURE.md`, `MODEL_EVALUATION.md`, `QUALITY_REPORT.md` and `observatory/HANDOFF.md`; inspect actual code and rerun relevant checks. No remembered conversation or prompt cache is authoritative. A later frontend and README improvement pass is planned for Claude Opus 5 Ultracode; it is not part of this release's completed work.

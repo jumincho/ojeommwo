@@ -142,10 +142,10 @@ test("snapshot loads once, keeps a last-known-good fallback, and excludes intern
   const observatory = read("app/components/Observatory.tsx");
   const taste = read("app/components/TasteRail.tsx");
   const css = read("app/globals.css");
-  assert.doesNotMatch(observatory, /setInterval|visibilitychange|SNAPSHOT_REVALIDATE/u);
-  assert.match(observatory, /15_000/u);
-  assert.match(observatory, /\["\/api\/snapshot\/current", "\/data\/snapshot\.json"\]/u);
-  assert.match(observatory, /validateSnapshot\(JSON\.parse\(snapshotText\)\)/u);
+  assert.doesNotMatch(observatory, /setInterval|SNAPSHOT_REVALIDATE/u);
+  assert.match(read("app/lib/snapshot-loader.mjs"), /10_000, 5_000/u);
+  assert.match(read("app/lib/snapshot-loader.mjs"), /\["\/api\/snapshot\/current", "\/data\/snapshot\.json"\]/u);
+  assert.match(read("app/lib/snapshot-loader.mjs"), /validateSnapshot\(JSON\.parse\(snapshotText\)\)/u);
   assert.match(observatory, /이 브라우저에 저장된 메뉴를 표시합니다/u);
   assert.match(observatory, /nextCategorySelection\(selectedCategories, category, categoryIds\)/u);
   assert.doesNotMatch(observatory, /최초 추천일 필터|현재 근거|추천 묶음|선호 점수|선호 반영 방식|데이터 최신/u);

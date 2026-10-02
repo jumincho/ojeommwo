@@ -310,3 +310,32 @@ test("a stale meal modal cannot overwrite the first stored event", () => {
   });
   assert.equal(persisted.duplicate, true);
 });
+
+test("DM meal rehearsal leaves the real meal modal available and vice versa", () => {
+  const now = new Date("2026-07-14T04:00:00.000Z");
+  for (const [existingSource, nextSource] of [["manual-private-test", "scheduled-cache"], ["scheduled-cache", "manual-private-test"]]) {
+    const existingChannel = existingSource === "manual-private-test" ? "D1" : "C1";
+    const nextChannel = nextSource === "manual-private-test" ? "D1" : "C1";
+    const existing = parseMealSubmission({
+      user: { id: "U1" },
+      view: {
+        callback_id: "actual_meal_submission",
+        private_metadata: JSON.stringify({ channel: existingChannel, messageTs: "1.9", mealType: "점심", source: existingSource, submissionDate: "2026-07-14", recommendations }),
+        state: { values: { meal_choice: { selected_choice: { selected_option: { value: "0" } } } } }
+      }
+    }).event;
+    const payload = {
+      user: { id: "U1" }, channel: { id: nextChannel }, message: { ts: "2.0" },
+      actions: [{ value: encodeMealInteractionContext({ mealType: "점심", source: nextSource, recommendations }) }]
+    };
+    const modal = modalForBlockAction(payload, { events: { version: 1, events: [existing] }, now });
+    assert.equal(modal.callback_id, "actual_meal_submission");
+    assert.ok(modal.submit);
+    payload.channel.id = existingChannel;
+    payload.actions[0].value = encodeMealInteractionContext({ mealType: "점심", source: existingSource, recommendations });
+    assert.equal(modalForBlockAction(payload, { events: { version: 1, events: [existing] }, now }).submit, undefined);
+    payload.message.ts = "1.9";
+    payload.actions[0].value = encodeMealInteractionContext({ mealType: "점심", source: nextSource, recommendations });
+    assert.equal(modalForBlockAction(payload, { events: { version: 1, events: [existing] }, now }).submit, undefined);
+  }
+});

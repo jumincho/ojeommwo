@@ -224,7 +224,7 @@ cd "$project_root"
 if maintenance_guard; then exit 0; else maintenance_code=$?; [ "$maintenance_code" -eq 1 ] || exit 1; fi
 log "starting scheduled meal: meal=$meal channel=$channel mode=$mode dryRun=$dry_run"
 set +e
-"$node_exe" "${args[@]}" >>"$log_path" 2>&1
+OJEOMMWO_SCHEDULED_ENTRY=server-cron "$node_exe" "${args[@]}" >>"$log_path" 2>&1
 exit_code=$?
 set -e
 if ! "$node_exe" scripts/prune-runtime-artifacts.js >>"$log_path" 2>&1; then

@@ -15,6 +15,7 @@ function runScheduled(args) {
     env: {
       ...process.env,
       NODE_ENV: "test",
+      OJEOMMWO_SCHEDULED_ENTRY: "",
       SLACK_BOT_TOKEN: "xoxb-test-suite",
       SLACK_APP_TOKEN: "xapp-test-suite",
       LUNCH_CHANNEL_ID: REQUIRED_LUNCH_CHANNEL_ID,
@@ -100,4 +101,12 @@ test("scheduled live delivery performs the read-only Slack target preflight befo
   assert.ok(preflightOffset >= 0, "Slack target preflight must be present");
   assert.ok(deliveryOffset > preflightOffset, "Slack target preflight must run before executeMeal");
   assert.match(source, /if \(!dryRun\) \{\s+const capability = await verifySlackDeliveryTarget/u);
+});
+
+
+test("direct scheduled CLI cannot post to lunch or send an operations alert", () => {
+  const result = runScheduled(["--meal", "lunch", "--channel", REQUIRED_LUNCH_CHANNEL_ID, "--mode", "cache"]);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /fenced platform wrapper/);
+  assert.doesNotMatch(`${result.stdout}\n${result.stderr}`, /network access is disabled|failure alert failed|\[scheduled\] starting/);
 });

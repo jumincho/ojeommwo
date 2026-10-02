@@ -167,10 +167,12 @@ try {
   Push-Location $ProjectRoot
   try {
     $PreviousObservatoryLink = [Environment]::GetEnvironmentVariable("ENABLE_OBSERVATORY_LINK", "Process")
+    $PreviousScheduledEntry = [Environment]::GetEnvironmentVariable("OJEOMMWO_SCHEDULED_ENTRY", "Process")
     try {
       # The public observatory lives on the primary server. A local emergency
       # delivery must not publish a button that is known to be unavailable.
       $env:ENABLE_OBSERVATORY_LINK = "false"
+      $env:OJEOMMWO_SCHEDULED_ENTRY = "local-emergency"
       Write-LocalEmergencyLog "starting local emergency meal: meal=$Meal channel=$Channel mode=$Mode dryRun=$DryRun observatoryLink=false"
       $PreviousErrorActionPreference = $ErrorActionPreference
       $ErrorActionPreference = "Continue"
@@ -182,6 +184,11 @@ try {
         $ErrorActionPreference = $PreviousErrorActionPreference
       }
     } finally {
+      if ($null -eq $PreviousScheduledEntry) {
+        Remove-Item Env:\OJEOMMWO_SCHEDULED_ENTRY -ErrorAction SilentlyContinue
+      } else {
+        $env:OJEOMMWO_SCHEDULED_ENTRY = $PreviousScheduledEntry
+      }
       if ($null -eq $PreviousObservatoryLink) {
         Remove-Item Env:\ENABLE_OBSERVATORY_LINK -ErrorAction SilentlyContinue
       } else {

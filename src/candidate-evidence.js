@@ -554,10 +554,12 @@ async function verifyOneCandidate(candidate, { now, fetchImpl }) {
       ...coordinates,
       ...(verifiedMenuPrice !== null ? {
         priceText: `${verifiedMenuPrice.toLocaleString("en-US")}원`,
-        // These two evidence providers expose store menu prices, not a
-        // target-address delivery checkout quote.
-        priceChannel: "store",
       } : {}),
+      // Both supported providers establish a branch's menu and delivery
+      // service. Neither checks delivery checkout at the target address or
+      // a delivery-platform price, even when a model claims otherwise.
+      priceChannel: "store",
+      deliveryStatus: "likely",
       priceCheckedAt: now.toISOString(),
       deliveryCheckedAt: now.toISOString(),
       evidenceVerifiedAt: now.toISOString(),

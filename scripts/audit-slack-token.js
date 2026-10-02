@@ -1,9 +1,10 @@
+import { fetchHttp } from "../src/http-transport.js";
 import { config, assertRuntimeConfig } from "../src/config.js";
 import { readBoundedResponseBytes } from "../src/bounded-response.js";
 
 assertRuntimeConfig({ requireBotToken: true });
 
-const response = await fetch("https://slack.com/api/auth.test", {
+const response = await fetchHttp("https://slack.com/api/auth.test", {
   method: "POST",
   headers: {
     authorization: `Bearer ${config.slackBotToken}`,

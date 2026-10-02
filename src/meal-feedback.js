@@ -1,3 +1,4 @@
+import { mealSubmissionSlotKey } from "./history-policy.js";
 import { config } from "./config.js";
 import { mealContextForBlockAction } from "./interaction-context.js";
 import { respondentIdForPayload, slackUserIdForPayload, stablePseudonymousId } from "./interaction-identity.js";
@@ -176,9 +177,9 @@ export function modalForBlockAction(payload, {
   const respondentId = respondentIdForPayload(payload);
   const date = kstDateKey(now);
   const mealType = normalizeMealType(context.mealType || "meal");
+  const slot = mealSubmissionSlotKey({ respondentId, date, mealType, source: context.source });
   const duplicate = (events.events || []).some((event) =>
-    event.eventId === eventId
-    || (event.respondentId === respondentId && event.date === date && event.mealType === mealType));
+    event.eventId === eventId || mealSubmissionSlotKey(event) === slot);
   return duplicate
     ? buildMealSubmissionConfirmation({ duplicate: true })
     : buildMealFeedbackModal({ ...context, now });

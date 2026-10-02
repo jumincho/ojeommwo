@@ -1,52 +1,39 @@
-# 현재 구조
+# Ojeommwo v2.5 architecture
 
-제품 v2 / 2.0.0. 서버의 통합 프로젝트가 기준이며 관측소는 `observatory/` 하위 모듈이다.
+Release: 2.5.0 (v2.5), 2026-10-03T00:56:08+09:00. User-requested attribution: GPT-6 Astra Ultra. Runtime: GPT-6 Luna / xhigh.
 
 ```text
-host pororo cron -> docker ojeommwo -> scripts/*.sh -> Slack cache 발송 / 후보 재검증
-Slack Socket Mode -> interaction-listener -> 모달/설문/커피 -> 스키마 검증 + JSON store
-실제 식사 입력 -> trash 검사 + 별칭 -> Luna 웹 검색 -> 지점/메뉴 본문 검증 -> 정규 기록
-후보 탐색 -> Luna 웹 검색/의미 분류 -> 독립 HTML 근거 검증 -> active + catalog
-JSON store -> Beta 선호 계산 + cooldown + 다양성 최적화 -> 3개 추천
-JSON store -> 공개 집계 export -> 인증된 snapshot 전송 -> Sites Worker R2 -> 관측소
-server source + static out + 7개 store -> Windows OFF 비상 사본
+server cron -> bounded wrappers -> verified candidate refresh / scheduled Slack send
+Slack Socket Mode -> immediate acknowledgement -> validation / survey / meal normalization
+local meal wording -> trash rejection -> aliases + Luna search -> verified canonical identity
+original JSON stores -> Bayesian taste + cooldown + diversity -> three meal choices
+original stores + verified catalog -> sanitized snapshot -> authenticated Sites Worker / R2
+Sites page -> bounded API load -> static snapshot fallback -> validated browser cache
+server source + static emergency build + seven stores -> normally-OFF Windows standby
 ```
 
-## 파일 책임
+`src/` owns the bot contracts, food taxonomy, evidence, ranking, feedback, weather and persistence; `prompts/` defines structured model output. `config/` holds explicit restaurant/menu aliases. `scripts/` contains bounded operational CLIs and emergency deployment. `test/` covers the bot. `observatory/app`, `worker`, `build`, `scripts` and `tests` are one child module, not a sibling deployment or another writer of the original database.
 
-| 영역 | 파일/폴더 | 책임 |
-|---|---|---|
-| 계약 | config.js, version.js, categories.js, text.js | 고정 설정, 릴리즈, 카테고리/음식 형식, 식당·메뉴 identity |
-| 의미 분류 | category-arbitration.js, prompts/ | Luna 신뢰 선언·구조 검증·identity-bound stamp·애매한 분류 판정 |
-| 후보 | candidate-research.js, candidate-evidence.js, verified-candidates.js | 계획, TTL, 근거 페이지, 가격·배달·좌표·폐점, reserve와 저장 |
-| 추천 | recommender.js, choice-diversity.js, cooldown.js, taste-profile.js | 확률적 탐색을 섞은 선호 점수, 엄격한 재추천 제한, 최적의 다양한 3개 조합 |
-| Slack | meal-service.js, slack.js, message.js, dm-preview.js | 보호 대상, 메시지, 유한 재시도, outbox, 테스트 분리 |
-| 입력 | interaction-*.js, meal-feedback.js, meal-normalization.js, meal-event-normalizer.js | 즉시 ack, 모달, 무효 입력 차단, 정규화, 동시성 |
-| 운영 데이터 | storage.js, operating-*.js, secure-file.js, time-integrity.js | 7개 store 검증, 잠금·원자적 저장, snapshot·merge·시간 검증 |
-| 외부 통신 | http-transport.js, weather.js, codex-cli.js | 고정 수정 통신, 국내 날씨, 비특권/제한된 모델 작업 |
-| 점검/운영 | health.js, scripts/, test/ | 운영 health, 스케줄 fence, 배포·동기화·비상 모드, 회귀 검사 |
-| 사이트 | observatory/app, worker, build, scripts, tests | 브라우저, CSP/R2, 서버 빌드, 공개 projection와 검사 |
+## Decisions and data
 
-## 신뢰 경계
+Luna/xhigh researches restaurants and ambiguous meal/category meanings. It has no authority to write stores. Deterministic gates check independent branch/menu HTML, public URLs, coordinates, closure, distance, current prices, delivery and food shape. An ingredient such as bulgogi cannot turn pizza into Korean food. Known aliases collapse whitespace and spelling variants; uncertain identities stay retryable or rejected rather than entering as unsupported guesses.
 
-Luna는 웹에서 신원을 찾고 분류를 판단한다. 출력은 신뢰하지 않는 구조화된 주장으로 받아, 스키마·거리·canonical identity·허용 웹 주소·실제 본문·가격 결합·배달 운영·TTL·음식 다양성 검증을 통과시킨다. 모델은 운영 DB를 직접 수정하지 않는다. Codex 작업은 비특권 일회성 환경이며 인증 source와 파일/환경비밀을 웹 입력에서 분리한다.
+Taste starts at Beta(3,3), weighs recommended-menu surveys at 0.9 and actual meal records at 1.0, and decays with a 180-day half-life. Repeated same-person input is deduplicated/damped across both channels; neutral and missing responses do not become dislikes. Ranking blends 82% stable posterior mean and 18% Beta exploration with a small 0.5 bonus for a well-evidenced untried restaurant. Hard cooldown, distance, evidence and meal diversity gates still apply.
 
-카테고리 판정은 실제 음식 형태를 보호한다. 피자의 불고기, 카레의 삼겹살 같은 재료 키워드가 형식을 뒤집지 않는다. 합성 메뉴 등 충돌하는 구조적 형태는 검증된 Luna 의미 판정에 맡긴다. 이 계약을 입력·검색·기존 DB·Slack·관측소가 함께 사용한다.
+The active candidate set holds up to 12 items; a bounded catalog preserves other verified discoveries and re-verifies them in rotation. Exploration and readiness are separate: optional new-restaurant research cannot destroy a viable prepared pool. New candidates must support two distinct three-choice meal sets. Refresh distinguishes operational failure from a harmless optional discovery shortfall.
 
-## 점수와 신호
+## Freshness and publication
 
-선호는 Beta 사전 (3,3)에서 시작한다. 실제 식사와 추천 후보 설문을 동시에 반영하되 설문 0.9, 실제 1.0의 가중치와 180일 반감기를 적용한다. 정확한 메뉴/식당 일치는 강하고 카테고리 전이는 약하다. 같은 응답자의 하루 중복과 반복을 제한한다. 3점/미선택은 부정으로 해석하지 않는다.
+Recommendation price evidence expires after 7 days and delivery/HTML evidence after 3 days. Actual pages are revisited; identity, closure or branch mismatch removes eligibility. Still-valid evidence may survive a transient provider error, but an expired claim never becomes current solely because it was cached. Catalog identity and past preference can remain visible independently of expiring commercial facts.
 
-추천 score는 검증된 source 우선, 배달/가격 근거 신뢰, taste, 작은 category 동점 처리, 첫 식당 0.5점, 원거리 likely 배달 패널티를 사용한다. 82% posterior mean + 18% Beta sample이므로 늘 최고 선호만 선택하지 않는다. restaurant/menu cooldown을 완화하지 않고 카테고리·식당·메뉴·주재료가 겹치지 않는 조합의 합계 점수를 최적화한다.
+The public snapshot combines eligible catalog identities with historical aggregate taste. Display evidence has its own explicit expiry; a retained restaurant name is not a promise of current price or delivery. Browsers bound the API fetch to 10 seconds and static fallback to 5 seconds, then use only a schema-valid local cache. Local expiry timers and visibility changes hide expired display facts without making network polls. Normal server exports continue every ten minutes; an open page does not auto-fetch them.
 
-## 신선도와 용량
+Snapshot upload uses authenticated bounded chunks, SHA-256, bounded decompression, commit receipts and R2 conditional writes. Retry of an already committed payload is idempotent; older data cannot replace a newer object. Browser rendering, schema validation and contract fingerprints defend against HTTP 200 responses with invalid or stale data. Public source has its own fingerprint because deployment identifiers are sanitized.
 
-가격 근거 7일, 배달 및 HTML 검증 3일이 기본 TTL이며 갱신 때 active 및 순환 catalog 페이지를 다시 가져온다. 실제 다음 발송과 reserve horizon까지 유효한지 확인한다. 폐점/지점 불일치는 후보/과거 fallback에서 제거하고 백업에도 반영한다. 일시 장애는 아직 유효한 last-known-good만 유지한다. active 12와 제한된 catalog 및 출력/HTML/파일 크기 상한으로 메모리를 제한한다.
+## Operations and boundaries
 
-JSON은 잠금 token·스키마 검증·제한된 크기·temp+fsync+rename으로 저장한다. 손상된 primary의 검증된 backup을 읽을 수 있지만 폐점 후보를 복구시키지 않는다. 동시 입력은 최신 자료를 다시 읽어 반영한다. 운영 발송은 안정된 client_msg_id와 outbox에 기록하고 전송 결과 불명확 시 임의 재발송하지 않는다.
+Seven original stores use schema validation, size limits, locks, atomic rename and fsync. The Slack outbox records delivery uncertainty instead of blindly resending. Scheduled send context is checked before live operations. Tests and private preview contexts are excluded from group learning. Weather uses five domestic KMA/AirKorea services; Open-Meteo is not a fallback.
 
-## 배포와 비상
+The server listener is a small Node process; frontend dependencies are build tooling, not a permanent separate frontend server. Static/Worker hosting serves the website. Bounded candidate count, page sizes, model attempts and job deadlines limit operating weight. Dependency audits, live provider capability checks and actual browser checks complement unit tests; none can guarantee future external availability.
 
-Sites는 공개 정적 자산/Worker와 R2 집계만 맡는다. 원본 DB는 pororo에 있고 10분 export가 algorithm fingerprint와 함께 전달된다. 업로드는 authenticated header chunks, bounded decompression, SHA-256 및 R2 조건부 write다. 동일 commit 재시도는 receipt를 돌려주며 더 새 snapshot을 늦은 요청이 덮지 못한다.
-
-Windows 비상 사본은 source seal(봇·lock·정적 fixture·관측소 source)과 7개 store 해시를 검증한다. 평소 OFF, 서버가 정상일 때 활성화 불가, explicit lease 및 서버 복구 감지 정지, 종료 후 동시성에 안전한 merge를 사용한다. 소스 버전 같음과 DB 최신성은 별도 조건이다. 자동 offsite 백업은 없다.
+Windows standby is emergency-only and starts OFF. Version equality, source hashes and DB freshness are independent checks. The seven-store snapshot must be within 24 hours, the primary independently unavailable, and the lease valid. The copied static website binds loopback only. Primary recovery stops standby; a guarded merge handles emergency writes after recovery. Without automatic offsite synchronization, a long-unsynchronized local copy can be unusable during an outage and must not be forced past safety checks.

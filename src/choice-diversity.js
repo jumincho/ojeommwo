@@ -80,9 +80,9 @@ const FAMILY_PATTERNS = Object.freeze({
   // itself.  Keeping the inference menu-only prevents a shop name from
   // leaking into diversity while covering reviewed dishes such as 감자탕,
   // 돈코츠라멘, 순대국밥, 햄치즈밥버거, and 부대찌개.
-  pork: /(?:돼지|제육|삼겹|목살|항정|족발|보쌈|(?<!탕)수육|돈까스|돈가스|돈카츠|돈코츠|차슈|감자탕|뼈해장국|순대|부대찌개|햄|소시지|스팸|탕수육|프로슈토|포크|pork)/iu,
+  pork: /(?:돼지|제육|삼겹|목살|항정|족발|보쌈|(?<!탕)수육|돈까스|돈가스|돈카츠|돈코츠|차슈|감자탕|뼈해장국|순대|부대찌개|햄(?!버거|버그)|소시지|스팸|탕수육|프로슈토|포크|pork)/iu,
   seafood: /(?:해물|수산|새우|쉬림프|슈림프|shrimp|연어|참치|명란|초밥|스시|광어|우럭|오징어|문어|낙지|주꾸미|쭈꾸미|아구|아귀|대게|꽃게|킹크랩|게장|크랩|랍스터|조개|전복|장어|고등어|갈치|생선|(?<!육)회덮밥|모둠회|모듬회|광어회|연어회|참치회|생굴|석화|굴국밥|굴전|굴밥)/iu,
-  lamb: /(?:양고기|양갈비|양꼬치|램|lamb)/iu,
+  lamb: /(?:양고기|양갈비|양꼬치|(?:^|[\s·,(+])램(?:고기|스테이크|숄더랙|갈비|찹|랙|구이|꼬치|[\s·,)+]|$)|lamb)/iu,
   offal: /(?:곱창|막창|대창|내장|피순대|순대국|한우곱|곱도리)/iu
 });
 
@@ -124,7 +124,10 @@ export function ingredientFamiliesFor(candidate) {
   const text = normalizeKey(candidate?.menu);
 
   for (const [family, pattern] of Object.entries(FAMILY_PATTERNS)) {
-    if (pattern.test(text)) inferredFamilies.add(family);
+    // Lamb's Korean loanword needs word boundaries: 그램 is a serving
+    // weight and 스크램블 is an egg preparation, not evidence of lamb.
+    const ingredientText = family === "lamb" ? String(candidate?.menu || "") : text;
+    if (pattern.test(ingredientText)) inferredFamilies.add(family);
   }
   // 육회 is raw beef, not the seafood word 회. Remove a stale/model-supplied
   // seafood tag unless an independent seafood signal is present.

@@ -35,7 +35,7 @@ test("release, static fallback, and Sites contracts stay aligned", () => {
   assert.match(pkg.scripts.test, /--import \.\/scripts\/setup-test-environment\.mjs --test/u);
   assert.match(pkg.scripts.verify, /--import \.\/scripts\/setup-test-environment\.mjs --test/u);
   assert.doesNotMatch(JSON.stringify(pkg.scripts), /\.\/tests\/(?:test-environment|setup-node-environment)\.mjs/u);
-  assert.equal(pkg.dependencies.next, "16.3.3");
+  assert.equal(pkg.dependencies.next, "16.3.6");
   assert.equal(pkg.dependencies.react, "19.2.8");
   assert.equal(pkg.dependencies["react-dom"], "19.2.8");
   assert.equal(pkg.devDependencies.eslint, "10.7.0");

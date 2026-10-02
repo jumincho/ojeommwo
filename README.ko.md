@@ -148,17 +148,15 @@ npm test        # 단위 테스트, Slack 워크스페이스나 인증 정보 �
 
 ## 현황
 
-버전 **2.0**(2.0.0), 2026-09-30 정식 출범. 릴리즈 표기는 *GPT-6.1 Sol (max)*, 실제 운영 모델은 xhigh 추론의 GPT-6 Luna입니다.
+버전 **2.5**(2.5.0), 2026-10-03 정식 출범. 릴리즈 표기는 *GPT-6 Astra Ultra*, 실제 운영 모델은 xhigh 추론의 GPT-6 Luna입니다.
 
-2.0에서 달라진 점:
+- 예약 발송 조건과 개인 DM 분리를 강화해 그룹의 식사 기록과 선호도 학습을 보호합니다.
+- 검증된 카탈로그 메뉴와 기존 취향을 함께 보여주며, 사이트 로딩 제한 시간과 가격·배달 근거의 만료를 반영합니다.
+- 현행 한국어 문구와 기능을 유지하면서 3D 및 취향 지도의 가독성과 선택 동작을 개선했습니다.
+- 고정 의존성, 모델 인증, 국내 날씨, 운영 데이터와 비상 운용 조건을 점검했습니다. 검증 범위는 품질 보고서를 참고하십시오.
+- 후속 프런트 및 README 개선은 Claude Opus 5 Ultracode가 진행할 예정입니다.
 
-- 당장 쓰는 후보 목록에 들지 못한 검증된 후보를 카탈로그에 남겨, 재검증을 거쳐 추천할 수 있습니다.
-- 근거가 충분한데 아직 시켜 본 적 없는 식당에 0.5점의 작은 가점을 줍니다.
-- Socket Mode 연결에 제한 시간을 두고 오류 뒤에 정리해, 멈춘 핸드셰이크가 죽은 리스너나 중복 리스너를 남기지 않습니다.
-- 봇은 Node에 딸린 구버전 대신 Undici 7.29.1을 고정해 쓰고, 관측소는 Undici 7.29.1·fast-uri 3.1.8·brace-expansion 5.0.12로 의존성 감사를 깨끗이 통과합니다.
-- 더 커진 3D 카테고리 라벨(24/25px)이 사라지는 대신 중심 주위의 빈 쪽으로 옮겨 가고, 별을 누르거나 탭하기 쉬워졌으며, 취향 지도의 행 글자는 15px이 되었고, GPU 컨텍스트를 잃으면 애니메이션을 멈춥니다.
-
-설계 문서: [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [observatory/ARCHITECTURE.md](observatory/ARCHITECTURE.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
+설계 및 릴리즈 문서: [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [QUALITY_REPORT.md](QUALITY_REPORT.md) · [observatory/DESIGN.md](observatory/DESIGN.md)
 
 ## 라이선스
 

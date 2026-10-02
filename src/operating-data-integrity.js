@@ -1,3 +1,4 @@
+import { mealSubmissionSlotKey } from "./history-policy.js";
 import { normalizeMealType } from "./meal-types.js";
 import { normalizeKey, normalizeMenuKey } from "./text.js";
 import {
@@ -431,8 +432,8 @@ export function validateMealEventStore(store, { now = new Date() } = {}) {
       }
     }
     assertNormalizedMealType(event, `meal event ${event.eventId}`);
-    if (event.respondentId && event.date) {
-      const slot = `${event.respondentId}:${event.date}:${event.mealType}`;
+    const slot = mealSubmissionSlotKey(event);
+    if (slot) {
       if (respondentMealSlots.has(slot)) throw new Error("meal event respondent/date/meal slots must be unique");
       respondentMealSlots.add(slot);
     }

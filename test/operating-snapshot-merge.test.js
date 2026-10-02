@@ -771,3 +771,19 @@ test("snapshot merge refuses linked input before following or parsing the target
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
+
+test("snapshot merge preserves both private rehearsal and production meal slots", () => {
+  const root = makeWorkspace();
+  try {
+    const event = mealEvent({ eventId: "event-production", respondentId: "77777777-7777-5777-a777-777777777777", date: "2026-05-10", menu: "식사 메뉴" });
+    const privateEvent = { ...event, eventId: "event-private", source: "manual-private-test" };
+    const server = writeSnapshot(root, "server", { mealEvents: { version: 1, events: [privateEvent] } });
+    const local = writeSnapshot(root, "local", { mealEvents: { version: 1, events: [event] } });
+    const output = path.join(root, "merged");
+    mergeOperatingSnapshots({ serverDir: server, localDir: local, outputDir: output, now: NOW });
+    assert.deepEqual(readStore(output, "mealEvents").events.map((item) => item.eventId), ["event-private", "event-production"]);
+    assert.doesNotThrow(() => validateOperatingSnapshotDirectory(output, { now: NOW }));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
