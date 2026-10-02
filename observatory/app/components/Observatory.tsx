@@ -463,7 +463,7 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
           aria-labelledby={detailsAreOverlay ? "observatory-details-title" : undefined}
           aria-label={!detailsAreOverlay ? "선택한 메뉴 상세" : undefined}
           inert={(detailsAreOverlay && !detailOpen) || activeModal === "controls" ? true : undefined}
-          tabIndex={detailsAreOverlay ? -1 : undefined}
+          tabIndex={detailsAreOverlay ? -1 : 0}
         >
           <div className="panel-mobile-header">
             <strong id="observatory-details-title">메뉴 상세</strong>
@@ -472,8 +472,8 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
           {selectedMenu ? (
             <>
               <div className="detail-hero" style={{ "--category-color": categoryById.get(selectedMenu.category)?.color ?? "#fff" } as React.CSSProperties}>
-                <span className="detail-hero__orbit" />
-                <span className="detail-hero__emoji">{categoryById.get(selectedMenu.category)?.emoji}</span>
+                <span className="detail-hero__orbit" aria-hidden="true" />
+                <span className="detail-hero__emoji" aria-hidden="true">{categoryById.get(selectedMenu.category)?.emoji}</span>
                 <span className="detail-hero__category">{selectedMenu.category}</span>
               </div>
               <section className="detail-content">
@@ -499,8 +499,8 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
           ) : selectedEasterEgg ? (
             <>
               <div className="detail-hero detail-hero--easter" style={{ "--category-color": categoryById.get(selectedEasterEgg.category)?.color ?? "#fff" } as React.CSSProperties}>
-                <span className="detail-hero__orbit" />
-                <span className="detail-hero__emoji">{categoryById.get(selectedEasterEgg.category)?.emoji}</span>
+                <span className="detail-hero__orbit" aria-hidden="true" />
+                <span className="detail-hero__emoji" aria-hidden="true">{categoryById.get(selectedEasterEgg.category)?.emoji}</span>
                 <span className="detail-hero__category">{selectedEasterEgg.category}</span>
               </div>
               <section className="detail-content">

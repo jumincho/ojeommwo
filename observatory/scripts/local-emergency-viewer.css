@@ -3,7 +3,9 @@
 
 .local-emergency-banner {
   position: fixed !important;
-  z-index: 2147483647 !important;
+  /* Above the copied build's header (30) and offline notice (38), below its
+     drawer backdrop (40) and drawers (44), so an open drawer is never covered. */
+  z-index: 39 !important;
   top: 36px !important;
   right: 22px !important;
   /* Centred in the header's empty side: clears the brand lockup (ends near 252px). */
@@ -219,6 +221,14 @@
   white-space: normal;
 }
 
+@media (min-width: 1440px) {
+  /* Whole words set the column minimum here, so a name never strands one syllable. */
+  .local-emergency-viewer td:nth-child(1),
+  .local-emergency-viewer td:nth-child(2) {
+    overflow-wrap: break-word;
+  }
+}
+
 .local-emergency-viewer th {
   position: sticky;
   z-index: 1;
@@ -338,6 +348,32 @@
   }
 }
 
+@media (max-height: 540px) {
+  /* The page scrolls here and drawers start at the top: scroll away with the header. */
+  .local-emergency-banner {
+    position: absolute !important;
+  }
+}
+
+@media (max-width: 760px) and (max-height: 540px) {
+  /* Short landscape phones: the header's empty side, as on desktop. */
+  .local-emergency-banner {
+    top: 31px !important;
+    right: 12px !important;
+    bottom: auto !important;
+    left: 210px !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (forced-colors: active) {
+  /* Forced colours drop box-shadow, so the pinned column needs a real edge. */
+  .local-emergency-viewer th:first-child,
+  .local-emergency-viewer td:first-child {
+    border-inline-end: 1px solid CanvasText;
+  }
+}
+
 @media print {
   /* Paper copy: dark text on white, every row and column, no inner scroll box. */
   .local-emergency-viewer {
@@ -361,7 +397,7 @@
     max-height: none;
   }
 
-  .local-emergency-viewer :is(p, strong, label, th, td, input, .emergency-warning) {
+  .local-emergency-viewer :is(p, strong, label, tr, th, td, input, .emergency-warning) {
     color: #000 !important;
     background: none !important;
   }

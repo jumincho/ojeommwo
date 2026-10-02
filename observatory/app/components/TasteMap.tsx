@@ -303,7 +303,7 @@ export function TasteMap({ menus, easterEggs, taxonomy, selectedId, onSelect, on
                   aria-pressed={selected}
                   style={{ "--category-color": category?.color ?? "#ffffff" } as React.CSSProperties}
                 >
-                  <span className="taste-map__list-category">{category?.emoji} {menu.category}</span>
+                  <span className="taste-map__list-category"><span aria-hidden="true">{category?.emoji}</span> {menu.category}</span>
                   <strong>{menu.menu}</strong>
                   <span>{menu.restaurantLabel}</span>
                   <b>{tastePercent(menu)}</b>
@@ -324,7 +324,7 @@ export function TasteMap({ menus, easterEggs, taxonomy, selectedId, onSelect, on
                   title={item.note}
                   style={{ "--category-color": category?.color ?? "#ffffff" } as React.CSSProperties}
                 >
-                  <span className="taste-map__list-category">{category?.emoji} {item.category}</span>
+                  <span className="taste-map__list-category"><span aria-hidden="true">{category?.emoji}</span> {item.category}</span>
                   <strong>{item.menu}</strong>
                   <span>{item.restaurantLabel}</span>
                   <b>−∞</b>

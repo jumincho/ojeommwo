@@ -60,6 +60,10 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .detail-panel:focus-visible,
 .taste-map__plot:focus-visible,
 .taste-map__list:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+.control-panel:focus-visible::after,
+.detail-panel:focus-visible::after { visibility: hidden; }
+/* The positioned hero paints over the panel's inset outline, so it carries the top edge. */
+.detail-panel:focus-visible > .detail-hero { box-shadow: inset 0 2px var(--cyan), inset 2px 0 var(--cyan), inset -2px 0 var(--cyan); }
 
 ::selection { color: #00151b; background: var(--cyan); }
 
@@ -209,12 +213,12 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   background: linear-gradient(180deg, rgba(13, 20, 39, 0.93), rgba(6, 9, 20, 0.9)), var(--panel);
   backdrop-filter: blur(22px);
 }
-.control-panel { border-right: 1px solid var(--line); }
+.control-panel { border-right: 1px solid var(--line); scroll-padding-bottom: 28px; /* clears the bottom fade cue */ }
 .detail-panel { display: flex; flex-direction: column; border-left: 1px solid var(--line); }
 
 .panel-mobile-header {
   position: sticky;
-  z-index: 3;
+  z-index: 5;
   top: 0;
   display: none;
   flex: 0 0 auto;
@@ -305,7 +309,6 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .text-button {
   min-width: 40px;
   min-height: 36px;
-  margin-right: -6px;
   padding: 4px 8px;
   border: 0;
   border-radius: var(--radius-sm);
@@ -634,6 +637,7 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   overflow: auto;
   overscroll-behavior: contain;
   padding: 22px 18px 34px;
+  scroll-padding-block: 26px 8px; /* focused rows stop below the 22px fade */
   scrollbar-width: thin;
   scrollbar-color: rgba(125, 166, 216, 0.28) transparent;
   mask-image: linear-gradient(transparent, #000 22px);
@@ -912,7 +916,7 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   .detail-panel { position: fixed; z-index: 44; top: 72px; right: 0; bottom: 0; width: min(360px, 92vw); visibility: hidden; pointer-events: none; transform: translateX(102%); border-left-color: var(--line-strong); box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45); transition: transform 220ms ease, visibility 0s linear 220ms; }
   .detail-panel.is-open { visibility: visible; pointer-events: auto; transform: translateX(0); transition-delay: 0s; }
   .detail-panel .panel-mobile-header { display: flex; }
-  .panel-backdrop { position: fixed; z-index: 40; inset: 0; display: block; border: 0; background: rgba(0, 2, 8, 0.62); backdrop-filter: blur(2px); }
+  .panel-backdrop { position: fixed; z-index: 40; inset: 0; display: block; border: 0; background: rgba(0, 2, 8, 0.62); backdrop-filter: blur(2px); touch-action: none; }
   .reroll-shop { grid-template-columns: 156px minmax(0, 1fr); }
   .reroll-shop__control strong { font-size: 16px; }
   /* Five fixed-width cards scroll sideways rather than squeezing their labels. */
@@ -992,7 +996,7 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   .viewport-count { position: absolute; bottom: 0; left: 0; }
   .cosmos-navigation-hint { bottom: 56px; }
   .taste-map__list { padding-bottom: 64px; }
-  @media (min-width: 761px) {
+  @media (min-width: 761px) and (min-height: 541px) {
     /* The count pill drops to the bottom here; keep rows and list items clear of it. */
     .taste-map__plot,
     .taste-map__list { bottom: 52px; border-bottom: 1px solid var(--line); }
@@ -1086,11 +1090,12 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 @media (forced-colors: active) {
   .taste-map__star span { forced-color-adjust: none; background: CanvasText; box-shadow: none; }
   .taste-map__star span::after { display: none; }
-  .taste-map__star.is-selected span,
-  .taste-map__star:focus-visible span { background: Highlight; }
+  .taste-map__star.is-selected span { background: Highlight; }
   .taste-map__star.is-selected::after { border-color: Highlight; }
   .taste-map__semantic-scale > i,
   .taste-rail__track::before { forced-color-adjust: none; background: CanvasText; box-shadow: none; opacity: 1; }
+  .taste-map__semantic-scale > i::before,
+  .taste-map__semantic-scale > i::after { background: CanvasText; box-shadow: none; }
   .taste-rail__bead { forced-color-adjust: none; background: Highlight; border-color: CanvasText; box-shadow: none; }
   .view-switch button.is-active,
   .taste-map__presentation button[aria-pressed="true"],
