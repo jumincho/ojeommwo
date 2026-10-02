@@ -45,6 +45,8 @@ function tastePercent(menu: MenuRecord) {
 
 export function TasteMap({ menus, easterEggs, taxonomy, selectedId, onSelect, onSelectEasterEgg }: TasteMapProps) {
   const [presentation, setPresentation] = useState<TastePresentation>("map");
+  // Only the current presentation is rendered, so both toggles point at it.
+  const presentationRegionId = presentation === "map" ? "taste-map-plot" : "taste-map-list";
   const [plotWidth, setPlotWidth] = useState(800);
   const [focusState, setFocusState] = useState<FocusState>(() => ({
     id: selectedId ?? menus[0]?.id ?? easterEggs[0]?.id ?? null,
@@ -158,8 +160,8 @@ export function TasteMap({ menus, easterEggs, taxonomy, selectedId, onSelect, on
         지도에서는 방향키로 메뉴 사이를 이동하고 Enter 또는 Space 키로 상세 정보를 엽니다. Home과 End 키로 처음과 끝 항목으로 이동할 수 있습니다.
       </p>
       <div className="taste-map__presentation" role="group" aria-label="취향 데이터 표시 방식">
-        <button type="button" onClick={() => setPresentation("map")} aria-pressed={presentation === "map"} aria-controls="taste-map-plot">지도</button>
-        <button type="button" onClick={() => setPresentation("list")} aria-pressed={presentation === "list"} aria-controls="taste-map-list">목록</button>
+        <button type="button" onClick={() => setPresentation("map")} aria-pressed={presentation === "map"} aria-controls={presentationRegionId}>지도</button>
+        <button type="button" onClick={() => setPresentation("list")} aria-pressed={presentation === "list"} aria-controls={presentationRegionId}>목록</button>
       </div>
 
       {presentation === "map" ? (
@@ -277,10 +279,10 @@ export function TasteMap({ menus, easterEggs, taxonomy, selectedId, onSelect, on
 
         </>
       ) : (
-        <div className="taste-map__list" id="taste-map-list" aria-label="필터된 메뉴 취향 목록">
+        <div className="taste-map__list" id="taste-map-list" role="group" aria-label="필터된 메뉴 취향 목록">
           <div className="taste-map__list-heading">
             <p>{menus.length}개 메뉴를 선호하는 순서로 모았습니다.</p>
-            <span aria-label="정렬 기준: 선호 순">선호 순 ↓</span>
+            <span role="img" aria-label="정렬 기준: 선호 순">선호 순 ↓</span>
           </div>
           <div className="taste-map__list-columns" aria-hidden="true">
             <span>카테고리</span>
