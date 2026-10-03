@@ -2,7 +2,7 @@
 
 Release: 2.5.0 (v2.5), 2026-10-03T00:56:08+09:00. User-requested attribution: GPT-6 Astra Ultra. Runtime: GPT-6 Luna / xhigh.
 
-Release attribution `GPT-6 Astra Ultra` is a user-requested release label. The bot's operational model is `gpt-6-luna` with `xhigh`; changing the coding agent does not silently change that runtime contract. A later frontend and GitHub README improvement pass is planned for Claude Opus 5 Ultracode. It has not been counted as completed v2.5 work.
+Release attribution `GPT-6 Astra Ultra` is a user-requested release label. The bot's operational model is `gpt-6-luna` with `xhigh`; changing the coding agent does not silently change that runtime contract. Claude Opus 5.5 Ultracode completed the frontend and five-language README changes in PR #3. They are integrated as a v2.5 follow-up; the original 2.5.0 package version, release declaration, immutable tag and GPT-6 Luna / xhigh runtime remain unchanged. Current integration and publication status is recorded in HANDOFF.md and QUALITY_REPORT.md.
 
 Start without relying on any earlier conversation or prompt cache: read `AGENTS.md`, `README.md`, `ARCHITECTURE.md`, `MODEL_EVALUATION.md`, `QUALITY_REPORT.md`, then `observatory/HANDOFF.md`. Inspect the actual version/source contracts. Root and Observatory dependencies are locked; run root syntax/tests, snapshot validation, Observatory tests/lint/typecheck and server builds before publishing changed UI.
 
@@ -13,3 +13,11 @@ Tests must never send to a shared meal channel. Use mocks and dry runs; a real o
 Standby remains OFF except a confirmed outage, with matching source seal, fresh consistent seven-store snapshot, current evidence and bounded lease. The 24-hour snapshot guard is intentional. No automatic offsite backup means source equality alone cannot promise emergency availability. Live authentication, Slack membership and provider/API availability need release-time verification outside the public synthetic test environment.
 
 Final installation-specific server, browser, local standby, publication and DM evidence is held outside this public checkout. `QUALITY_REPORT.md` states the verified scope and its limits. Existing older Git tags remain immutable; current documentation focuses on v2.5.
+
+## v2.5 follow-up integration
+
+The v2.5 follow-up was deployed successfully on 2026-10-03 at 14:06:46.919 KST. [Public PR #3](https://github.com/jumincho/ojeommwo/pull/3) was merged with all four author commits preserved; reviewed local refinements and current documentation are recorded in the following source commit. The original v2.5.0 tag, 2.5.0 package version and original release declaration remain unchanged. Source/deployment receipts are retained privately. Repository branch cleanup and automatic branch deletion are not part of this completed validation claim.
+
+Review scope: PR #3 presentation and five-language README work, local pulse/banner/backdrop fixes, and the pinned braces depth-limit patch. All four author commits are preserved by a native merge; the reviewed local changes are recorded in a follow-up commit. Original release metadata and v2.5.0 tag stay fixed. Exact merge/source/deployment hashes and integration time belong in the final receipt; fresh checks are required after source changes.
+
+The 2026-10-03 follow-up audit reports one raw High advisory for build-time `braces@3.0.3`: [GHSA-vfj7-8cjw-p6xm / CVE-2026-93687](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm). No upstream patched version is published. A checked-in pnpm `patchedDependencies` patch caps parser nesting and compile/expand/stringify traversal at depth 128, including directly supplied ASTs; caller options cannot disable it. Deep strings (4,000 levels) and ASTs (12,000 levels) fail with the intended SyntaxError, while 144 ordinary-input comparisons preserved upstream results. The raw High count remains visible; it is not ignored or described as an audit-zero result. This mitigates the identified stack-exhaustion behavior in server build tooling. Replace it with an official fixed version when available and rerun the same checks. See observatory/SECURITY.md for the boundary.

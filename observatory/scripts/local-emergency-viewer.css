@@ -355,14 +355,27 @@
   }
 }
 
-@media (max-width: 760px) and (max-height: 540px) {
-  /* Short landscape phones: the header's empty side, as on desktop. */
+@media (min-width: 600px) and (max-width: 760px) {
+  /* Wider phones have room beside the title, away from the offline notice. */
   .local-emergency-banner {
     top: 31px !important;
     right: 12px !important;
     bottom: auto !important;
     left: 210px !important;
     transform: translateY(-50%) !important;
+  }
+}
+
+/* Narrow screens cannot fit the warning beside the title. The viewer
+   injects this banner directly after <body>, so normal flow keeps it fully
+   visible and lets it scroll with the page without covering either notice. */
+@media (max-width: 599px) {
+  .local-emergency-banner {
+    position: static !important;
+    inset: auto !important;
+    margin: 8px 12px !important;
+    max-width: none !important;
+    transform: none !important;
   }
 }
 

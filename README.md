@@ -74,7 +74,7 @@ flowchart TB
 
 ### Recommendations
 
-- **Candidates are prepared before posts.** Research and posting are separate jobs. Before each meal the bot re-verifies prices, delivery evidence, distance, cooldowns and diversity, and keeps enough for two meals: whichever three valid picks go out first, three more remain. It searches the web only when that pool runs short. At 11:35, and only when the pool is already full, it may also look for up to two new restaurants (the model gets a budget of six web searches and the job stops after 420 seconds); a failed optional search leaves the prepared pool intact. A post that would start more than 45 minutes late is skipped rather than sent.
+- **Candidates are prepared before posts.** Research and posting are separate jobs. Before each meal the bot re-verifies prices, delivery evidence, distance, cooldowns and diversity, and targets two independently usable sets of three picks. During the guarded 08:50–09:10 morning window, if that reserve cannot be filled, a revalidated single set may be retained for lunch; later refreshes replenish the reserve. It searches the web only when that pool runs short. At 11:35, and only when the pool is already full, it may also look for up to two new restaurants (the model gets a budget of six web searches and the job stops after 420 seconds); a failed optional search leaves the prepared pool intact. A post that would start more than 45 minutes late is skipped rather than sent.
 - **Verified finds are kept.** The active shortlist holds up to twelve candidates. Verified finds that do not fit wait in a catalog of up to 120 and are re-verified twelve at a time in rotation, so a good new restaurant is not lost just because the shortlist was full.
 - **Evidence stays honest.** A clear new price on the branch's current menu replaces the old one, while prices that disagree between sources are held back. Distances use coordinates read from the exact branch page, never the model's guess, and pages that were not actually visited are never stored as evidence. Closures and branch mismatches are removed for good, even from backups, while a temporary network error keeps evidence that is still valid.
 
@@ -180,7 +180,7 @@ Version **2.5** (2.5.0), released 2026-10-03 ([release notes](https://github.com
 - Verified catalog menus appear alongside historical taste, with bounded loading and honest expiry for price and delivery evidence.
 - 3D and taste-map readability and selection are improved while keeping the current Korean wording and features.
 - Locked dependencies, model authentication, the Korean weather sources (KMA and AirKorea), operating data and emergency guards were reviewed; see [QUALITY_REPORT.md](QUALITY_REPORT.md) for the verified scope.
-- A later frontend and README improvement pass is planned for Claude Opus 5 Ultracode.
+- Claude Opus 5.5 Ultracode completed the frontend polish and five-language README rewrite in PR #3. Its v2.5 follow-up integration and deployment status are recorded in [HANDOFF.md](HANDOFF.md) and [QUALITY_REPORT.md](QUALITY_REPORT.md). The original v2.5.0 tag, release declaration and GPT-6 Luna / xhigh runtime remain unchanged.
 
 Design and release notes: [ARCHITECTURE.md](ARCHITECTURE.md) · [RELEASES.md](RELEASES.md) · [QUALITY_REPORT.md](QUALITY_REPORT.md) · [MODEL_EVALUATION.md](MODEL_EVALUATION.md) · [observatory/DESIGN.md](observatory/DESIGN.md) (Korean)
 

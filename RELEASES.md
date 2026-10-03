@@ -1,17 +1,18 @@
 # Releases
 
-## v2.5.0 — 2026-10-03
+## v2.5 follow-up — 2026-10-03
 
-Release: 2.5.0 (v2.5), 2026-10-03T00:56:08+09:00. User-requested attribution: GPT-6 Astra Ultra. Runtime: GPT-6 Luna / xhigh.
+The v2.5 follow-up was deployed successfully on 2026-10-03 at 14:06:46.919 KST. [Public PR #3](https://github.com/jumincho/ojeommwo/pull/3) was merged with all four author commits preserved; reviewed local refinements and current documentation are recorded in the following source commit. The original v2.5.0 tag, 2.5.0 package version and original release declaration remain unchanged. Source/deployment receipts are retained privately. Repository branch cleanup and automatic branch deletion are not part of this completed validation claim.
 
-Release attribution: GPT-6 Astra Ultra. Runtime research remains GPT-6 Luna / xhigh.
+Claude Opus 5.5 Ultracode completed the frontend and five-language README changes in PR #3. They are integrated as a v2.5 follow-up; the original 2.5.0 package version, release declaration, immutable tag and GPT-6 Luna / xhigh runtime remain unchanged. Current integration and publication status is recorded in HANDOFF.md and QUALITY_REPORT.md.
 
-- Guard scheduled live sends against invalid timing/context and preserve private-DM isolation from group learning.
-- Tighten independent identity/evidence checks, food taxonomy, duplicate handling, survey visibility, catalog retention and new-restaurant exploration while preserving strict recommendation gates.
-- Include verified catalog identities in the read-only observatory, keep commercial evidence expiry honest, bound API/static fetches and re-render local expiry without browser polling.
-- Improve 3D/taste-map readability and interaction while preserving Korean terms, information scope and existing functions; update locked dependencies and security checks.
-- Rebuild the handoff around current source, model roles, measured token usage, release checks and explicit emergency limitations so a prompt-cache miss does not lose essential context.
+- Integrate forced-colour and higher-contrast support, keyboard focus/scroll improvements, clearer selected states and responsive emergency-viewer styling without changing Korean terms, information scope or functions.
+- Bound the status pulse, keep the emergency banner readable on narrow screens, including simultaneous offline warnings and prevent backdrop wheel scrolling.
+- Keep all five localized READMEs aligned with code, including survey versus meal input and the guarded morning one-set exception; retain separate public and private operating documentation.
+- Apply a pinned local depth-limit patch to build-time braces. The raw audit still reports one High advisory with no published upstream fix; this is a documented local mitigation, not a zero-advisory upgrade.
 
-v2.5 scoped release PASS: Linux bot644PASS/0FAIL/10Windows skips; Windows bot652PASS/0FAIL/2symlink skips; server Observatory99PASS/0FAIL/2Windows skips; Windows viewer3PASS; syntax/lint/types/frozen builds pass; known dependency vulnerabilities0; both health38PASS/0WARN/0FAIL; true Luna xhigh discovery423246tokens first-attempt success, active12/catalog90 and two-ready-sets pass; live Site131menus matches server SHA; Windows source266/out35/seven stores synchronized and OFF. Real browser1280/390px no horizontal overflow or console errors, pork/multicategory/keyboard/reroll/paused-star/14px-adjacent selection pass. Live data is API-backed; tracked130-menu bootstrap intentionally matches pushed Sites source. External provider/account/real-time restaurant failures remain bounded limitations; no automatic offsite sync; no lunch test messages.
+Verified on the finalized deployment source: 100 Observatory tests passed, none failed and two environment-specific tests were skipped; lint, TypeScript checks, frozen patched dependency installation, Sites build and the separate static emergency build passed. Windows root tests passed 652 with no failures and two skips; syntax checks and all 38 health checks passed. The copied emergency viewer passed three tests, source/build/seven-store hashes matched and standby stayed OFF. Browser checks covered all 19 categories, combined filters, ingredient search, paused 3D selection, random selection, high-contrast/forced-colour visibility, overlapping map items, responsive 320–1920 px layouts and backdrop wheel suppression. The final emergency banner was also checked together with the offline warning at narrow widths. The raw dependency audit reports one locally mitigated High braces advisory, not zero advisories.
 
-Earlier release tags remain immutable. Superseded local release narratives are not part of the current operating instructions. A later frontend and README improvement pass is planned for Claude Opus 5 Ultracode.
+## Original v2.5.0 declaration
+
+Product version 2.5.0 / v2.5 was declared at 2026-10-03T00:56:08+09:00. The release label is GPT-6 Astra Ultra and runtime research is GPT-6 Luna / xhigh. Its original Git tag and release identity remain unchanged. Current validation and advisory status are in QUALITY_REPORT.md and observatory/SECURITY.md; earlier audit-zero evidence is not a claim about the current dependency graph.

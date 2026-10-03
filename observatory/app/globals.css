@@ -626,7 +626,7 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .taste-map__star.is-selected { pointer-events: none; }
 .taste-map__star:focus-visible span,
 .taste-map__star.is-selected span { transform: translate(-50%, -50%) scale(1.45); }
-.taste-map__star.is-selected::after { content: ""; position: absolute; inset: 1px; border: 1px solid currentColor; border-radius: 50%; pointer-events: none; animation: pulse-ring 1.8s ease-out 3; }
+.taste-map__star.is-selected::after { content: ""; position: absolute; inset: 1px; border: 1px solid currentColor; border-radius: 50%; pointer-events: none; animation: pulse-ring 1.6s ease-out 3; }
 .taste-map__star--easter { z-index: 6; }
 
 /* Taste list starts below the floating toolbar so its heading is never masked. */
@@ -1122,3 +1122,6 @@ input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   .category-filter.is-active { border-color: color-mix(in srgb, var(--category-color) 80%, white); }
   .category-filter:not(.is-active) { color: #c3cddc; }
 }
+
+/* The backdrop also receives wheel input; contain on the drawer alone cannot lock the document. */
+body:has(.panel-backdrop) { overflow: hidden; }

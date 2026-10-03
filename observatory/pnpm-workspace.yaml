@@ -22,3 +22,7 @@ overrides:
   undici: 7.29.1
   ws: 8.21.0
 
+
+# GHSA-vfj7-8cjw-p6xm: upstream has no published fix; keep audit visible.
+patchedDependencies:
+  braces@3.0.3: patches/braces@3.0.3.patch

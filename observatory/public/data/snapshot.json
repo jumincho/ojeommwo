@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-02T15:56:10.365Z",
+  "generatedAt": "2026-10-03T04:50:31.577Z",
   "source": {
     "project": "ojeommwo-v2",
     "releaseVersion": "2.5.0",
-    "sourceFingerprint": "2efc43fc5f80db165853e2b330799f3a4ac73444e6ea04b3c38cbfd741055413",
+    "sourceFingerprint": "088621ab149c879cecead89c59139d5d80453c1833f85348e07aeec47570d3d1",
     "privacy": "sanitized-aggregate-only"
   },
   "algorithm": {
@@ -150,14 +150,14 @@
     "recommendationItems": 360,
     "recommendationMessages": 120,
     "sentMessages": 120,
-    "restaurants": 117,
-    "menus": 130,
+    "restaurants": 118,
+    "menus": 131,
     "mealEvents": 7,
     "preferenceResponses": 154,
     "preferenceRatings": 167,
     "freshCandidates": 12,
     "categoryCounts": {
-      "한식": 7,
+      "한식": 8,
       "치킨": 14,
       "분식": 5,
       "돈까스": 4,
@@ -223,19 +223,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.48599,
-        "beta": 3.06383,
-        "mean": 0.59419,
-        "bias": 0.18837,
-        "evidenceWeight": 1.54981,
-        "confidence": 0.43659,
-        "intervalLow": 0.31793,
-        "intervalHigh": 0.87044,
+        "alpha": 4.48291,
+        "beta": 3.06369,
+        "mean": 0.59403,
+        "bias": 0.18806,
+        "evidenceWeight": 1.54661,
+        "confidence": 0.43608,
+        "intervalLow": 0.31771,
+        "intervalHigh": 0.87036,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.48599,
-          "surveyNegative": 0.06383
+          "surveyPositive": 1.48291,
+          "surveyNegative": 0.06369
         }
       }
     },
@@ -272,19 +272,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.33304,
-        "beta": 3.67684,
-        "mean": 0.54096,
-        "bias": 0.08192,
-        "evidenceWeight": 2.00989,
-        "confidence": 0.50123,
-        "intervalLow": 0.26787,
+        "alpha": 4.33029,
+        "beta": 3.67544,
+        "mean": 0.5409,
+        "bias": 0.0818,
+        "evidenceWeight": 2.00573,
+        "confidence": 0.50072,
+        "intervalLow": 0.26774,
         "intervalHigh": 0.81406,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 1.26155,
-          "surveyNegative": 0.67684
+          "surveyPositive": 1.25894,
+          "surveyNegative": 0.67544
         }
       }
     },
@@ -322,19 +322,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.28428,
-        "beta": 3.54065,
-        "mean": 0.54752,
-        "bias": 0.09503,
-        "evidenceWeight": 1.82493,
-        "confidence": 0.47711,
-        "intervalLow": 0.2719,
-        "intervalHigh": 0.82314,
+        "alpha": 4.28162,
+        "beta": 3.53953,
+        "mean": 0.54744,
+        "bias": 0.09488,
+        "evidenceWeight": 1.82115,
+        "confidence": 0.4766,
+        "intervalLow": 0.27176,
+        "intervalHigh": 0.82312,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 1.21278,
-          "surveyNegative": 0.54065
+          "surveyPositive": 1.21028,
+          "surveyNegative": 0.53953
         }
       }
     },
@@ -371,19 +371,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.31217,
-        "beta": 3.24392,
-        "mean": 0.57069,
-        "bias": 0.14138,
-        "evidenceWeight": 1.55609,
-        "confidence": 0.43758,
-        "intervalLow": 0.29232,
-        "intervalHigh": 0.84905,
+        "alpha": 4.30945,
+        "beta": 3.24342,
+        "mean": 0.57057,
+        "bias": 0.14114,
+        "evidenceWeight": 1.55287,
+        "confidence": 0.43707,
+        "intervalLow": 0.29215,
+        "intervalHigh": 0.849,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.31217,
-          "surveyNegative": 0.24392
+          "surveyPositive": 1.30945,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -420,19 +420,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.32235,
-        "beta": 4.21943,
+        "alpha": 4.31961,
+        "beta": 4.21691,
         "mean": 0.50602,
-        "bias": 0.01205,
-        "evidenceWeight": 2.54178,
-        "confidence": 0.55964,
-        "intervalLow": 0.23977,
-        "intervalHigh": 0.77227,
+        "bias": 0.01203,
+        "evidenceWeight": 2.53652,
+        "confidence": 0.55913,
+        "intervalLow": 0.23969,
+        "intervalHigh": 0.77234,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.32235,
-          "surveyNegative": 1.21943
+          "surveyPositive": 1.31961,
+          "surveyNegative": 1.21691
         }
       }
     },
@@ -468,19 +468,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.98407,
-        "beta": 4.33424,
-        "mean": 0.53487,
-        "bias": 0.06974,
-        "evidenceWeight": 3.31831,
-        "confidence": 0.62394,
-        "intervalLow": 0.27944,
-        "intervalHigh": 0.7903,
+        "alpha": 4.97997,
+        "beta": 4.33148,
+        "mean": 0.53482,
+        "bias": 0.06964,
+        "evidenceWeight": 3.31145,
+        "confidence": 0.62345,
+        "intervalLow": 0.2793,
+        "intervalHigh": 0.79034,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.91129,
-          "surveyNegative": 1.33424
+          "surveyPositive": 1.90734,
+          "surveyNegative": 1.33148
         }
       }
     },
@@ -518,19 +518,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.31914,
-        "beta": 4.12214,
-        "mean": 0.56339,
-        "bias": 0.12678,
-        "evidenceWeight": 3.44128,
-        "confidence": 0.63244,
-        "intervalLow": 0.3109,
-        "intervalHigh": 0.81588,
+        "alpha": 5.31434,
+        "beta": 4.11982,
+        "mean": 0.56331,
+        "bias": 0.12662,
+        "evidenceWeight": 3.43416,
+        "confidence": 0.63196,
+        "intervalLow": 0.31073,
+        "intervalHigh": 0.81589,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 2.24636,
-          "surveyNegative": 1.12214
+          "surveyPositive": 2.24171,
+          "surveyNegative": 1.11982
         }
       }
     },
@@ -567,19 +567,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.2254,
-        "beta": 3.23546,
-        "mean": 0.6176,
-        "bias": 0.23519,
-        "evidenceWeight": 2.46086,
-        "confidence": 0.55166,
-        "intervalLow": 0.35769,
-        "intervalHigh": 0.8775,
+        "alpha": 5.2208,
+        "beta": 3.23497,
+        "mean": 0.61742,
+        "bias": 0.23485,
+        "evidenceWeight": 2.45577,
+        "confidence": 0.55114,
+        "intervalLow": 0.35743,
+        "intervalHigh": 0.87742,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 2.2254,
-          "surveyNegative": 0.23546
+          "surveyPositive": 2.2208,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -615,19 +615,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.75118,
-        "beta": 3.23546,
-        "mean": 0.59489,
-        "bias": 0.18978,
-        "evidenceWeight": 1.98664,
-        "confidence": 0.49832,
-        "intervalLow": 0.32551,
-        "intervalHigh": 0.86428,
+        "alpha": 4.74756,
+        "beta": 3.23497,
+        "mean": 0.59474,
+        "bias": 0.18949,
+        "evidenceWeight": 1.98253,
+        "confidence": 0.49781,
+        "intervalLow": 0.32528,
+        "intervalHigh": 0.86421,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.75118,
-          "surveyNegative": 0.23546
+          "surveyPositive": 1.74756,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -665,19 +665,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.94456,
-        "beta": 3.87109,
-        "mean": 0.5047,
-        "bias": 0.0094,
-        "evidenceWeight": 1.81566,
-        "confidence": 0.47584,
-        "intervalLow": 0.22769,
-        "intervalHigh": 0.78171,
+        "alpha": 3.94261,
+        "beta": 3.86929,
+        "mean": 0.50469,
+        "bias": 0.00939,
+        "evidenceWeight": 1.8119,
+        "confidence": 0.47533,
+        "intervalLow": 0.22763,
+        "intervalHigh": 0.78176,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.94456,
-          "surveyNegative": 0.87109
+          "surveyPositive": 0.94261,
+          "surveyNegative": 0.86929
         }
       }
     },
@@ -713,19 +713,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.76926,
-        "beta": 3.07579,
-        "mean": 0.55066,
-        "bias": 0.10131,
-        "evidenceWeight": 0.84504,
-        "confidence": 0.29702,
-        "intervalLow": 0.25851,
-        "intervalHigh": 0.8428,
+        "alpha": 3.76767,
+        "beta": 3.07563,
+        "mean": 0.55056,
+        "bias": 0.10113,
+        "evidenceWeight": 0.8433,
+        "confidence": 0.29659,
+        "intervalLow": 0.25838,
+        "intervalHigh": 0.84275,
         "sources": {
-          "mealPositive": 0.14693,
+          "mealPositive": 0.14662,
           "mealNegative": 0,
-          "surveyPositive": 0.62233,
-          "surveyNegative": 0.07579
+          "surveyPositive": 0.62104,
+          "surveyNegative": 0.07563
         }
       }
     },
@@ -763,19 +763,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.17791,
-        "beta": 3.97447,
-        "mean": 0.44432,
-        "bias": -0.11137,
-        "evidenceWeight": 1.15238,
-        "confidence": 0.36556,
-        "intervalLow": 0.15804,
-        "intervalHigh": 0.73059,
+        "alpha": 3.17754,
+        "beta": 3.97245,
+        "mean": 0.44441,
+        "bias": -0.11118,
+        "evidenceWeight": 1.14999,
+        "confidence": 0.36508,
+        "intervalLow": 0.15809,
+        "intervalHigh": 0.73074,
         "sources": {
-          "mealPositive": 0.07935,
+          "mealPositive": 0.07919,
           "mealNegative": 0,
-          "surveyPositive": 0.09856,
-          "surveyNegative": 0.97447
+          "surveyPositive": 0.09836,
+          "surveyNegative": 0.97245
         }
       }
     },
@@ -799,32 +799,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 4,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-10-01T23:50:02.158Z",
-      "availabilityExpiresAt": "2026-10-04T23:50:02.158Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-01T23:50:02.158Z",
-      "priceExpiresAt": "2026-10-08T23:50:02.158Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 3.96638,
-        "beta": 3.17974,
-        "mean": 0.55504,
-        "bias": 0.11008,
-        "evidenceWeight": 1.14612,
-        "confidence": 0.3643,
-        "intervalLow": 0.26861,
-        "intervalHigh": 0.84147,
+        "alpha": 3.96439,
+        "beta": 3.17937,
+        "mean": 0.55494,
+        "bias": 0.10989,
+        "evidenceWeight": 1.14375,
+        "confidence": 0.36382,
+        "intervalLow": 0.26847,
+        "intervalHigh": 0.84142,
         "sources": {
-          "mealPositive": 0.07935,
+          "mealPositive": 0.07919,
           "mealNegative": 0,
-          "surveyPositive": 0.88703,
-          "surveyNegative": 0.17974
+          "surveyPositive": 0.8852,
+          "surveyNegative": 0.17937
         }
       }
     },
@@ -848,33 +849,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 3,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 3.6797,
-        "beta": 3.81579,
-        "mean": 0.49092,
-        "bias": -0.01816,
-        "evidenceWeight": 1.4955,
-        "confidence": 0.42784,
-        "intervalLow": 0.20878,
-        "intervalHigh": 0.77307,
+        "alpha": 3.6783,
+        "beta": 3.81411,
+        "mean": 0.49094,
+        "bias": -0.01813,
+        "evidenceWeight": 1.4924,
+        "confidence": 0.42733,
+        "intervalLow": 0.20874,
+        "intervalHigh": 0.77313,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.6797,
-          "surveyNegative": 0.81579
+          "surveyPositive": 0.6783,
+          "surveyNegative": 0.81411
         }
       }
     },
@@ -912,19 +912,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.07085,
-        "beta": 3.299,
-        "mean": 0.55237,
-        "bias": 0.10473,
-        "evidenceWeight": 1.36985,
-        "confidence": 0.4065,
-        "intervalLow": 0.26963,
-        "intervalHigh": 0.8351,
+        "alpha": 4.06864,
+        "beta": 3.29838,
+        "mean": 0.55228,
+        "bias": 0.10455,
+        "evidenceWeight": 1.36702,
+        "confidence": 0.406,
+        "intervalLow": 0.26949,
+        "intervalHigh": 0.83507,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.07085,
-          "surveyNegative": 0.299
+          "surveyPositive": 1.06864,
+          "surveyNegative": 0.29838
         }
       }
     },
@@ -949,32 +949,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 4,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-10-02T02:35:01.899Z",
-      "availabilityExpiresAt": "2026-10-05T02:35:01.899Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T02:35:01.899Z",
-      "priceExpiresAt": "2026-10-09T02:35:01.899Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 4.32807,
-        "beta": 3.16271,
-        "mean": 0.57779,
-        "bias": 0.15557,
-        "evidenceWeight": 1.49078,
-        "confidence": 0.42706,
-        "intervalLow": 0.29895,
-        "intervalHigh": 0.85662,
+        "alpha": 4.32532,
+        "beta": 3.16238,
+        "mean": 0.57766,
+        "bias": 0.15531,
+        "evidenceWeight": 1.4877,
+        "confidence": 0.42656,
+        "intervalLow": 0.29876,
+        "intervalHigh": 0.85655,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.32807,
-          "surveyNegative": 0.16271
+          "surveyPositive": 1.32532,
+          "surveyNegative": 0.16238
         }
       }
     },
@@ -1012,19 +1013,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.69779,
-        "beta": 3.89278,
-        "mean": 0.54685,
-        "bias": 0.09371,
-        "evidenceWeight": 2.59058,
-        "confidence": 0.56432,
-        "intervalLow": 0.28243,
-        "intervalHigh": 0.81128,
+        "alpha": 4.69428,
+        "beta": 3.89094,
+        "mean": 0.54679,
+        "bias": 0.09357,
+        "evidenceWeight": 2.58522,
+        "confidence": 0.56382,
+        "intervalLow": 0.28229,
+        "intervalHigh": 0.81129,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.69779,
-          "surveyNegative": 0.89278
+          "surveyPositive": 1.69428,
+          "surveyNegative": 0.89094
         }
       }
     },
@@ -1062,19 +1063,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.81145,
-        "beta": 3.89914,
-        "mean": 0.55237,
-        "bias": 0.10474,
-        "evidenceWeight": 2.71059,
-        "confidence": 0.57542,
-        "intervalLow": 0.28987,
-        "intervalHigh": 0.81486,
+        "alpha": 4.8077,
+        "beta": 3.89728,
+        "mean": 0.55229,
+        "bias": 0.10459,
+        "evidenceWeight": 2.70498,
+        "confidence": 0.57492,
+        "intervalLow": 0.28972,
+        "intervalHigh": 0.81487,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.81145,
-          "surveyNegative": 0.89914
+          "surveyPositive": 1.8077,
+          "surveyNegative": 0.89728
         }
       }
     },
@@ -1086,7 +1087,7 @@
       "restaurantLabel": "꽁꼬르드",
       "menu": "트러플 머쉬룸 파스타",
       "category": "양식",
-      "priceText": "14,000원",
+      "priceText": "가격 정보 없음",
       "comment": "버섯의 깊고 향긋한 풍미와 트러플 향이 부드러운 크림소스에 배어 면의 쫄깃함과 잘 어울립니다.",
       "ingredientFamilies": [
         "noodles · 면",
@@ -1101,30 +1102,30 @@
       "averageSurveyRating": 3.5,
       "availableNow": false,
       "availabilityCheckedAt": "2026-09-29T23:50:02.081Z",
-      "availabilityExpiresAt": "2026-10-02T23:50:02.081Z",
+      "availabilityExpiresAt": "2026-10-29T23:50:02.081Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-09-29T23:50:02.081Z",
-      "priceExpiresAt": "2026-10-06T23:50:02.081Z",
+      "deliveryFreshness": "recent",
+      "priceCheckedAt": null,
+      "priceExpiresAt": null,
       "sources": [
         "catalog",
         "history",
         "preference"
       ],
       "taste": {
-        "alpha": 4.70598,
-        "beta": 3.8983,
-        "mean": 0.54694,
-        "bias": 0.09387,
-        "evidenceWeight": 2.60428,
-        "confidence": 0.56562,
-        "intervalLow": 0.28271,
-        "intervalHigh": 0.81116,
+        "alpha": 4.70245,
+        "beta": 3.89644,
+        "mean": 0.54687,
+        "bias": 0.09373,
+        "evidenceWeight": 2.59889,
+        "confidence": 0.56511,
+        "intervalLow": 0.28256,
+        "intervalHigh": 0.81117,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.70598,
-          "surveyNegative": 0.8983
+          "surveyPositive": 1.70245,
+          "surveyNegative": 0.89644
         }
       }
     },
@@ -1161,19 +1162,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.75968,
-        "beta": 3.87493,
-        "mean": 0.55123,
-        "bias": 0.10246,
-        "evidenceWeight": 2.63461,
-        "confidence": 0.56846,
-        "intervalLow": 0.28764,
-        "intervalHigh": 0.81482,
+        "alpha": 4.75604,
+        "beta": 3.87312,
+        "mean": 0.55116,
+        "bias": 0.10232,
+        "evidenceWeight": 2.62916,
+        "confidence": 0.56796,
+        "intervalLow": 0.28749,
+        "intervalHigh": 0.81483,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 1.68818,
-          "surveyNegative": 0.87493
+          "surveyPositive": 1.68469,
+          "surveyNegative": 0.87312
         }
       }
     },
@@ -1211,19 +1212,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.56157,
-        "beta": 3.54065,
-        "mean": 0.563,
-        "bias": 0.12601,
-        "evidenceWeight": 2.10222,
-        "confidence": 0.51246,
-        "intervalLow": 0.29255,
-        "intervalHigh": 0.83345,
+        "alpha": 4.55834,
+        "beta": 3.53953,
+        "mean": 0.56291,
+        "bias": 0.12581,
+        "evidenceWeight": 2.09787,
+        "confidence": 0.51194,
+        "intervalLow": 0.29238,
+        "intervalHigh": 0.83343,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 1.49008,
-          "surveyNegative": 0.54065
+          "surveyPositive": 1.487,
+          "surveyNegative": 0.53953
         }
       }
     },
@@ -1260,19 +1261,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.86289,
-        "beta": 3.67524,
-        "mean": 0.51245,
-        "bias": 0.02489,
-        "evidenceWeight": 1.53813,
-        "confidence": 0.43473,
-        "intervalLow": 0.23105,
-        "intervalHigh": 0.79384,
+        "alpha": 3.8611,
+        "beta": 3.67384,
+        "mean": 0.51243,
+        "bias": 0.02485,
+        "evidenceWeight": 1.53495,
+        "confidence": 0.43422,
+        "intervalLow": 0.23098,
+        "intervalHigh": 0.79388,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 0.79139,
-          "surveyNegative": 0.67524
+          "surveyPositive": 0.78976,
+          "surveyNegative": 0.67384
         }
       }
     },
@@ -1308,19 +1309,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.6543,
-        "beta": 3.15156,
-        "mean": 0.53693,
-        "bias": 0.07387,
-        "evidenceWeight": 0.80586,
-        "confidence": 0.28721,
-        "intervalLow": 0.24335,
-        "intervalHigh": 0.83052,
+        "alpha": 3.65295,
+        "beta": 3.15125,
+        "mean": 0.53687,
+        "bias": 0.07373,
+        "evidenceWeight": 0.80419,
+        "confidence": 0.28678,
+        "intervalLow": 0.24325,
+        "intervalHigh": 0.83049,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.6543,
-          "surveyNegative": 0.15156
+          "surveyPositive": 0.65295,
+          "surveyNegative": 0.15125
         }
       }
     },
@@ -1357,19 +1358,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.65198,
-        "beta": 3.92657,
-        "mean": 0.48188,
-        "bias": -0.03623,
-        "evidenceWeight": 1.57855,
-        "confidence": 0.44112,
-        "intervalLow": 0.20125,
-        "intervalHigh": 0.76252,
+        "alpha": 3.65063,
+        "beta": 3.92466,
+        "mean": 0.48191,
+        "bias": -0.03617,
+        "evidenceWeight": 1.57529,
+        "confidence": 0.4406,
+        "intervalLow": 0.20122,
+        "intervalHigh": 0.7626,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.65198,
-          "surveyNegative": 0.92657
+          "surveyPositive": 0.65063,
+          "surveyNegative": 0.92466
         }
       }
     },
@@ -1406,19 +1407,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.18038,
-        "beta": 3.38166,
-        "mean": 0.55281,
-        "bias": 0.10562,
-        "evidenceWeight": 1.56204,
-        "confidence": 0.43852,
-        "intervalLow": 0.27329,
-        "intervalHigh": 0.83233,
+        "alpha": 4.17794,
+        "beta": 3.38087,
+        "mean": 0.55272,
+        "bias": 0.10545,
+        "evidenceWeight": 1.55881,
+        "confidence": 0.43801,
+        "intervalLow": 0.27315,
+        "intervalHigh": 0.8323,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.18038,
-          "surveyNegative": 0.38166
+          "surveyPositive": 1.17794,
+          "surveyNegative": 0.38087
         }
       }
     },
@@ -1455,19 +1456,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.61333,
-        "beta": 3.24392,
-        "mean": 0.58714,
-        "bias": 0.17429,
-        "evidenceWeight": 1.85725,
-        "confidence": 0.4815,
-        "intervalLow": 0.31501,
-        "intervalHigh": 0.85928,
+        "alpha": 4.61,
+        "beta": 3.24342,
+        "mean": 0.58701,
+        "bias": 0.17401,
+        "evidenceWeight": 1.85341,
+        "confidence": 0.48098,
+        "intervalLow": 0.3148,
+        "intervalHigh": 0.85922,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.61333,
-          "surveyNegative": 0.24392
+          "surveyPositive": 1.61,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -1503,19 +1504,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.91004,
-        "beta": 3.24392,
-        "mean": 0.60217,
-        "bias": 0.20433,
-        "evidenceWeight": 2.15397,
-        "confidence": 0.51853,
-        "intervalLow": 0.33605,
-        "intervalHigh": 0.86828,
+        "alpha": 4.90609,
+        "beta": 3.24342,
+        "mean": 0.60201,
+        "bias": 0.20402,
+        "evidenceWeight": 2.14951,
+        "confidence": 0.51802,
+        "intervalLow": 0.33581,
+        "intervalHigh": 0.86821,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.91004,
-          "surveyNegative": 0.24392
+          "surveyPositive": 1.90609,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -1551,19 +1552,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.36632,
-        "beta": 3.24392,
-        "mean": 0.57374,
-        "bias": 0.14748,
-        "evidenceWeight": 1.61024,
-        "confidence": 0.44602,
-        "intervalLow": 0.2965,
-        "intervalHigh": 0.85098,
+        "alpha": 4.36349,
+        "beta": 3.24342,
+        "mean": 0.57362,
+        "bias": 0.14724,
+        "evidenceWeight": 1.6069,
+        "confidence": 0.44551,
+        "intervalLow": 0.29632,
+        "intervalHigh": 0.85092,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.36632,
-          "surveyNegative": 0.24392
+          "surveyPositive": 1.36349,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -1600,19 +1601,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.1216,
-        "beta": 3.91724,
-        "mean": 0.56662,
-        "bias": 0.13324,
-        "evidenceWeight": 3.03884,
-        "confidence": 0.60308,
-        "intervalLow": 0.30934,
+        "alpha": 5.11722,
+        "beta": 3.91534,
+        "mean": 0.56653,
+        "bias": 0.13306,
+        "evidenceWeight": 3.03256,
+        "confidence": 0.60259,
+        "intervalLow": 0.30916,
         "intervalHigh": 0.8239,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 2.04883,
-          "surveyNegative": 0.91724
+          "surveyPositive": 2.04459,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -1637,33 +1638,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 2.5,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 4.83464,
-        "mean": 0.4645,
-        "bias": -0.07101,
-        "evidenceWeight": 3.02822,
-        "confidence": 0.60224,
-        "intervalLow": 0.20542,
-        "intervalHigh": 0.72357,
+        "alpha": 4.1911,
+        "beta": 4.83085,
+        "mean": 0.46455,
+        "bias": -0.07091,
+        "evidenceWeight": 3.02195,
+        "confidence": 0.60175,
+        "intervalLow": 0.20539,
+        "intervalHigh": 0.7237,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 1.83464
+          "surveyPositive": 1.11848,
+          "surveyNegative": 1.83085
         }
       }
     },
@@ -1701,19 +1701,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 5.06158,
-        "beta": 3.91724,
-        "mean": 0.56372,
-        "bias": 0.12745,
-        "evidenceWeight": 2.97882,
-        "confidence": 0.5983,
-        "intervalLow": 0.30547,
+        "alpha": 5.05732,
+        "beta": 3.91534,
+        "mean": 0.56364,
+        "bias": 0.12727,
+        "evidenceWeight": 2.97266,
+        "confidence": 0.5978,
+        "intervalLow": 0.3053,
         "intervalHigh": 0.82197,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.98881,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.98469,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -1752,19 +1752,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.77905,
-        "beta": 4.75194,
+        "alpha": 4.77537,
+        "beta": 4.74832,
         "mean": 0.50142,
         "bias": 0.00284,
-        "evidenceWeight": 3.531,
-        "confidence": 0.6384,
-        "intervalLow": 0.24797,
-        "intervalHigh": 0.75488,
+        "evidenceWeight": 3.52369,
+        "confidence": 0.63792,
+        "intervalLow": 0.24788,
+        "intervalHigh": 0.75496,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.70628,
-          "surveyNegative": 1.75194
+          "surveyPositive": 1.70275,
+          "surveyNegative": 1.74832
         }
       }
     },
@@ -1800,19 +1800,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.96212,
-        "beta": 3.91724,
-        "mean": 0.55884,
-        "bias": 0.11768,
-        "evidenceWeight": 2.87936,
-        "confidence": 0.59011,
-        "intervalLow": 0.29898,
+        "alpha": 4.95807,
+        "beta": 3.91534,
+        "mean": 0.55876,
+        "bias": 0.11751,
+        "evidenceWeight": 2.87341,
+        "confidence": 0.58961,
+        "intervalLow": 0.29881,
         "intervalHigh": 0.8187,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.88935,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.88544,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -1835,32 +1835,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 4,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-10-02T02:35:01.899Z",
-      "availabilityExpiresAt": "2026-10-05T02:35:01.899Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T02:35:01.899Z",
-      "priceExpiresAt": "2026-10-09T02:35:01.899Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 5.15016,
-        "beta": 4.1862,
-        "mean": 0.55162,
-        "bias": 0.10325,
-        "evidenceWeight": 3.33636,
-        "confidence": 0.62521,
-        "intervalLow": 0.29716,
-        "intervalHigh": 0.80609,
+        "alpha": 5.14572,
+        "beta": 4.18374,
+        "mean": 0.55156,
+        "bias": 0.10311,
+        "evidenceWeight": 3.32946,
+        "confidence": 0.62473,
+        "intervalLow": 0.297,
+        "intervalHigh": 0.80611,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 2.07739,
-          "surveyNegative": 1.1862
+          "surveyPositive": 2.07309,
+          "surveyNegative": 1.18374
         }
       }
     },
@@ -1898,19 +1899,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 4.42182,
-        "mean": 0.48675,
-        "bias": -0.02649,
-        "evidenceWeight": 2.6154,
-        "confidence": 0.56667,
-        "intervalLow": 0.2216,
-        "intervalHigh": 0.75191,
+        "alpha": 4.1911,
+        "beta": 4.41888,
+        "mean": 0.48677,
+        "bias": -0.02646,
+        "evidenceWeight": 2.60999,
+        "confidence": 0.56616,
+        "intervalLow": 0.22154,
+        "intervalHigh": 0.752,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 1.42182
+          "surveyPositive": 1.11848,
+          "surveyNegative": 1.41888
         }
       }
     },
@@ -1946,19 +1947,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.13514,
-        "beta": 3.39383,
-        "mean": 0.54923,
-        "bias": 0.09846,
-        "evidenceWeight": 1.52896,
-        "confidence": 0.43326,
-        "intervalLow": 0.26896,
-        "intervalHigh": 0.8295,
+        "alpha": 4.13279,
+        "beta": 3.39301,
+        "mean": 0.54915,
+        "bias": 0.0983,
+        "evidenceWeight": 1.5258,
+        "confidence": 0.43275,
+        "intervalLow": 0.26883,
+        "intervalHigh": 0.82947,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.13514,
-          "surveyNegative": 0.39383
+          "surveyPositive": 1.13279,
+          "surveyNegative": 0.39301
         }
       }
     },
@@ -1995,19 +1996,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.54002,
-        "beta": 3.36966,
-        "mean": 0.57398,
-        "bias": 0.14797,
-        "evidenceWeight": 1.90968,
-        "confidence": 0.48845,
-        "intervalLow": 0.30146,
-        "intervalHigh": 0.8465,
+        "alpha": 4.53683,
+        "beta": 3.36889,
+        "mean": 0.57387,
+        "bias": 0.14773,
+        "evidenceWeight": 1.90573,
+        "confidence": 0.48793,
+        "intervalLow": 0.30128,
+        "intervalHigh": 0.84646,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.54002,
-          "surveyNegative": 0.36966
+          "surveyPositive": 1.53683,
+          "surveyNegative": 0.36889
         }
       }
     },
@@ -2046,19 +2047,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.02164,
-        "beta": 3.88074,
-        "mean": 0.50891,
-        "bias": 0.01783,
-        "evidenceWeight": 1.90239,
-        "confidence": 0.48749,
-        "intervalLow": 0.23329,
-        "intervalHigh": 0.78454,
+        "alpha": 4.01953,
+        "beta": 3.87892,
+        "mean": 0.5089,
+        "bias": 0.0178,
+        "evidenceWeight": 1.89845,
+        "confidence": 0.48698,
+        "intervalLow": 0.23322,
+        "intervalHigh": 0.78458,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.02164,
-          "surveyNegative": 0.88074
+          "surveyPositive": 1.01953,
+          "surveyNegative": 0.87892
         }
       }
     },
@@ -2094,19 +2095,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.28133,
-        "beta": 4.00113,
-        "mean": 0.45058,
-        "bias": -0.09884,
-        "evidenceWeight": 1.28246,
-        "confidence": 0.3907,
-        "intervalLow": 0.16618,
-        "intervalHigh": 0.73498,
+        "alpha": 3.28075,
+        "beta": 3.99906,
+        "mean": 0.45066,
+        "bias": -0.09867,
+        "evidenceWeight": 1.27981,
+        "confidence": 0.39021,
+        "intervalLow": 0.16622,
+        "intervalHigh": 0.73511,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.28133,
-          "surveyNegative": 1.00113
+          "surveyPositive": 0.28075,
+          "surveyNegative": 0.99906
         }
       }
     },
@@ -2118,7 +2119,7 @@
       "restaurantLabel": "만배식탁 전북대점",
       "menu": "육회덮밥",
       "category": "한식",
-      "priceText": "가격 정보 없음",
+      "priceText": "10,900원",
       "comment": "신선한 육회의 고소한 풍미가 따뜻한 밥과 어우러지고, 덮밥 특유의 든든함까지 갖춘 한 끼입니다.",
       "ingredientFamilies": [
         "beef · 소고기",
@@ -2130,32 +2131,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 4,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-09-18T06:00:02.107Z",
-      "availabilityExpiresAt": "2026-10-18T06:00:02.107Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "recent",
-      "priceCheckedAt": null,
-      "priceExpiresAt": null,
+      "deliveryFreshness": "current",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 4.445,
-        "beta": 3.16836,
-        "mean": 0.58384,
-        "bias": 0.16768,
-        "evidenceWeight": 1.61336,
-        "confidence": 0.4465,
-        "intervalLow": 0.30756,
-        "intervalHigh": 0.86013,
+        "alpha": 4.44201,
+        "beta": 3.16801,
+        "mean": 0.58371,
+        "bias": 0.16741,
+        "evidenceWeight": 1.61002,
+        "confidence": 0.44599,
+        "intervalLow": 0.30735,
+        "intervalHigh": 0.86006,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.445,
-          "surveyNegative": 0.16836
+          "surveyPositive": 1.44201,
+          "surveyNegative": 0.16801
         }
       }
     },
@@ -2167,7 +2169,7 @@
       "restaurantLabel": "곰곰 김밥",
       "menu": "제육덮밥",
       "category": "한식",
-      "priceText": "8,000원",
+      "priceText": "가격 정보 없음",
       "comment": "매콤한 제육 양념이 따뜻한 밥과 어우러져 입맛을 돋우고 혼자 먹기에도 든든한 덮밥입니다.",
       "ingredientFamilies": [
         "pork · 돼지고기",
@@ -2181,30 +2183,30 @@
       "averageSurveyRating": 3,
       "availableNow": false,
       "availabilityCheckedAt": "2026-09-29T23:50:02.081Z",
-      "availabilityExpiresAt": "2026-10-02T23:50:02.081Z",
+      "availabilityExpiresAt": "2026-10-29T23:50:02.081Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-09-29T23:50:02.081Z",
-      "priceExpiresAt": "2026-10-06T23:50:02.081Z",
+      "deliveryFreshness": "recent",
+      "priceCheckedAt": null,
+      "priceExpiresAt": null,
       "sources": [
         "catalog",
         "history",
         "preference"
       ],
       "taste": {
-        "alpha": 3.50461,
-        "beta": 3.16836,
-        "mean": 0.5252,
-        "bias": 0.05039,
-        "evidenceWeight": 0.67297,
-        "confidence": 0.25177,
-        "intervalLow": 0.22864,
-        "intervalHigh": 0.82175,
+        "alpha": 3.50357,
+        "beta": 3.16801,
+        "mean": 0.52515,
+        "bias": 0.0503,
+        "evidenceWeight": 0.67158,
+        "confidence": 0.25138,
+        "intervalLow": 0.22857,
+        "intervalHigh": 0.82173,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.50461,
-          "surveyNegative": 0.16836
+          "surveyPositive": 0.50357,
+          "surveyNegative": 0.16801
         }
       }
     },
@@ -2227,32 +2229,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 3.5,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-10-01T23:50:02.158Z",
-      "availabilityExpiresAt": "2026-10-04T23:50:02.158Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-01T23:50:02.158Z",
-      "priceExpiresAt": "2026-10-08T23:50:02.158Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 3.65588,
-        "beta": 3.24879,
-        "mean": 0.52948,
-        "bias": 0.05896,
-        "evidenceWeight": 0.90467,
-        "confidence": 0.31145,
-        "intervalLow": 0.23744,
-        "intervalHigh": 0.82152,
+        "alpha": 3.65452,
+        "beta": 3.24827,
+        "mean": 0.52943,
+        "bias": 0.05885,
+        "evidenceWeight": 0.9028,
+        "confidence": 0.31101,
+        "intervalLow": 0.23735,
+        "intervalHigh": 0.8215,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.65588,
-          "surveyNegative": 0.24879
+          "surveyPositive": 0.65452,
+          "surveyNegative": 0.24827
         }
       }
     },
@@ -2288,19 +2291,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.77756,
-        "beta": 3.68207,
-        "mean": 0.5064,
-        "bias": 0.0128,
-        "evidenceWeight": 1.45963,
-        "confidence": 0.4219,
-        "intervalLow": 0.22364,
-        "intervalHigh": 0.78917,
+        "alpha": 3.77596,
+        "beta": 3.68066,
+        "mean": 0.50639,
+        "bias": 0.01278,
+        "evidenceWeight": 1.45661,
+        "confidence": 0.4214,
+        "intervalLow": 0.22358,
+        "intervalHigh": 0.7892,
         "sources": {
-          "mealPositive": 0.14693,
+          "mealPositive": 0.14662,
           "mealNegative": 0,
-          "surveyPositive": 0.63064,
-          "surveyNegative": 0.68207
+          "surveyPositive": 0.62933,
+          "surveyNegative": 0.68066
         }
       }
     },
@@ -2338,19 +2341,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.53654,
-        "beta": 3.31913,
-        "mean": 0.51586,
-        "bias": 0.03171,
-        "evidenceWeight": 0.85567,
-        "confidence": 0.29964,
-        "intervalLow": 0.22255,
+        "alpha": 3.53543,
+        "beta": 3.31847,
+        "mean": 0.51583,
+        "bias": 0.03165,
+        "evidenceWeight": 0.85389,
+        "confidence": 0.2992,
+        "intervalLow": 0.22248,
         "intervalHigh": 0.80917,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.53654,
-          "surveyNegative": 0.31913
+          "surveyPositive": 0.53543,
+          "surveyNegative": 0.31847
         }
       }
     },
@@ -2388,18 +2391,18 @@
       ],
       "taste": {
         "alpha": 3,
-        "beta": 4.27659,
-        "mean": 0.41228,
-        "bias": -0.17544,
-        "evidenceWeight": 1.27659,
-        "confidence": 0.38961,
-        "intervalLow": 0.13082,
-        "intervalHigh": 0.69374,
+        "beta": 4.27395,
+        "mean": 0.41243,
+        "bias": -0.17514,
+        "evidenceWeight": 1.27395,
+        "confidence": 0.38912,
+        "intervalLow": 0.13091,
+        "intervalHigh": 0.69395,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 1.27659
+          "surveyNegative": 1.27395
         }
       }
     },
@@ -2436,19 +2439,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.68708,
-        "beta": 4.34595,
-        "mean": 0.45899,
-        "bias": -0.08202,
-        "evidenceWeight": 2.03303,
-        "confidence": 0.50409,
-        "intervalLow": 0.18625,
-        "intervalHigh": 0.73173,
+        "alpha": 3.68566,
+        "beta": 4.34317,
+        "mean": 0.45905,
+        "bias": -0.08189,
+        "evidenceWeight": 2.02882,
+        "confidence": 0.50358,
+        "intervalLow": 0.18624,
+        "intervalHigh": 0.73186,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07341,
-          "surveyPositive": 0.68708,
-          "surveyNegative": 1.27254
+          "mealNegative": 0.07326,
+          "surveyPositive": 0.68566,
+          "surveyNegative": 1.26991
         }
       }
     },
@@ -2485,19 +2488,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.74317,
-        "beta": 3.89064,
-        "mean": 0.49034,
-        "bias": -0.01932,
-        "evidenceWeight": 1.63381,
-        "confidence": 0.44961,
-        "intervalLow": 0.21047,
-        "intervalHigh": 0.77021,
+        "alpha": 3.74164,
+        "beta": 3.88879,
+        "mean": 0.49036,
+        "bias": -0.01929,
+        "evidenceWeight": 1.63043,
+        "confidence": 0.4491,
+        "intervalLow": 0.21043,
+        "intervalHigh": 0.77028,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07341,
-          "surveyPositive": 0.74317,
-          "surveyNegative": 0.81722
+          "mealNegative": 0.07326,
+          "surveyPositive": 0.74164,
+          "surveyNegative": 0.81553
         }
       }
     },
@@ -2509,7 +2512,7 @@
       "restaurantLabel": "파스톨로지",
       "menu": "치킨 파마지아나(호주식치킨까스)",
       "category": "양식",
-      "priceText": "가격 정보 없음",
+      "priceText": "17,000원",
       "comment": "바삭한 닭가슴살 커틀렛에 매콤새콤한 토마토소스와 치즈의 묵직한 풍미가 어우러져 든든합니다.",
       "ingredientFamilies": [
         "chicken · 닭고기",
@@ -2522,32 +2525,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 3,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-09-18T06:00:02.107Z",
-      "availabilityExpiresAt": "2026-10-18T06:00:02.107Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "recent",
-      "priceCheckedAt": null,
-      "priceExpiresAt": null,
+      "deliveryFreshness": "current",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 4.09558,
-        "beta": 3.77108,
-        "mean": 0.52063,
-        "bias": 0.04125,
-        "evidenceWeight": 1.86667,
-        "confidence": 0.48276,
-        "intervalLow": 0.24464,
-        "intervalHigh": 0.79661,
+        "alpha": 4.09332,
+        "beta": 3.76949,
+        "mean": 0.52059,
+        "bias": 0.04119,
+        "evidenceWeight": 1.8628,
+        "confidence": 0.48224,
+        "intervalLow": 0.24455,
+        "intervalHigh": 0.79664,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.09558,
-          "surveyNegative": 0.77108
+          "surveyPositive": 1.09332,
+          "surveyNegative": 0.76949
         }
       }
     },
@@ -2584,19 +2588,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.28391,
-        "beta": 3.54065,
-        "mean": 0.5475,
-        "bias": 0.09499,
-        "evidenceWeight": 1.82456,
-        "confidence": 0.47706,
-        "intervalLow": 0.27187,
-        "intervalHigh": 0.82312,
+        "alpha": 4.28126,
+        "beta": 3.53953,
+        "mean": 0.54742,
+        "bias": 0.09484,
+        "evidenceWeight": 1.82079,
+        "confidence": 0.47655,
+        "intervalLow": 0.27173,
+        "intervalHigh": 0.82311,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 1.21242,
-          "surveyNegative": 0.54065
+          "surveyPositive": 1.20991,
+          "surveyNegative": 0.53953
         }
       }
     },
@@ -2634,19 +2638,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.70329,
-        "beta": 5.23823,
-        "mean": 0.41417,
-        "bias": -0.17166,
-        "evidenceWeight": 2.94152,
-        "confidence": 0.59527,
-        "intervalLow": 0.15718,
-        "intervalHigh": 0.67116,
+        "alpha": 3.70184,
+        "beta": 5.2336,
+        "mean": 0.41429,
+        "bias": -0.17142,
+        "evidenceWeight": 2.93544,
+        "confidence": 0.59477,
+        "intervalLow": 0.15721,
+        "intervalHigh": 0.67137,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 0.6318,
-          "surveyNegative": 2.23823
+          "surveyPositive": 0.63049,
+          "surveyNegative": 2.2336
         }
       }
     },
@@ -2683,19 +2687,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.70329,
-        "beta": 5.15968,
-        "mean": 0.41784,
-        "bias": -0.16432,
-        "evidenceWeight": 2.86298,
-        "confidence": 0.58873,
-        "intervalLow": 0.1595,
-        "intervalHigh": 0.67618,
+        "alpha": 3.70184,
+        "beta": 5.15521,
+        "mean": 0.41795,
+        "bias": -0.16409,
+        "evidenceWeight": 2.85705,
+        "confidence": 0.58823,
+        "intervalLow": 0.15953,
+        "intervalHigh": 0.67638,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 0.6318,
-          "surveyNegative": 2.15968
+          "surveyPositive": 0.63049,
+          "surveyNegative": 2.15521
         }
       }
     },
@@ -2707,7 +2711,7 @@
       "restaurantLabel": "춘리마라탕 전북대점",
       "menu": "셀프마라탕(1인분)",
       "category": "중식",
-      "priceText": "10,000원",
+      "priceText": "가격 정보 없음",
       "comment": "진한 마라 국물에 원하는 재료를 담아 아삭한 채소와 쫄깃한 면을 함께 즐길 수 있습니다.",
       "ingredientFamilies": [
         "noodles · 면",
@@ -2721,30 +2725,30 @@
       "averageSurveyRating": 2.5,
       "availableNow": false,
       "availabilityCheckedAt": "2026-09-29T23:50:02.081Z",
-      "availabilityExpiresAt": "2026-10-02T23:50:02.081Z",
+      "availabilityExpiresAt": "2026-10-29T23:50:02.081Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-09-29T23:50:02.081Z",
-      "priceExpiresAt": "2026-10-06T23:50:02.081Z",
+      "deliveryFreshness": "recent",
+      "priceCheckedAt": null,
+      "priceExpiresAt": null,
       "sources": [
         "catalog",
         "history",
         "preference"
       ],
       "taste": {
-        "alpha": 4.407,
-        "beta": 3.78906,
-        "mean": 0.5377,
-        "bias": 0.07539,
-        "evidenceWeight": 2.19606,
-        "confidence": 0.52336,
-        "intervalLow": 0.26724,
-        "intervalHigh": 0.80815,
+        "alpha": 4.40409,
+        "beta": 3.78743,
+        "mean": 0.53764,
+        "bias": 0.07528,
+        "evidenceWeight": 2.19152,
+        "confidence": 0.52285,
+        "intervalLow": 0.26711,
+        "intervalHigh": 0.80817,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.407,
-          "surveyNegative": 0.78906
+          "surveyPositive": 1.40409,
+          "surveyNegative": 0.78743
         }
       }
     },
@@ -2768,33 +2772,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 3,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 4.53283,
-        "beta": 3.5369,
-        "mean": 0.56171,
-        "bias": 0.12342,
-        "evidenceWeight": 2.06973,
-        "confidence": 0.50857,
-        "intervalLow": 0.29068,
-        "intervalHigh": 0.83273,
+        "alpha": 4.52966,
+        "beta": 3.53579,
+        "mean": 0.56161,
+        "bias": 0.12323,
+        "evidenceWeight": 2.06544,
+        "confidence": 0.50805,
+        "intervalLow": 0.29052,
+        "intervalHigh": 0.83271,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.53283,
-          "surveyNegative": 0.5369
+          "surveyPositive": 1.52966,
+          "surveyNegative": 0.53579
         }
       }
     },
@@ -2831,19 +2834,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.76224,
-        "beta": 4.18981,
-        "mean": 0.53197,
-        "bias": 0.06394,
-        "evidenceWeight": 2.95204,
-        "confidence": 0.59613,
-        "intervalLow": 0.27178,
-        "intervalHigh": 0.79216,
+        "alpha": 4.75859,
+        "beta": 4.18735,
+        "mean": 0.53193,
+        "bias": 0.06386,
+        "evidenceWeight": 2.94594,
+        "confidence": 0.59563,
+        "intervalLow": 0.27166,
+        "intervalHigh": 0.7922,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.68946,
-          "surveyNegative": 1.18981
+          "surveyPositive": 1.68596,
+          "surveyNegative": 1.18735
         }
       }
     },
@@ -2867,33 +2870,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 1.5,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 5.49571,
-        "mean": 0.43281,
-        "bias": -0.13439,
-        "evidenceWeight": 3.68928,
-        "confidence": 0.64846,
-        "intervalLow": 0.18352,
-        "intervalHigh": 0.68209,
+        "alpha": 4.1911,
+        "beta": 5.49055,
+        "mean": 0.43289,
+        "bias": -0.13422,
+        "evidenceWeight": 3.68165,
+        "confidence": 0.64799,
+        "intervalLow": 0.18351,
+        "intervalHigh": 0.68228,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 2.49571
+          "surveyPositive": 1.11848,
+          "surveyNegative": 2.49055
         }
       }
     },
@@ -2930,19 +2932,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.73649,
-        "beta": 4.49006,
-        "mean": 0.51335,
-        "bias": 0.02671,
-        "evidenceWeight": 3.22655,
-        "confidence": 0.61734,
-        "intervalLow": 0.25625,
-        "intervalHigh": 0.77046,
+        "alpha": 4.7329,
+        "beta": 4.48698,
+        "mean": 0.51334,
+        "bias": 0.02667,
+        "evidenceWeight": 3.21988,
+        "confidence": 0.61685,
+        "intervalLow": 0.25614,
+        "intervalHigh": 0.77053,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.66372,
-          "surveyNegative": 1.49006
+          "surveyPositive": 1.66028,
+          "surveyNegative": 1.48698
         }
       }
     },
@@ -2979,19 +2981,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.77379,
-        "beta": 3.91724,
-        "mean": 0.54928,
-        "bias": 0.09856,
-        "evidenceWeight": 2.69103,
-        "confidence": 0.57365,
-        "intervalLow": 0.28635,
-        "intervalHigh": 0.8122,
+        "alpha": 4.77012,
+        "beta": 3.91534,
+        "mean": 0.54921,
+        "bias": 0.09842,
+        "evidenceWeight": 2.68546,
+        "confidence": 0.57315,
+        "intervalLow": 0.2862,
+        "intervalHigh": 0.81221,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.70101,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.69749,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -3003,7 +3005,7 @@
       "restaurantLabel": "모쿠모쿠 전북대점",
       "menu": "김치치즈치킨",
       "category": "치킨",
-      "priceText": "가격 정보 없음",
+      "priceText": "18,900원",
       "comment": "촉촉한 순살 치킨에 김치의 새콤함과 치즈의 고소함, 탕수육 소스의 달큰함이 어우러져 풍성한 맛을 냅니다.",
       "ingredientFamilies": [
         "chicken · 닭고기",
@@ -3016,32 +3018,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 3,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-09-17T23:50:01.357Z",
-      "availabilityExpiresAt": "2026-10-17T23:50:01.357Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "recent",
-      "priceCheckedAt": null,
-      "priceExpiresAt": null,
+      "deliveryFreshness": "current",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 4.12874,
-        "beta": 3.78616,
-        "mean": 0.52164,
-        "bias": 0.04328,
-        "evidenceWeight": 1.91489,
-        "confidence": 0.48913,
-        "intervalLow": 0.24643,
-        "intervalHigh": 0.79686,
+        "alpha": 4.1264,
+        "beta": 3.78453,
+        "mean": 0.52161,
+        "bias": 0.04321,
+        "evidenceWeight": 1.91093,
+        "confidence": 0.48861,
+        "intervalLow": 0.24633,
+        "intervalHigh": 0.79688,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.12874,
-          "surveyNegative": 0.78616
+          "surveyPositive": 1.1264,
+          "surveyNegative": 0.78453
         }
       }
     },
@@ -3080,18 +3083,18 @@
       ],
       "taste": {
         "alpha": 3,
-        "beta": 4.556,
-        "mean": 0.39704,
-        "bias": -0.20593,
-        "evidenceWeight": 1.556,
-        "confidence": 0.43757,
-        "intervalLow": 0.12187,
-        "intervalHigh": 0.6722,
+        "beta": 4.55278,
+        "mean": 0.3972,
+        "bias": -0.20559,
+        "evidenceWeight": 1.55278,
+        "confidence": 0.43706,
+        "intervalLow": 0.12197,
+        "intervalHigh": 0.67244,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 1.556
+          "surveyNegative": 1.55278
         }
       }
     },
@@ -3129,19 +3132,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.15619,
-        "beta": 4.57642,
-        "mean": 0.40817,
-        "bias": -0.18367,
-        "evidenceWeight": 1.73261,
-        "confidence": 0.46418,
-        "intervalLow": 0.13457,
-        "intervalHigh": 0.68176,
+        "alpha": 3.15587,
+        "beta": 4.57316,
+        "mean": 0.40831,
+        "bias": -0.18337,
+        "evidenceWeight": 1.72903,
+        "confidence": 0.46367,
+        "intervalLow": 0.13464,
+        "intervalHigh": 0.68198,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07341,
-          "surveyPositive": 0.15619,
-          "surveyNegative": 1.50301
+          "mealNegative": 0.07326,
+          "surveyPositive": 0.15587,
+          "surveyNegative": 1.4999
         }
       }
     },
@@ -3177,19 +3180,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.15619,
-        "beta": 4.55019,
-        "mean": 0.40956,
-        "bias": -0.18089,
-        "evidenceWeight": 1.70638,
-        "confidence": 0.46039,
-        "intervalLow": 0.1354,
-        "intervalHigh": 0.68371,
+        "alpha": 3.15587,
+        "beta": 4.54698,
+        "mean": 0.4097,
+        "bias": -0.1806,
+        "evidenceWeight": 1.70285,
+        "confidence": 0.45988,
+        "intervalLow": 0.13548,
+        "intervalHigh": 0.68392,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07341,
-          "surveyPositive": 0.15619,
-          "surveyNegative": 1.47677
+          "mealNegative": 0.07326,
+          "surveyPositive": 0.15587,
+          "surveyNegative": 1.47372
         }
       }
     },
@@ -3227,19 +3230,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.91723,
-        "beta": 4.07731,
-        "mean": 0.48999,
-        "bias": -0.02002,
-        "evidenceWeight": 1.99454,
-        "confidence": 0.49932,
-        "intervalLow": 0.21579,
-        "intervalHigh": 0.76418,
+        "alpha": 3.91533,
+        "beta": 4.07508,
+        "mean": 0.49,
+        "bias": -0.01999,
+        "evidenceWeight": 1.99041,
+        "confidence": 0.4988,
+        "intervalLow": 0.21575,
+        "intervalHigh": 0.76426,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.91723,
-          "surveyNegative": 1.07731
+          "surveyPositive": 0.91533,
+          "surveyNegative": 1.07508
         }
       }
     },
@@ -3276,19 +3279,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.33902,
-        "beta": 3.54065,
-        "mean": 0.55066,
-        "bias": 0.10132,
-        "evidenceWeight": 1.87967,
-        "confidence": 0.48449,
-        "intervalLow": 0.27606,
-        "intervalHigh": 0.82526,
+        "alpha": 4.33625,
+        "beta": 3.53953,
+        "mean": 0.55058,
+        "bias": 0.10116,
+        "evidenceWeight": 1.87578,
+        "confidence": 0.48398,
+        "intervalLow": 0.27592,
+        "intervalHigh": 0.82524,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 1.26753,
-          "surveyNegative": 0.54065
+          "surveyPositive": 1.2649,
+          "surveyNegative": 0.53953
         }
       }
     },
@@ -3325,19 +3328,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.84655,
-        "beta": 3.81304,
-        "mean": 0.50219,
+        "alpha": 3.8448,
+        "beta": 3.81136,
+        "mean": 0.50218,
         "bias": 0.00437,
-        "evidenceWeight": 1.65958,
-        "confidence": 0.45349,
-        "intervalLow": 0.22269,
-        "intervalHigh": 0.78169,
+        "evidenceWeight": 1.65615,
+        "confidence": 0.45298,
+        "intervalLow": 0.22263,
+        "intervalHigh": 0.78174,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 0.77505,
-          "surveyNegative": 0.81304
+          "surveyPositive": 0.77345,
+          "surveyNegative": 0.81136
         }
       }
     },
@@ -3375,19 +3378,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.11311,
-        "beta": 3.67179,
-        "mean": 0.52834,
-        "bias": 0.05669,
-        "evidenceWeight": 1.78489,
-        "confidence": 0.47158,
-        "intervalLow": 0.25129,
-        "intervalHigh": 0.8054,
+        "alpha": 4.1108,
+        "beta": 3.6704,
+        "mean": 0.5283,
+        "bias": 0.0566,
+        "evidenceWeight": 1.7812,
+        "confidence": 0.47107,
+        "intervalLow": 0.25118,
+        "intervalHigh": 0.80542,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 1.04161,
-          "surveyNegative": 0.67179
+          "surveyPositive": 1.03946,
+          "surveyNegative": 0.6704
         }
       }
     },
@@ -3399,7 +3402,7 @@
       "restaurantLabel": "군산아구탕 아구찜",
       "menu": "아구찜小 (2인기준)",
       "category": "찜/탕",
-      "priceText": "가격 정보 없음",
+      "priceText": "44,000원",
       "comment": "쫄깃한 아구살에 매콤한 찜 양념이 배어 해산물의 감칠맛을 풍성하게 즐길 수 있습니다.",
       "ingredientFamilies": [
         "seafood · 해산물"
@@ -3410,32 +3413,33 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 1,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-09-18T06:00:02.107Z",
-      "availabilityExpiresAt": "2026-10-18T06:00:02.107Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "recent",
-      "priceCheckedAt": null,
-      "priceExpiresAt": null,
+      "deliveryFreshness": "current",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 5.39603,
-        "mean": 0.4373,
-        "bias": -0.12539,
-        "evidenceWeight": 3.58961,
-        "confidence": 0.64219,
-        "intervalLow": 0.18655,
-        "intervalHigh": 0.68806,
+        "alpha": 4.1911,
+        "beta": 5.39108,
+        "mean": 0.43739,
+        "bias": -0.12523,
+        "evidenceWeight": 3.58218,
+        "confidence": 0.64172,
+        "intervalLow": 0.18653,
+        "intervalHigh": 0.68824,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 2.39603
+          "surveyPositive": 1.11848,
+          "surveyNegative": 2.39108
         }
       }
     },
@@ -3458,33 +3462,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 5,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 5.64898,
-        "beta": 3.23546,
-        "mean": 0.63583,
-        "bias": 0.27166,
-        "evidenceWeight": 2.88444,
-        "confidence": 0.59054,
-        "intervalLow": 0.38405,
-        "intervalHigh": 0.8876,
+        "alpha": 5.6435,
+        "beta": 3.23497,
+        "mean": 0.63564,
+        "bias": 0.27128,
+        "evidenceWeight": 2.87847,
+        "confidence": 0.59004,
+        "intervalLow": 0.38376,
+        "intervalHigh": 0.88752,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 2.64898,
-          "surveyNegative": 0.23546
+          "surveyPositive": 2.6435,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -3509,33 +3512,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 2.5,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 3.86437,
-        "beta": 4.13631,
-        "mean": 0.48301,
-        "bias": -0.03399,
-        "evidenceWeight": 2.00067,
-        "confidence": 0.50008,
-        "intervalLow": 0.20901,
-        "intervalHigh": 0.757,
+        "alpha": 3.86258,
+        "beta": 4.13396,
+        "mean": 0.48303,
+        "bias": -0.03394,
+        "evidenceWeight": 1.99653,
+        "confidence": 0.49957,
+        "intervalLow": 0.20897,
+        "intervalHigh": 0.75709,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.86437,
-          "surveyNegative": 1.13631
+          "surveyPositive": 0.86258,
+          "surveyNegative": 1.13396
         }
       }
     },
@@ -3559,33 +3561,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 4,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 4.43215,
-        "beta": 3.46001,
-        "mean": 0.56159,
-        "bias": 0.12318,
-        "evidenceWeight": 1.89216,
-        "confidence": 0.48615,
-        "intervalLow": 0.28786,
-        "intervalHigh": 0.83531,
+        "alpha": 4.42918,
+        "beta": 3.45906,
+        "mean": 0.56149,
+        "bias": 0.12298,
+        "evidenceWeight": 1.88824,
+        "confidence": 0.48563,
+        "intervalLow": 0.2877,
+        "intervalHigh": 0.83528,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.43215,
-          "surveyNegative": 0.46001
+          "surveyPositive": 1.42918,
+          "surveyNegative": 0.45906
         }
       }
     },
@@ -3622,19 +3623,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.28783,
-        "beta": 4.13309,
-        "mean": 0.44305,
-        "bias": -0.1139,
-        "evidenceWeight": 1.42092,
-        "confidence": 0.41536,
-        "intervalLow": 0.16146,
-        "intervalHigh": 0.72464,
+        "alpha": 3.28724,
+        "beta": 4.13074,
+        "mean": 0.44314,
+        "bias": -0.11371,
+        "evidenceWeight": 1.41798,
+        "confidence": 0.41486,
+        "intervalLow": 0.1615,
+        "intervalHigh": 0.72479,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.07341,
-          "surveyPositive": 0.28783,
-          "surveyNegative": 1.05967
+          "mealNegative": 0.07326,
+          "surveyPositive": 0.28724,
+          "surveyNegative": 1.05748
         }
       }
     },
@@ -3659,32 +3660,33 @@
       "mealEventCount": 0,
       "surveyCount": 1,
       "averageSurveyRating": 5,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-10-01T23:50:02.158Z",
-      "availabilityExpiresAt": "2026-10-04T23:50:02.158Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-01T23:50:02.158Z",
-      "priceExpiresAt": "2026-10-08T23:50:02.158Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 4.81199,
-        "beta": 3.91724,
-        "mean": 0.55125,
-        "bias": 0.1025,
-        "evidenceWeight": 2.72923,
-        "confidence": 0.5771,
-        "intervalLow": 0.28895,
-        "intervalHigh": 0.81355,
+        "alpha": 4.80824,
+        "beta": 3.91534,
+        "mean": 0.55118,
+        "bias": 0.10236,
+        "evidenceWeight": 2.72358,
+        "confidence": 0.57659,
+        "intervalLow": 0.28879,
+        "intervalHigh": 0.81356,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.73921,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.73562,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -3709,32 +3711,33 @@
       "mealEventCount": 0,
       "surveyCount": 1,
       "averageSurveyRating": 4,
-      "availableNow": false,
-      "availabilityCheckedAt": "2026-10-02T02:35:01.899Z",
-      "availabilityExpiresAt": "2026-10-05T02:35:01.899Z",
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T02:35:01.899Z",
-      "priceExpiresAt": "2026-10-09T02:35:01.899Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference"
+        "preference",
+        "verified"
       ],
       "taste": {
-        "alpha": 3.9173,
-        "beta": 3.32169,
-        "mean": 0.54114,
-        "bias": 0.08228,
-        "evidenceWeight": 1.23898,
-        "confidence": 0.38252,
-        "intervalLow": 0.25556,
-        "intervalHigh": 0.82672,
+        "alpha": 3.9154,
+        "beta": 3.32102,
+        "mean": 0.54107,
+        "bias": 0.08214,
+        "evidenceWeight": 1.23642,
+        "confidence": 0.38203,
+        "intervalLow": 0.25544,
+        "intervalHigh": 0.82669,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.9173,
-          "surveyNegative": 0.32169
+          "surveyPositive": 0.9154,
+          "surveyNegative": 0.32102
         }
       }
     },
@@ -3757,33 +3760,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 2.5,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 3.39007,
-        "beta": 3.95891,
-        "mean": 0.4613,
-        "bias": -0.0774,
-        "evidenceWeight": 1.34898,
-        "confidence": 0.4028,
-        "intervalLow": 0.1775,
-        "intervalHigh": 0.7451,
+        "alpha": 3.38926,
+        "beta": 3.95693,
+        "mean": 0.46136,
+        "bias": -0.07727,
+        "evidenceWeight": 1.34619,
+        "confidence": 0.4023,
+        "intervalLow": 0.17751,
+        "intervalHigh": 0.74521,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.39007,
-          "surveyNegative": 0.95891
+          "surveyPositive": 0.38926,
+          "surveyNegative": 0.95693
         }
       }
     },
@@ -3819,19 +3821,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.27222,
-        "beta": 3.07579,
-        "mean": 0.51547,
-        "bias": 0.03094,
-        "evidenceWeight": 0.34801,
-        "confidence": 0.14821,
-        "intervalLow": 0.21219,
-        "intervalHigh": 0.81875,
+        "alpha": 3.27166,
+        "beta": 3.07563,
+        "mean": 0.51544,
+        "bias": 0.03088,
+        "evidenceWeight": 0.34729,
+        "confidence": 0.14795,
+        "intervalLow": 0.21215,
+        "intervalHigh": 0.81874,
         "sources": {
-          "mealPositive": 0.14693,
+          "mealPositive": 0.14662,
           "mealNegative": 0,
-          "surveyPositive": 0.1253,
-          "surveyNegative": 0.07579
+          "surveyPositive": 0.12504,
+          "surveyNegative": 0.07563
         }
       }
     },
@@ -3868,19 +3870,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.36939,
-        "beta": 3.57443,
-        "mean": 0.48524,
-        "bias": -0.02953,
-        "evidenceWeight": 0.94383,
-        "confidence": 0.32061,
-        "intervalLow": 0.19354,
-        "intervalHigh": 0.77693,
+        "alpha": 3.36863,
+        "beta": 3.57324,
+        "mean": 0.48526,
+        "bias": -0.02948,
+        "evidenceWeight": 0.94187,
+        "confidence": 0.32016,
+        "intervalLow": 0.19353,
+        "intervalHigh": 0.777,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.36939,
-          "surveyNegative": 0.57443
+          "surveyPositive": 0.36863,
+          "surveyNegative": 0.57324
         }
       }
     },
@@ -3916,19 +3918,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.20225,
-        "beta": 3.06383,
-        "mean": 0.51105,
-        "bias": 0.02209,
-        "evidenceWeight": 0.26608,
-        "confidence": 0.11742,
-        "intervalLow": 0.20599,
-        "intervalHigh": 0.8161,
+        "alpha": 3.20183,
+        "beta": 3.06369,
+        "mean": 0.51102,
+        "bias": 0.02205,
+        "evidenceWeight": 0.26553,
+        "confidence": 0.1172,
+        "intervalLow": 0.20596,
+        "intervalHigh": 0.81609,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.20225,
-          "surveyNegative": 0.06383
+          "surveyPositive": 0.20183,
+          "surveyNegative": 0.06369
         }
       }
     },
@@ -3966,19 +3968,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.38205,
-        "beta": 3.63546,
-        "mean": 0.54656,
-        "bias": 0.09312,
-        "evidenceWeight": 2.01751,
-        "confidence": 0.50218,
-        "intervalLow": 0.27385,
+        "alpha": 4.37919,
+        "beta": 3.63414,
+        "mean": 0.54649,
+        "bias": 0.09298,
+        "evidenceWeight": 2.01333,
+        "confidence": 0.50166,
+        "intervalLow": 0.27371,
         "intervalHigh": 0.81927,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.38205,
-          "surveyNegative": 0.63546
+          "surveyPositive": 1.37919,
+          "surveyNegative": 0.63414
         }
       }
     },
@@ -4015,19 +4017,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.35078,
-        "beta": 3.16271,
-        "mean": 0.51444,
-        "bias": 0.02887,
-        "evidenceWeight": 0.51349,
-        "confidence": 0.20429,
-        "intervalLow": 0.2145,
-        "intervalHigh": 0.81438,
+        "alpha": 3.35005,
+        "beta": 3.16238,
+        "mean": 0.51441,
+        "bias": 0.02882,
+        "evidenceWeight": 0.51243,
+        "confidence": 0.20396,
+        "intervalLow": 0.21445,
+        "intervalHigh": 0.81437,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.35078,
-          "surveyNegative": 0.16271
+          "surveyPositive": 0.35005,
+          "surveyNegative": 0.16238
         }
       }
     },
@@ -4063,19 +4065,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.60608,
-        "beta": 3.41802,
-        "mean": 0.51339,
-        "bias": 0.02677,
-        "evidenceWeight": 1.02409,
-        "confidence": 0.33864,
-        "intervalLow": 0.22313,
-        "intervalHigh": 0.80364,
+        "alpha": 3.60482,
+        "beta": 3.41715,
+        "mean": 0.51336,
+        "bias": 0.02673,
+        "evidenceWeight": 1.02198,
+        "confidence": 0.33818,
+        "intervalLow": 0.22307,
+        "intervalHigh": 0.80366,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.60608,
-          "surveyNegative": 0.41802
+          "surveyPositive": 0.60482,
+          "surveyNegative": 0.41715
         }
       }
     },
@@ -4110,19 +4112,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.35078,
-        "beta": 3.16271,
-        "mean": 0.51444,
-        "bias": 0.02887,
-        "evidenceWeight": 0.51349,
-        "confidence": 0.20429,
-        "intervalLow": 0.2145,
-        "intervalHigh": 0.81438,
+        "alpha": 3.35005,
+        "beta": 3.16238,
+        "mean": 0.51441,
+        "bias": 0.02882,
+        "evidenceWeight": 0.51243,
+        "confidence": 0.20396,
+        "intervalLow": 0.21445,
+        "intervalHigh": 0.81437,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.35078,
-          "surveyNegative": 0.16271
+          "surveyPositive": 0.35005,
+          "surveyNegative": 0.16238
         }
       }
     },
@@ -4147,8 +4149,8 @@
       "surveyCount": 0,
       "averageSurveyRating": null,
       "availableNow": false,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
       "priceCheckedAt": null,
@@ -4158,19 +4160,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.51524,
-        "beta": 3.48925,
+        "alpha": 3.51417,
+        "beta": 3.48824,
         "mean": 0.50185,
-        "bias": 0.00371,
-        "evidenceWeight": 1.00449,
-        "confidence": 0.33433,
-        "intervalLow": 0.21114,
-        "intervalHigh": 0.79257,
+        "bias": 0.0037,
+        "evidenceWeight": 1.00242,
+        "confidence": 0.33387,
+        "intervalLow": 0.2111,
+        "intervalHigh": 0.7926,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.51524,
-          "surveyNegative": 0.48925
+          "surveyPositive": 0.51417,
+          "surveyNegative": 0.48824
         }
       }
     },
@@ -4206,19 +4208,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.71081,
-        "beta": 3.23086,
-        "mean": 0.53457,
-        "bias": 0.06914,
-        "evidenceWeight": 0.94167,
-        "confidence": 0.32011,
-        "intervalLow": 0.24341,
-        "intervalHigh": 0.82574,
+        "alpha": 3.70934,
+        "beta": 3.23038,
+        "mean": 0.53451,
+        "bias": 0.06902,
+        "evidenceWeight": 0.93972,
+        "confidence": 0.31966,
+        "intervalLow": 0.24331,
+        "intervalHigh": 0.82571,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.71081,
-          "surveyNegative": 0.23086
+          "surveyPositive": 0.70934,
+          "surveyNegative": 0.23038
         }
       }
     },
@@ -4255,19 +4257,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.35078,
-        "beta": 3.16271,
-        "mean": 0.51444,
-        "bias": 0.02887,
-        "evidenceWeight": 0.51349,
-        "confidence": 0.20429,
-        "intervalLow": 0.2145,
-        "intervalHigh": 0.81438,
+        "alpha": 3.35005,
+        "beta": 3.16238,
+        "mean": 0.51441,
+        "bias": 0.02882,
+        "evidenceWeight": 0.51243,
+        "confidence": 0.20396,
+        "intervalLow": 0.21445,
+        "intervalHigh": 0.81437,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.35078,
-          "surveyNegative": 0.16271
+          "surveyPositive": 0.35005,
+          "surveyNegative": 0.16238
         }
       }
     },
@@ -4303,19 +4305,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.59019,
-        "beta": 3.58956,
+        "alpha": 3.58897,
+        "beta": 3.58834,
         "mean": 0.50004,
-        "bias": 9e-05,
-        "evidenceWeight": 1.17975,
-        "confidence": 0.37102,
-        "intervalLow": 0.21246,
-        "intervalHigh": 0.78763,
+        "bias": 0.00009,
+        "evidenceWeight": 1.17731,
+        "confidence": 0.37054,
+        "intervalLow": 0.21242,
+        "intervalHigh": 0.78767,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.59019,
-          "surveyNegative": 0.58956
+          "surveyPositive": 0.58897,
+          "surveyNegative": 0.58834
         }
       }
     },
@@ -4349,19 +4351,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.06558,
-        "beta": 3.06551,
+        "alpha": 3.06544,
+        "beta": 3.06537,
         "mean": 0.50001,
-        "bias": 1e-05,
-        "evidenceWeight": 0.13108,
-        "confidence": 0.06151,
-        "intervalLow": 0.192,
-        "intervalHigh": 0.80801,
+        "bias": 0.00001,
+        "evidenceWeight": 0.13081,
+        "confidence": 0.06139,
+        "intervalLow": 0.19199,
+        "intervalHigh": 0.80802,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.06558,
-          "surveyNegative": 0.06551
+          "surveyPositive": 0.06544,
+          "surveyNegative": 0.06537
         }
       }
     },
@@ -4398,18 +4400,18 @@
       ],
       "taste": {
         "alpha": 3,
-        "beta": 3.8334,
-        "mean": 0.43902,
-        "bias": -0.12196,
-        "evidenceWeight": 0.8334,
-        "confidence": 0.29413,
-        "intervalLow": 0.14734,
-        "intervalHigh": 0.7307,
+        "beta": 3.83167,
+        "mean": 0.43913,
+        "bias": -0.12174,
+        "evidenceWeight": 0.83167,
+        "confidence": 0.2937,
+        "intervalLow": 0.14741,
+        "intervalHigh": 0.73085,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 0.8334
+          "surveyNegative": 0.83167
         }
       }
     },
@@ -4446,19 +4448,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.72653,
-        "beta": 3.70827,
+        "alpha": 3.72502,
+        "beta": 3.70681,
         "mean": 0.50123,
-        "bias": 0.00246,
-        "evidenceWeight": 1.4348,
-        "confidence": 0.41772,
-        "intervalLow": 0.21802,
-        "intervalHigh": 0.78443,
+        "bias": 0.00245,
+        "evidenceWeight": 1.43183,
+        "confidence": 0.41722,
+        "intervalLow": 0.21797,
+        "intervalHigh": 0.78448,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.72653,
-          "surveyNegative": 0.70827
+          "surveyPositive": 0.72502,
+          "surveyNegative": 0.70681
         }
       }
     },
@@ -4494,19 +4496,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.70329,
-        "beta": 3.54065,
-        "mean": 0.51123,
-        "bias": 0.02245,
-        "evidenceWeight": 1.24394,
-        "confidence": 0.38347,
-        "intervalLow": 0.22484,
-        "intervalHigh": 0.79762,
+        "alpha": 3.70184,
+        "beta": 3.53953,
+        "mean": 0.51121,
+        "bias": 0.02241,
+        "evidenceWeight": 1.24137,
+        "confidence": 0.38298,
+        "intervalLow": 0.22477,
+        "intervalHigh": 0.79764,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 0.6318,
-          "surveyNegative": 0.54065
+          "surveyPositive": 0.63049,
+          "surveyNegative": 0.53953
         }
       }
     },
@@ -4541,19 +4543,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.74939,
-        "beta": 3.24392,
-        "mean": 0.53614,
-        "bias": 0.07228,
-        "evidenceWeight": 0.99331,
-        "confidence": 0.33184,
-        "intervalLow": 0.24598,
-        "intervalHigh": 0.8263,
+        "alpha": 3.74784,
+        "beta": 3.24342,
+        "mean": 0.53608,
+        "bias": 0.07215,
+        "evidenceWeight": 0.99125,
+        "confidence": 0.33138,
+        "intervalLow": 0.24588,
+        "intervalHigh": 0.82627,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.74939,
-          "surveyNegative": 0.24392
+          "surveyPositive": 0.74784,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -4587,19 +4589,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.74939,
-        "beta": 3.24392,
-        "mean": 0.53614,
-        "bias": 0.07228,
-        "evidenceWeight": 0.99331,
-        "confidence": 0.33184,
-        "intervalLow": 0.24598,
-        "intervalHigh": 0.8263,
+        "alpha": 3.74784,
+        "beta": 3.24342,
+        "mean": 0.53608,
+        "bias": 0.07215,
+        "evidenceWeight": 0.99125,
+        "confidence": 0.33138,
+        "intervalLow": 0.24588,
+        "intervalHigh": 0.82627,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.74939,
-          "surveyNegative": 0.24392
+          "surveyPositive": 0.74784,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -4637,19 +4639,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.09513,
-        "beta": 3.24392,
-        "mean": 0.55799,
-        "bias": 0.11598,
-        "evidenceWeight": 1.33905,
-        "confidence": 0.40103,
-        "intervalLow": 0.27509,
-        "intervalHigh": 0.84089,
+        "alpha": 4.09287,
+        "beta": 3.24342,
+        "mean": 0.55789,
+        "bias": 0.11579,
+        "evidenceWeight": 1.33628,
+        "confidence": 0.40053,
+        "intervalLow": 0.27494,
+        "intervalHigh": 0.84085,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.09513,
-          "surveyNegative": 0.24392
+          "surveyPositive": 1.09287,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -4685,19 +4687,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.74939,
-        "beta": 3.24392,
-        "mean": 0.53614,
-        "bias": 0.07228,
-        "evidenceWeight": 0.99331,
-        "confidence": 0.33184,
-        "intervalLow": 0.24598,
-        "intervalHigh": 0.8263,
+        "alpha": 3.74784,
+        "beta": 3.24342,
+        "mean": 0.53608,
+        "bias": 0.07215,
+        "evidenceWeight": 0.99125,
+        "confidence": 0.33138,
+        "intervalLow": 0.24588,
+        "intervalHigh": 0.82627,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.74939,
-          "surveyNegative": 0.24392
+          "surveyPositive": 0.74784,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -4734,19 +4736,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 3.91724,
-        "mean": 0.51704,
-        "bias": 0.03407,
-        "evidenceWeight": 2.11081,
-        "confidence": 0.51348,
-        "intervalLow": 0.2447,
-        "intervalHigh": 0.78937,
+        "alpha": 4.1911,
+        "beta": 3.91534,
+        "mean": 0.51701,
+        "bias": 0.03402,
+        "evidenceWeight": 2.10644,
+        "confidence": 0.51296,
+        "intervalLow": 0.24461,
+        "intervalHigh": 0.78941,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.11848,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -4781,19 +4783,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 3.91724,
-        "mean": 0.51704,
-        "bias": 0.03407,
-        "evidenceWeight": 2.11081,
-        "confidence": 0.51348,
-        "intervalLow": 0.2447,
-        "intervalHigh": 0.78937,
+        "alpha": 4.1911,
+        "beta": 3.91534,
+        "mean": 0.51701,
+        "bias": 0.03402,
+        "evidenceWeight": 2.10644,
+        "confidence": 0.51296,
+        "intervalLow": 0.24461,
+        "intervalHigh": 0.78941,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.11848,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -4818,33 +4820,32 @@
       "mealEventCount": 0,
       "surveyCount": 2,
       "averageSurveyRating": 3,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "history",
-        "preference",
-        "verified"
+        "preference"
       ],
       "taste": {
-        "alpha": 4.48125,
-        "beta": 4.20491,
-        "mean": 0.51591,
-        "bias": 0.03181,
-        "evidenceWeight": 2.68616,
-        "confidence": 0.57321,
-        "intervalLow": 0.25176,
-        "intervalHigh": 0.78005,
+        "alpha": 4.47819,
+        "beta": 4.20241,
+        "mean": 0.51588,
+        "bias": 0.03177,
+        "evidenceWeight": 2.6806,
+        "confidence": 0.5727,
+        "intervalLow": 0.25166,
+        "intervalHigh": 0.7801,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.40848,
-          "surveyNegative": 1.20491
+          "surveyPositive": 1.40556,
+          "surveyNegative": 1.20241
         }
       }
     },
@@ -4881,19 +4882,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.53932,
-        "beta": 3.91724,
-        "mean": 0.53678,
-        "bias": 0.07356,
-        "evidenceWeight": 2.45655,
-        "confidence": 0.55122,
-        "intervalLow": 0.27004,
-        "intervalHigh": 0.80352,
+        "alpha": 4.53613,
+        "beta": 3.91534,
+        "mean": 0.53673,
+        "bias": 0.07345,
+        "evidenceWeight": 2.45147,
+        "confidence": 0.55071,
+        "intervalLow": 0.26991,
+        "intervalHigh": 0.80354,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.46654,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.46351,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -4928,19 +4929,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.79981,
-        "beta": 4.0198,
-        "mean": 0.48593,
-        "bias": -0.02813,
-        "evidenceWeight": 1.81961,
-        "confidence": 0.47639,
-        "intervalLow": 0.20909,
-        "intervalHigh": 0.76278,
+        "alpha": 3.79815,
+        "beta": 4.01769,
+        "mean": 0.48596,
+        "bias": -0.02809,
+        "evidenceWeight": 1.81584,
+        "confidence": 0.47587,
+        "intervalLow": 0.20905,
+        "intervalHigh": 0.76286,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.79981,
-          "surveyNegative": 1.0198
+          "surveyPositive": 0.79815,
+          "surveyNegative": 1.01769
         }
       }
     },
@@ -4974,19 +4975,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.79981,
-        "beta": 3.23546,
-        "mean": 0.54011,
-        "bias": 0.08022,
-        "evidenceWeight": 1.03527,
-        "confidence": 0.34108,
-        "intervalLow": 0.25089,
-        "intervalHigh": 0.82933,
+        "alpha": 3.79815,
+        "beta": 3.23497,
+        "mean": 0.54004,
+        "bias": 0.08008,
+        "evidenceWeight": 1.03312,
+        "confidence": 0.34061,
+        "intervalLow": 0.25077,
+        "intervalHigh": 0.8293,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.79981,
-          "surveyNegative": 0.23546
+          "surveyPositive": 0.79815,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -5021,19 +5022,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.05511,
-        "beta": 3.23546,
-        "mean": 0.55621,
-        "bias": 0.11243,
-        "evidenceWeight": 1.29057,
-        "confidence": 0.3922,
-        "intervalLow": 0.27237,
-        "intervalHigh": 0.84006,
+        "alpha": 4.05293,
+        "beta": 3.23497,
+        "mean": 0.55612,
+        "bias": 0.11223,
+        "evidenceWeight": 1.2879,
+        "confidence": 0.39171,
+        "intervalLow": 0.27222,
+        "intervalHigh": 0.84001,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.05511,
-          "surveyNegative": 0.23546
+          "surveyPositive": 1.05293,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -5069,19 +5070,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 4.31238,
-        "beta": 3.49149,
-        "mean": 0.55259,
-        "bias": 0.10519,
-        "evidenceWeight": 1.80387,
-        "confidence": 0.47422,
-        "intervalLow": 0.27693,
-        "intervalHigh": 0.82826,
+        "alpha": 4.30966,
+        "beta": 3.49048,
+        "mean": 0.55251,
+        "bias": 0.10502,
+        "evidenceWeight": 1.80014,
+        "confidence": 0.4737,
+        "intervalLow": 0.27678,
+        "intervalHigh": 0.82824,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.31238,
-          "surveyNegative": 0.49149
+          "surveyPositive": 1.30966,
+          "surveyNegative": 0.49048
         }
       }
     },
@@ -5115,19 +5116,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.79981,
-        "beta": 3.23546,
-        "mean": 0.54011,
-        "bias": 0.08022,
-        "evidenceWeight": 1.03527,
-        "confidence": 0.34108,
-        "intervalLow": 0.25089,
-        "intervalHigh": 0.82933,
+        "alpha": 3.79815,
+        "beta": 3.23497,
+        "mean": 0.54004,
+        "bias": 0.08008,
+        "evidenceWeight": 1.03312,
+        "confidence": 0.34061,
+        "intervalLow": 0.25077,
+        "intervalHigh": 0.8293,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.79981,
-          "surveyNegative": 0.23546
+          "surveyPositive": 0.79815,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -5161,19 +5162,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.79981,
-        "beta": 3.23546,
-        "mean": 0.54011,
-        "bias": 0.08022,
-        "evidenceWeight": 1.03527,
-        "confidence": 0.34108,
-        "intervalLow": 0.25089,
-        "intervalHigh": 0.82933,
+        "alpha": 3.79815,
+        "beta": 3.23497,
+        "mean": 0.54004,
+        "bias": 0.08008,
+        "evidenceWeight": 1.03312,
+        "confidence": 0.34061,
+        "intervalLow": 0.25077,
+        "intervalHigh": 0.8293,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.79981,
-          "surveyNegative": 0.23546
+          "surveyPositive": 0.79815,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -5209,19 +5210,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.43789,
-        "beta": 3.32169,
-        "mean": 0.5086,
-        "bias": 0.01719,
-        "evidenceWeight": 0.75958,
-        "confidence": 0.27525,
-        "intervalLow": 0.21337,
-        "intervalHigh": 0.80382,
+        "alpha": 3.43699,
+        "beta": 3.32102,
+        "mean": 0.50858,
+        "bias": 0.01716,
+        "evidenceWeight": 0.75801,
+        "confidence": 0.27484,
+        "intervalLow": 0.21333,
+        "intervalHigh": 0.80383,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43789,
-          "surveyNegative": 0.32169
+          "surveyPositive": 0.43699,
+          "surveyNegative": 0.32102
         }
       }
     },
@@ -5259,19 +5260,19 @@
         "history"
       ],
       "taste": {
-        "alpha": 3.43789,
-        "beta": 3.32169,
-        "mean": 0.5086,
-        "bias": 0.01719,
-        "evidenceWeight": 0.75958,
-        "confidence": 0.27525,
-        "intervalLow": 0.21337,
-        "intervalHigh": 0.80382,
+        "alpha": 3.43699,
+        "beta": 3.32102,
+        "mean": 0.50858,
+        "bias": 0.01716,
+        "evidenceWeight": 0.75801,
+        "confidence": 0.27484,
+        "intervalLow": 0.21333,
+        "intervalHigh": 0.80383,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43789,
-          "surveyNegative": 0.32169
+          "surveyPositive": 0.43699,
+          "surveyNegative": 0.32102
         }
       }
     },
@@ -5307,19 +5308,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.95046,
-        "beta": 3.83376,
-        "mean": 0.5075,
-        "bias": 0.01499,
-        "evidenceWeight": 1.78422,
-        "confidence": 0.47149,
-        "intervalLow": 0.23001,
-        "intervalHigh": 0.78498,
+        "alpha": 3.94849,
+        "beta": 3.83204,
+        "mean": 0.50748,
+        "bias": 0.01497,
+        "evidenceWeight": 1.78053,
+        "confidence": 0.47097,
+        "intervalLow": 0.22994,
+        "intervalHigh": 0.78502,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.95046,
-          "surveyNegative": 0.83376
+          "surveyPositive": 0.94849,
+          "surveyNegative": 0.83204
         }
       }
     },
@@ -5356,19 +5357,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.53662,
-        "beta": 3.16836,
-        "mean": 0.52746,
-        "bias": 0.05492,
-        "evidenceWeight": 0.70498,
-        "confidence": 0.26062,
-        "intervalLow": 0.2316,
-        "intervalHigh": 0.82333,
+        "alpha": 3.53551,
+        "beta": 3.16801,
+        "mean": 0.52741,
+        "bias": 0.05482,
+        "evidenceWeight": 0.70353,
+        "confidence": 0.26023,
+        "intervalLow": 0.23152,
+        "intervalHigh": 0.82331,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.53662,
-          "surveyNegative": 0.16836
+          "surveyPositive": 0.53551,
+          "surveyNegative": 0.16801
         }
       }
     },
@@ -5405,19 +5406,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.6274,
-        "beta": 3.16836,
-        "mean": 0.53377,
-        "bias": 0.06755,
-        "evidenceWeight": 0.79576,
-        "confidence": 0.28463,
-        "intervalLow": 0.23986,
-        "intervalHigh": 0.82768,
+        "alpha": 3.6261,
+        "beta": 3.16801,
+        "mean": 0.53371,
+        "bias": 0.06742,
+        "evidenceWeight": 0.79411,
+        "confidence": 0.28421,
+        "intervalLow": 0.23977,
+        "intervalHigh": 0.82766,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.6274,
-          "surveyNegative": 0.16836
+          "surveyPositive": 0.6261,
+          "surveyNegative": 0.16801
         }
       }
     },
@@ -5454,19 +5455,19 @@
         "preference"
       ],
       "taste": {
-        "alpha": 3.54364,
-        "beta": 3.68246,
-        "mean": 0.49039,
-        "bias": -0.01921,
-        "evidenceWeight": 1.2261,
-        "confidence": 0.38006,
-        "intervalLow": 0.20367,
-        "intervalHigh": 0.77711,
+        "alpha": 3.54251,
+        "beta": 3.68105,
+        "mean": 0.49041,
+        "bias": -0.01918,
+        "evidenceWeight": 1.22356,
+        "confidence": 0.37957,
+        "intervalLow": 0.20365,
+        "intervalHigh": 0.77718,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.54364,
-          "surveyNegative": 0.68246
+          "surveyPositive": 0.54251,
+          "surveyNegative": 0.68105
         }
       }
     },
@@ -5500,19 +5501,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.69956,
-        "beta": 3.07579,
-        "mean": 0.54603,
-        "bias": 0.09207,
-        "evidenceWeight": 0.77535,
-        "confidence": 0.27937,
-        "intervalLow": 0.25232,
-        "intervalHigh": 0.83975,
+        "alpha": 3.69812,
+        "beta": 3.07563,
+        "mean": 0.54595,
+        "bias": 0.0919,
+        "evidenceWeight": 0.77374,
+        "confidence": 0.27895,
+        "intervalLow": 0.2522,
+        "intervalHigh": 0.8397,
         "sources": {
-          "mealPositive": 0.57427,
+          "mealPositive": 0.57308,
           "mealNegative": 0,
-          "surveyPositive": 0.1253,
-          "surveyNegative": 0.07579
+          "surveyPositive": 0.12504,
+          "surveyNegative": 0.07563
         }
       }
     },
@@ -5546,19 +5547,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.72645,
-        "beta": 3.07579,
-        "mean": 0.54783,
-        "bias": 0.09566,
-        "evidenceWeight": 0.80224,
-        "confidence": 0.28629,
-        "intervalLow": 0.25472,
-        "intervalHigh": 0.84094,
+        "alpha": 3.72495,
+        "beta": 3.07563,
+        "mean": 0.54774,
+        "bias": 0.09548,
+        "evidenceWeight": 0.80058,
+        "confidence": 0.28586,
+        "intervalLow": 0.25459,
+        "intervalHigh": 0.84089,
         "sources": {
-          "mealPositive": 0.60116,
+          "mealPositive": 0.59991,
           "mealNegative": 0,
-          "surveyPositive": 0.1253,
-          "surveyNegative": 0.07579
+          "surveyPositive": 0.12504,
+          "surveyNegative": 0.07563
         }
       }
     },
@@ -5583,29 +5584,29 @@
       "surveyCount": 0,
       "averageSurveyRating": null,
       "availableNow": false,
-      "availabilityCheckedAt": "2026-09-18T06:00:02.107Z",
-      "availabilityExpiresAt": "2026-10-18T06:00:02.107Z",
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "recent",
+      "deliveryFreshness": "current",
       "priceCheckedAt": null,
       "priceExpiresAt": null,
       "sources": [
         "catalog"
       ],
       "taste": {
-        "alpha": 3.75975,
-        "beta": 3.11542,
-        "mean": 0.54686,
-        "bias": 0.09372,
-        "evidenceWeight": 0.87517,
-        "confidence": 0.30439,
-        "intervalLow": 0.25506,
-        "intervalHigh": 0.83866,
+        "alpha": 3.75818,
+        "beta": 3.11518,
+        "mean": 0.54677,
+        "bias": 0.09355,
+        "evidenceWeight": 0.87336,
+        "confidence": 0.30395,
+        "intervalLow": 0.25493,
+        "intervalHigh": 0.83862,
         "sources": {
-          "mealPositive": 0.07935,
+          "mealPositive": 0.07919,
           "mealNegative": 0,
-          "surveyPositive": 0.68039,
-          "surveyNegative": 0.11542
+          "surveyPositive": 0.67899,
+          "surveyNegative": 0.11518
         }
       }
     },
@@ -5639,19 +5640,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.81274,
-        "beta": 3.11542,
-        "mean": 0.55033,
-        "bias": 0.10065,
-        "evidenceWeight": 0.92816,
-        "confidence": 0.31698,
-        "intervalLow": 0.2597,
-        "intervalHigh": 0.84095,
+        "alpha": 3.81106,
+        "beta": 3.11518,
+        "mean": 0.55023,
+        "bias": 0.10047,
+        "evidenceWeight": 0.92624,
+        "confidence": 0.31653,
+        "intervalLow": 0.25957,
+        "intervalHigh": 0.8409,
         "sources": {
-          "mealPositive": 0.71418,
+          "mealPositive": 0.71271,
           "mealNegative": 0,
-          "surveyPositive": 0.09856,
-          "surveyNegative": 0.11542
+          "surveyPositive": 0.09836,
+          "surveyNegative": 0.11518
         }
       }
     },
@@ -5687,19 +5688,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.06558,
-        "beta": 3.06551,
+        "alpha": 3.06544,
+        "beta": 3.06537,
         "mean": 0.50001,
-        "bias": 1e-05,
-        "evidenceWeight": 0.13108,
-        "confidence": 0.06151,
-        "intervalLow": 0.192,
-        "intervalHigh": 0.80801,
+        "bias": 0.00001,
+        "evidenceWeight": 0.13081,
+        "confidence": 0.06139,
+        "intervalLow": 0.19199,
+        "intervalHigh": 0.80802,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.06558,
-          "surveyNegative": 0.06551
+          "surveyPositive": 0.06544,
+          "surveyNegative": 0.06537
         }
       }
     },
@@ -5735,19 +5736,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.19673,
-        "beta": 3.32256,
-        "mean": 0.49035,
-        "bias": -0.0193,
-        "evidenceWeight": 0.51929,
-        "confidence": 0.20613,
-        "intervalLow": 0.19046,
-        "intervalHigh": 0.79024,
+        "alpha": 3.19632,
+        "beta": 3.32189,
+        "mean": 0.49037,
+        "bias": -0.01926,
+        "evidenceWeight": 0.51822,
+        "confidence": 0.20579,
+        "intervalLow": 0.19045,
+        "intervalHigh": 0.79028,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.19673,
-          "surveyNegative": 0.32256
+          "surveyPositive": 0.19632,
+          "surveyNegative": 0.32189
         }
       }
     },
@@ -5782,19 +5783,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.06558,
-        "beta": 3.06551,
+        "alpha": 3.06544,
+        "beta": 3.06537,
         "mean": 0.50001,
-        "bias": 1e-05,
-        "evidenceWeight": 0.13108,
-        "confidence": 0.06151,
-        "intervalLow": 0.192,
-        "intervalHigh": 0.80801,
+        "bias": 0.00001,
+        "evidenceWeight": 0.13081,
+        "confidence": 0.06139,
+        "intervalLow": 0.19199,
+        "intervalHigh": 0.80802,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.06558,
-          "surveyNegative": 0.06551
+          "surveyPositive": 0.06544,
+          "surveyNegative": 0.06537
         }
       }
     },
@@ -5820,31 +5821,30 @@
       "mealEventCount": 0,
       "surveyCount": 0,
       "averageSurveyRating": null,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
-        "catalog",
-        "verified"
+        "catalog"
       ],
       "taste": {
         "alpha": 3,
-        "beta": 3.14184,
-        "mean": 0.48845,
-        "bias": -0.02309,
-        "evidenceWeight": 0.14184,
-        "confidence": 0.06622,
-        "intervalLow": 0.18076,
-        "intervalHigh": 0.79614,
+        "beta": 3.14155,
+        "mean": 0.48848,
+        "bias": -0.02305,
+        "evidenceWeight": 0.14155,
+        "confidence": 0.0661,
+        "intervalLow": 0.18078,
+        "intervalHigh": 0.79617,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 0.14184
+          "surveyNegative": 0.14155
         }
       }
     },
@@ -5869,30 +5869,30 @@
       "surveyCount": 0,
       "averageSurveyRating": null,
       "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
         "catalog",
         "verified"
       ],
       "taste": {
         "alpha": 3,
-        "beta": 3.17289,
-        "mean": 0.486,
-        "bias": -0.02801,
-        "evidenceWeight": 0.17289,
-        "confidence": 0.07957,
-        "intervalLow": 0.17901,
-        "intervalHigh": 0.79298,
+        "beta": 3.17253,
+        "mean": 0.48602,
+        "bias": -0.02795,
+        "evidenceWeight": 0.17253,
+        "confidence": 0.07941,
+        "intervalLow": 0.17903,
+        "intervalHigh": 0.79302,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
           "surveyPositive": 0,
-          "surveyNegative": 0.17289
+          "surveyNegative": 0.17253
         }
       }
     },
@@ -5928,19 +5928,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 3.15619,
-        "beta": 4.1322,
-        "mean": 0.43304,
-        "bias": -0.13391,
-        "evidenceWeight": 1.28839,
-        "confidence": 0.3918,
-        "intervalLow": 0.14992,
-        "intervalHigh": 0.71616,
+        "alpha": 3.15587,
+        "beta": 4.12986,
+        "mean": 0.43316,
+        "bias": -0.13368,
+        "evidenceWeight": 1.28572,
+        "confidence": 0.39131,
+        "intervalLow": 0.14998,
+        "intervalHigh": 0.71633,
         "sources": {
           "mealPositive": 0,
-          "mealNegative": 0.66072,
-          "surveyPositive": 0.15619,
-          "surveyNegative": 0.47148
+          "mealNegative": 0.65935,
+          "surveyPositive": 0.15587,
+          "surveyNegative": 0.4705
         }
       }
     },
@@ -5976,19 +5976,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.72653,
-        "beta": 3.70827,
+        "alpha": 3.72502,
+        "beta": 3.70681,
         "mean": 0.50123,
-        "bias": 0.00246,
-        "evidenceWeight": 1.4348,
-        "confidence": 0.41772,
-        "intervalLow": 0.21802,
-        "intervalHigh": 0.78443,
+        "bias": 0.00245,
+        "evidenceWeight": 1.43183,
+        "confidence": 0.41722,
+        "intervalLow": 0.21797,
+        "intervalHigh": 0.78448,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.72653,
-          "surveyNegative": 0.70827
+          "surveyPositive": 0.72502,
+          "surveyNegative": 0.70681
         }
       }
     },
@@ -6023,19 +6023,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 4.27526,
-        "beta": 3.54065,
-        "mean": 0.54699,
-        "bias": 0.09399,
-        "evidenceWeight": 1.81591,
-        "confidence": 0.47588,
-        "intervalLow": 0.27121,
-        "intervalHigh": 0.82278,
+        "alpha": 4.27262,
+        "beta": 3.53953,
+        "mean": 0.54692,
+        "bias": 0.09384,
+        "evidenceWeight": 1.81215,
+        "confidence": 0.47536,
+        "intervalLow": 0.27107,
+        "intervalHigh": 0.82277,
         "sources": {
-          "mealPositive": 0.64346,
+          "mealPositive": 0.64213,
           "mealNegative": 0,
-          "surveyPositive": 0.6318,
-          "surveyNegative": 0.54065
+          "surveyPositive": 0.63049,
+          "surveyNegative": 0.53953
         }
       }
     },
@@ -6070,19 +6070,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.70329,
-        "beta": 3.54065,
-        "mean": 0.51123,
-        "bias": 0.02245,
-        "evidenceWeight": 1.24394,
-        "confidence": 0.38347,
-        "intervalLow": 0.22484,
-        "intervalHigh": 0.79762,
+        "alpha": 3.70184,
+        "beta": 3.53953,
+        "mean": 0.51121,
+        "bias": 0.02241,
+        "evidenceWeight": 1.24137,
+        "confidence": 0.38298,
+        "intervalLow": 0.22477,
+        "intervalHigh": 0.79764,
         "sources": {
-          "mealPositive": 0.0715,
+          "mealPositive": 0.07135,
           "mealNegative": 0,
-          "surveyPositive": 0.6318,
-          "surveyNegative": 0.54065
+          "surveyPositive": 0.63049,
+          "surveyNegative": 0.53953
         }
       }
     },
@@ -6117,19 +6117,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 4.18136,
-        "beta": 3.24392,
-        "mean": 0.56312,
-        "bias": 0.12625,
-        "evidenceWeight": 1.42528,
-        "confidence": 0.41611,
-        "intervalLow": 0.28203,
-        "intervalHigh": 0.84422,
+        "alpha": 4.17892,
+        "beta": 3.24342,
+        "mean": 0.56302,
+        "bias": 0.12604,
+        "evidenceWeight": 1.42233,
+        "confidence": 0.4156,
+        "intervalLow": 0.28187,
+        "intervalHigh": 0.84417,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.18136,
-          "surveyNegative": 0.24392
+          "surveyPositive": 1.17892,
+          "surveyNegative": 0.24342
         }
       }
     },
@@ -6154,28 +6154,28 @@
       "averageSurveyRating": null,
       "availableNow": false,
       "availabilityCheckedAt": "2026-09-29T23:50:02.081Z",
-      "availabilityExpiresAt": "2026-10-02T23:50:02.081Z",
+      "availabilityExpiresAt": "2026-10-29T23:50:02.081Z",
       "deliveryStatus": "likely",
-      "deliveryFreshness": "current",
+      "deliveryFreshness": "recent",
       "priceCheckedAt": null,
       "priceExpiresAt": null,
       "sources": [
         "catalog"
       ],
       "taste": {
-        "alpha": 4.07819,
-        "beta": 3.51649,
-        "mean": 0.53698,
-        "bias": 0.07396,
-        "evidenceWeight": 1.59468,
-        "confidence": 0.44362,
-        "intervalLow": 0.25719,
-        "intervalHigh": 0.81677,
+        "alpha": 4.07596,
+        "beta": 3.51542,
+        "mean": 0.53692,
+        "bias": 0.07384,
+        "evidenceWeight": 1.59138,
+        "confidence": 0.44311,
+        "intervalLow": 0.25707,
+        "intervalHigh": 0.81676,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 1.07819,
-          "surveyNegative": 0.51649
+          "surveyPositive": 1.07596,
+          "surveyNegative": 0.51542
         }
       }
     },
@@ -6210,19 +6210,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 3.91724,
-        "mean": 0.51704,
-        "bias": 0.03407,
-        "evidenceWeight": 2.11081,
-        "confidence": 0.51348,
-        "intervalLow": 0.2447,
-        "intervalHigh": 0.78937,
+        "alpha": 4.1911,
+        "beta": 3.91534,
+        "mean": 0.51701,
+        "bias": 0.03402,
+        "evidenceWeight": 2.10644,
+        "confidence": 0.51296,
+        "intervalLow": 0.24461,
+        "intervalHigh": 0.78941,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.11848,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -6256,19 +6256,19 @@
         "meal"
       ],
       "taste": {
-        "alpha": 4.77579,
-        "beta": 3.91724,
-        "mean": 0.54938,
-        "bias": 0.09876,
-        "evidenceWeight": 2.69303,
-        "confidence": 0.57384,
-        "intervalLow": 0.28649,
-        "intervalHigh": 0.81227,
+        "alpha": 4.77212,
+        "beta": 3.91534,
+        "mean": 0.54931,
+        "bias": 0.09862,
+        "evidenceWeight": 2.68746,
+        "confidence": 0.57333,
+        "intervalLow": 0.28634,
+        "intervalHigh": 0.81228,
         "sources": {
-          "mealPositive": 0.65499,
+          "mealPositive": 0.65364,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.11848,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -6292,31 +6292,30 @@
       "mealEventCount": 0,
       "surveyCount": 0,
       "averageSurveyRating": null,
-      "availableNow": true,
-      "availabilityCheckedAt": "2026-10-02T08:35:01.906Z",
-      "availabilityExpiresAt": "2026-10-05T08:35:01.906Z",
+      "availableNow": false,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
       "deliveryStatus": "likely",
       "deliveryFreshness": "current",
-      "priceCheckedAt": "2026-10-02T08:35:01.906Z",
-      "priceExpiresAt": "2026-10-09T08:35:01.906Z",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
       "sources": [
-        "catalog",
-        "verified"
+        "catalog"
       ],
       "taste": {
-        "alpha": 4.19357,
-        "beta": 3.91724,
-        "mean": 0.51704,
-        "bias": 0.03407,
-        "evidenceWeight": 2.11081,
-        "confidence": 0.51348,
-        "intervalLow": 0.2447,
-        "intervalHigh": 0.78937,
+        "alpha": 4.1911,
+        "beta": 3.91534,
+        "mean": 0.51701,
+        "bias": 0.03402,
+        "evidenceWeight": 2.10644,
+        "confidence": 0.51296,
+        "intervalLow": 0.24461,
+        "intervalHigh": 0.78941,
         "sources": {
-          "mealPositive": 0.07278,
+          "mealPositive": 0.07263,
           "mealNegative": 0,
-          "surveyPositive": 1.1208,
-          "surveyNegative": 0.91724
+          "surveyPositive": 1.11848,
+          "surveyNegative": 0.91534
         }
       }
     },
@@ -6351,19 +6350,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.79981,
-        "beta": 3.23546,
-        "mean": 0.54011,
-        "bias": 0.08022,
-        "evidenceWeight": 1.03527,
-        "confidence": 0.34108,
-        "intervalLow": 0.25089,
-        "intervalHigh": 0.82933,
+        "alpha": 3.79815,
+        "beta": 3.23497,
+        "mean": 0.54004,
+        "bias": 0.08008,
+        "evidenceWeight": 1.03312,
+        "confidence": 0.34061,
+        "intervalLow": 0.25077,
+        "intervalHigh": 0.8293,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.79981,
-          "surveyNegative": 0.23546
+          "surveyPositive": 0.79815,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -6397,19 +6396,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.92746,
-        "beta": 3.23546,
-        "mean": 0.5483,
-        "bias": 0.09661,
-        "evidenceWeight": 1.16292,
-        "confidence": 0.36767,
-        "intervalLow": 0.26177,
-        "intervalHigh": 0.83484,
+        "alpha": 3.92554,
+        "beta": 3.23497,
+        "mean": 0.54822,
+        "bias": 0.09644,
+        "evidenceWeight": 1.16051,
+        "confidence": 0.36719,
+        "intervalLow": 0.26164,
+        "intervalHigh": 0.8348,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.92746,
-          "surveyNegative": 0.23546
+          "surveyPositive": 0.92554,
+          "surveyNegative": 0.23497
         }
       }
     },
@@ -6445,19 +6444,67 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.43789,
-        "beta": 3.32169,
-        "mean": 0.5086,
-        "bias": 0.01719,
-        "evidenceWeight": 0.75958,
-        "confidence": 0.27525,
-        "intervalLow": 0.21337,
-        "intervalHigh": 0.80382,
+        "alpha": 3.43699,
+        "beta": 3.32102,
+        "mean": 0.50858,
+        "bias": 0.01716,
+        "evidenceWeight": 0.75801,
+        "confidence": 0.27484,
+        "intervalLow": 0.21333,
+        "intervalHigh": 0.80383,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.43789,
-          "surveyNegative": 0.32169
+          "surveyPositive": 0.43699,
+          "surveyNegative": 0.32102
+        }
+      }
+    },
+    {
+      "id": "menu_80f4b3917addb5b9",
+      "restaurantId": "restaurant_e8f23880f2fd61a3",
+      "restaurant": "덮덮밥",
+      "branch": "완산점",
+      "restaurantLabel": "덮덮밥 완산점",
+      "menu": "(직화) 홍타레 대창덮밥",
+      "category": "한식",
+      "priceText": "13,900원",
+      "comment": "직화로 구운 통통한 대창의 쫄깃함에 매콤한 홍타레 소스가 진하게 배어 밥과 함께 먹기 좋은 한 그릇입니다.",
+      "ingredientFamilies": [
+        "offal · 내장",
+        "rice · 밥"
+      ],
+      "occurrences": 0,
+      "firstRecommendedAt": null,
+      "lastRecommendedAt": null,
+      "mealEventCount": 0,
+      "surveyCount": 0,
+      "averageSurveyRating": null,
+      "availableNow": true,
+      "availabilityCheckedAt": "2026-10-02T16:06:21.507Z",
+      "availabilityExpiresAt": "2026-10-05T16:06:21.507Z",
+      "deliveryStatus": "likely",
+      "deliveryFreshness": "current",
+      "priceCheckedAt": "2026-10-02T16:06:21.507Z",
+      "priceExpiresAt": "2026-10-09T16:06:21.507Z",
+      "sources": [
+        "catalog",
+        "verified"
+      ],
+      "taste": {
+        "alpha": 3.28075,
+        "beta": 3.16801,
+        "mean": 0.50874,
+        "bias": 0.01748,
+        "evidenceWeight": 0.44876,
+        "confidence": 0.18326,
+        "intervalLow": 0.20742,
+        "intervalHigh": 0.81006,
+        "sources": {
+          "mealPositive": 0,
+          "mealNegative": 0,
+          "surveyPositive": 0.28075,
+          "surveyNegative": 0.16801
         }
       }
     },
@@ -6493,19 +6540,19 @@
         "catalog"
       ],
       "taste": {
-        "alpha": 3.28133,
-        "beta": 3.16836,
-        "mean": 0.50876,
-        "bias": 0.01752,
-        "evidenceWeight": 0.44969,
-        "confidence": 0.18357,
-        "intervalLow": 0.20746,
+        "alpha": 3.28075,
+        "beta": 3.16801,
+        "mean": 0.50874,
+        "bias": 0.01748,
+        "evidenceWeight": 0.44876,
+        "confidence": 0.18326,
+        "intervalLow": 0.20742,
         "intervalHigh": 0.81006,
         "sources": {
           "mealPositive": 0,
           "mealNegative": 0,
-          "surveyPositive": 0.28133,
-          "surveyNegative": 0.16836
+          "surveyPositive": 0.28075,
+          "surveyNegative": 0.16801
         }
       }
     }
@@ -7699,6 +7746,18 @@
       "occurrences": 0,
       "categories": [
         "구이"
+      ]
+    },
+    {
+      "id": "restaurant_e8f23880f2fd61a3",
+      "name": "덮덮밥",
+      "branches": [
+        "완산점"
+      ],
+      "menuCount": 1,
+      "occurrences": 0,
+      "categories": [
+        "한식"
       ]
     },
     {
