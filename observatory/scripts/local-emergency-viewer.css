@@ -1,52 +1,86 @@
-:root {
-  color-scheme: dark;
-  font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
+/* Shared by the fallback table page and, in full-static mode, injected after the
+   copied observatory build. Keep every rule scoped so the build's own styles win. */
 
 .local-emergency-banner {
   position: fixed !important;
-  z-index: 2147483647 !important;
-  top: 0.75rem !important;
-  left: 50% !important;
-  width: min(46rem, calc(100% - 2rem)) !important;
-  transform: translateX(-50%) !important;
-  padding: 0.7rem 1rem !important;
-  border: 1px solid rgba(255, 199, 92, 0.72) !important;
-  border-radius: 999px !important;
-  background: rgba(39, 24, 5, 0.94) !important;
+  /* Above the copied build's header (30) and offline notice (38), below its
+     drawer backdrop (40) and drawers (44), so an open drawer is never covered. */
+  z-index: 39 !important;
+  top: 36px !important;
+  right: 22px !important;
+  /* Centred in the header's empty side: clears the brand lockup (ends near 252px). */
+  left: 300px !important;
+  width: auto !important;
+  max-width: 46rem !important;
+  margin: 0 auto !important;
+  transform: translateY(-50%) !important;
+  padding: 0.6rem 1rem !important;
+  border: 1px solid rgba(255, 211, 106, 0.6) !important;
+  border-radius: 12px !important;
+  background: rgba(32, 25, 10, 0.95) !important;
   color: #fff4cf !important;
-  box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.45) !important;
-  font: 600 0.95rem/1.4 system-ui, sans-serif !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.42) !important;
+  font: 600 15px/1.4 "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans CJK KR", "Malgun Gothic", system-ui, sans-serif !important;
+  letter-spacing: -0.01em !important;
+  word-break: keep-all !important;
   text-align: center !important;
+  text-wrap: balance !important;
   pointer-events: none !important;
 }
 
+.local-emergency-banner strong {
+  color: #ffd36a !important;
+}
+
 .local-emergency-viewer {
+  --ev-bg: #070912;
+  --ev-panel: #0f1322;
+  --ev-panel-alt: #141a2a;
+  --ev-head: #18203a;
+  --ev-line: #283149;
+  --ev-line-strong: #586784;
+  --ev-text: #f3f7ff;
+  --ev-muted: #b1bdd1;
+  --ev-subtle: #94a3bb;
+  --ev-cyan: #64e8ff;
+  --ev-gold: #ffd36a;
+  --ev-green: #6effb5;
+  color-scheme: dark;
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
-  background: #090b13;
-  color: #f6f7fb;
+  background: var(--ev-bg);
+  color: var(--ev-text);
+  font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans CJK KR", "Malgun Gothic", system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.6;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  /* Korean wraps between words, as in the main observatory. */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.local-emergency-viewer,
+.local-emergency-viewer *,
+.local-emergency-viewer *::before,
+.local-emergency-viewer *::after {
+  box-sizing: border-box;
 }
 
 .local-emergency-viewer .emergency-shell {
   width: min(92rem, 100%);
   margin: 0 auto;
-  padding: clamp(1.25rem, 3vw, 3rem);
+  padding: clamp(1rem, 3vw, 3rem);
 }
 
 .local-emergency-viewer .emergency-header,
 .local-emergency-viewer .emergency-controls,
 .local-emergency-viewer .emergency-table-wrap {
-  border: 1px solid #2b3245;
-  border-radius: 1rem;
-  background: #111522;
+  border: 1px solid var(--ev-line);
+  border-radius: 12px;
+  background: var(--ev-panel);
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.22);
 }
 
@@ -55,11 +89,11 @@
 }
 
 .local-emergency-viewer .emergency-kicker {
-  margin: 0;
-  color: #9fb8ff;
+  margin: 0 0 0.35rem;
+  color: var(--ev-cyan);
   font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .local-emergency-viewer h1,
@@ -69,22 +103,37 @@
 }
 
 .local-emergency-viewer h1 {
-  margin-bottom: 0.7rem;
-  font-size: clamp(1.9rem, 5vw, 3.5rem);
+  margin-bottom: 0.8rem;
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
+  font-weight: 780;
   line-height: 1.15;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.local-emergency-viewer h2 {
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
 }
 
 .local-emergency-viewer .emergency-warning {
   margin-bottom: 0.75rem;
   padding: 0.75rem 1rem;
-  border-left: 0.3rem solid #ffc75c;
-  background: #2b210d;
+  border: 1px solid rgba(255, 211, 106, 0.32);
+  border-left: 0.3rem solid var(--ev-gold);
+  border-radius: 8px;
+  background: #20190a;
   color: #fff1c1;
+}
+
+.local-emergency-viewer .emergency-warning strong {
+  color: var(--ev-gold);
 }
 
 .local-emergency-viewer .snapshot-status {
   margin-bottom: 0;
-  color: #bdc7dc;
+  color: var(--ev-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .local-emergency-viewer .emergency-controls {
@@ -101,6 +150,10 @@
   margin-bottom: 0.2rem;
 }
 
+.local-emergency-viewer .emergency-controls p {
+  color: var(--ev-muted);
+}
+
 .local-emergency-viewer .emergency-controls label {
   display: grid;
   min-width: min(28rem, 100%);
@@ -113,62 +166,121 @@
   width: 100%;
   min-height: 3rem;
   padding: 0.65rem 0.85rem;
-  border: 1px solid #586784;
-  border-radius: 0.65rem;
-  background: #080b13;
-  color: #fff;
+  border: 1px solid var(--ev-line-strong);
+  border-radius: 8px;
+  background: #060811;
+  color: var(--ev-text);
   font: inherit;
+  font-weight: 400;
+}
+
+.local-emergency-viewer input[type="search"]::placeholder {
+  color: var(--ev-subtle);
+  opacity: 1;
 }
 
 .local-emergency-viewer input[type="search"]:focus-visible,
 .local-emergency-viewer .emergency-table-wrap:focus-visible {
-  outline: 0.2rem solid #88aaff;
-  outline-offset: 0.15rem;
+  outline: 2px solid var(--ev-cyan);
+  outline-offset: 2px;
 }
 
 .local-emergency-viewer .emergency-table-wrap {
   overflow: auto;
   max-height: 68vh;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(125, 166, 216, 0.35) transparent;
 }
 
 .local-emergency-viewer table {
   width: 100%;
-  border-collapse: collapse;
-  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: start;
 }
 
 .local-emergency-viewer th,
 .local-emergency-viewer td {
-  padding: 0.8rem 0.9rem;
-  border-bottom: 1px solid #2a3142;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--ev-line);
   vertical-align: top;
   white-space: nowrap;
+}
+
+/* Long text columns wrap so 취향 and 현재 검증 stay in view on a laptop. */
+.local-emergency-viewer td:nth-child(1),
+.local-emergency-viewer td:nth-child(2) {
+  min-width: 9rem;
+  white-space: normal;
+}
+
+.local-emergency-viewer td:nth-child(5) {
+  min-width: 14rem;
+  color: #c9d3e6;
+  font-size: 0.94em;
+  white-space: normal;
+}
+
+@media (min-width: 1440px) {
+  /* Whole words set the column minimum here, so a name never strands one syllable. */
+  .local-emergency-viewer td:nth-child(1),
+  .local-emergency-viewer td:nth-child(2) {
+    overflow-wrap: break-word;
+  }
 }
 
 .local-emergency-viewer th {
   position: sticky;
   z-index: 1;
   top: 0;
-  background: #1a2030;
+  background: var(--ev-head);
   color: #dce5fa;
   font-size: 0.9rem;
+  font-weight: 700;
+  text-align: start;
+}
+
+.local-emergency-viewer :is(th, td):nth-child(6),
+.local-emergency-viewer :is(th, td):nth-child(7),
+.local-emergency-viewer :is(th, td):nth-child(8) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The menu name stays visible while the table scrolls sideways. */
+.local-emergency-viewer th:first-child,
+.local-emergency-viewer td:first-child {
+  position: sticky;
+  left: 0;
+  box-shadow: inset -1px 0 var(--ev-line);
+}
+
+.local-emergency-viewer th:first-child {
+  z-index: 2;
 }
 
 .local-emergency-viewer td:first-child {
+  background: var(--ev-panel);
   color: #fff;
   font-weight: 750;
 }
 
-.local-emergency-viewer tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.025);
+.local-emergency-viewer tbody tr:nth-child(even),
+.local-emergency-viewer tbody tr:nth-child(even) td:first-child {
+  background: var(--ev-panel-alt);
 }
 
-.local-emergency-viewer tbody tr:hover {
-  background: rgba(133, 164, 255, 0.1);
+.local-emergency-viewer tbody tr:hover,
+.local-emergency-viewer tbody tr:hover td:first-child {
+  background: #1c2440;
+}
+
+.local-emergency-viewer tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 .local-emergency-viewer .availability-current {
-  color: #8ff0b6;
+  color: var(--ev-green);
   font-weight: 750;
 }
 
@@ -179,16 +291,27 @@
 .local-emergency-viewer .empty-state {
   margin-top: 1rem;
   padding: 1rem;
-  border: 1px dashed #586784;
-  border-radius: 0.75rem;
+  border: 1px dashed var(--ev-line-strong);
+  border-radius: 12px;
+  background: var(--ev-panel);
+  color: var(--ev-muted);
   text-align: center;
 }
 
 @media (max-width: 760px) {
+  /* The copied build's 62px header holds the filter button and title, so the
+     banner sits just above the 204px menu shop instead. */
   .local-emergency-banner {
-    top: 0.4rem !important;
-    border-radius: 0.75rem !important;
-    font-size: 0.82rem !important;
+    top: auto !important;
+    right: 12px !important;
+    bottom: 212px !important;
+    left: 12px !important;
+    transform: none !important;
+    font-size: 13px !important;
+  }
+
+  .local-emergency-viewer {
+    font-size: 16px;
   }
 
   .local-emergency-viewer .emergency-controls {
@@ -199,13 +322,106 @@
   .local-emergency-viewer .emergency-controls label {
     min-width: 0;
   }
+
+  .local-emergency-viewer th,
+  .local-emergency-viewer td {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .local-emergency-viewer th:first-child,
+  .local-emergency-viewer td:first-child {
+    width: 8.5rem;
+    min-width: 8.5rem;
+    max-width: 8.5rem;
+  }
+
+  /* Only the pinned menu column wraps; the rest scroll sideways in one line. */
+  .local-emergency-viewer td:nth-child(2),
+  .local-emergency-viewer td:nth-child(5) {
+    white-space: nowrap;
+  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
+@media (max-width: 460px) {
+  .local-emergency-banner {
+    bottom: 240px !important;
+  }
+}
+
+@media (max-height: 540px) {
+  /* The page scrolls here and drawers start at the top: scroll away with the header. */
+  .local-emergency-banner {
+    position: absolute !important;
+  }
+}
+
+@media (max-width: 760px) and (max-height: 540px) {
+  /* Short landscape phones: the header's empty side, as on desktop. */
+  .local-emergency-banner {
+    top: 31px !important;
+    right: 12px !important;
+    bottom: auto !important;
+    left: 210px !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (forced-colors: active) {
+  /* Forced colours drop box-shadow, so the pinned column needs a real edge. */
+  .local-emergency-viewer th:first-child,
+  .local-emergency-viewer td:first-child {
+    border-inline-end: 1px solid CanvasText;
+  }
+}
+
+@media print {
+  /* Paper copy: dark text on white, every row and column, no inner scroll box. */
+  .local-emergency-viewer {
+    background: #fff;
+    color: #000;
+    font-size: 10pt;
+  }
+
+  .local-emergency-viewer .emergency-shell {
+    padding: 0;
+  }
+
+  .local-emergency-viewer :is(.emergency-header, .emergency-controls, .emergency-table-wrap, .empty-state) {
+    border-color: #999;
+    background: none;
+    box-shadow: none;
+  }
+
+  .local-emergency-viewer .emergency-table-wrap {
+    overflow: visible;
+    max-height: none;
+  }
+
+  .local-emergency-viewer :is(p, strong, label, tr, th, td, input, .emergency-warning) {
+    color: #000 !important;
+    background: none !important;
+  }
+
+  .local-emergency-viewer th,
+  .local-emergency-viewer td {
+    position: static;
+    padding: 0.3rem 0.4rem;
+    border-color: #bbb;
+    overflow-wrap: normal;
+  }
+
+  .local-emergency-viewer th:first-child,
+  .local-emergency-viewer td:first-child {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    box-shadow: none;
+  }
+
+  .local-emergency-viewer td:nth-child(1),
+  .local-emergency-viewer td:nth-child(2),
+  .local-emergency-viewer td:nth-child(5) {
+    min-width: 0;
+    white-space: normal;
   }
 }

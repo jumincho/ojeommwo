@@ -75,7 +75,7 @@ function LoadingState() {
 function ErrorState({ message, retry, title = "데이터에 연결하지 못했습니다" }: { message: string; retry: () => void; title?: string }) {
   return (
     <main className="observatory-loading observatory-loading--error">
-      <div className="error-glyph">!</div>
+      <div className="error-glyph" aria-hidden="true">!</div>
       <h1>{title}</h1>
       <p>{message}</p>
       <button type="button" className="primary-button" onClick={retry}>다시 연결</button>
@@ -365,6 +365,8 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
               <input aria-label="메뉴 데이터 검색" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="상호·메뉴·재료 검색" />
               {query && <button type="button" onClick={() => setQuery("")} aria-label="검색 지우기">×</button>}
             </div>
+            {/* The visible count sits in the viewport (hidden on phones); this announces the same text while filtering. */}
+            <p className="sr-only" role="status" aria-atomic="true">{filteredMenus.length} / {snapshot.menus.length}개 메뉴</p>
           </section>
 
           <section className="panel-section">
@@ -389,7 +391,7 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
                     aria-pressed={active}
                     style={{ "--category-color": category.color, "--category-glow": category.glow } as React.CSSProperties}
                   >
-                    <span className="category-filter__symbol">{category.emoji}</span>
+                    <span className="category-filter__symbol" aria-hidden="true">{category.emoji}</span>
                     <span className="category-filter__name">{category.id}</span>
                     <strong className="category-filter__count">{snapshot.stats.categoryCounts[category.id] ?? 0}</strong>
                   </button>
@@ -407,8 +409,8 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
         >
           <div className="viewport-toolbar">
             <div className="view-switch" role="group" aria-label="관측 보기 전환">
-              <button type="button" className={view === "cosmos" ? "is-active" : ""} onClick={() => setView("cosmos")} aria-pressed={view === "cosmos"}><span>✦</span> 3D 코스모스</button>
-              <button type="button" className={view === "taste" ? "is-active" : ""} onClick={() => setView("taste")} aria-pressed={view === "taste"}><span>◒</span> 취향 지도</button>
+              <button type="button" className={view === "cosmos" ? "is-active" : ""} onClick={() => setView("cosmos")} aria-pressed={view === "cosmos"}><span aria-hidden="true">✦</span> 3D 코스모스</button>
+              <button type="button" className={view === "taste" ? "is-active" : ""} onClick={() => setView("taste")} aria-pressed={view === "taste"}><span aria-hidden="true">◒</span> 취향 지도</button>
             </div>
             <div className="viewport-count"><strong>{filteredMenus.length}</strong> / {snapshot.menus.length}개 메뉴</div>
             {view === "cosmos" && (
@@ -417,7 +419,6 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
                 className={`pause-button${paused ? " is-active" : ""}`}
                 onClick={() => setPaused((value) => !value)}
                 aria-label={paused ? "자동 회전 켜기" : "자동 회전 끄기"}
-                aria-pressed={paused}
               >
                 <span className="pause-button__icon" aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
                 <span className="pause-button__label">{paused ? "회전 켜기" : "회전 끄기"}</span>
@@ -448,7 +449,7 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
                 />
               )
             ) : (
-              <div className="empty-orbit"><span>∅</span><strong>조건에 맞는 메뉴가 없습니다</strong><button type="button" onClick={() => { setQuery(""); selectAllCategories(); }}>필터 초기화</button></div>
+              <div className="empty-orbit"><span aria-hidden="true">∅</span><strong>조건에 맞는 메뉴가 없습니다</strong><button type="button" onClick={() => { setQuery(""); selectAllCategories(); }}>필터 초기화</button></div>
             )}
           </div>
         </section>
@@ -462,7 +463,7 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
           aria-labelledby={detailsAreOverlay ? "observatory-details-title" : undefined}
           aria-label={!detailsAreOverlay ? "선택한 메뉴 상세" : undefined}
           inert={(detailsAreOverlay && !detailOpen) || activeModal === "controls" ? true : undefined}
-          tabIndex={detailsAreOverlay ? -1 : undefined}
+          tabIndex={detailsAreOverlay ? -1 : 0}
         >
           <div className="panel-mobile-header">
             <strong id="observatory-details-title">메뉴 상세</strong>
@@ -471,8 +472,8 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
           {selectedMenu ? (
             <>
               <div className="detail-hero" style={{ "--category-color": categoryById.get(selectedMenu.category)?.color ?? "#fff" } as React.CSSProperties}>
-                <span className="detail-hero__orbit" />
-                <span className="detail-hero__emoji">{categoryById.get(selectedMenu.category)?.emoji}</span>
+                <span className="detail-hero__orbit" aria-hidden="true" />
+                <span className="detail-hero__emoji" aria-hidden="true">{categoryById.get(selectedMenu.category)?.emoji}</span>
                 <span className="detail-hero__category">{selectedMenu.category}</span>
               </div>
               <section className="detail-content">
@@ -498,8 +499,8 @@ function ObservatoryApp({ snapshot, snapshotNotice }: ObservatoryAppProps) {
           ) : selectedEasterEgg ? (
             <>
               <div className="detail-hero detail-hero--easter" style={{ "--category-color": categoryById.get(selectedEasterEgg.category)?.color ?? "#fff" } as React.CSSProperties}>
-                <span className="detail-hero__orbit" />
-                <span className="detail-hero__emoji">{categoryById.get(selectedEasterEgg.category)?.emoji}</span>
+                <span className="detail-hero__orbit" aria-hidden="true" />
+                <span className="detail-hero__emoji" aria-hidden="true">{categoryById.get(selectedEasterEgg.category)?.emoji}</span>
                 <span className="detail-hero__category">{selectedEasterEgg.category}</span>
               </div>
               <section className="detail-content">

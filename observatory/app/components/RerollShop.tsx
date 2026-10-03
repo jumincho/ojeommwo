@@ -65,16 +65,18 @@ export function RerollShop({ menus, taxonomy, onSelect }: RerollShopProps) {
           <small>마음에 드는 메뉴를 눌러 자세히 보세요.</small>
         </div>
         <button type="button" className="reroll-button" onClick={reroll} disabled={menus.length < 1}>
-          <span className={rolling ? "reroll-icon is-rolling" : "reroll-icon"}>↻</span>
+          <span className={rolling ? "reroll-icon is-rolling" : "reroll-icon"} aria-hidden="true">↻</span>
           다시 뽑기
         </button>
       </div>
 
       <p className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
-      <div className={`reroll-shop__cards${rolling ? " is-rolling" : ""}`} aria-label="현재 뽑힌 메뉴">
+      <div className={`reroll-shop__cards${rolling ? " is-rolling" : ""}`} role="group" aria-label="현재 뽑힌 메뉴">
         {cards.map((menu, index) => {
           const category = categoryById.get(menu.category);
           const color = category?.color ?? "#ffffff";
+          // Snapshots already carry this placeholder when a price has expired.
+          const priceText = menu.priceText || "가격 정보 없음";
           return (
             <button
               type="button"
@@ -88,7 +90,7 @@ export function RerollShop({ menus, taxonomy, onSelect }: RerollShopProps) {
               <strong>{menu.menu}</strong>
               <span className="reroll-card__restaurant">{menu.restaurantLabel}</span>
               <TasteRail taste={menu.taste} compact />
-              <span className="reroll-card__price">{menu.priceText || "가격 정보 없음"}</span>
+              <span className={`reroll-card__price${priceText === "가격 정보 없음" ? " is-missing" : ""}`}>{priceText}</span>
             </button>
           );
         })}

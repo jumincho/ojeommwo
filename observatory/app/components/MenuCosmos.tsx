@@ -1693,7 +1693,7 @@ export function MenuCosmos({
       )}
       {status === "fallback" && (
         <div className="cosmos-state cosmos-state--fallback">
-          <span>✦</span>
+          <span aria-hidden="true">✦</span>
           <strong>이 환경에서는 WebGL 우주를 열 수 없습니다</strong>
           <small>상단의 취향 지도로 동일한 메뉴를 탐색할 수 있습니다.</small>
         </div>
